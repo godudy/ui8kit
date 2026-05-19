@@ -1,0 +1,33 @@
+// Copy: components/ui/title/title.templ
+
+package title
+
+import "github.com/fastygo/templ/utils"
+
+type TitleProps struct {
+	Class string
+	Order int
+}
+
+templ Title(p TitleProps, value string) {
+	@titleTag(p) {
+		{ value }
+	}
+}
+
+templ titleTag(p TitleProps) {
+	switch uiutils.TitleTag(p.Order) {
+		case "h1":
+			<h1 class={ p.Class }>{ children... }</h1>
+		case "h3":
+			<h3 class={ p.Class }>{ children... }</h3>
+		case "h4":
+			<h4 class={ p.Class }>{ children... }</h4>
+		case "h5":
+			<h5 class={ p.Class }>{ children... }</h5>
+		case "h6":
+			<h6 class={ p.Class }>{ children... }</h6>
+		default:
+			<h2 class={ p.Class }>{ children... }</h2>
+	}
+}

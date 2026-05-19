@@ -1,0 +1,85 @@
+// Copy: components/ui/card/card.templ
+
+package card
+
+import (
+	"strings"
+
+	"github.com/fastygo/templ/utils"
+)
+
+type CardProps struct {
+	Class   string
+	Variant string
+	Tag     string
+}
+
+type CardHeaderProps struct {
+	Class string
+}
+
+type CardTitleProps struct {
+	Class string
+	Order int
+}
+
+type CardDescriptionProps struct {
+	Class string
+}
+
+type CardContentProps struct {
+	Class string
+}
+
+type CardFooterProps struct {
+	Class string
+}
+
+func CardClasses(p CardProps) string {
+	return uiutils.CardClasses(p.Variant, strings.TrimSpace(p.Class))
+}
+
+templ Card(p CardProps) {
+	<div class={ CardClasses(p) }>
+		{ children... }
+	</div>
+}
+
+templ CardHeader(p CardHeaderProps) {
+	<div class={ uiutils.Cn("border-b border-border px-4 py-2", p.Class) }>
+		{ children... }
+	</div>
+}
+
+templ CardTitle(p CardTitleProps, value string) {
+	@cardTitleTag(p) {
+		{ value }
+	}
+}
+
+templ cardTitleTag(p CardTitleProps) {
+	switch uiutils.TitleTag(p.Order) {
+		case "h1":
+			<h1 class={ uiutils.Cn("text-sm font-semibold", p.Class) }>{ children... }</h1>
+		case "h3":
+			<h3 class={ uiutils.Cn("text-sm font-semibold", p.Class) }>{ children... }</h3>
+		default:
+			<h2 class={ uiutils.Cn("text-sm font-semibold", p.Class) }>{ children... }</h2>
+	}
+}
+
+templ CardDescription(p CardDescriptionProps, value string) {
+	<p class={ uiutils.Cn("text-sm text-muted-foreground", p.Class) }>{ value }</p>
+}
+
+templ CardContent(p CardContentProps) {
+	<div class={ uiutils.Cn("p-4", p.Class) }>
+		{ children... }
+	</div>
+}
+
+templ CardFooter(p CardFooterProps) {
+	<div class={ uiutils.Cn("border-t border-border px-4 py-3", p.Class) }>
+		{ children... }
+	</div>
+}

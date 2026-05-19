@@ -1,0 +1,64 @@
+// Copy: components/ui/form/form.templ
+
+package form
+
+import "github.com/fastygo/templ/utils"
+
+type FormProps struct {
+	ID           string
+	Class        string
+	Action       string
+	Method       string
+	Enctype      string
+	Autocomplete string
+	Name         string
+	Target       string
+	NoValidate   bool
+	Attrs        templ.Attributes
+}
+
+type FormItemProps struct {
+	Class string
+}
+
+type FormDescriptionProps struct {
+	Class string
+}
+
+type FormMessageProps struct {
+	Class string
+}
+
+templ Form(p FormProps) {
+	<form
+		if p.ID != "" {
+			id={ p.ID }
+		}
+		class={ uiutils.Cn("grid gap-4", p.Class) }
+		action={ p.Action }
+		method={ p.Method }
+		enctype={ p.Enctype }
+		autocomplete={ p.Autocomplete }
+		name={ p.Name }
+		target={ p.Target }
+		novalidate?={ p.NoValidate }
+		{ p.Attrs... }
+	>
+		{ children... }
+	</form>
+}
+
+templ FormItem(p FormItemProps) {
+	<div class={ uiutils.Cn("flex flex-col gap-2", p.Class) }>
+		{ children... }
+	</div>
+}
+
+
+templ FormDescription(p FormDescriptionProps, value string) {
+	<p class={ uiutils.Cn("text-xs text-muted-foreground", p.Class) }>{ value }</p>
+}
+
+templ FormMessage(p FormMessageProps, value string) {
+	<p class={ uiutils.Cn("text-sm font-medium text-destructive", p.Class) } role="alert">{ value }</p>
+}

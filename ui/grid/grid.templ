@@ -1,0 +1,29 @@
+// Copy: components/ui/grid/grid.templ
+
+package grid
+
+import "github.com/fastygo/templ/utils"
+
+type GridProps struct {
+	Class string
+}
+
+type GridColProps struct {
+	Class string
+}
+
+func GridClasses(p GridProps) string {
+	return uiutils.Cn("grid", p.Class)
+}
+
+templ Grid(p GridProps) {
+	<div class={ GridClasses(p) }>
+		{ children... }
+	</div>
+}
+
+templ GridCol(p GridColProps) {
+	<div class={ p.Class }>
+		{ children... }
+	</div>
+}

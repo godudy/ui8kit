@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "default",
+  "tailwind": {
+    "config": "tailwind.config.js",
+    "css": "web/static/css/input.css",
+    "cssVariables": true
+  },
+  "aliases": {
+    "components": "@/components",
+    "ui": "@/components/ui",
+    "utils": "@/utils"
+  },
+  "templ": {
+    "utils": "github.com/fastygo/templ/utils",
+    "ui": "ui",
+    "components": "components"
+  }
+}

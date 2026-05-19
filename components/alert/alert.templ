@@ -1,0 +1,24 @@
+// Copy: components/ui/alert/alert.templ
+
+package alert
+
+import (
+	"strings"
+
+	"github.com/fastygo/templ/utils"
+)
+
+type AlertProps struct {
+	Class   string
+	Variant string
+}
+
+func AlertClasses(p AlertProps) string {
+	return uiutils.AlertClasses(p.Variant, strings.TrimSpace(p.Class))
+}
+
+templ Alert(p AlertProps) {
+	<section class={ AlertClasses(p) } { uiutils.AlertAttrs()... }>
+		{ children... }
+	</section>
+}

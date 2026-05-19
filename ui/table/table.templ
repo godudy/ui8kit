@@ -1,0 +1,61 @@
+// Copy: components/ui/table/table.templ
+
+package table
+
+templ Table(p TableProps) {
+	<table class={ p.Class } { tableAttrs(p)... }>
+		{ children... }
+	</table>
+}
+
+templ TableCaption(p TableCaptionProps) {
+	<caption class={ p.Class }>
+		{ children... }
+	</caption>
+}
+
+templ TableHead(p TableSectionProps) {
+	<thead class={ p.Class }>
+		{ children... }
+	</thead>
+}
+
+templ TableBody(p TableSectionProps) {
+	<tbody class={ p.Class }>
+		{ children... }
+	</tbody>
+}
+
+templ TableFoot(p TableSectionProps) {
+	<tfoot class={ p.Class }>
+		{ children... }
+	</tfoot>
+}
+
+templ TableRow(p TableRowProps) {
+	<tr class={ p.Class }>
+		{ children... }
+	</tr>
+}
+
+templ TableHeadCell(p TableCellProps) {
+	<th class={ p.Class } { tableCellAttrs(p, true)... }>
+		{ children... }
+	</th>
+}
+
+templ TableCell(p TableCellProps) {
+	<td class={ p.Class } { tableCellAttrs(p, false)... }>
+		{ children... }
+	</td>
+}
+
+templ TableColGroup(p TableColGroupProps) {
+	<colgroup class={ p.Class } { spanAttrs(p.Span)... }>
+		{ children... }
+	</colgroup>
+}
+
+templ TableCol(p TableColProps) {
+	<col class={ p.Class } { spanAttrs(p.Span)... }/>
+}

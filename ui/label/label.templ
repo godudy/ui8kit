@@ -1,0 +1,23 @@
+// Copy: components/ui/label/label.templ
+
+package label
+
+import "github.com/fastygo/templ/utils"
+
+type LabelProps struct {
+	Class   string
+	HTMLFor string
+	Attrs   templ.Attributes
+}
+
+templ Label(p LabelProps) {
+	<label
+		class={ uiutils.Cn("text-sm font-medium leading-none", p.Class) }
+		if p.HTMLFor != "" {
+			for={ p.HTMLFor }
+		}
+		{ p.Attrs... }
+	>
+		{ children... }
+	</label>
+}

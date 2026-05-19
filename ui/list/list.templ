@@ -1,0 +1,30 @@
+// Copy: components/ui/list/list.templ
+
+package list
+
+templ List(p ListProps) {
+	switch listTag(p.Tag) {
+		case "ol":
+			<ol class={ p.Class } { listSpreadAttrs(p)... }>
+				{ children... }
+			</ol>
+		case "dl":
+			<dl class={ p.Class } { listSpreadAttrs(p)... }>
+				{ children... }
+			</dl>
+		case "menu":
+			<menu class={ p.Class } { listSpreadAttrs(p)... }>
+				{ children... }
+			</menu>
+		default:
+			<ul class={ p.Class } { listSpreadAttrs(p)... }>
+				{ children... }
+			</ul>
+	}
+}
+
+templ ListItem(p ListItemProps) {
+	<li class={ p.Class } { listItemMergedAttrs(p)... }>
+		{ children... }
+	</li>
+}
