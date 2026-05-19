@@ -1,0 +1,15 @@
+.manual
+.project
+bin
+node_modules
+/tmp/
+*.exe
+.env
+.DS_Store
+
+# Playwright
+playwright-report/
+test-results/
+blob-report/
+
+.validate/html-snapshots/generated/*.html
