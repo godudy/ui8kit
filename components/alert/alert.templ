@@ -1,3 +1,8 @@
+/**
+ * Alert displays a static status or informational message.
+ * Renders section with role=status; children carry the message body.
+ */
+
 // Copy: components/ui/alert/alert.templ
 
 package alert
@@ -8,8 +13,10 @@ import (
 	"github.com/fastygo/templ/utils"
 )
 
+// AlertProps configures alert surface variant and classes.
 type AlertProps struct {
 	Class   string
+	// Variant — default, destructive, or wireframe preset
 	Variant string
 }
 
@@ -17,6 +24,7 @@ func AlertClasses(p AlertProps) string {
 	return uiutils.AlertClasses(p.Variant, strings.TrimSpace(p.Class))
 }
 
+// Alert renders a landmark section with alert semantics.
 templ Alert(p AlertProps) {
 	<section class={ AlertClasses(p) } { uiutils.AlertAttrs()... }>
 		{ children... }

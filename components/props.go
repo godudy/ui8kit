@@ -1,3 +1,8 @@
+/**
+ * Package components is the composite registry facade.
+ * Import cmp "github.com/fastygo/templ/components" for Card, Alert, Breadcrumb.
+ */
+
 // Package components is the composite registry facade. Import as:
 //
 //	import cmp "github.com/fastygo/templ/components"

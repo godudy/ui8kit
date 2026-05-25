@@ -1,9 +1,14 @@
+/**
+ * Radio is a native single-choice control within a named group.
+ */
+
 // Copy: components/ui/radio/radio.templ
 
 package radio
 
 import "github.com/fastygo/templ/utils"
 
+// RadioProps configures one radio input in a group.
 type RadioProps struct {
 	Variant   string
 	Size      string
@@ -24,6 +29,7 @@ func RadioClasses(p RadioProps) string {
 	return uiutils.ControlClasses(p.Variant, p.Size, p.Class)
 }
 
+// Radio renders input[type=radio] with shared Name for grouping.
 templ Radio(p RadioProps) {
 	<input
 		if p.ID != "" {

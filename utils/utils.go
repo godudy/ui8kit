@@ -1,4 +1,5 @@
-// Package uiutils is the only shared Go helper for copy-paste templ registry bricks.
+// Package uiutils holds shared Go helpers for registry bricks.
+// See utils.spec.md for machine-readable export catalog.
 package uiutils
 
 import (

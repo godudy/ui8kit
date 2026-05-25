@@ -1,14 +1,22 @@
+/**
+ * Text renders inline or block prose with a resolved semantic tag.
+ * Pass copy as value; use Tag for span, small, code, blockquote, etc.
+ */
+
 // Copy: components/ui/text/text.templ
 
 package text
 
 import "github.com/fastygo/templ/utils"
 
+// TextProps configures typography element and classes.
 type TextProps struct {
 	Class string
+	// Tag — p, span, small, code, blockquote, …; defaults to p
 	Tag   string
 }
 
+// Text renders plain copy in the chosen semantic tag.
 templ Text(p TextProps, value string) {
 	switch uiutils.ResolveTag(p.Tag, "p", uiutils.TagGroupText) {
 		case "span":

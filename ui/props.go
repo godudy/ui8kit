@@ -1,3 +1,9 @@
+/**
+ * Package ui is the registry facade for all primitives.
+ * Import as github.com/fastygo/templ/ui — use @ui.Button, @ui.Block, etc.
+ * Granular imports (github.com/fastygo/templ/ui/button) remain valid.
+ */
+
 // Package ui is the registry facade. Import as:
 //
 //	import "github.com/fastygo/templ/ui"
@@ -13,14 +19,14 @@ import (
 	"github.com/fastygo/templ/ui/checkbox"
 	"github.com/fastygo/templ/ui/container"
 	"github.com/fastygo/templ/ui/form"
-	"github.com/fastygo/templ/ui/formswitch"
+	"github.com/fastygo/templ/ui/switch"
 	"github.com/fastygo/templ/ui/grid"
 	"github.com/fastygo/templ/ui/group"
 	"github.com/fastygo/templ/ui/input"
 	"github.com/fastygo/templ/ui/label"
 	"github.com/fastygo/templ/ui/list"
 	"github.com/fastygo/templ/ui/radio"
-	"github.com/fastygo/templ/ui/selectfield"
+	"github.com/fastygo/templ/ui/select"
 	"github.com/fastygo/templ/ui/stack"
 	"github.com/fastygo/templ/ui/table"
 	"github.com/fastygo/templ/ui/text"

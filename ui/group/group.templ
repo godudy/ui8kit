@@ -1,11 +1,18 @@
+/**
+ * Group arranges children in a horizontal flex row.
+ * Supports fieldset for related form controls.
+ */
+
 // Copy: components/ui/group/group.templ
 
 package group
 
 import "github.com/fastygo/templ/utils"
 
+// GroupProps configures inline flex grouping.
 type GroupProps struct {
 	Class string
+	// Tag — div or fieldset for related controls
 	Tag   string
 	Attrs templ.Attributes
 }
@@ -14,6 +21,7 @@ func GroupClasses(p GroupProps) string {
 	return uiutils.Cn("flex min-w-0", p.Class)
 }
 
+// Group renders a horizontal flex container.
 templ Group(p GroupProps) {
 	@groupTag(p) {
 		{ children... }

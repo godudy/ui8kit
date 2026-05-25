@@ -1,3 +1,8 @@
+/**
+ * Card groups related content in one bordered surface.
+ * Card uses header, content, and footer slots.
+ */
+
 // Copy: components/ui/card/card.templ
 
 package card
@@ -8,29 +13,39 @@ import (
 	"github.com/fastygo/templ/utils"
 )
 
+// CardProps holds Card root configuration.
 type CardProps struct {
+	// Class adds Tailwind utilities
 	Class   string
+	// Variant sets surface preset: default, raised, kpi, muted, ghost, compact, flat, accent
 	Variant string
+	// Tag overrides root element name
 	Tag     string
 }
 
+// CardHeaderProps holds header slot configuration.
 type CardHeaderProps struct {
 	Class string
 }
 
+// CardTitleProps holds title text and heading level.
 type CardTitleProps struct {
 	Class string
+	// Order maps to h1, h2, or h3
 	Order int
 }
 
+// CardDescriptionProps holds muted subtitle configuration.
 type CardDescriptionProps struct {
 	Class string
 }
 
+// CardContentProps holds main body slot configuration.
 type CardContentProps struct {
 	Class string
 }
 
+// CardFooterProps holds footer action slot configuration.
 type CardFooterProps struct {
 	Class string
 }
@@ -39,18 +54,21 @@ func CardClasses(p CardProps) string {
 	return uiutils.CardClasses(p.Variant, strings.TrimSpace(p.Class))
 }
 
+// Card renders the bordered surface wrapper.
 templ Card(p CardProps) {
 	<div class={ CardClasses(p) }>
 		{ children... }
 	</div>
 }
 
+// CardHeader renders the top slot with bottom border.
 templ CardHeader(p CardHeaderProps) {
 	<div class={ uiutils.Cn("border-b border-border px-4 py-2", p.Class) }>
 		{ children... }
 	</div>
 }
 
+// CardTitle renders heading text at Order level.
 templ CardTitle(p CardTitleProps, value string) {
 	@cardTitleTag(p) {
 		{ value }
@@ -68,16 +86,19 @@ templ cardTitleTag(p CardTitleProps) {
 	}
 }
 
+// CardDescription renders muted subtitle in a p element.
 templ CardDescription(p CardDescriptionProps, value string) {
 	<p class={ uiutils.Cn("text-sm text-muted-foreground", p.Class) }>{ value }</p>
 }
 
+// CardContent renders the padded main body slot.
 templ CardContent(p CardContentProps) {
 	<div class={ uiutils.Cn("p-4", p.Class) }>
 		{ children... }
 	</div>
 }
 
+// CardFooter renders the bottom action slot with top border.
 templ CardFooter(p CardFooterProps) {
 	<div class={ uiutils.Cn("border-t border-border px-4 py-3", p.Class) }>
 		{ children... }

@@ -1,0 +1,345 @@
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+	"path/filepath"
+	"regexp"
+	"strings"
+
+	"gopkg.in/yaml.v3"
+)
+
+type specDoc struct {
+	path string
+	raw  string
+	fm   map[string]any
+	body string
+}
+
+type validationError struct {
+	file    string
+	field   string
+	message string
+}
+
+func (e validationError) Error() string {
+	if e.field != "" {
+		return fmt.Sprintf("%s: %s: %s", e.file, e.field, e.message)
+	}
+	return fmt.Sprintf("%s: %s", e.file, e.message)
+}
+
+func findRepoRoot() (string, error) {
+	dir, err := os.Getwd()
+	if err != nil {
+		return "", err
+	}
+	for {
+		if _, err := os.Stat(filepath.Join(dir, "go.mod")); err == nil {
+			if _, err := os.Stat(filepath.Join(dir, "ui")); err == nil {
+				return dir, nil
+			}
+		}
+		parent := filepath.Dir(dir)
+		if parent == dir {
+			return "", fmt.Errorf("repo root not found from cwd")
+		}
+		dir = parent
+	}
+}
+
+func loadSpec(path string) (*specDoc, error) {
+	raw, err := os.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+	text := strings.ReplaceAll(string(raw), "\r\n", "\n")
+	if !strings.HasPrefix(text, "---\n") {
+		return nil, fmt.Errorf("missing YAML front matter")
+	}
+	end := strings.Index(text[4:], "\n---")
+	if end < 0 {
+		return nil, fmt.Errorf("unclosed YAML front matter")
+	}
+	fmText := text[4 : 4+end]
+	body := strings.TrimLeft(text[4+end+4:], "\n")
+
+	fm := map[string]any{}
+	if err := yaml.Unmarshal([]byte(fmText), &fm); err != nil {
+		return nil, fmt.Errorf("front matter YAML: %w", err)
+	}
+	return &specDoc{path: path, raw: text, fm: fm, body: body}, nil
+}
+
+func discoverSpecs(repoRoot string) ([]string, error) {
+	var paths []string
+	roots := []string{"ui", "components", "utils"}
+	for _, root := range roots {
+		rootPath := filepath.Join(repoRoot, root)
+		err := filepath.WalkDir(rootPath, func(path string, d os.DirEntry, err error) error {
+			if err != nil {
+				return err
+			}
+			if d.IsDir() {
+				return nil
+			}
+			if strings.HasSuffix(path, ".spec.md") {
+				paths = append(paths, path)
+			}
+			return nil
+		})
+		if err != nil && !os.IsNotExist(err) {
+			return nil, err
+		}
+	}
+	return paths, nil
+}
+
+func validateSpec(doc *specDoc, allowLists map[string][]string) []validationError {
+	var errs []validationError
+	rel, _ := filepath.Rel(findRepoRootMust(), doc.path)
+
+	layer := stringField(doc.fm, "layer")
+	required := []string{"id", "layer", "kind", "package", "facade", "semantics"}
+	for _, key := range required {
+		if _, ok := doc.fm[key]; !ok {
+			errs = append(errs, validationError{rel, key, "required front matter key missing"})
+		}
+	}
+
+	if layer == "helper" {
+		if _, ok := doc.fm["exports"]; !ok {
+			errs = append(errs, validationError{rel, "exports", "helper spec requires exports"})
+		}
+		if _, ok := doc.fm["api"]; ok {
+			errs = append(errs, validationError{rel, "api", "helper spec must not use api"})
+		}
+		if _, ok := doc.fm["showcase"]; ok {
+			errs = append(errs, validationError{rel, "showcase", "helper spec must not use showcase"})
+		}
+		errs = append(errs, validateHelperExamples(doc, rel)...)
+		return errs
+	}
+
+	for _, forbidden := range []string{"props", "variants", "omitted"} {
+		if _, ok := doc.fm[forbidden]; ok {
+			errs = append(errs, validationError{rel, forbidden, "legacy key; use api/showcase only"})
+		}
+	}
+	for _, key := range []string{"api", "showcase"} {
+		if _, ok := doc.fm[key]; !ok {
+			errs = append(errs, validationError{rel, key, "required for brick specs"})
+		}
+	}
+
+	errs = append(errs, validateShowcaseExamples(doc, rel)...)
+	errs = append(errs, validateAllowLists(doc, rel, allowLists)...)
+	return errs
+}
+
+func validateHelperExamples(doc *specDoc, rel string) []validationError {
+	var ids []string
+	for _, item := range getSlice(doc.fm, "examples") {
+		m, _ := item.(map[string]any)
+		if m == nil {
+			continue
+		}
+		id, _ := m["id"].(string)
+		if id != "" {
+			ids = append(ids, id)
+		}
+	}
+	if len(ids) == 0 {
+		return nil
+	}
+	return validateExampleSections(doc, rel, ids, "go")
+}
+
+func validateShowcaseExamples(doc *specDoc, rel string) []validationError {
+	showcase := getSlice(doc.fm, "showcase")
+	if showcase == nil {
+		return nil
+	}
+	var ids []string
+	for _, item := range showcase {
+		m, _ := item.(map[string]any)
+		if m == nil {
+			continue
+		}
+		id, _ := m["id"].(string)
+		if id == "" {
+			errs := []validationError{{rel, "showcase", "entry missing id"}}
+			return errs
+		}
+		ids = append(ids, id)
+	}
+	return validateExampleSections(doc, rel, ids, "templ")
+}
+
+var reExampleHeading = regexp.MustCompile(`(?m)^## Example ([^\n]+)\s*$`)
+var reFence = regexp.MustCompile("(?s)```(templ|go)\\s*\\n(.*?)```")
+
+func validateExampleSections(doc *specDoc, rel string, showcaseIDs []string, fenceLang string) []validationError {
+	var errs []validationError
+	showcaseSet := map[string]bool{}
+	for _, id := range showcaseIDs {
+		showcaseSet[id] = true
+	}
+
+	exampleIDs := map[string]bool{}
+	for _, m := range reExampleHeading.FindAllStringSubmatch(doc.body, -1) {
+		id := strings.TrimSpace(m[1])
+		exampleIDs[id] = true
+		if !showcaseSet[id] {
+			errs = append(errs, validationError{rel, "showcase", fmt.Sprintf("## Example %s has no matching showcase/export entry", id)})
+		}
+	}
+
+	for _, id := range showcaseIDs {
+		if !exampleIDs[id] {
+			errs = append(errs, validationError{rel, "showcase", fmt.Sprintf("missing ## Example %s section", id)})
+			continue
+		}
+		section := extractExampleSection(doc.body, id)
+		fences := reFence.FindAllStringSubmatch(section, -1)
+		if len(fences) != 1 {
+			errs = append(errs, validationError{rel, id, fmt.Sprintf("expected exactly one fenced code block, found %d", len(fences))})
+			continue
+		}
+		if fences[0][1] != fenceLang {
+			errs = append(errs, validationError{rel, id, fmt.Sprintf("expected ```%s fence, found ```%s", fenceLang, fences[0][1])})
+		}
+	}
+	return errs
+}
+
+func extractExampleSection(body, id string) string {
+	startMarker := "## Example " + id
+	start := strings.Index(body, startMarker)
+	if start < 0 {
+		return ""
+	}
+	rest := body[start+len(startMarker):]
+	next := strings.Index(rest, "\n## ")
+	if next >= 0 {
+		return rest[:next]
+	}
+	return rest
+}
+
+func validateAllowLists(doc *specDoc, rel string, allowLists map[string][]string) []validationError {
+	api, _ := doc.fm["api"].(map[string]any)
+	if api == nil {
+		return nil
+	}
+	var errs []validationError
+	for field, raw := range api {
+		fm, _ := raw.(map[string]any)
+		if fm == nil {
+			continue
+		}
+		source, _ := fm["allow-list-source"].(string)
+		if source == "" {
+			continue
+		}
+		specEnum := getStringSliceAny(fm["enum"])
+		codeEnum, ok := resolveAllowList(source, field, allowLists)
+		if !ok {
+			errs = append(errs, validationError{rel, field, fmt.Sprintf("unknown allow-list-source %q", source)})
+			continue
+		}
+		missing, extra := diffEnum(specEnum, codeEnum)
+		if len(missing) > 0 {
+			errs = append(errs, validationError{rel, field, fmt.Sprintf("api.enum missing code values from %s: %v", source, missing)})
+		}
+		if len(extra) > 0 {
+			errs = append(errs, validationError{rel, field, fmt.Sprintf("api.enum has extra values not in %s: %v", source, extra)})
+		}
+	}
+	return errs
+}
+
+func validateComponentsJSON(repoRoot string) []validationError {
+	path := filepath.Join(repoRoot, "components.json")
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return []validationError{{"components.json", "", err.Error()}}
+	}
+	var cfg map[string]any
+	if err := json.Unmarshal(data, &cfg); err != nil {
+		return []validationError{{"components.json", "", "invalid JSON: " + err.Error()}}
+	}
+	var errs []validationError
+	aliases, _ := cfg["aliases"].(map[string]any)
+	expect := map[string]string{
+		"components": "@/components",
+		"ui":         "@/components/ui",
+		"utils":      "@/utils",
+	}
+	for k, v := range expect {
+		got, _ := aliases[k].(string)
+		if got != v {
+			errs = append(errs, validationError{"components.json", "aliases." + k, fmt.Sprintf("expected %q, got %q", v, got)})
+		}
+	}
+	templCfg, _ := cfg["templ"].(map[string]any)
+	for _, key := range []string{"utils", "ui", "components"} {
+		if _, ok := templCfg[key]; !ok {
+			errs = append(errs, validationError{"components.json", "templ." + key, "missing package group"})
+		}
+	}
+	for _, bad := range []string{"css", "preview", "examples"} {
+		if _, ok := cfg[bad]; ok {
+			errs = append(errs, validationError{"components.json", bad, "registry must not reference preview/css paths"})
+		}
+	}
+	return errs
+}
+
+func getSlice(fm map[string]any, key string) []any {
+	v, ok := fm[key]
+	if !ok {
+		return nil
+	}
+	s, _ := v.([]any)
+	return s
+}
+
+func getStringSlice(fm map[string]any, key string) []string {
+	return getStringSliceAny(fm[key])
+}
+
+func getStringSliceAny(v any) []string {
+	switch t := v.(type) {
+	case []any:
+		var out []string
+		for _, item := range t {
+			out = append(out, normalizeEnumValue(item))
+		}
+		return out
+	case []string:
+		return t
+	default:
+		return nil
+	}
+}
+
+func stringField(fm map[string]any, key string) string {
+	v, _ := fm[key].(string)
+	return v
+}
+
+var repoRootCached string
+
+func findRepoRootMust() string {
+	if repoRootCached == "" {
+		r, err := findRepoRoot()
+		if err != nil {
+			return "."
+		}
+		repoRootCached = r
+	}
+	return repoRootCached
+}

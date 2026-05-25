@@ -1,3 +1,8 @@
+/**
+ * Button triggers an action on click.
+ * Button navigates when Href is set.
+ */
+
 // Copy: components/ui/button/button.templ — requires github.com/fastygo/templ/utils
 
 package button
@@ -34,17 +39,26 @@ var ButtonVariants = uiutils.Variants{
 	},
 }
 
+// ButtonProps holds Button configuration.
 type ButtonProps struct {
+	// Variant sets appearance preset: default, secondary, destructive, outline, ghost, link, unstyled
 	Variant   string
+	// Size sets density preset: default, sm, lg, icon
 	Size      string
+	// Class adds Tailwind utilities
 	Class     string
+	// Type sets button type: button, submit, reset
 	Type      string
+	// Form links button to a form id
 	Form      string
+	// Disabled blocks interaction
 	Disabled  bool
+	// Href renders anchor instead of button
 	Href      string
 	ID        string
 	Role      string
 	TabIndex  string
+	// AriaLabel sets accessible name for icon buttons
 	AriaLabel string
 	Attrs     templ.Attributes
 }
@@ -79,6 +93,7 @@ func buttonSpreadAttrs(p ButtonProps) templ.Attributes {
 	return attrs
 }
 
+// Button renders button or anchor with variant classes.
 templ Button(p ButtonProps) {
 	if strings.TrimSpace(p.Href) != "" {
 		if p.Disabled {

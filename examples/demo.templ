@@ -1,0 +1,98 @@
+// Registry showcase — Block for landmarks, Box/Stack for internal layout.
+
+package examples
+
+import (
+	"github.com/fastygo/templ/ui"
+	cmp "github.com/fastygo/templ/components"
+)
+
+templ RegistryDemo() {
+	@ui.Block(ui.BlockProps{
+		ID:    "registry-main",
+		Tag:   "main",
+		Class: "min-h-screen",
+	}) {
+		@ui.Block(ui.BlockProps{
+			Tag:   "header",
+			Class: "border-b border-border bg-card",
+		}) {
+			@ui.Box(ui.BoxProps{Class: "mx-auto max-w-3xl px-6 py-6"}) {
+				@ui.Stack(ui.StackProps{Class: "gap-2"}) {
+					@ui.Title(ui.TitleProps{Order: 1}, "Templ component registry")
+					@ui.Text(ui.TextProps{Class: "text-sm text-muted-foreground"}, "Copy-paste bricks with ui8kit-style Block/Box semantics. Import github.com/fastygo/templ/ui or granular ui/button.")
+				}
+			}
+		}
+		@ui.Block(ui.BlockProps{
+			ID:    "registry-content",
+			Tag:   "section",
+			Class: "mx-auto max-w-3xl px-6 py-8",
+		}) {
+			@ui.Stack(ui.StackProps{Class: "gap-8"}) {
+				@cmp.Alert(cmp.AlertProps{Variant: "default"}) {
+					@ui.Text(ui.TextProps{Class: "text-sm"}, "Static alert with role=status. Wireframe tokens only.")
+				}
+				@cmp.Card(cmp.CardProps{Variant: "default"}) {
+					@cmp.CardHeader(cmp.CardHeaderProps{}) {
+						@cmp.CardTitle(cmp.CardTitleProps{Order: 2}, "Form controls")
+						@cmp.CardDescription(cmp.CardDescriptionProps{}, "Label, input, and buttons inside a card (internal Box layout).")
+					}
+					@cmp.CardContent(cmp.CardContentProps{}) {
+						@ui.FormItem(ui.FormItemProps{}) {
+							@ui.Label(ui.LabelProps{HTMLFor: "demo-email"}) {
+								Email
+							}
+							@ui.Input(ui.InputProps{
+								ID:          "demo-email",
+								Name:        "email",
+								Type:        "email",
+								Placeholder: "name@example.com",
+							})
+							@ui.FormDescription(ui.FormDescriptionProps{}, "We never share your email.")
+						}
+						@ui.Group(ui.GroupProps{Class: "mt-4 gap-2"}) {
+							@ui.Button(ui.ButtonProps{Variant: "default"}) {
+								Primary
+							}
+							@ui.Button(ui.ButtonProps{Variant: "outline", Size: "sm"}) {
+								Outline
+							}
+							@ui.Button(ui.ButtonProps{Variant: "ghost", Size: "sm"}) {
+								Ghost
+							}
+						}
+					}
+				}
+				@ui.Box(ui.BoxProps{Class: "flex flex-wrap gap-2"}) {
+					@ui.Badge(ui.BadgeProps{Variant: "default"}) {
+						Default
+					}
+					@ui.Badge(ui.BadgeProps{Variant: "secondary"}) {
+						Secondary
+					}
+					@ui.Badge(ui.BadgeProps{Variant: "destructive"}) {
+						Destructive
+					}
+					@ui.Badge(ui.BadgeProps{Variant: "outline"}) {
+						Outline
+					}
+				}
+				@cmp.Breadcrumb(cmp.BreadcrumbProps{
+					Items: []cmp.BreadcrumbItem{
+						{Label: "Home", Href: "/"},
+						{Label: "Registry", Current: true},
+					},
+				})
+			}
+		}
+		@ui.Block(ui.BlockProps{
+			Tag:   "footer",
+			Class: "border-t border-border",
+		}) {
+			@ui.Box(ui.BoxProps{Class: "mx-auto max-w-3xl px-6 py-4"}) {
+				@ui.Text(ui.TextProps{Class: "text-xs text-muted-foreground"}, "Copy ui/*, components/*, and utils/ into your app. Run templ generate and include sources in Tailwind.")
+			}
+		}
+	}
+}

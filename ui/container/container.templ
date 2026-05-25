@@ -1,15 +1,23 @@
+/**
+ * Container wraps page content with a constrained width shell.
+ * Optional main or section tag for inner layout regions.
+ */
+
 // Copy: components/ui/container/container.templ
 
 package container
 
 import "github.com/fastygo/templ/utils"
 
+// ContainerProps configures the outer content shell.
 type ContainerProps struct {
 	Class string
+	// Tag — div, main, or section
 	Tag   string
 	Attrs templ.Attributes
 }
 
+// Container renders a width-constrained layout wrapper.
 templ Container(p ContainerProps) {
 	@containerTag(p) {
 		{ children... }

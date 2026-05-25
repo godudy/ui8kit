@@ -1,3 +1,5 @@
+// TagGroup restricts HTML tags for one primitive semantic group.
+// See tags.spec.md for allowed tags per group.
 package uiutils
 
 import "strings"

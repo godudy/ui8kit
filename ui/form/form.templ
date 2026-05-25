@@ -1,9 +1,15 @@
+/**
+ * Form primitives: form wrapper, field item, description, and validation message.
+ * Composes with Label, Input, and other controls.
+ */
+
 // Copy: components/ui/form/form.templ
 
 package form
 
 import "github.com/fastygo/templ/utils"
 
+// FormProps configures the native form element.
 type FormProps struct {
 	ID           string
 	Class        string
@@ -17,18 +23,22 @@ type FormProps struct {
 	Attrs        templ.Attributes
 }
 
+// FormItemProps wraps one label + control + helper text group.
 type FormItemProps struct {
 	Class string
 }
 
+// FormDescriptionProps styles supplementary field hint text.
 type FormDescriptionProps struct {
 	Class string
 }
 
+// FormMessageProps styles validation or error text (role=alert).
 type FormMessageProps struct {
 	Class string
 }
 
+// Form renders a vertical grid form container.
 templ Form(p FormProps) {
 	<form
 		if p.ID != "" {
@@ -48,6 +58,7 @@ templ Form(p FormProps) {
 	</form>
 }
 
+// FormItem groups a single field with spacing for label and control.
 templ FormItem(p FormItemProps) {
 	<div class={ uiutils.Cn("flex flex-col gap-2", p.Class) }>
 		{ children... }
@@ -55,10 +66,12 @@ templ FormItem(p FormItemProps) {
 }
 
 
+// FormDescription renders muted helper copy below a control.
 templ FormDescription(p FormDescriptionProps, value string) {
 	<p class={ uiutils.Cn("text-xs text-muted-foreground", p.Class) }>{ value }</p>
 }
 
+// FormMessage renders destructive validation feedback.
 templ FormMessage(p FormMessageProps, value string) {
 	<p class={ uiutils.Cn("text-sm font-medium text-destructive", p.Class) } role="alert">{ value }</p>
 }

@@ -1,3 +1,8 @@
+/**
+ * Badge shows a short status label.
+ * Badge uses variant and size presets.
+ */
+
 // Copy: components/ui/badge/badge.templ
 
 package badge
@@ -26,9 +31,13 @@ var BadgeVariants = uiutils.Variants{
 	},
 }
 
+// BadgeProps holds Badge configuration.
 type BadgeProps struct {
+	// Variant sets color preset: default, secondary, destructive, outline
 	Variant string
+	// Size sets density preset: default, sm, lg
 	Size    string
+	// Class adds Tailwind utilities
 	Class   string
 }
 
@@ -39,6 +48,7 @@ func BadgeClasses(p BadgeProps) string {
 	}, p.Class)
 }
 
+// Badge renders label text in a div wrapper.
 templ Badge(p BadgeProps) {
 	<div class={ BadgeClasses(p) }>
 		{ children... }

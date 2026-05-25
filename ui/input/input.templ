@@ -1,13 +1,20 @@
+/**
+ * Input is a single-line native text field.
+ * Supports types, validation attrs, and wireframe variant/size classes.
+ */
+
 // Copy: components/ui/input/input.templ
 
 package input
 
 import "github.com/fastygo/templ/utils"
 
+// InputProps configures a native input element.
 type InputProps struct {
 	Variant      string
 	Size         string
 	Class        string
+	// Type — input type; defaults to text
 	Type         string
 	Name         string
 	Value        string
@@ -28,6 +35,7 @@ func InputClasses(p InputProps) string {
 	return uiutils.InputClasses(p.Variant, p.Size, p.Class)
 }
 
+// Input renders a styled single-line form control.
 templ Input(p InputProps) {
 	<input
 		if p.ID != "" {

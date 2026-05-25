@@ -1,14 +1,21 @@
+/**
+ * Title renders a heading (h1–h6) from Order without picking tags manually.
+ */
+
 // Copy: components/ui/title/title.templ
 
 package title
 
 import "github.com/fastygo/templ/utils"
 
+// TitleProps configures heading level and classes.
 type TitleProps struct {
 	Class string
+	// Order — maps to h1–h6; 0 and 2 default to h2
 	Order int
 }
 
+// Title renders one heading element with the resolved level.
 templ Title(p TitleProps, value string) {
 	@titleTag(p) {
 		{ value }

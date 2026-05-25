@@ -10,18 +10,13 @@ shadcn-style **copy-paste** templ bricks for React developers onboarding to Go +
 | [`ui/`](ui/) | Primitives: button, badge, input, form, layout |
 | [`components/`](components/) | Composites: card, alert, breadcrumb |
 | [`components.json`](components.json) | Registry manifest (shadcn-style) |
-| [`test/example/`](test/example/) | Live registry demo page (`Page`, `RegistryDemo`) |
+| [`examples/`](examples/) | Optional local preview (server + Tailwind demo — not part of the library) |
+| [`.validate/docs/component.spec.template.md`](.validate/docs/component.spec.template.md) | Spec template: `api` + `showcase` per brick |
+| [`.validate/docs/README.md`](.validate/docs/README.md) | Local `validate-spec` command and registry checks |
+| [`.cursor/rules/templ-component-spec.mdc`](.cursor/rules/templ-component-spec.mdc) | Authoring rule for specs and STE comments |
+| [`utils/utils.spec.md`](utils/utils.spec.md) | Helper module export catalog (classes, attrs, recipes) |
 
 No UI8Kit or Base dependency in default bricks. Optional Base adapters can be added per app at init time.
-
-## Quick start
-
-```bash
-bun install
-bun run dev
-```
-
-Open **http://127.0.0.1:8080/**
 
 ## Copy into your app
 
@@ -29,6 +24,11 @@ Open **http://127.0.0.1:8080/**
 2. Copy folders from `ui/button/`, `ui/input/`, `components/card/`, etc.
 3. Update the `uiutils` import path in each `.templ` file to match your module.
 4. Run `templ generate` and include `ui/**/*.templ` in your Tailwind `@source`.
+5. Define **your own** shadcn-compatible CSS variables (`--background`, `--primary`, …) in the consuming app — the library does not ship tokens.
+
+## Local preview
+
+See [`examples/README.md`](examples/README.md) for a minimal preview server and Tailwind setup.
 
 ## Usage
 
@@ -61,10 +61,22 @@ import "your/module/ui/button"
 - **children:** `{ children... }` in the component body.
 - **attrs:** `Attrs templ.Attributes` plus `ID`, `AriaLabel`, `Href`, etc.
 
-## Scripts
+## Generate templ
 
-| Script | Description |
-|--------|-------------|
-| `bun run templ` | Regenerate all `*_templ.go` |
-| `bun run build:css` | Build Tailwind `app.css` |
-| `bun run dev` | templ + css + preview server |
+From the repository root:
+
+```bash
+go tool templ generate ./...
+```
+
+Or per package, e.g. `go tool templ generate ./ui/button`.
+
+## Validate specs
+
+Before CI, run the component spec validator:
+
+```bash
+bash .validate/scripts/validate-spec.sh --with-tests
+```
+
+See [`.validate/docs/README.md`](.validate/docs/README.md) for checks and `components.json` alias expectations.

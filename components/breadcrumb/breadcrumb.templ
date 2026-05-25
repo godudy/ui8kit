@@ -1,3 +1,8 @@
+/**
+ * Breadcrumb shows the current page location within a hierarchy.
+ * Renders nav with ordered links and aria-current on the active item.
+ */
+
 // Copy: components/ui/breadcrumb/breadcrumb.templ
 
 package breadcrumb
@@ -8,13 +13,16 @@ import (
 	"github.com/fastygo/templ/utils"
 )
 
+// BreadcrumbItem is one crumb in the trail.
 type BreadcrumbItem struct {
 	Label    string
 	Href     string
+	// Current — marks the active page (aria-current=page)
 	Current  bool
 	Disabled bool
 }
 
+// BreadcrumbProps configures items and nav classes.
 type BreadcrumbProps struct {
 	Class string
 	Items []BreadcrumbItem
@@ -32,6 +40,7 @@ func breadcrumbLinkClasses(item BreadcrumbItem) string {
 	return uiutils.Cn(classes...)
 }
 
+// Breadcrumb renders the full navigation trail.
 templ Breadcrumb(p BreadcrumbProps) {
 	<nav
 		class={ uiutils.Cn("text-sm", strings.TrimSpace(p.Class)) }

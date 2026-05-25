@@ -1,3 +1,7 @@
+/**
+ * Textarea is a multi-line native text field with row sizing.
+ */
+
 // Copy: components/ui/textarea/textarea.templ
 
 package textarea
@@ -8,6 +12,7 @@ import (
 	"github.com/fastygo/templ/utils"
 )
 
+// TextareaProps configures a native textarea element.
 type TextareaProps struct {
 	Variant     string
 	Size        string
@@ -15,6 +20,7 @@ type TextareaProps struct {
 	Name        string
 	Value       string
 	Placeholder string
+	// Rows — visible line count; defaults when zero
 	Rows        int
 	Disabled    bool
 	Required    bool
@@ -29,6 +35,7 @@ func TextareaClasses(p TextareaProps) string {
 	return uiutils.InputClasses(p.Variant, p.Size, p.Class)
 }
 
+// Textarea renders a styled multi-line form control.
 templ Textarea(p TextareaProps) {
 	<textarea
 		if p.ID != "" {

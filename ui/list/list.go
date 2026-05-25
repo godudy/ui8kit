@@ -1,3 +1,7 @@
+/**
+ * List props and helpers for List and ListItem templ components.
+ */
+
 package list
 
 import (
@@ -7,14 +11,18 @@ import (
 	"github.com/fastygo/templ/utils"
 )
 
+// ListProps configures list tag and classes.
 type ListProps struct {
 	Class string
+	// Tag — ul, ol, dl, or menu
 	Tag   string
 	Attrs templ.Attributes
 }
 
+// ListItemProps configures one list row.
 type ListItemProps struct {
 	Class string
+	// Value — optional li value for ordered contexts
 	Value int
 	Attrs templ.Attributes
 }

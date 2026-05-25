@@ -1,3 +1,7 @@
+/**
+ * Table props and cell attribute helpers for table templ components.
+ */
+
 package table
 
 import (
@@ -7,37 +11,47 @@ import (
 	"github.com/a-h/templ"
 )
 
+// TableProps configures the root table element.
 type TableProps struct {
 	Class string
 	Attrs templ.Attributes
 }
 
+// TableCaptionProps configures caption styling.
 type TableCaptionProps struct {
 	Class string
 }
 
+// TableSectionProps configures thead, tbody, or tfoot.
 type TableSectionProps struct {
 	Class string
 }
 
+// TableRowProps configures one table row.
 type TableRowProps struct {
 	Class string
 }
 
+// TableCellProps configures th or td cells.
 type TableCellProps struct {
 	Class   string
+	// Scope — th scope: col, row, colgroup, rowgroup
 	Scope   string
 	ColSpan int
 	RowSpan int
+	// Headers — ids of related header cells
 	Headers string
+	// Abbr — abbreviated header text for th
 	Abbr    string
 }
 
+// TableColGroupProps configures colgroup span.
 type TableColGroupProps struct {
 	Class string
 	Span  int
 }
 
+// TableColProps configures a single col element.
 type TableColProps struct {
 	Class string
 	Span  int

@@ -1,0 +1,56 @@
+---
+description: Templ registry — machine-readable component specs (api vs showcase)
+globs: "**/*.spec.md,**/*.templ,.validate/docs/**"
+alwaysApply: true
+---
+
+# Component specs (`{name}.spec.md`)
+
+Machine-readable source of truth for docgen, LLM, and parsers. Human docs are generated **from** specs, not the reverse.
+
+## Two layers (do not collapse)
+
+| Layer | YAML key | Role |
+|-------|----------|------|
+| **API** | `api:` | **Full contract** — every prop, full `enum`, defaults, `allow-list-source` when tags come from `utils/tags.go` |
+| **Showcase** | `showcase:` | **Curated previews only** — typical usage; missing entry ≠ forbidden value |
+
+**Rule for authors and LLM:** read `api.*.enum` for allowed values. Use `showcase` only for copy-paste examples and doc previews.
+
+```yaml
+api:          # complete — mandatory full enums
+  Tag:
+    enum: [div, main, header, section, footer, nav, article, aside, figure]
+    allow-list-source: utils.tags.TagGroupLayout
+
+showcase:     # curated — not exhaustive
+  - id: tag.main
+    props: { Tag: main }
+```
+
+## Validation contract
+
+1. File: `{templ-basename}.spec.md` next to `{templ-basename}.templ`.
+2. Required front matter: `id`, `layer`, `kind`, `package`, `facade`, `api`, `showcase`, `semantics`.
+3. Primitives: `templ: Name`. Composites: `parts[]`. Helpers (`layer: helper`): `exports` — see `utils/utils.spec.md`.
+4. Every `showcase[].id` MUST have `## Example {id}` with one ` ```templ ` fence (helpers: ` ```go `).
+5. When `allow-list-source` is set, enum MUST match the referenced tag group or utils recipe.
+6. STE prose only: `Summary`, `Use Cases`, `Semantics` — short sentences, active voice.
+7. `/** */` in `.templ` MUST match `## Summary`. `//` prop comments MUST match `api` enums.
+
+**Showcase coverage:** `showcase` does not need to list every `api.*.enum` value. Missing from showcase ≠ forbidden — read `api` for the full contract.
+
+| Prefix | Use |
+|--------|-----|
+| `variant.*` | Appearance (`Variant` prop) |
+| `size.*` | Density (`Size` prop) |
+| `tag.*` | Root tag selection |
+| `state.*` | Interaction state |
+| `layout.*` | Composite part composition |
+| `order.*` | Heading level |
+
+## Template
+
+Authoritative blank: [`.validate/docs/component.spec.template.md`](../../.validate/docs/component.spec.template.md).
+
+Reference implementations: `ui/button/button.spec.md`, `ui/block/block.spec.md`, `components/card/card.spec.md`.
