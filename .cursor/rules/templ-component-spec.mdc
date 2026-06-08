@@ -1,7 +1,7 @@
 ---
 description: Templ registry — machine-readable component specs (api vs showcase)
 globs: "**/*.spec.md,**/*.templ,.validate/docs/**"
-alwaysApply: true
+alwaysApply: false
 ---
 
 # Component specs (`{name}.spec.md`)
