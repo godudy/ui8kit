@@ -7,35 +7,26 @@ import (
 	cmp "github.com/fastygo/templ/components"
 )
 
-templ RegistryDemo() {
+templ ComponentExamples() {
 	@ui.Block(ui.BlockProps{
-		ID:    "registry-main",
-		Tag:   "main",
-		Class: "min-h-screen",
+		ID:    "component-examples",
+		Tag:   "section",
+		Class: "rounded-md border border-border bg-card",
 	}) {
-		@ui.Block(ui.BlockProps{
-			Tag:   "header",
-			Class: "border-b border-border bg-card",
-		}) {
-			@ui.Box(ui.BoxProps{Class: "mx-auto max-w-3xl px-6 py-6"}) {
-				@ui.Stack(ui.StackProps{Class: "gap-2"}) {
-					@ui.Title(ui.TitleProps{Order: 1}, "Templ component registry")
-					@ui.Text(ui.TextProps{Class: "text-sm text-muted-foreground"}, "Copy-paste bricks with ui8kit-style Block/Box semantics. Import github.com/fastygo/templ/ui or granular ui/button.")
-				}
+		@ui.Box(ui.BoxProps{Class: "border-b border-border px-6 py-6"}) {
+			@ui.Stack(ui.StackProps{Class: "gap-2"}) {
+				@ui.Title(ui.TitleProps{Order: 2}, "Templ component registry")
+				@ui.Text(ui.TextProps{Class: "text-sm text-muted-foreground"}, "Copy-paste bricks with ui8kit-style Block/Box semantics. Import github.com/fastygo/templ/ui or granular ui/button.")
 			}
 		}
-		@ui.Block(ui.BlockProps{
-			ID:    "registry-content",
-			Tag:   "section",
-			Class: "mx-auto max-w-3xl px-6 py-8",
-		}) {
+		@ui.Box(ui.BoxProps{Class: "px-6 py-6"}) {
 			@ui.Stack(ui.StackProps{Class: "gap-8"}) {
 				@cmp.Alert(cmp.AlertProps{Variant: "default"}) {
 					@ui.Text(ui.TextProps{Class: "text-sm"}, "Static alert with role=status. Wireframe tokens only.")
 				}
 				@cmp.Card(cmp.CardProps{Variant: "default"}) {
 					@cmp.CardHeader(cmp.CardHeaderProps{}) {
-						@cmp.CardTitle(cmp.CardTitleProps{Order: 2}, "Form controls")
+						@cmp.CardTitle(cmp.CardTitleProps{Order: 3}, "Form controls")
 						@cmp.CardDescription(cmp.CardDescriptionProps{}, "Label, input, and buttons inside a card (internal Box layout).")
 					}
 					@cmp.CardContent(cmp.CardContentProps{}) {
@@ -86,11 +77,22 @@ templ RegistryDemo() {
 				})
 			}
 		}
-		@ui.Block(ui.BlockProps{
-			Tag:   "footer",
-			Class: "border-t border-border",
-		}) {
-			@ui.Box(ui.BoxProps{Class: "mx-auto max-w-3xl px-6 py-4"}) {
+	}
+}
+
+templ RegistryDemo() {
+	@ui.Block(ui.BlockProps{
+		ID:    "registry-main",
+		Tag:   "main",
+		Class: "min-h-screen",
+	}) {
+		@ui.Box(ui.BoxProps{Class: "mx-auto max-w-3xl px-6 py-8"}) {
+			@ui.Stack(ui.StackProps{Class: "gap-8"}) {
+				@ui.Stack(ui.StackProps{Class: "gap-2"}) {
+					@ui.Title(ui.TitleProps{Order: 1}, "Templ component registry")
+					@ui.Text(ui.TextProps{Class: "text-sm text-muted-foreground"}, "Copy-paste bricks with ui8kit-style Block/Box semantics. Import github.com/fastygo/templ/ui or granular ui/button.")
+				}
+				@ComponentExamples()
 				@ui.Text(ui.TextProps{Class: "text-xs text-muted-foreground"}, "Copy ui/*, components/*, and utils/ into your app. Run templ generate and include sources in Tailwind.")
 			}
 		}

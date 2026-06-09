@@ -23,6 +23,11 @@ func main() {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
 	})
+	mux.HandleFunc("GET /home/{$}", func(w http.ResponseWriter, r *http.Request) {
+		if err := examples.HomePage().Render(r.Context(), w); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+	})
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir(staticDir))))
 
 	log.Printf("preview http://%s/", addr)

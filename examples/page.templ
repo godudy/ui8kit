@@ -1,16 +1,38 @@
 package examples
 
+import (
+	"github.com/fastygo/templ/examples/ui/blocks/dashboard"
+	"github.com/fastygo/templ/examples/ui/blocks/home"
+)
+
 templ Page() {
 	<!DOCTYPE html>
 	<html lang="en">
 		<head>
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1"/>
-			<title>Templ component registry</title>
+			<title>Dashboard · Templ examples</title>
 			<link rel="stylesheet" href="/static/css/app.css"/>
 		</head>
 		<body class="bg-background text-foreground antialiased">
-			@RegistryDemo()
+			@dashboard.Page(dashboard.DefaultPage()) {
+				@ComponentExamples()
+			}
+		</body>
+	</html>
+}
+
+templ HomePage() {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1"/>
+			<title>Home block · Templ examples</title>
+			<link rel="stylesheet" href="/static/css/app.css"/>
+		</head>
+		<body class="bg-background text-foreground antialiased">
+			@home.Page(home.DefaultPage())
 		</body>
 	</html>
 }
