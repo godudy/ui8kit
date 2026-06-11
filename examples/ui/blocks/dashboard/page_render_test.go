@@ -20,8 +20,15 @@ func TestPageRendersDefaultDashboardBlock(t *testing.T) {
 		"Current layer",
 		"github.com/fastygo/framework",
 		"Catalog copy, not runtime code",
+		"Shell readiness",
+		`<progress`,
 		`data-ui8kit="sheet"`,
 		`id="dashboard-mobile-sheet-trigger"`,
+		`id="dashboard-mobile-sheet-panel"`,
+		`aria-label="Primary navigation"`,
+		`aria-current="page"`,
+		`<article`,
+		`<section`,
 	} {
 		if !strings.Contains(html, want) {
 			t.Fatalf("expected rendered block to contain %q", want)

@@ -31,7 +31,9 @@ semantics:
 
 Dashboard is a self-contained Catalog page block.
 It mirrors the current application shell layer with sidebar navigation, header
-navigation, status cards, and a current-layer inventory.
+navigation, status cards, and a current-layer inventory. The block composes
+`components.Sheet`, `components.Nav`, and `components.IconBadge` for mobile
+menu, navigation lists, and icon surfaces.
 
 ## Boundaries
 

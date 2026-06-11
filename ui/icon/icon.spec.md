@@ -15,7 +15,7 @@ api:
   Size:
     role: density
     type: string
-    enum: [xs, sm, default, md, lg, xl]
+    enum: [xs, sm, default, lg, xl]
     allow-list-source: ui.icon.IconVariants
     default: default
   Name:

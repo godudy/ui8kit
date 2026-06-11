@@ -3,8 +3,14 @@
 package examples
 
 import (
-	"github.com/fastygo/templ/ui"
 	cmp "github.com/fastygo/templ/components"
+	"github.com/fastygo/templ/ui"
+)
+
+const (
+	demoSheetID        = "demo-sheet-panel"
+	demoSheetTriggerID = "demo-sheet-trigger"
+	demoSheetTitleID   = "demo-sheet-title"
 )
 
 templ ComponentExamples() {
@@ -21,13 +27,13 @@ templ ComponentExamples() {
 		}
 		@ui.Box(ui.BoxProps{Class: "px-6 py-6"}) {
 			@ui.Stack(ui.StackProps{Class: "gap-8"}) {
-				@cmp.Alert(cmp.AlertProps{Variant: "default"}) {
-					@ui.Text(ui.TextProps{Class: "text-sm"}, "Static alert with role=status. Wireframe tokens only.")
+				@cmp.Alert(cmp.AlertProps{Variant: "default", Role: "status", AriaLive: "polite"}) {
+					@ui.Text(ui.TextProps{Class: "text-sm"}, "Static alert with explicit role and aria-live. Wireframe tokens only.")
 				}
-				@cmp.Card(cmp.CardProps{Variant: "default"}) {
+				@cmp.Card(cmp.CardProps{Tag: "section", Variant: "default"}) {
 					@cmp.CardHeader(cmp.CardHeaderProps{}) {
 						@cmp.CardTitle(cmp.CardTitleProps{Order: 3}, "Form controls")
-						@cmp.CardDescription(cmp.CardDescriptionProps{}, "Label, input, and buttons inside a card (internal Box layout).")
+						@cmp.CardDescription(cmp.CardDescriptionProps{}, "Label, input, and buttons inside a semantic section card.")
 					}
 					@cmp.CardContent(cmp.CardContentProps{}) {
 						@ui.FormItem(ui.FormItemProps{}) {
@@ -55,6 +61,61 @@ templ ComponentExamples() {
 						}
 					}
 				}
+				@ui.Stack(ui.StackProps{Class: "gap-3"}) {
+					@ui.Text(ui.TextProps{Class: "text-sm font-medium"}, "Navigation and icon surfaces")
+					@cmp.Nav(cmp.NavProps{AriaLabel: "Example navigation"}) {
+						@cmp.NavList(cmp.NavListProps{Gap: "sm"}) {
+							@cmp.NavItem(cmp.NavItemProps{}) {
+								@cmp.NavLink(cmp.NavLinkProps{Href: "/", Active: true}) {
+									@cmp.IconBadge(cmp.IconBadgeProps{Name: "home", Size: "sm"})
+									Home
+								}
+							}
+							@cmp.NavItem(cmp.NavItemProps{}) {
+								@cmp.NavLink(cmp.NavLinkProps{Href: "/docs"}) {
+									@cmp.IconBadge(cmp.IconBadgeProps{Name: "docs", Size: "sm", Variant: "secondary"})
+									Docs
+								}
+							}
+						}
+					}
+					@ui.Group(ui.GroupProps{Class: "flex flex-wrap items-center gap-2"}) {
+						@cmp.IconBadge(cmp.IconBadgeProps{Name: "spark", Size: "default", Variant: "accent"})
+						@cmp.IconBadge(cmp.IconBadgeProps{BaseClass: "icon", Prefix: "icon-", Name: "check", Size: "sm"})
+					}
+				}
+				@ui.Stack(ui.StackProps{Class: "gap-3"}) {
+					@ui.Text(ui.TextProps{Class: "text-sm font-medium"}, "Mobile sheet (ui8kit behavior hooks)")
+					@cmp.SheetTrigger(cmp.SheetTriggerProps{
+						ID:        demoSheetTriggerID,
+						For:       demoSheetID,
+						Behavior:  "ui8kit",
+						Variant:   "outline",
+						Size:      "sm",
+						AriaLabel: "Open demo sheet",
+					}) {
+						Open sheet
+					}
+					@cmp.Sheet(cmp.SheetProps{
+						ID:             demoSheetID,
+						Side:           "right",
+						Behavior:       "ui8kit",
+						AriaLabel:      "Demo sheet",
+						AriaLabelledBy: demoSheetTitleID,
+					}) {
+						@cmp.SheetOverlay(cmp.SheetOverlayProps{For: demoSheetID, Behavior: "ui8kit"})
+						@cmp.SheetContent(cmp.SheetContentProps{}) {
+							@cmp.SheetHeader(cmp.SheetHeaderProps{}) {
+								@cmp.SheetTitle(cmp.SheetTitleProps{ID: demoSheetTitleID}, "Sheet panel")
+								@cmp.SheetClose(cmp.SheetCloseProps{For: demoSheetID, Behavior: "ui8kit", AriaLabel: "Close demo sheet"}) {
+									Close
+								}
+							}
+							@cmp.SheetDescription(cmp.SheetDescriptionProps{}, "Sheet parts compose trigger, overlay, content, and close controls.")
+						}
+					}
+				}
+				@ui.Separator(ui.SeparatorProps{})
 				@ui.Box(ui.BoxProps{Class: "flex flex-wrap gap-2"}) {
 					@ui.Badge(ui.BadgeProps{Variant: "default"}) {
 						Default
@@ -70,6 +131,7 @@ templ ComponentExamples() {
 					}
 				}
 				@cmp.Breadcrumb(cmp.BreadcrumbProps{
+					AriaLabel: "Breadcrumb",
 					Items: []cmp.BreadcrumbItem{
 						{Label: "Home", Href: "/"},
 						{Label: "Registry", Current: true},

@@ -103,8 +103,10 @@ func loadRecipeKeys(repoRoot string) (map[string][]string, error) {
 			return
 		}
 		src := string(data)
+		parts := strings.Split(sourceID, ".")
+		varName := parts[len(parts)-1]
 		for _, field := range fields {
-			keys := extractTemplVariantKeys(src, field)
+			keys := extractRecipeFieldKeys(src, varName, field)
 			if len(keys) > 0 {
 				out[sourceID+"."+field] = keys
 			}

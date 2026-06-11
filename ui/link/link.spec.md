@@ -15,7 +15,7 @@ api:
   Size:
     role: density
     type: string
-    enum: [sm, default, md, lg]
+    enum: [sm, default, lg]
     allow-list-source: ui.link.LinkVariants
     default: default
   Href:

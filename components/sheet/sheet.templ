@@ -64,6 +64,7 @@ type SheetProps struct {
 
 // SheetTriggerProps configures a button that opens a sheet.
 type SheetTriggerProps struct {
+	ID        string
 	For       string
 	Class     string
 	Variant   string
@@ -204,6 +205,7 @@ templ Sheet(p SheetProps) {
 // SheetTrigger renders a button wired to a sheet.
 templ SheetTrigger(p SheetTriggerProps) {
 	@ui.Button(ui.ButtonProps{
+		ID:        p.ID,
 		Variant:   p.Variant,
 		Size:      p.Size,
 		Class:     p.Class,

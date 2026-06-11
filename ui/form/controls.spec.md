@@ -25,25 +25,25 @@ api:
     role: appearance
     type: string
     enum: [default, card, inline, unstyled]
-    allow-list-source: ui.form.FieldsetVariants
+    allow-list-source: ui.form.FieldsetVariants.variant
     default: default
   LegendVariant:
     role: appearance
     type: string
     enum: [default, muted, unstyled]
-    allow-list-source: ui.form.LegendVariants
+    allow-list-source: ui.form.LegendVariants.variant
     default: default
   MeterVariant:
     role: appearance
     type: string
     enum: [default, muted, unstyled]
-    allow-list-source: ui.form.MeterVariants
+    allow-list-source: ui.form.MeterVariants.variant
     default: default
   ProgressVariant:
     role: appearance
     type: string
     enum: [default, muted, unstyled]
-    allow-list-source: ui.form.ProgressVariants
+    allow-list-source: ui.form.ProgressVariants.variant
     default: default
 showcase:
   - id: group.fieldset

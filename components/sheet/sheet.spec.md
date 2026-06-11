@@ -9,7 +9,7 @@ parts:
   - templ: Sheet
     props: [ID, Variant, Side, Size, Class, Open, AriaLabel, AriaLabelledBy, AriaDescribedBy, Behavior, Attrs]
   - templ: SheetTrigger
-    props: [For, Class, Variant, Size, Open, Behavior, AriaLabel, Attrs]
+    props: [ID, For, Class, Variant, Size, Open, Behavior, AriaLabel, Attrs]
   - templ: SheetOverlay
     props: [For, Class, Open, Behavior, Attrs]
   - templ: SheetContent

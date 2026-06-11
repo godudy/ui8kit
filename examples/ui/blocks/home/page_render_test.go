@@ -22,6 +22,9 @@ func TestPageRendersDefaultCatalogBlock(t *testing.T) {
 		"AppCMS",
 		`data-ui8kit="sheet"`,
 		`id="home-mobile-sheet-trigger"`,
+		`id="home-mobile-sheet-panel"`,
+		`aria-label="Primary navigation"`,
+		`aria-current="page"`,
 	} {
 		if !strings.Contains(html, want) {
 			t.Fatalf("expected rendered block to contain %q", want)

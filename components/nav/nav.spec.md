@@ -25,7 +25,7 @@ api:
     role: appearance
     type: string
     enum: [default, active, ghost, muted, unstyled]
-    allow-list-source: components.nav.NavLinkVariants
+    allow-list-source: components.nav.NavLinkVariants.variant
     default: default
   Size:
     role: density

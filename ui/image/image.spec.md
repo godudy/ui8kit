@@ -24,7 +24,7 @@ api:
   Size:
     role: density
     type: string
-    enum: [auto, default, xs, sm, md, lg, xl, full]
+    enum: [auto, default, xs, sm, lg, xl, full]
     allow-list-source: ui.image.ImageVariants
     default: auto
   Fit:
