@@ -9,6 +9,9 @@ import (
 	"github.com/fastygo/templ/components/alert"
 	"github.com/fastygo/templ/components/breadcrumb"
 	"github.com/fastygo/templ/components/card"
+	"github.com/fastygo/templ/components/iconbadge"
+	"github.com/fastygo/templ/components/nav"
+	"github.com/fastygo/templ/components/sheet"
 )
 
 templ Card(p CardProps) {
@@ -51,4 +54,74 @@ templ Alert(p AlertProps) {
 
 templ Breadcrumb(p BreadcrumbProps) {
 	@breadcrumb.Breadcrumb(p)
+}
+
+templ Sheet(p SheetProps) {
+	@sheet.Sheet(p) {
+		{ children... }
+	}
+}
+
+templ SheetTrigger(p SheetTriggerProps) {
+	@sheet.SheetTrigger(p) {
+		{ children... }
+	}
+}
+
+templ SheetOverlay(p SheetOverlayProps) {
+	@sheet.SheetOverlay(p)
+}
+
+templ SheetContent(p SheetContentProps) {
+	@sheet.SheetContent(p) {
+		{ children... }
+	}
+}
+
+templ SheetHeader(p SheetHeaderProps) {
+	@sheet.SheetHeader(p) {
+		{ children... }
+	}
+}
+
+templ SheetTitle(p SheetTitleProps, value string) {
+	@sheet.SheetTitle(p, value)
+}
+
+templ SheetDescription(p SheetDescriptionProps, value string) {
+	@sheet.SheetDescription(p, value)
+}
+
+templ SheetClose(p SheetCloseProps) {
+	@sheet.SheetClose(p) {
+		{ children... }
+	}
+}
+
+templ Nav(p NavProps) {
+	@nav.Nav(p) {
+		{ children... }
+	}
+}
+
+templ NavList(p NavListProps) {
+	@nav.NavList(p) {
+		{ children... }
+	}
+}
+
+templ NavItem(p NavItemProps) {
+	@nav.NavItem(p) {
+		{ children... }
+	}
+}
+
+templ NavLink(p NavLinkProps) {
+	@nav.NavLink(p) {
+		{ children... }
+	}
+}
+
+templ IconBadge(p IconBadgeProps) {
+	@iconbadge.IconBadge(p)
 }

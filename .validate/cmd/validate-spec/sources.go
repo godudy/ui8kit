@@ -27,11 +27,14 @@ func loadTagGroups(repoRoot string) (map[string][]string, error) {
 		key  string
 	}{
 		{"TagGroupLayout", "utils.tags.TagGroupLayout"},
+		{"TagGroupBlockText", "utils.tags.TagGroupBlockText"},
+		{"TagGroupInline", "utils.tags.TagGroupInline"},
 		{"TagGroupStack", "utils.tags.TagGroupStack"},
 		{"TagGroupGroup", "utils.tags.TagGroupGroup"},
 		{"TagGroupText", "utils.tags.TagGroupText"},
 		{"TagGroupContainer", "utils.tags.TagGroupContainer"},
 		{"TagGroupList", "utils.tags.TagGroupList"},
+		{"TagGroupListItem", "utils.tags.TagGroupListItem"},
 	}
 
 	for _, c := range cases {
@@ -62,7 +65,10 @@ func loadTagGroups(repoRoot string) (map[string][]string, error) {
 			}
 		}
 		if c.name == "TagGroupText" {
-			for _, t := range []string{"p", "blockquote", "figcaption", "address", "pre", "span", "small", "time", "em", "strong", "cite", "abbr", "code", "mark"} {
+			for _, t := range out["utils.tags.TagGroupBlockText"] {
+				tags[t] = true
+			}
+			for _, t := range out["utils.tags.TagGroupInline"] {
 				tags[t] = true
 			}
 		}
@@ -91,16 +97,35 @@ func loadRecipeKeys(repoRoot string) (map[string][]string, error) {
 		}
 	}
 
-	btnPath := filepath.Join(repoRoot, "ui", "button", "button.templ")
-	if data, err := os.ReadFile(btnPath); err == nil {
-		out["ui.button.ButtonVariants.variant"] = extractTemplVariantKeys(string(data), "variant")
-		out["ui.button.ButtonVariants.size"] = extractTemplVariantKeys(string(data), "size")
+	addTemplRecipe := func(relPath, sourceID string, fields ...string) {
+		data, err := os.ReadFile(filepath.Join(repoRoot, filepath.FromSlash(relPath)))
+		if err != nil {
+			return
+		}
+		src := string(data)
+		for _, field := range fields {
+			keys := extractTemplVariantKeys(src, field)
+			if len(keys) > 0 {
+				out[sourceID+"."+field] = keys
+			}
+		}
 	}
-	badgePath := filepath.Join(repoRoot, "ui", "badge", "badge.templ")
-	if data, err := os.ReadFile(badgePath); err == nil {
-		out["ui.badge.BadgeVariants.variant"] = extractTemplVariantKeys(string(data), "variant")
-		out["ui.badge.BadgeVariants.size"] = extractTemplVariantKeys(string(data), "size")
-	}
+	addTemplRecipe("ui/button/button.templ", "ui.button.ButtonVariants", "variant", "size")
+	addTemplRecipe("ui/badge/badge.templ", "ui.badge.BadgeVariants", "variant", "size")
+	addTemplRecipe("ui/icon/icon.templ", "ui.icon.IconVariants", "type", "size")
+	addTemplRecipe("ui/image/image.templ", "ui.image.ImageVariants", "variant", "size", "fit", "position", "aspect")
+	addTemplRecipe("ui/link/link.templ", "ui.link.LinkVariants", "variant", "size")
+	addTemplRecipe("ui/separator/separator.templ", "ui.separator.SeparatorVariants", "variant", "orientation")
+	addTemplRecipe("ui/disclosure/disclosure.templ", "ui.disclosure.DisclosureVariants", "variant", "size")
+	addTemplRecipe("ui/dialog/dialog.templ", "ui.dialog.DialogVariants", "variant", "size")
+	addTemplRecipe("ui/form/controls.templ", "ui.form.FieldsetVariants", "variant", "size")
+	addTemplRecipe("ui/form/controls.templ", "ui.form.LegendVariants", "variant", "size")
+	addTemplRecipe("ui/form/controls.templ", "ui.form.MeterVariants", "variant", "size")
+	addTemplRecipe("ui/form/controls.templ", "ui.form.ProgressVariants", "variant", "size")
+	addTemplRecipe("components/sheet/sheet.templ", "components.sheet.SheetVariants", "variant", "side", "size")
+	addTemplRecipe("components/nav/nav.templ", "components.nav.NavListVariants", "orientation", "gap")
+	addTemplRecipe("components/nav/nav.templ", "components.nav.NavLinkVariants", "variant", "size")
+	addTemplRecipe("components/iconbadge/iconbadge.templ", "components.iconbadge.IconBadgeVariants", "variant", "size")
 
 	out["utils.helpers.TitleTag"] = []string{"1", "2", "3", "4", "5", "6"}
 	return out, nil

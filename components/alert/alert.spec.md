@@ -15,6 +15,18 @@ api:
   Class:
     role: style-extension
     type: string
+  Role:
+    role: live-region-role
+    type: string
+    default: status
+  AriaLive:
+    role: live-region-politeness
+    type: string
+    enum: [off, polite, assertive]
+    default: polite
+  Attrs:
+    role: html-attrs
+    type: templ.Attributes
 slots:
   default:
     required: true
@@ -49,7 +61,8 @@ Alert uses role status and aria-live polite.
 ## Semantics
 
 - Root element is section
-- AlertAttrs sets role status from utils
+- Role defaults to status
+- AriaLive defaults to polite
 - Children carry the visible message body
 
 ## Example variant.default

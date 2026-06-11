@@ -6,23 +6,23 @@ package: github.com/fastygo/templ/components/card
 facade: github.com/fastygo/templ/components
 parts:
   - templ: Card
-    props: [Class, Variant, Tag]
+    props: [Class, Variant, Tag, Attrs]
   - templ: CardHeader
-    props: [Class]
+    props: [Class, Attrs]
     slot: header
   - templ: CardTitle
-    props: [Class, Order]
+    props: [Class, Order, Attrs]
     slot: title
     value: string
   - templ: CardDescription
-    props: [Class]
+    props: [Class, Attrs]
     slot: description
     value: string
   - templ: CardContent
-    props: [Class]
+    props: [Class, Attrs]
     slot: content
   - templ: CardFooter
-    props: [Class]
+    props: [Class, Attrs]
     slot: footer
 api:
   Class:
@@ -37,6 +37,12 @@ api:
   Tag:
     role: root-tag
     type: string
+    enum: [div, section, article, aside, header, footer, main, nav, figure, search, hgroup]
+    allow-list-source: utils.tags.TagGroupLayout
+    default: div
+  Attrs:
+    role: html-attrs
+    type: templ.Attributes
   Order:
     role: heading-level
     type: int
@@ -64,7 +70,7 @@ showcase:
     props: { Variant: default }
     parts: [Card, CardHeader, CardTitle]
 semantics:
-  root: div
+  root: div | section | article | aside | header | footer | main | nav | figure | search | hgroup
   role: none
   behavior: static
   title-root: h1 | h2 | h3
@@ -84,7 +90,7 @@ Card uses header, content, and footer slots.
 
 ## Semantics
 
-- Card root element is div
+- Card root element is resolved from Tag
 - CardTitle maps Order to h1, h2, or h3
 - CardDescription renders a p element
 - Card parts compose in document order

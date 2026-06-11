@@ -31,11 +31,30 @@ import (
 type AlertProps struct {
 	Class string
 	// Variant — default, destructive, or wireframe preset
-	Variant string
+	Variant  string
+	Role     string
+	AriaLive string
+	Attrs    templ.Attributes
 }
 
 func AlertClasses(p AlertProps) string {
 	return uiutils.AlertClasses(p.Variant, strings.TrimSpace(p.Class))
+}
+
+func alertAttrs(p AlertProps) templ.Attributes {
+	role := strings.TrimSpace(p.Role)
+	if role == "" {
+		role = "status"
+	}
+	live := strings.TrimSpace(p.AriaLive)
+	if live == "" {
+		live = "polite"
+	}
+	return uiutils.MergeAttrs(
+		templ.Attributes{"role": role},
+		uiutils.AriaLive(live),
+		p.Attrs,
+	)
 }
 
 // Alert renders a landmark section with alert semantics.
@@ -82,7 +101,7 @@ func Alert(p AlertProps) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templ.RenderAttributes(ctx, templ_7745c5c3_Buffer, uiutils.AlertAttrs())
+		templ_7745c5c3_Err = templ.RenderAttributes(ctx, templ_7745c5c3_Buffer, alertAttrs(p))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

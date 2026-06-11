@@ -18,15 +18,34 @@ type AlertProps struct {
 	Class   string
 	// Variant — default, destructive, or wireframe preset
 	Variant string
+	Role    string
+	AriaLive string
+	Attrs   templ.Attributes
 }
 
 func AlertClasses(p AlertProps) string {
 	return uiutils.AlertClasses(p.Variant, strings.TrimSpace(p.Class))
 }
 
+func alertAttrs(p AlertProps) templ.Attributes {
+	role := strings.TrimSpace(p.Role)
+	if role == "" {
+		role = "status"
+	}
+	live := strings.TrimSpace(p.AriaLive)
+	if live == "" {
+		live = "polite"
+	}
+	return uiutils.MergeAttrs(
+		templ.Attributes{"role": role},
+		uiutils.AriaLive(live),
+		p.Attrs,
+	)
+}
+
 // Alert renders a landmark section with alert semantics.
 templ Alert(p AlertProps) {
-	<section class={ AlertClasses(p) } { uiutils.AlertAttrs()... }>
+	<section class={ AlertClasses(p) } { alertAttrs(p)... }>
 		{ children... }
 	</section>
 }
