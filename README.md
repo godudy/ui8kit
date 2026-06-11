@@ -1,22 +1,24 @@
 # Templ component registry
 
-shadcn-style **copy-paste** templ bricks for React developers onboarding to Go + templ.
+shadcn-style **copy-paste** Templ bricks for building Go interfaces with a familiar component workflow.
+
+The registry keeps the ergonomics React developers expect — props, variants, children, composition, and small colocated examples — while staying server-rendered, Go-native, and easy to copy into an app. The goal is not to recreate React in Go, but to bring its useful component discipline to Templ: predictable APIs, composable primitives, and application-owned styling.
 
 ## Layout
 
 | Path | Role |
 |------|------|
 | [`utils/`](utils/) | **Only shared Go helpers** — CVA (`Compose`), `Cn`, attrs, ARIA, `tags.go`, form recipes |
-| [`ui/`](ui/) | Primitives: button, badge, input, form, layout |
-| [`components/`](components/) | Composites: card, alert, breadcrumb |
+| [`ui/`](ui/) | Primitives: button, badge, input, form controls, layout, media, links, dialog, disclosure |
+| [`components/`](components/) | Composites: card, alert, breadcrumb, sheet, nav, icon badge |
 | [`components.json`](components.json) | Registry manifest (shadcn-style) |
-| [`examples/`](examples/) | Optional local preview (server + Tailwind demo — not part of the library) |
+| [`examples/`](examples/) | Optional local preview (server, Tailwind, dialog-only `@ui8kit/aria` for Sheet demos) |
 | [`.validate/docs/component.spec.template.md`](.validate/docs/component.spec.template.md) | Spec template: `api` + `showcase` per brick |
 | [`.validate/docs/README.md`](.validate/docs/README.md) | Local `validate-spec` command and registry checks |
 | [`.cursor/rules/templ-component-spec.mdc`](.cursor/rules/templ-component-spec.mdc) | Authoring rule for specs and STE comments |
 | [`utils/utils.spec.md`](utils/utils.spec.md) | Helper module export catalog (classes, attrs, recipes) |
 
-No UI8Kit or Base dependency in default bricks. Optional Base adapters can be added per app at init time.
+Default bricks avoid app-specific runtime dependencies. Behavior hooks such as `data-ui8kit` are opt-in per component, so each consuming app can choose its own client layer.
 
 ## Copy into your app
 
