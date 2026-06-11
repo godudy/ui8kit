@@ -12,6 +12,15 @@ api:
   Class:
     role: style-extension
     type: string
+  AriaLabel:
+    role: accessible-name
+    type: string
+  DataUI8Kit:
+    role: behavior-hook
+    type: string
+  Attrs:
+    role: html-attrs
+    type: templ.Attributes
 item-props:
   Label:
     role: crumb-label
@@ -41,7 +50,7 @@ semantics:
   root: nav
   list-root: ol
   role: navigation
-  aria-label: Breadcrumb
+  aria-label: from AriaLabel prop
   behavior: static
   current-attr: aria-current page
 
@@ -58,7 +67,8 @@ Breadcrumb sets aria-current on the active item.
 
 ## Semantics
 
-- Root element is nav with aria-label Breadcrumb
+- Root element is nav
+- AriaLabel and DataUI8Kit are explicit opt-in props
 - Items render as ol li elements
 - Href renders anchor when link is enabled
 
@@ -69,6 +79,7 @@ import cmp "github.com/fastygo/templ/components"
 
 templ Example() {
 	@cmp.Breadcrumb(cmp.BreadcrumbProps{
+		AriaLabel: "Breadcrumb",
 		Items: []cmp.BreadcrumbItem{
 			{Label: "Home", Href: "/"},
 			{Label: "Docs", Href: "/docs"},
@@ -85,6 +96,7 @@ import cmp "github.com/fastygo/templ/components"
 
 templ Example() {
 	@cmp.Breadcrumb(cmp.BreadcrumbProps{
+		AriaLabel: "Breadcrumb",
 		Items: []cmp.BreadcrumbItem{
 			{Label: "Home", Href: "/"},
 			{Label: "Locked", Disabled: true},

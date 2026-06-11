@@ -24,8 +24,11 @@ type BreadcrumbItem struct {
 
 // BreadcrumbProps configures items and nav classes.
 type BreadcrumbProps struct {
-	Class string
-	Items []BreadcrumbItem
+	Class      string
+	Items      []BreadcrumbItem
+	AriaLabel  string
+	DataUI8Kit string
+	Attrs      templ.Attributes
 }
 
 func breadcrumbLinkClasses(item BreadcrumbItem) string {
@@ -44,7 +47,7 @@ func breadcrumbLinkClasses(item BreadcrumbItem) string {
 templ Breadcrumb(p BreadcrumbProps) {
 	<nav
 		class={ uiutils.Cn("text-sm", strings.TrimSpace(p.Class)) }
-		{ uiutils.BreadcrumbRootAttrs()... }
+		{ uiutils.BreadcrumbRootAttrs(p.AriaLabel, p.DataUI8Kit, p.Attrs)... }
 	>
 		<ol class="flex flex-wrap items-center gap-2">
 			for _, item := range p.Items {
