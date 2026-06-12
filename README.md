@@ -1,7 +1,10 @@
 # Templ component registry
 
-shadcn-style **copy-paste** Templ bricks for building Go interfaces with a familiar component workflow.
+> **Not [a-h/templ](https://github.com/a-h/templ).** This repository is a separate **component library** for Go UI: copy-paste `.templ` bricks, helpers, and specs. It is built **on top of** Adrian Hacker's excellent [templ](https://github.com/a-h/templ) project and uses the official code generator [`github.com/a-h/templ/cmd/templ`](https://github.com/a-h/templ) (via `go tool templ` in `go.mod`). We are grateful for that foundation — templ's design and tooling make a typed, server-rendered component workflow practical.
+>
+> The module path is **`github.com/fastygo/templ`** so imports read naturally in application code — for example `import "github.com/fastygo/templ/ui"` and `import cmp "github.com/fastygo/templ/components"`. That name reflects **where these components live**, not a claim to be the templ language or compiler. When you need templ itself, depend on **`github.com/a-h/templ`**; when you need this registry, depend on **`github.com/fastygo/templ`**.
 
+shadcn-style **copy-paste** Templ bricks for building Go interfaces with a familiar component workflow.
 The registry keeps the ergonomics React developers expect — props, variants, children, composition, and small colocated examples — while staying server-rendered, Go-native, and easy to copy into an app. The goal is not to recreate React in Go, but to bring its useful component discipline to Templ: predictable APIs, composable primitives, and application-owned styling.
 
 ## Layout
@@ -82,3 +85,9 @@ bash .validate/scripts/validate-spec.sh --with-tests
 ```
 
 See [`.validate/docs/README.md`](.validate/docs/README.md) for checks and `components.json` alias expectations.
+
+## License
+
+MIT — see [LICENSE](LICENSE). Copyright (c) FastyGo.
+
+This registry depends on [a-h/templ](https://github.com/a-h/templ); use and attribution for that project follow its own license and documentation.
