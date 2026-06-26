@@ -1,0 +1,77 @@
+---
+description: Templ registry — spec-driven agent workflow for plain-language requests
+globs: "**/*"
+alwaysApply: false
+---
+
+# Templ — Spec Driver
+
+Use specs as the driver for non-trivial registry changes.
+
+The user may describe intent in plain language. The agent is responsible for
+turning that intent into a small implementation spec before editing code.
+
+## Core Workflow
+
+For substantial work, proceed as:
+
+1. Gather local context from existing files and active rules.
+2. Draft a bounded spec from the user's intent.
+3. Validate the spec against registry contracts (`.project/`, `*.spec.md`, variants).
+4. Implement only what the spec requires.
+5. Run the relevant verification and report the result.
+
+For tiny mechanical edits, an inline one-sentence spec is enough.
+
+## Spec Inputs
+
+Build the spec from:
+
+- the user's plain-language request;
+- rules in `.cursor/rules` and docs in `.project/`;
+- existing `*.spec.md`, `*.variants.json`, `*.data.json` when present;
+- brick implementation patterns under `ui/`, `components/`, `utils/`;
+- `examples/` preview patterns when the change affects demos or block scaffolds.
+
+## Required Spec Fields
+
+For non-trivial brick or API changes, the spec should name:
+
+- intent and affected brick(s) or example surface;
+- `api:` / `variants` / `data` changes;
+- accessibility and behavior-hook requirements;
+- validation commands (`validate-spec`, `go test`, `lint:ui8px`);
+- explicit non-goals.
+
+## Persistent Specs
+
+For non-trivial feature work, save the agent-authored spec under
+`.project/specs/` so future chats can recover the decision context.
+
+- Use `.project/specs/active.md` for the current active implementation spec.
+- Use `.project/specs/<feature-slug>.md` for durable feature specs.
+- Use `.project/specs/archive/` for superseded or completed spec snapshots.
+- Create `.project/specs/` when the first persistent spec is needed.
+- Do not create persistent specs for tiny mechanical edits.
+
+See also [`.project/dual-stack-component-library.md`](../../.project/dual-stack-component-library.md).
+
+## Validation Checks
+
+Before implementation, check whether the spec requires:
+
+- `*.spec.md` updates (full `api` enums, `semantics`, showcase);
+- `*.variants.json` sync with `allow-list-source` and Go/React class maps;
+- `*.data.json` showcase payloads when adding examples;
+- typed `Aria*` props vs `Attrs` escape hatch — see [`behavior-hooks-and-aria.md`](../../.project/behavior-hooks-and-aria.md);
+- `go tool templ generate` for touched packages;
+- ui8px on `ui/`, `components/`, `utils/`, and `examples/`;
+- render tests under `examples/` or brick `*_test.go`.
+
+## Boundaries
+
+- The user writes intent; the agent writes the spec.
+- Code is the output of the spec, not the starting point.
+- Keep specs small, local, and reversible.
+- Do not add npm/runtime dependencies to copy-paste bricks unless the spec justifies opt-in hooks.
+- Do not rewrite unrelated bricks, examples server, or validation tooling.

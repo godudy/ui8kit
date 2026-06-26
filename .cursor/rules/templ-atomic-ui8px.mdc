@@ -1,0 +1,59 @@
+---
+description: Templ registry — CVA variants, Class-only Tailwind, ui8px policy
+globs: "**/*"
+alwaysApply: false
+---
+
+# Templ — composition & ui8px
+
+## Stack
+
+- **Primitives:** `github.com/fastygo/templ/ui` — `@ui.Stack`, `@ui.Button`, `@ui.Form`, …
+- **Composites:** `import cmp "github.com/fastygo/templ/components"`
+- **Helpers:** `github.com/fastygo/templ/utils` — `Cn`, `Compose`, ARIA, `tags.go`
+- **Preview:** `examples/` — composes facades for local server only
+
+Import shape: `import "github.com/fastygo/templ/ui"` — do **not** deep-import in examples unless testing one package.
+
+## Styling model
+
+| Kind | Mechanism | Where defined |
+|------|-----------|---------------|
+| `Variant`, `Size`, … | CVA | `*.variants.json` (target) or `*Variants` in `.templ` |
+| Layout, spacing, responsive | raw Tailwind | `Class` prop only |
+| Design tokens | CSS variables | consumer app or `examples/web/static/css/tokens.css` |
+
+**Forbidden:** semantic layout props (`gap=`, `flex=`, `items=` as component API).  
+**Prefer:** `Variant` / `Size` presets over `Variant: "unstyled"` + long manual chains unless spec documents an escape hatch.
+
+## Tailwind / ui8px
+
+- Utilities in `Class` strings must pass **[`.ui8px/policy`](../../.ui8px/policy/)**.
+- Lint **`ui/`**, **`components/`**, **`utils/`**, and **`examples/`** after class-bearing edits.
+- Registry bricks do **not** ship canonical theme CSS — demos use `examples/web/static/css/tokens.css`.
+- Allowed preview CSS: `examples/web/static/css/input.css`, `tokens.css`, built `app.css`.
+
+```bash
+bun run lint:ui8px
+```
+
+## No raw markup in bricks
+
+- **Forbidden:** ad-hoc layout/content tags in **`ui/**`** and **`components/**`** when a primitive or composite exists.
+- **Mandatory:** compose `@ui.*` and `@cmp.*`; keep brick files thin (props → classes → one root element).
+- **Exception:** brick root element required by semantics (`<dialog>`, `<button>`, landmark tags via `Tag` on `Block`).
+- **Examples:** `examples/page.templ` may use document shell tags (`<!DOCTYPE>`, `<html>`, `<head>`, `<body>`, asset tags).
+
+## Variants file
+
+Migrate inline `var XVariants = uiutils.Variants{...}` to colocated `*.variants.json` per [`.project/dual-stack-component-library.md`](../../.project/dual-stack-component-library.md).
+
+Validator must keep `api.enum` ↔ JSON keys in sync.
+
+## Dependencies
+
+- Brick markup: **this module only** — no consumer app imports inside `ui/` or `components/`.
+- Default bricks: **no** npm/React deps; no required client bundle.
+- Opt-in behavior: `Behavior`, `DataUI8Kit` — see **`templ-aria.mdc`**.
+
+See **`templ-registry-structure.mdc`**, **`templ-validation-testing.mdc`**, **`templ-component-spec.mdc`**.

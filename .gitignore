@@ -1,5 +1,4 @@
 .manual
-.project
 bin
 node_modules
 /tmp/

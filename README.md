@@ -19,6 +19,11 @@ The registry keeps the ergonomics React developers expect — props, variants, c
 | [`.validate/docs/component.spec.template.md`](.validate/docs/component.spec.template.md) | Spec template: `api` + `showcase` per brick |
 | [`.validate/docs/README.md`](.validate/docs/README.md) | Local `validate-spec` command and registry checks |
 | [`.cursor/rules/templ-component-spec.mdc`](.cursor/rules/templ-component-spec.mdc) | Authoring rule for specs and STE comments |
+| [`.cursor/rules/`](.cursor/rules/) | Agent rules — registry structure, ui8px, ARIA, examples, validation |
+| [`.ui8px/policy/`](.ui8px/policy/) | Tailwind class policy (`ui/`, `components/`, `utils/`, `examples/`) |
+| [`.project/dual-stack-component-library.md`](.project/dual-stack-component-library.md) | Dual-stack brick contract |
+| [`.project/ui8kit-aria-boundary.md`](.project/ui8kit-aria-boundary.md) | `@ui8kit/aria` vs registry — APG subset |
+| [`.project/behavior-hooks-and-aria.md`](.project/behavior-hooks-and-aria.md) | Opt-in behavior hooks, static ARIA |
 | [`utils/utils.spec.md`](utils/utils.spec.md) | Helper module export catalog (classes, attrs, recipes) |
 
 Default bricks avoid app-specific runtime dependencies. Behavior hooks such as `data-ui8kit` are opt-in per component, so each consuming app can choose its own client layer.
@@ -78,13 +83,25 @@ Or per package, e.g. `go tool templ generate ./ui/button`.
 
 ## Validate specs
 
-Before CI, run the component spec validator:
+Before CI, run the full registry check:
+
+```bash
+bun install
+bun run verify
+```
+
+Or step by step:
 
 ```bash
 bash .validate/scripts/validate-spec.sh --with-tests
+bun run lint:ui8px
+bun run validate:aria
+go test ./...
 ```
 
-See [`.validate/docs/README.md`](.validate/docs/README.md) for checks and `components.json` alias expectations.
+`lint:ui8px` covers **`ui/`**, **`components/`**, **`utils/`**, and **`examples/`** against [`.ui8px/policy/`](.ui8px/policy/).
+
+See [`.validate/docs/README.md`](.validate/docs/README.md) for spec checks and `components.json` alias expectations.
 
 ## License
 

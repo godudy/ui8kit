@@ -1,0 +1,15 @@
+{
+  "lockfileVersion": 1,
+  "configVersion": 1,
+  "workspaces": {
+    "": {
+      "name": "fastygo-templ-registry",
+      "devDependencies": {
+        "ui8px": "0.2.4",
+      },
+    },
+  },
+  "packages": {
+    "ui8px": ["ui8px@0.2.4", "", { "bin": { "ui8px": "dist/index.js" } }, "sha512-4Zfq7n1V8z3SRupbXYapbiUWn3Ikk5ziH5WLglZew2NSLWicjoqsvimKD1/LibjLWJ1wu0Q0+26zDpZ2yfYtEg=="],
+  }
+}

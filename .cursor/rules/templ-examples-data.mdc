@@ -1,0 +1,53 @@
+---
+description: Templ examples — demo defaults, block props, preview copy
+globs: "examples/**"
+alwaysApply: false
+---
+
+# Data & demo copy (examples/)
+
+The **library** (`ui/`, `components/`) stays copy-neutral. All product-style strings for the local preview live under **`examples/`**.
+
+## Layers
+
+1. **Block defaults** — English wireframe copy in-package: `examples/ui/blocks/<block>/defaults.go`, `props.go`.
+2. **Page composition** — `examples/page.templ`, `examples/demo.templ`, `examples/ui/blocks/*/page.templ` assemble bricks with props.
+3. **Preview server** — `examples/cmd/server/main.go` serves static demo pages only.
+
+There are **no** `locale/*.json` fixtures in this repo — i18n belongs in consumer apps (e.g. Blank).
+
+## Rules
+
+- User-visible demo copy lives in **`defaults.go`** / block **`props.go`** — not hard-coded in registry `ui/` or `components/` bricks.
+- Example `.templ` files take **props only**; no embedded product strings in library facades.
+- Keep **accessible names** (`AriaLabel`, sheet titles, icon buttons) in defaults when used as labels.
+- Block specs (`examples/ui/blocks/*/*.spec.md`) document demo scaffolds separately from brick specs.
+
+## Block scaffolds
+
+```
+examples/ui/blocks/
+  home/       # marketing-style demo — home.spec.md, page.templ, defaults.go
+  dashboard/  # app-shell demo — dashboard.spec.md, page.templ, defaults.go
+```
+
+Full scaffolds include realistic default data — not thin adapters that only wrap a layout.
+
+## Preview tokens
+
+shadcn-compatible CSS variables for the demo only:
+
+- `examples/web/static/css/tokens.css`
+- referenced from `examples/web/static/css/input.css`
+
+Consuming apps define their own tokens; copying bricks does not copy the demo theme.
+
+## When adding a demo
+
+1. Add or extend props in `props.go` + `defaults.go`.
+2. Compose with `@ui.*` / `@cmp.*` in `page.templ` or block `page.templ`.
+3. Update block `*.spec.md` showcase if present.
+4. Add `page_render_test.go` when markup contract matters.
+5. Run **`bun run lint:ui8px`** — `examples/` is in lint scope.
+
+See **`templ-registry-structure.mdc`**, **`templ-atomic-ui8px.mdc`**.

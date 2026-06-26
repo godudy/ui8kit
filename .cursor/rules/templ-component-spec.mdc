@@ -1,42 +1,55 @@
 ---
 description: Templ registry — machine-readable component specs (api vs showcase)
-globs: "**/*.spec.md,**/*.templ,.validate/docs/**"
+globs: "**/*.spec.md,**/*.templ,**/*.variants.json,**/*.data.json,.validate/docs/**,.project/**"
 alwaysApply: false
 ---
 
 # Component specs (`{name}.spec.md`)
 
-Machine-readable source of truth for docgen, LLM, and parsers. Human docs are generated **from** specs, not the reverse.
+Machine-readable source of truth for docgen, LLM, dual-stack codegen, and parsers. Human docs are generated **from** specs, not the reverse.
+
+Dual-stack contract: [`.project/dual-stack-component-library.md`](../../.project/dual-stack-component-library.md).  
+ARIA and behavior: [`.project/behavior-hooks-and-aria.md`](../../.project/behavior-hooks-and-aria.md).
+
+## Colocated files
+
+```
+ui/<brick>/
+  <brick>.spec.md
+  <brick>.variants.json    # CVA map — api.enum must match keys
+  <brick>.data.json        # showcase props (optional)
+  <brick>.templ
+  <brick>.tsx              # React port (optional)
+```
+
+Example block specs live under `examples/ui/blocks/*/*.spec.md` — same rules, `layer` may be `block` or documented in front matter.
 
 ## Two layers (do not collapse)
 
 | Layer | YAML key | Role |
 |-------|----------|------|
-| **API** | `api:` | **Full contract** — every prop, full `enum`, defaults, `allow-list-source` when tags come from `utils/tags.go` |
+| **API** | `api:` | **Full contract** — every prop, full `enum`, defaults, `allow-list-source` |
 | **Showcase** | `showcase:` | **Curated previews only** — typical usage; missing entry ≠ forbidden value |
 
 **Rule for authors and LLM:** read `api.*.enum` for allowed values. Use `showcase` only for copy-paste examples and doc previews.
 
-```yaml
-api:          # complete — mandatory full enums
-  Tag:
-    enum: [div, main, header, section, footer, nav, article, aside, figure]
-    allow-list-source: utils.tags.TagGroupLayout
+Mark props in `api:`:
 
-showcase:     # curated — not exhaustive
-  - id: tag.main
-    props: { Tag: main }
-```
+- `cva: true` — `Variant`, `Size`, keys in `*.variants.json`
+- `cva: false` — `Class`, identity, a11y, state (raw Tailwind via `Class` only)
+- `role: behavior-hook` — `Behavior`, `DataUI8Kit` (opt-in, default off)
 
 ## Validation contract
 
-1. File: `{templ-basename}.spec.md` next to `{templ-basename}.templ`.
+1. File: `{name}.spec.md` next to `{name}.templ` (or block folder under `examples/`).
 2. Required front matter: `id`, `layer`, `kind`, `package`, `facade`, `api`, `showcase`, `semantics`.
 3. Primitives: `templ: Name`. Composites: `parts[]`. Helpers (`layer: helper`): `exports` — see `utils/utils.spec.md`.
-4. Every `showcase[].id` MUST have `## Example {id}` with one ` ```templ ` fence (helpers: ` ```go `).
-5. When `allow-list-source` is set, enum MUST match the referenced tag group or utils recipe.
+4. Every `showcase[].id` MUST have `## Example {id}` with at least one ` ```templ ` fence (helpers: ` ```go `).
+5. When `allow-list-source` is set, enum MUST match tag group, utils recipe, or `*.variants.json`.
 6. STE prose only: `Summary`, `Use Cases`, `Semantics` — short sentences, active voice.
 7. `/** */` in `.templ` MUST match `## Summary`. `//` prop comments MUST match `api` enums.
+
+Run: `bash .validate/scripts/validate-spec.sh --with-tests`
 
 **Showcase coverage:** `showcase` does not need to list every `api.*.enum` value. Missing from showcase ≠ forbidden — read `api` for the full contract.
 
@@ -53,4 +66,9 @@ showcase:     # curated — not exhaustive
 
 Authoritative blank: [`.validate/docs/component.spec.template.md`](../../.validate/docs/component.spec.template.md).
 
-Reference implementations: `ui/button/button.spec.md`, `ui/block/block.spec.md`, `components/card/card.spec.md`.
+Reference implementations:
+
+- `ui/button/button.spec.md`
+- `ui/block/block.spec.md`
+- `components/card/card.spec.md`
+- `examples/ui/blocks/home/home.spec.md`

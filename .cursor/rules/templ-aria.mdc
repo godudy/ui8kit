@@ -1,0 +1,61 @@
+---
+description: Templ registry — static ARIA (utils) + opt-in behavior hooks
+globs: "**/*"
+alwaysApply: false
+---
+
+# ARIA & behavior (Templ registry)
+
+See [`.project/behavior-hooks-and-aria.md`](../../.project/behavior-hooks-and-aria.md) for the full three-layer model.  
+For **`@ui8kit/aria`** vs registry (APG patterns, subset bundles): [`.project/ui8kit-aria-boundary.md`](../../.project/ui8kit-aria-boundary.md).
+
+## Static markup (library)
+
+Use **`github.com/fastygo/templ/utils`** helpers in brick `.templ` files:
+
+- `AriaLabel`, `AriaExpanded`, `AriaControls`, `AriaCurrent`, `AriaModal`, …
+- `ControlAttrs`, `SwitchAttrs`, `MergeAttrs`, `DOMAttrs`
+- Component-specific typed props: `AriaLabelledBy`, `AriaDescribedBy`, …
+
+Declare required a11y fields in `*.spec.md` `api:` with roles such as `accessible-name`, `state`.
+
+Default bricks emit **SSR-safe** HTML without a client runtime.
+
+## Behavior hooks (opt-in)
+
+| Prop | Bricks | When set |
+|------|--------|----------|
+| `DataUI8Kit` | `Dialog`, `Nav`, `Breadcrumb`, … | emits `data-ui8kit="…"` |
+| `Behavior: "ui8kit"` | `Sheet` family | emits `data-ui8kit-dialog*` hooks |
+
+When empty / default: **no** behavior attributes. Library stays framework-neutral.
+
+## Examples preview only
+
+`examples/` loads a **dialog-only** `@ui8kit/aria` bundle so Sheet demos work in the browser:
+
+| File | Role |
+|------|------|
+| `examples/scripts/ui8kit-entry.mjs` | Registers `dialog` pattern |
+| `examples/web/static/js/ui8kit.js` | Built bundle (`bun run build:js`) |
+| `examples/web/static/js/manifest.json` | Pattern manifest |
+
+After changing hooks in **examples** or upgrading `@ui8kit/aria`:
+
+```bash
+cd examples && bun run build:js
+bun run validate:aria
+```
+
+`validate:aria` scans **`examples/`** markup against the manifest — not the whole module tree unless extended.
+
+## Authoring rules
+
+- Icon-only controls in showcase **must** include `AriaLabel` in spec + `*.data.json`.
+- Do not enable `Behavior: "ui8kit"` in default brick showcase unless demonstrating client wiring.
+- Prefer typed `Aria*` props over dumping aria-* into `Attrs`.
+- Document root element and `semantics` in `*.spec.md`.
+
+## Dual-stack note
+
+React `*.tsx` ports match **semantics** (name, role, state), not necessarily identical `data-ui8kit` attributes — CSR may use Radix or local state instead.

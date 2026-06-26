@@ -1,0 +1,88 @@
+---
+description: Templ registry — ui/, components/, utils/, examples/ layout
+globs: "**/*"
+alwaysApply: false
+---
+
+# Templ — Registry structure
+
+Copy-paste **component library** (`github.com/fastygo/templ`). Not an application shell — consuming apps (e.g. Blank) own routes, fixtures, and chrome.
+
+On-disk index: [`README.md`](../../README.md), [`.project/dual-stack-component-library.md`](../../.project/dual-stack-component-library.md).
+
+```
+utils/              # shared Go helpers — Cn, Compose, ARIA, tags, form recipes
+ui/                 # primitives — button/, stack/, form/, dialog/, …
+  <brick>/
+    <brick>.spec.md
+    <brick>.variants.json   # target layout (migrate inline Variants here)
+    <brick>.data.json       # showcase fixtures (optional)
+    <brick>.templ
+    <brick>.tsx             # React port (optional)
+components/         # composites — card/, sheet/, nav/, alert/, …
+  <brick>/            # same file set as ui/
+components.json     # shadcn-style registry manifest
+examples/           # optional local preview — NOT copy-pasted with bricks
+  page.templ        # document shell for preview
+  demo.templ        # RegistryDemo composition
+  cmd/server/       # minimal HTTP preview
+  ui/blocks/        # full demo scaffolds (home, dashboard)
+  web/static/       # preview tokens, CSS, ui8kit bundle
+.validate/          # spec validator
+.ui8px/policy/      # Tailwind class policy for registry + examples
+.project/           # dual-stack contract, behavior/ARIA docs
+```
+
+| Path | Role |
+|------|------|
+| `utils/` | **Only** shared helpers — no brick markup |
+| `ui/` | Primitives — props, variants, children; framework-neutral by default |
+| `components/` | Composites — multi-part bricks (`parts[]` in spec) |
+| `ui/*/facade.templ`, `components/facade.templ` | Re-export facades — prefer `@ui.*`, `@cmp.*` in examples |
+| `examples/` | Preview server, demo copy, block scaffolds — app-like but not shipped |
+| `examples/ui/blocks/<name>/` | Full wireframe scaffolds with `defaults.go` / `props.go` |
+
+## Per-brick contract
+
+Colocate under `ui/<brick>/` or `components/<brick>/`:
+
+1. `{brick}.spec.md` — machine-readable API (authoritative)
+2. `{brick}.variants.json` — CVA class map (shared target for Go + React)
+3. `{brick}.data.json` — showcase props + sample slot content (optional)
+4. `{brick}.templ` — Go implementation
+5. `{brick}.tsx` — React implementation when dual-stack port exists
+
+## Import shape
+
+```templ
+import "github.com/fastygo/templ/ui"
+import cmp "github.com/fastygo/templ/components"
+```
+
+Granular imports (`ui/button`) remain valid for copy-paste consumers. **Inside this repo**, examples and new bricks should prefer facades unless testing a single package.
+
+## Examples vs library
+
+| Layer | Library (`ui/`, `components/`) | Examples (`examples/`) |
+|-------|-------------------------------|-------------------------|
+| Demo copy | forbidden in bricks | `defaults.go`, block `props.go` |
+| Tokens / theme | not shipped | `examples/web/static/css/tokens.css` |
+| `@ui8kit/aria` bundle | opt-in via `Behavior` / `DataUI8Kit` | preview-only `ui8kit.js` |
+| HTTP server | none | `examples/cmd/server` |
+
+## Forbidden
+
+- App routes, locale fixtures, or site chrome inside `ui/` or `components/`.
+- Hard-coded product copy inside registry bricks (use `examples/` or consumer app).
+- Deep imports in docs/examples when demonstrating public API (`@ui.Button`, not ad-hoc forks).
+- `utility-prop` style APIs (`gap=`, `flex=` as props) — use `Class` + ui8px.
+- Behavior hooks enabled by default on bricks (`Behavior`, `DataUI8Kit` must default off).
+
+## Adding a brick
+
+1. Add `ui/<brick>/` or `components/<brick>/` with `*.spec.md` from [`.validate/docs/component.spec.template.md`](../../.validate/docs/component.spec.template.md).
+2. Add `*.variants.json`; wire `ButtonClasses`-style helpers to `Compose`.
+3. Implement `*.templ`; run `go tool templ generate ./...`.
+4. Add showcase to spec + optional `*.data.json`.
+5. Extend `examples/demo.templ` or a block under `examples/ui/blocks/` when a visual preview is needed.
+6. Run validation — see **`templ-validation-testing.mdc`**.

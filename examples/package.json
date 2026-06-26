@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.2.1",
-    "tailwindcss": "^4.2.1"
+    "tailwindcss": "^4.2.1",
+    "ui8px": "0.2.4"
   }
 }

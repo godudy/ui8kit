@@ -1,0 +1,95 @@
+---
+description: Templ registry — validate-spec, ui8px, aria, Go render tests
+globs: "**/*"
+alwaysApply: false
+---
+
+# Validation & testing (Templ registry)
+
+Validate **bricks**, **utils**, and **examples** — not only `ui/` and `components/`.
+
+## Routine checks
+
+From repository root:
+
+```bash
+bash .validate/scripts/validate-spec.sh --with-tests
+bun run lint:ui8px
+bun run validate:aria
+go test ./...
+```
+
+Or combined:
+
+```bash
+bun run verify
+```
+
+### Pipeline
+
+| Step | Command | Scope |
+|------|---------|--------|
+| Spec contract | `validate-spec.sh` | `ui/**/*.spec.md`, `components/**/*.spec.md`, `utils/*.spec.md`, `examples/**/*.spec.md` |
+| Variant maps | `validate-spec` + future `variants.json` checks | `*Variants` / `*.variants.json` ↔ `api.enum` |
+| ui8px | `bun run lint:ui8px` | `ui/`, `components/`, `utils/`, `examples/` |
+| ARIA manifest | `bun run validate:aria` | `examples/` markup vs `examples/web/static/js/manifest.json` |
+| Go tests | `go test ./...` | brick tests, `examples/*_render_test.go` |
+| templ codegen | `go tool templ generate ./...` | after any `.templ` edit |
+
+## ui8px scope
+
+Policy root: **[`.ui8px/policy/`](../../.ui8px/policy/)**.
+
+Lint paths (see root `package.json`):
+
+- `ui/` — primitive bricks and `Class` strings
+- `components/` — composite bricks
+- `utils/` — shared variant base strings and recipes
+- `examples/` — preview pages, demo compositions, block scaffolds
+- `examples/web/static/css/input.css` — `@source` entry (when listed)
+
+After `.templ`, `Class` strings, `*.variants.json`, or CSS `@source` edits: **`bun run lint:ui8px`**.
+
+## Spec validation
+
+```bash
+bash .validate/scripts/validate-spec.sh --with-tests
+```
+
+Checks include:
+
+- required front matter on brick specs;
+- `showcase[].id` ↔ `## Example {id}` fences;
+- `allow-list-source` ↔ `utils/tags.go`, `utils/utils.go`, or `*.variants.json`;
+- `components.json` alias expectations.
+
+Example block specs: `examples/ui/blocks/home/home.spec.md`, `examples/ui/blocks/dashboard/dashboard.spec.md`.
+
+## Go render tests
+
+Add or extend `*_render_test.go` when markup contracts matter:
+
+- `components/components_render_test.go` — composite bricks
+- `examples/page_render_test.go` — preview document shell
+- `examples/ui/blocks/*/page_render_test.go` — demo scaffolds
+
+Assert class strings, roles, and opt-in `data-ui8kit` hooks — not browser behavior.
+
+## Examples preview (manual)
+
+```bash
+cd examples && bun install && bun run dev
+```
+
+Rebuild client bundle after hook or `@ui8kit/aria` changes:
+
+```bash
+cd examples && bun run build:js
+```
+
+## Coordination
+
+- **`templ-atomic-ui8px.mdc`** — CVA + `Class`, policy paths
+- **`templ-aria.mdc`** — static ARIA + examples manifest
+- **`templ-examples-data.mdc`** — demo defaults in `examples/`
+- **`templ-component-spec.mdc`** — `api` vs `showcase`
