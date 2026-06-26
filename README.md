@@ -21,6 +21,7 @@ The registry keeps the ergonomics React developers expect — props, variants, c
 | [`.cursor/rules/templ-component-spec.mdc`](.cursor/rules/templ-component-spec.mdc) | Authoring rule for specs and STE comments |
 | [`.cursor/rules/`](.cursor/rules/) | Agent rules — registry structure, ui8px, ARIA, examples, validation |
 | [`.ui8px/policy/`](.ui8px/policy/) | Tailwind class policy (`ui/`, `components/`, `utils/`, `examples/`) |
+| [`.project/go-module-publishing.md`](.project/go-module-publishing.md) | `go get` vs npm, `export-ignore`, release |
 | [`.project/dual-stack-component-library.md`](.project/dual-stack-component-library.md) | Dual-stack brick contract |
 | [`.project/ui8kit-aria-boundary.md`](.project/ui8kit-aria-boundary.md) | `@ui8kit/aria` vs registry — APG subset |
 | [`.project/behavior-hooks-and-aria.md`](.project/behavior-hooks-and-aria.md) | Opt-in behavior hooks, static ARIA |

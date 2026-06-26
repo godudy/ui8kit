@@ -324,6 +324,7 @@ templ/
     dual-stack-component-library.md    # brick contract (variants, data, dual-target)
     behavior-hooks-and-aria.md       # opt-in behavior, static ARIA, planned a11y work
     ui8kit-aria-boundary.md          # @ui8kit/aria vs registry — subset APG patterns
+    go-module-publishing.md          # go get vs npm, export-ignore, release.yml
     schemas/
       variants.schema.json
       data.schema.json

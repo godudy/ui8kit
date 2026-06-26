@@ -9,6 +9,7 @@ alwaysApply: false
 Machine-readable source of truth for docgen, LLM, dual-stack codegen, and parsers. Human docs are generated **from** specs, not the reverse.
 
 Dual-stack contract: [`.project/dual-stack-component-library.md`](../../.project/dual-stack-component-library.md).  
+Publishing (Go module vs npm): [`.project/go-module-publishing.md`](../../.project/go-module-publishing.md).  
 ARIA and behavior: [`.project/behavior-hooks-and-aria.md`](../../.project/behavior-hooks-and-aria.md).
 
 ## Colocated files

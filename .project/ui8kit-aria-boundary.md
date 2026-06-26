@@ -197,6 +197,7 @@ Do not duplicate aria’s E2E suite inside the templ registry. Fix interaction b
 
 | Document | Role |
 |----------|------|
+| [`go-module-publishing.md`](./go-module-publishing.md) | `go get` vs npm, `export-ignore`, release |
 | [`behavior-hooks-and-aria.md`](./behavior-hooks-and-aria.md) | Three layers: static / explicit Aria* / hooks |
 | [`dual-stack-component-library.md`](./dual-stack-component-library.md) | Brick files, CVA, dual-target |
 | [`examples/README.md`](../examples/README.md) | Preview server + ui8kit bundle |

@@ -230,6 +230,7 @@ When adding or changing a brick:
 
 | File | Role |
 |------|------|
+| [`go-module-publishing.md`](./go-module-publishing.md) | `go get` vs npm, `export-ignore`, release |
 | [`dual-stack-component-library.md`](./dual-stack-component-library.md) | Overall brick contract |
 | [`ui8kit-aria-boundary.md`](./ui8kit-aria-boundary.md) | `@ui8kit/aria` vs registry — APG subset bundles |
 | [`utils/utils.spec.md`](../utils/utils.spec.md) | Helper export catalog |
