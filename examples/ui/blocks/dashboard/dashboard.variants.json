@@ -1,0 +1,15 @@
+{
+  "$schema": "../../../../.project/schemas/variants.schema.json",
+  "id": "blocks.dashboard",
+  "base": "",
+  "keys": ["statusTone"],
+  "defaults": {
+    "statusTone": "accent"
+  },
+  "byKey": {
+    "statusTone": {
+      "default": "accent",
+      "muted": "default"
+    }
+  }
+}

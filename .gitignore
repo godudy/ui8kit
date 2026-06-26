@@ -12,3 +12,7 @@ test-results/
 blob-report/
 
 .validate/html-snapshots/generated/*.html
+
+# Generated code (run: bun run generate)
+*_gen.go
+*_templ.go

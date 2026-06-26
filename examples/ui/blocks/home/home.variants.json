@@ -1,0 +1,18 @@
+{
+  "$schema": "../../../../.project/schemas/variants.schema.json",
+  "id": "blocks.home",
+  "base": "",
+  "keys": ["toolTone"],
+  "defaults": {
+    "toolTone": "accent"
+  },
+  "byKey": {
+    "toolTone": {
+      "blue": "accent",
+      "green": "secondary",
+      "amber": "secondary",
+      "muted": "default",
+      "default": "accent"
+    }
+  }
+}

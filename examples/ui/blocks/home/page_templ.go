@@ -13,6 +13,12 @@ import (
 	"github.com/fastygo/templ/ui"
 )
 
+const (
+	homeSheetTriggerID = "home-mobile-sheet-trigger"
+	homeSheetPanelID   = "home-mobile-sheet-panel"
+	homeSheetTitleID   = "home-mobile-sheet-title"
+)
+
 func Page(props PageProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -395,7 +401,7 @@ func CatalogPrimaryNav(items []NavItem, class string) templ.Component {
 							var templ_7745c5c3_Var16 string
 							templ_7745c5c3_Var16, templ_7745c5c3_Err = templ.JoinStringErrs(item.Label)
 							if templ_7745c5c3_Err != nil {
-								return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 68, Col: 18}
+								return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 74, Col: 18}
 							}
 							_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var16))
 							if templ_7745c5c3_Err != nil {
@@ -503,7 +509,7 @@ func CatalogHeaderNav(items []NavItem, class string) templ.Component {
 							var templ_7745c5c3_Var22 string
 							templ_7745c5c3_Var22, templ_7745c5c3_Err = templ.JoinStringErrs(item.Label)
 							if templ_7745c5c3_Err != nil {
-								return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 82, Col: 18}
+								return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 88, Col: 18}
 							}
 							_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var22))
 							if templ_7745c5c3_Err != nil {
@@ -704,7 +710,7 @@ func CatalogHeader(props PageProps) templ.Component {
 					var templ_7745c5c3_Var31 string
 					templ_7745c5c3_Var31, templ_7745c5c3_Err = templ.JoinStringErrs(props.Workspace)
 					if templ_7745c5c3_Err != nil {
-						return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 113, Col: 21}
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 119, Col: 21}
 					}
 					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var31))
 					if templ_7745c5c3_Err != nil {
@@ -778,7 +784,7 @@ func CatalogHeader(props PageProps) templ.Component {
 								var templ_7745c5c3_Var36 string
 								templ_7745c5c3_Var36, templ_7745c5c3_Err = templ.JoinStringErrs(item.Label)
 								if templ_7745c5c3_Err != nil {
-									return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 121, Col: 19}
+									return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 127, Col: 19}
 								}
 								_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var36))
 								if templ_7745c5c3_Err != nil {
@@ -840,7 +846,7 @@ func CatalogHeader(props PageProps) templ.Component {
 					var templ_7745c5c3_Var39 string
 					templ_7745c5c3_Var39, templ_7745c5c3_Err = templ.JoinStringErrs(props.Prototype)
 					if templ_7745c5c3_Err != nil {
-						return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 129, Col: 21}
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 135, Col: 21}
 					}
 					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var39))
 					if templ_7745c5c3_Err != nil {
@@ -871,7 +877,7 @@ func CatalogHeader(props PageProps) templ.Component {
 					var templ_7745c5c3_Var41 string
 					templ_7745c5c3_Var41, templ_7745c5c3_Err = templ.JoinStringErrs(props.ProfileName)
 					if templ_7745c5c3_Err != nil {
-						return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 132, Col: 23}
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 138, Col: 23}
 					}
 					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var41))
 					if templ_7745c5c3_Err != nil {
@@ -1150,7 +1156,7 @@ func HeroChat(props HeroProps) templ.Component {
 									var templ_7745c5c3_Var55 string
 									templ_7745c5c3_Var55, templ_7745c5c3_Err = templ.JoinStringErrs(props.PrimaryAction)
 									if templ_7745c5c3_Err != nil {
-										return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 161, Col: 29}
+										return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 167, Col: 29}
 									}
 									_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var55))
 									if templ_7745c5c3_Err != nil {
@@ -1210,7 +1216,7 @@ func HeroChat(props HeroProps) templ.Component {
 									var templ_7745c5c3_Var58 string
 									templ_7745c5c3_Var58, templ_7745c5c3_Err = templ.JoinStringErrs(suggestion)
 									if templ_7745c5c3_Err != nil {
-										return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 169, Col: 20}
+										return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 175, Col: 20}
 									}
 									_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var58))
 									if templ_7745c5c3_Err != nil {
@@ -1429,7 +1435,7 @@ func ToolCards(items []ToolCard) templ.Component {
 									}()
 								}
 								ctx = templ.InitializeContext(ctx)
-								templ_7745c5c3_Err = cmp.IconBadge(cmp.IconBadgeProps{Name: item.Icon, Size: "default", Variant: toolIconBadgeVariant(item.Tone)}).Render(ctx, templ_7745c5c3_Buffer)
+								templ_7745c5c3_Err = cmp.IconBadge(cmp.IconBadgeProps{Name: item.Icon, Size: "default", Variant: BlockVariant("toolTone", item.Tone)}).Render(ctx, templ_7745c5c3_Buffer)
 								if templ_7745c5c3_Err != nil {
 									return templ_7745c5c3_Err
 								}
@@ -1596,7 +1602,7 @@ func ShowcaseGrid(props ShowcaseProps) templ.Component {
 					var templ_7745c5c3_Var75 string
 					templ_7745c5c3_Var75, templ_7745c5c3_Err = templ.JoinStringErrs(props.ActionLabel)
 					if templ_7745c5c3_Err != nil {
-						return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 219, Col: 23}
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 225, Col: 23}
 					}
 					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var75))
 					if templ_7745c5c3_Err != nil {
@@ -1814,7 +1820,7 @@ func ShowcaseCardView(item ShowcaseItem) templ.Component {
 							var templ_7745c5c3_Var86 string
 							templ_7745c5c3_Var86, templ_7745c5c3_Err = templ.JoinStringErrs(item.Category)
 							if templ_7745c5c3_Err != nil {
-								return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 245, Col: 21}
+								return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 251, Col: 21}
 							}
 							_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var86))
 							if templ_7745c5c3_Err != nil {
@@ -1891,7 +1897,7 @@ func ShowcaseCardView(item ShowcaseItem) templ.Component {
 							var templ_7745c5c3_Var90 string
 							templ_7745c5c3_Var90, templ_7745c5c3_Err = templ.JoinStringErrs(item.UseLabel)
 							if templ_7745c5c3_Err != nil {
-								return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 255, Col: 21}
+								return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 261, Col: 21}
 							}
 							_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var90))
 							if templ_7745c5c3_Err != nil {
@@ -1922,7 +1928,7 @@ func ShowcaseCardView(item ShowcaseItem) templ.Component {
 							var templ_7745c5c3_Var92 string
 							templ_7745c5c3_Var92, templ_7745c5c3_Err = templ.JoinStringErrs(item.PreviewLabel)
 							if templ_7745c5c3_Err != nil {
-								return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 258, Col: 25}
+								return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 264, Col: 25}
 							}
 							_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var92))
 							if templ_7745c5c3_Err != nil {
@@ -2070,7 +2076,7 @@ func PrototypeNotice(props NoticeProps) templ.Component {
 				var templ_7745c5c3_Var98 string
 				templ_7745c5c3_Var98, templ_7745c5c3_Err = templ.JoinStringErrs(props.ActionLabel)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 276, Col: 22}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 282, Col: 22}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var98))
 				if templ_7745c5c3_Err != nil {

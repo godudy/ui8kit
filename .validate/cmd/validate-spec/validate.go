@@ -75,7 +75,7 @@ func loadSpec(path string) (*specDoc, error) {
 
 func discoverSpecs(repoRoot string) ([]string, error) {
 	var paths []string
-	roots := []string{"ui", "components", "utils"}
+	roots := []string{"ui", "components", "utils", filepath.Join("examples", "ui", "blocks")}
 	for _, root := range roots {
 		rootPath := filepath.Join(repoRoot, root)
 		err := filepath.WalkDir(rootPath, func(path string, d os.DirEntry, err error) error {
@@ -123,9 +123,14 @@ func validateSpec(doc *specDoc, allowLists map[string][]string) []validationErro
 		return errs
 	}
 
-	for _, forbidden := range []string{"props", "variants", "omitted"} {
+	for _, forbidden := range []string{"props", "omitted"} {
 		if _, ok := doc.fm[forbidden]; ok {
 			errs = append(errs, validationError{rel, forbidden, "legacy key; use api/showcase only"})
+		}
+	}
+	if raw, ok := doc.fm["variants"]; ok {
+		if _, isString := raw.(string); !isString {
+			errs = append(errs, validationError{rel, "variants", "legacy key; use variants: <file>.variants.json path string"})
 		}
 	}
 	for _, key := range []string{"api", "showcase"} {
@@ -136,6 +141,7 @@ func validateSpec(doc *specDoc, allowLists map[string][]string) []validationErro
 
 	errs = append(errs, validateShowcaseExamples(doc, rel)...)
 	errs = append(errs, validateAllowLists(doc, rel, allowLists)...)
+	errs = append(errs, validateBlockContract(doc, rel, findRepoRootMust())...)
 	return errs
 }
 
@@ -242,6 +248,9 @@ func validateAllowLists(doc *specDoc, rel string, allowLists map[string][]string
 		}
 		source, _ := fm["allow-list-source"].(string)
 		if source == "" {
+			continue
+		}
+		if strings.Contains(source, ".json#") {
 			continue
 		}
 		specEnum := getStringSliceAny(fm["enum"])

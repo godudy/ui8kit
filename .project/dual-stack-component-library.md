@@ -373,7 +373,7 @@ For each existing brick (e.g. `ui/dialog/`):
 1. **Extract** inline `*Variants` var from `*_templ.go` / `.templ` → `dialog.variants.json`
 2. **Extend** `dialog.spec.md` with `targets`, `variants`, `data`, `cva: true/false` on api fields
 3. **Add** `dialog.data.json` from existing `showcase[].props`
-4. **Wire** Go to load/embed JSON (or keep generated `var` synced by codegen)
+4. **Wire** Go to load/embed JSON via `blockgen` → `page_gen.go` (or React equivalent later)
 5. **Add** `dialog.tsx` when React port starts — same folder, same contract
 6. **Delete** duplicate class strings from implementation files
 
@@ -393,6 +393,12 @@ When creating or editing a brick:
 6. Implement `*.tsx` — mirror semantics, React idioms only for DOM/events
 7. Add dual `## Example` fences when both runtimes exist
 8. Run validators + ui8px in the reference app
+
+For example blocks under `examples/ui/blocks/`:
+
+1. Edit `*.spec.md`, `*.data.json`, `*.variants.json`, `props.go`, `page.templ`.
+2. Run `bun run generate` — emits `page_gen.go` and `page_templ.go`.
+3. Do not hand-edit generated glue files.
 
 **Forbidden:**
 

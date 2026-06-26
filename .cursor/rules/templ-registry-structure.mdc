@@ -28,7 +28,7 @@ examples/           # optional local preview — NOT copy-pasted with bricks
   cmd/server/       # minimal HTTP preview
   ui/blocks/        # full demo scaffolds (home, dashboard)
   web/static/       # preview tokens, CSS, ui8kit bundle
-.validate/          # spec validator
+.validate/          # spec validator, blockgen
 .ui8px/policy/      # Tailwind class policy for registry + examples
 .project/           # dual-stack contract, behavior/ARIA docs
 ```
@@ -40,7 +40,7 @@ examples/           # optional local preview — NOT copy-pasted with bricks
 | `components/` | Composites — multi-part bricks (`parts[]` in spec) |
 | `ui/*/facade.templ`, `components/facade.templ` | Re-export facades — prefer `@ui.*`, `@cmp.*` in examples |
 | `examples/` | Preview server, demo copy, block scaffolds — app-like but not shipped |
-| `examples/ui/blocks/<name>/` | Full wireframe scaffolds with `defaults.go` / `props.go` |
+| `examples/ui/blocks/<name>/` | Wireframe scaffolds: `*.data.json`, `props.go`, `page.templ`, generated `page_gen.go` |
 
 ## Per-brick contract
 
@@ -65,7 +65,7 @@ Granular imports (`ui/button`) remain valid for copy-paste consumers. **Inside t
 
 | Layer | Library (`ui/`, `components/`) | Examples (`examples/`) |
 |-------|-------------------------------|-------------------------|
-| Demo copy | forbidden in bricks | `defaults.go`, block `props.go` |
+| Demo copy | forbidden in bricks | `*.data.json`, block `props.go` |
 | Tokens / theme | not shipped | `examples/web/static/css/tokens.css` |
 | `@ui8kit/aria` bundle | opt-in via `Behavior` / `DataUI8Kit` | preview-only `ui8kit.js` |
 | HTTP server | none | `examples/cmd/server` |
@@ -82,7 +82,7 @@ Granular imports (`ui/button`) remain valid for copy-paste consumers. **Inside t
 
 1. Add `ui/<brick>/` or `components/<brick>/` with `*.spec.md` from [`.validate/docs/component.spec.template.md`](../../.validate/docs/component.spec.template.md).
 2. Add `*.variants.json`; wire `ButtonClasses`-style helpers to `Compose`.
-3. Implement `*.templ`; run `go tool templ generate ./...`.
+3. Implement `*.templ`; run `bun run generate`.
 4. Add showcase to spec + optional `*.data.json`.
 5. Extend `examples/demo.templ` or a block under `examples/ui/blocks/` when a visual preview is needed.
 6. Run validation — see **`templ-validation-testing.mdc`**.

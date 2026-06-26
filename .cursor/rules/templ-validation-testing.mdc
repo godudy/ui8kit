@@ -13,6 +13,7 @@ Validate **bricks**, **utils**, and **examples** — not only `ui/` and `compone
 From repository root:
 
 ```bash
+bun run generate
 bash .validate/scripts/validate-spec.sh --with-tests
 bun run lint:ui8px
 bun run validate:aria
@@ -29,12 +30,13 @@ bun run verify
 
 | Step | Command | Scope |
 |------|---------|--------|
+| Codegen | `bun run generate` | `examples/ui/blocks/*/page_gen.go`, `*_templ.go` |
 | Spec contract | `validate-spec.sh` | `ui/**/*.spec.md`, `components/**/*.spec.md`, `utils/*.spec.md`, `examples/**/*.spec.md` |
-| Variant maps | `validate-spec` + future `variants.json` checks | `*Variants` / `*.variants.json` ↔ `api.enum` |
+| Blockgen freshness | `blockgen --check` (in validate-spec.sh) | generated `page_gen.go` matches spec/data/variants |
+| Variant maps | `validate-spec` | `*Variants` / `*.variants.json` ↔ `api.enum` |
 | ui8px | `bun run lint:ui8px` | `ui/`, `components/`, `utils/`, `examples/` |
 | ARIA manifest | `bun run validate:aria` | `examples/` markup vs `examples/web/static/js/manifest.json` |
 | Go tests | `go test ./...` | brick tests, `examples/*_render_test.go` |
-| templ codegen | `go tool templ generate ./...` | after any `.templ` edit |
 
 ## ui8px scope
 

@@ -5,6 +5,12 @@ import (
 	"github.com/fastygo/templ/ui"
 )
 
+const (
+	dashboardSheetTriggerID = "dashboard-mobile-sheet-trigger"
+	dashboardSheetPanelID   = "dashboard-mobile-sheet-panel"
+	dashboardSheetTitleID   = "dashboard-mobile-sheet-title"
+)
+
 templ Page(props PageProps) {
 	@ui.Block(ui.BlockProps{Tag: "main", Class: "min-h-screen bg-background text-foreground"}) {
 		@DashboardMobileSheet(props)
@@ -171,7 +177,7 @@ templ StatusCards(items []StatusCard) {
 					@cmp.CardContent(cmp.CardContentProps{Class: "p-4"}) {
 						@ui.Stack(ui.StackProps{Class: "gap-3"}) {
 							@ui.Group(ui.GroupProps{Class: "items-start justify-between gap-3"}) {
-								@cmp.IconBadge(cmp.IconBadgeProps{Name: item.Icon, Size: "default", Variant: statusIconBadgeVariant(item.Tone)})
+								@cmp.IconBadge(cmp.IconBadgeProps{Name: item.Icon, Size: "default", Variant: BlockVariant("statusTone", item.Tone)})
 								@ui.Badge(ui.BadgeProps{Variant: "outline"}) {
 									{ item.Meta }
 								}
