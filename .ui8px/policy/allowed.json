@@ -62,6 +62,7 @@
     "-translate-y-1/2",
     "absolute",
     "align-top",
+    "antialiased",
     "aspect-",
     "aspect-auto",
     "aspect-square",

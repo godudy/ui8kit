@@ -5,6 +5,7 @@
   "ariaMode": "subset",
   "ariaVersion": "0.1.0",
   "patterns": [
+    "alert",
     "dialog"
   ]
 }
