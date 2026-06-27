@@ -1,40 +1,73 @@
 ---
-id: ui.dialog
-layer: primitive
-kind: interactive
-package: github.com/fastygo/templ/ui/dialog
-facade: github.com/fastygo/templ/ui
-templ: Dialog
 api:
-  Variant:
-    role: appearance
-    type: string
-    enum: [default, card, sheet, unstyled]
-    allow-list-source: ui.dialog.DialogVariants
-    default: default
-  Size:
-    role: density
-    type: string
-    enum: [sm, default, lg, xl, full]
-    default: default
-  Open:
-    role: state
-    type: bool
-    default: false
-  DataUI8Kit:
-    role: behavior-hook
-    type: string
-    default: ""
-showcase:
-  - id: variant.default
-    props: { Variant: default, Size: default, AriaLabel: "Dialog" }
-  - id: variant.sheet
-    props: { Variant: sheet, Size: full, AriaLabel: "Panel" }
+    DataUI8Kit:
+        cva: false
+        default: ""
+        role: behavior-hook
+        type: string
+    Open:
+        cva: false
+        default: false
+        role: state
+        type: bool
+    Size:
+        allow-list-source: dialog.variants.json#size
+        cva: true
+        default: default
+        enum:
+            - sm
+            - default
+            - lg
+            - xl
+            - full
+        role: density
+        type: string
+    Variant:
+        allow-list-source: dialog.variants.json#variant
+        cva: true
+        default: default
+        enum:
+            - default
+            - card
+            - sheet
+            - unstyled
+        role: appearance
+        type: string
+data: dialog.data.json
+facade: github.com/fastygo/templ/ui
+id: ui.dialog
+kind: interactive
+layer: primitive
+package: github.com/fastygo/templ/ui/dialog
 semantics:
-  root: dialog
-  behavior: native-dialog
+    behavior: native-dialog
+    data: dialog.data.json
+    root: dialog
+showcase:
+    - id: variant.default
+      props:
+        AriaLabel: Dialog
+        Size: default
+        Variant: default
+      ref: variant.default
+    - id: variant.sheet
+      props:
+        AriaLabel: Panel
+        Size: full
+        Variant: sheet
+      ref: variant.sheet
+targets:
+    react:
+        component: Dialog
+        facade: '@fastygo/templ-react'
+        package: '@fastygo/templ-react/ui/dialog'
+    templ:
+        component: Dialog
+        facade: github.com/fastygo/templ/ui
+        package: github.com/fastygo/templ/ui/dialog
+templ: Dialog
+variants: dialog.variants.json
 ---
-
 ## Summary
 
 Dialog renders a native dialog root with optional behavior hook.

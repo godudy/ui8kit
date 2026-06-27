@@ -1,0 +1,17 @@
+{
+  "$schema": "../../.project/schemas/data.schema.json",
+  "id": "ui.separator",
+  "showcase": {
+    "orientation.vertical": {
+      "props": {
+        "Decorative": true,
+        "Orientation": "vertical"
+      }
+    },
+    "variant.default": {
+      "props": {
+        "Variant": "default"
+      }
+    }
+  }
+}

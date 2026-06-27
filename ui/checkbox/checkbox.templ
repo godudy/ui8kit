@@ -27,7 +27,10 @@ type CheckboxProps struct {
 }
 
 func CheckboxClasses(p CheckboxProps) string {
-	return uiutils.ControlClasses(p.Variant, p.Size, p.Class)
+	return uiutils.Compose(CheckboxVariants, map[string]string{
+		"variant": p.Variant,
+		"size":    p.Size,
+	}, p.Class)
 }
 
 // Checkbox renders a styled input[type=checkbox].

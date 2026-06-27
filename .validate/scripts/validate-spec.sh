@@ -7,6 +7,9 @@ cd "$ROOT"
 echo "==> validate-spec"
 go run ./.validate/cmd/validate-spec
 
+echo "==> variantgen --check"
+go run ./.validate/cmd/variantgen --check
+
 echo "==> blockgen --check"
 go run ./.validate/cmd/blockgen --check
 

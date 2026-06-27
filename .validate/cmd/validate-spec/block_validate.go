@@ -10,7 +10,7 @@ import (
 
 func validateBlockContract(doc *specDoc, rel string, repoRoot string) []validationError {
 	layer := stringField(doc.fm, "layer")
-	if layer != "catalog-block" {
+	if layer != "catalog-block" && layer != "primitive" && layer != "composite" {
 		return nil
 	}
 	var errs []validationError
@@ -21,9 +21,18 @@ func validateBlockContract(doc *specDoc, rel string, repoRoot string) []validati
 		errs = append(errs, validateDataRefs(doc, rel, specDir, dataFile)...)
 	}
 
-	variantsFile := stringField(doc.fm, "variants")
-	if variantsFile != "" {
-		errs = append(errs, validateVariantsFile(doc, rel, specDir, variantsFile)...)
+	variants := stringField(doc.fm, "variants")
+	if variants != "" {
+		errs = append(errs, validateVariantsFile(doc, rel, specDir, variants)...)
+	}
+
+	recipes := getMap(doc.fm, "variant_recipes")
+	for _, rawFile := range recipes {
+		file, _ := rawFile.(string)
+		if file == "" || file == variants {
+			continue
+		}
+		errs = append(errs, validateVariantsFile(doc, rel, specDir, file)...)
 	}
 
 	codegen := getMap(doc.fm, "codegen")

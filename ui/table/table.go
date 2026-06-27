@@ -9,7 +9,12 @@ import (
 	"strings"
 
 	"github.com/a-h/templ"
+	"github.com/fastygo/templ/utils"
 )
+
+func TableClasses(p TableProps) string {
+	return uiutils.Compose(TableVariants, map[string]string{}, p.Class)
+}
 
 // TableProps configures the root table element.
 type TableProps struct {

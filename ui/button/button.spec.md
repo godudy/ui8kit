@@ -1,90 +1,169 @@
 ---
-id: ui.button
-layer: primitive
-kind: action
-package: github.com/fastygo/templ/ui/button
-facade: github.com/fastygo/templ/ui
-templ: Button
 api:
-  Variant:
-    role: appearance
-    type: string
-    enum: [default, secondary, destructive, outline, ghost, link, unstyled]
-    allow-list-source: ui.button.ButtonVariants
-    default: default
-  Size:
-    role: density
-    type: string
-    enum: [default, sm, lg, icon]
-    allow-list-source: ui.button.ButtonVariants
-    default: default
-  Class:
-    role: style-extension
-    type: string
-  Type:
-    role: control-type
-    type: string
-    enum: [button, submit, reset]
-    default: button
-  Form:
-    role: association
-    type: string
-  Disabled:
-    role: state
-    type: bool
-    default: false
-  Href:
-    role: navigation
-    type: string
-  AriaLabel:
-    role: accessible-name
-    type: string
-  ID:
-    role: identity
-    type: string
-  Attrs:
-    role: html-attrs
-    type: templ.Attributes
-slots:
-  default:
-    required: true
-    accepts: text
-showcase:
-  - id: variant.default
-    props: { Variant: default, Size: default }
-  - id: variant.secondary
-    props: { Variant: secondary, Size: default }
-  - id: variant.destructive
-    props: { Variant: destructive, Size: default }
-  - id: variant.outline
-    props: { Variant: outline, Size: sm }
-  - id: variant.ghost
-    props: { Variant: ghost, Size: sm }
-  - id: variant.link
-    props: { Variant: link, Href: "/docs" }
-  - id: variant.unstyled
-    props: { Variant: unstyled, Class: "underline" }
-  - id: size.sm
-    props: { Variant: default, Size: sm }
-  - id: size.lg
-    props: { Variant: default, Size: lg }
-  - id: size.icon
-    props: { Variant: default, Size: icon, AriaLabel: "Settings" }
-  - id: state.disabled
-    props: { Variant: default, Disabled: true }
-  - id: state.disabled-link
-    props: { Variant: link, Href: "/locked", Disabled: true }
-  - id: state.submit
-    props: { Variant: default, Type: submit }
-  - id: state.reset
-    props: { Variant: outline, Type: reset }
+    AriaLabel:
+        cva: false
+        role: accessible-name
+        type: string
+    Attrs:
+        cva: false
+        role: html-attrs
+        type: templ.Attributes
+    Class:
+        cva: false
+        role: style-extension
+        type: string
+    Disabled:
+        cva: false
+        default: false
+        role: state
+        type: bool
+    Form:
+        cva: false
+        role: association
+        type: string
+    Href:
+        cva: false
+        role: navigation
+        type: string
+    ID:
+        cva: false
+        role: identity
+        type: string
+    Size:
+        allow-list-source: button.variants.json#size
+        cva: true
+        default: default
+        enum:
+            - default
+            - sm
+            - lg
+            - icon
+        role: density
+        type: string
+    Type:
+        cva: false
+        default: button
+        enum:
+            - button
+            - submit
+            - reset
+        role: control-type
+        type: string
+    Variant:
+        allow-list-source: button.variants.json#variant
+        cva: true
+        default: default
+        enum:
+            - default
+            - secondary
+            - destructive
+            - outline
+            - ghost
+            - link
+            - unstyled
+        role: appearance
+        type: string
+data: button.data.json
+facade: github.com/fastygo/templ/ui
+id: ui.button
+kind: action
+layer: primitive
+package: github.com/fastygo/templ/ui/button
 semantics:
-  root: button
-  root-when-href: a
-  role: button
-  role-when-href: link
-  behavior: interactive
-
+    behavior: interactive
+    data: button.data.json
+    role: button
+    role-when-href: link
+    root: button
+    root-when-href: a
+showcase:
+    - id: variant.default
+      props:
+        Size: default
+        Variant: default
+      ref: variant.default
+    - id: variant.secondary
+      props:
+        Size: default
+        Variant: secondary
+      ref: variant.secondary
+    - id: variant.destructive
+      props:
+        Size: default
+        Variant: destructive
+      ref: variant.destructive
+    - id: variant.outline
+      props:
+        Size: sm
+        Variant: outline
+      ref: variant.outline
+    - id: variant.ghost
+      props:
+        Size: sm
+        Variant: ghost
+      ref: variant.ghost
+    - id: variant.link
+      props:
+        Href: /docs
+        Variant: link
+      ref: variant.link
+    - id: variant.unstyled
+      props:
+        Class: underline
+        Variant: unstyled
+      ref: variant.unstyled
+    - id: size.sm
+      props:
+        Size: sm
+        Variant: default
+      ref: size.sm
+    - id: size.lg
+      props:
+        Size: lg
+        Variant: default
+      ref: size.lg
+    - id: size.icon
+      props:
+        AriaLabel: Settings
+        Size: icon
+        Variant: default
+      ref: size.icon
+    - id: state.disabled
+      props:
+        Disabled: true
+        Variant: default
+      ref: state.disabled
+    - id: state.disabled-link
+      props:
+        Disabled: true
+        Href: /locked
+        Variant: link
+      ref: state.disabled-link
+    - id: state.submit
+      props:
+        Type: submit
+        Variant: default
+      ref: state.submit
+    - id: state.reset
+      props:
+        Type: reset
+        Variant: outline
+      ref: state.reset
+slots:
+    default:
+        accepts: text
+        required: true
+targets:
+    react:
+        component: Button
+        facade: '@fastygo/templ-react'
+        package: '@fastygo/templ-react/ui/button'
+    templ:
+        component: Button
+        facade: github.com/fastygo/templ/ui
+        package: github.com/fastygo/templ/ui/button
+templ: Button
+variants: button.variants.json
 ---
 ## Summary
 

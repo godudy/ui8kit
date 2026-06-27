@@ -41,14 +41,17 @@ type GridColProps struct {
 }
 
 func GridClasses(p GridProps) string {
-	return uiutils.Cn("grid", gridColsClass(p.Cols), p.Class)
+	return uiutils.Compose(GridVariants, map[string]string{}, gridColsClass(p.Cols, p.Class), p.Class)
 }
 
 func GridColClasses(p GridColProps) string {
 	return uiutils.Cn(gridColClass(p.Span, p.Start, p.End, p.Order), p.Class)
 }
 
-func gridColsClass(cols string) string {
+func gridColsClass(cols, class string) string {
+	if strings.Contains(class, "grid-cols-") {
+		return ""
+	}
 	switch strings.TrimSpace(cols) {
 	case "", "1":
 		return "grid-cols-1"

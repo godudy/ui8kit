@@ -1,70 +1,127 @@
 ---
-id: ui.input
-layer: primitive
-kind: input
-package: github.com/fastygo/templ/ui/input
-facade: github.com/fastygo/templ/ui
-templ: Input
 api:
-  Variant:
-    role: appearance
-    type: string
-    enum: [default, outline, ghost, unstyled]
-    allow-list-source: utils.recipes.InputChrome
-    default: default
-  Size:
-    role: density
-    type: string
-    enum: [default, sm, lg, xs]
-    allow-list-source: utils.recipes.InputSize
-    default: default
-  Type:
-    role: input-type
-    type: string
-    enum: [text, email, password, number, search, tel, url]
-    default: text
-  Class:
-    role: style-extension
-    type: string
-  Name:
-    role: form-name
-    type: string
-  Value:
-    role: value
-    type: string
-  Placeholder:
-    role: placeholder
-    type: string
-  Disabled:
-    role: state
-    type: bool
-  Required:
-    role: state
-    type: bool
-  AriaLabel:
-    role: accessible-name
-    type: string
-showcase:
-  - id: variant.default
-    props: { Variant: default, Type: text, Name: email, Placeholder: "name@example.com" }
-  - id: type.email
-    props: { Type: email, Name: email, ID: demo-email }
-  - id: size.sm
-    props: { Size: sm, Name: q, Placeholder: "Search" }
-  - id: state.disabled
-    props: { Disabled: true, Name: locked, Value: "Read only" }
-  - id: state.required
-    props: { Required: true, Name: name, Placeholder: "Required field" }
+    AriaLabel:
+        cva: false
+        role: accessible-name
+        type: string
+    Class:
+        cva: false
+        role: style-extension
+        type: string
+    Disabled:
+        cva: false
+        role: state
+        type: bool
+    Name:
+        cva: false
+        role: form-name
+        type: string
+    Placeholder:
+        cva: false
+        role: placeholder
+        type: string
+    Required:
+        cva: false
+        role: state
+        type: bool
+    Size:
+        allow-list-source: input.variants.json#size
+        cva: true
+        default: default
+        enum:
+            - default
+            - sm
+            - lg
+            - xs
+        role: density
+        type: string
+    Type:
+        cva: false
+        default: text
+        enum:
+            - text
+            - email
+            - password
+            - number
+            - search
+            - tel
+            - url
+        role: input-type
+        type: string
+    Value:
+        cva: false
+        role: value
+        type: string
+    Variant:
+        allow-list-source: input.variants.json#variant
+        cva: true
+        default: default
+        enum:
+            - default
+            - outline
+            - ghost
+            - unstyled
+        role: appearance
+        type: string
+data: input.data.json
+facade: github.com/fastygo/templ/ui
+id: ui.input
+kind: input
+layer: primitive
+package: github.com/fastygo/templ/ui/input
 semantics:
-  root: input
-  role: textbox
-  behavior: interactive
-
+    behavior: interactive
+    data: input.data.json
+    role: textbox
+    root: input
+showcase:
+    - id: variant.default
+      props:
+        Name: email
+        Placeholder: name@example.com
+        Type: text
+        Variant: default
+      ref: variant.default
+    - id: type.email
+      props:
+        ID: demo-email
+        Name: email
+        Type: email
+      ref: type.email
+    - id: size.sm
+      props:
+        Name: q
+        Placeholder: Search
+        Size: sm
+      ref: size.sm
+    - id: state.disabled
+      props:
+        Disabled: true
+        Name: locked
+        Value: Read only
+      ref: state.disabled
+    - id: state.required
+      props:
+        Name: name
+        Placeholder: Required field
+        Required: true
+      ref: state.required
+targets:
+    react:
+        component: Input
+        facade: '@fastygo/templ-react'
+        package: '@fastygo/templ-react/ui/input'
+    templ:
+        component: Input
+        facade: github.com/fastygo/templ/ui
+        package: github.com/fastygo/templ/ui/input
+templ: Input
+variants: input.variants.json
 ---
 ## Summary
 
 Input renders a single-line native text field.
-Input uses InputClasses recipe from utils.
+Input uses InputVariants from input.variants.json via InputClasses.
 
 ## Use Cases
 

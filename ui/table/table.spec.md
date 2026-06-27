@@ -1,68 +1,128 @@
 ---
-id: ui.table
-layer: composite
-kind: data
-package: github.com/fastygo/templ/ui/table
-facade: github.com/fastygo/templ/ui
-parts:
-  - templ: Table
-    props: [Class, Attrs]
-  - templ: TableCaption
-    props: [Class]
-    slot: caption
-  - templ: TableHead
-    props: [Class]
-    slot: head
-  - templ: TableBody
-    props: [Class]
-    slot: body
-  - templ: TableFoot
-    props: [Class]
-    slot: foot
-  - templ: TableRow
-    props: [Class]
-    slot: row
-  - templ: TableHeadCell
-    props: [Class, Scope, Abbr]
-    slot: head-cell
-  - templ: TableCell
-    props: [Class, ColSpan, RowSpan, Headers]
-    slot: cell
 api:
-  Scope:
-    role: header-scope
-    type: string
-    enum: [col, row, colgroup, rowgroup]
-    applies-to: TableHeadCell
-  ColSpan:
-    role: column-span
-    type: int
-    applies-to: TableCell
-showcase:
-  - id: layout.basic
-    parts: [Table, TableHead, TableBody, TableRow, TableHeadCell, TableCell]
-    props: { Scope: col }
-  - id: cell.colspan
-    parts: [Table, TableBody, TableRow, TableCell]
+    Class:
+        cva: false
+        role: style-extension
+        type: string
+    ColSpan:
+        applies-to: TableCell
+        cva: false
+        role: column-span
+        type: int
+    Scope:
+        applies-to: TableHeadCell
+        cva: false
+        enum:
+            - col
+            - row
+            - colgroup
+            - rowgroup
+        role: header-scope
+        type: string
+data: table.data.json
+facade: github.com/fastygo/templ/ui
+id: ui.table
+kind: data
+layer: composite
+package: github.com/fastygo/templ/ui/table
+parts:
+    - props:
+        - Class
+        - Attrs
+      templ: Table
+    - props:
+        - Class
+      slot: caption
+      templ: TableCaption
+    - props:
+        - Class
+      slot: head
+      templ: TableHead
+    - props:
+        - Class
+      slot: body
+      templ: TableBody
+    - props:
+        - Class
+      slot: foot
+      templ: TableFoot
+    - props:
+        - Class
+      slot: row
+      templ: TableRow
+    - props:
+        - Class
+        - Scope
+        - Abbr
+      slot: head-cell
+      templ: TableHeadCell
+    - props:
+        - Class
+        - ColSpan
+        - RowSpan
+        - Headers
+      slot: cell
+      templ: TableCell
+    - props:
+        - Class
+        - Span
+      slot: colgroup
+      templ: TableColGroup
+    - props:
+        - Class
+        - Span
+      slot: col
+      templ: TableCol
 semantics:
-  root: table
-  role: table
-  behavior: static
-
+    behavior: static
+    data: table.data.json
+    root: table
+    role: table
+showcase:
+    - id: layout.basic
+      parts:
+        - Table
+        - TableHead
+        - TableBody
+        - TableRow
+        - TableHeadCell
+        - TableCell
+      props:
+        Scope: col
+      ref: layout.basic
+    - id: cell.colspan
+      parts:
+        - Table
+        - TableBody
+        - TableRow
+        - TableCell
+      ref: cell.colspan
+targets:
+    react:
+        component: Table
+        facade: '@fastygo/templ-react'
+        package: '@fastygo/templ-react/ui/table'
+    templ:
+        component: Table
+        facade: github.com/fastygo/templ/ui
+        package: github.com/fastygo/templ/ui/table
+templ: Table
+variants: table.variants.json
 ---
 ## Summary
 
-Table composes caption, sections, rows, and cells.
+Table composes caption, sections, rows, cells, and optional column definitions.
 TableHeadCell supports scope on th elements.
 
 ## Use Cases
 
 - Show user list with column headers
 - Span one cell across two columns with ColSpan
+- Define column widths with TableColGroup and TableCol
 
 ## Semantics
 
-- Table root is native table element
+- Table root is native table element styled via table.variants.json
 - TableHeadCell sets scope when Scope prop is valid
 
 ## Example layout.basic

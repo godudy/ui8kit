@@ -26,7 +26,10 @@ type RadioProps struct {
 }
 
 func RadioClasses(p RadioProps) string {
-	return uiutils.ControlClasses(p.Variant, p.Size, p.Class)
+	return uiutils.Compose(RadioVariants, map[string]string{
+		"variant": p.Variant,
+		"size":    p.Size,
+	}, p.Class)
 }
 
 // Radio renders input[type=radio] with shared Name for grouping.

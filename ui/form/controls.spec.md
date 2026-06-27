@@ -5,11 +5,31 @@ kind: form
 package: github.com/fastygo/templ/ui/form
 facade: github.com/fastygo/templ/ui
 templ: Fieldset
+
+targets:
+  templ:
+    package: github.com/fastygo/templ/ui/form
+    facade: github.com/fastygo/templ/ui
+    component: Fieldset
+  react:
+    package: "@fastygo/templ-react/ui/form"
+    facade: "@fastygo/templ-react"
+    component: Fieldset
+
+variants: fieldset.variants.json
+variant_recipes:
+  legend: legend.variants.json
+  meter: meter.variants.json
+  progress: progress.variants.json
+data: controls.data.json
+
 parts:
   - templ: Fieldset
     props: [Variant, Size, Class, Name, Form, Disabled, Attrs]
+    recipe: fieldset.variants.json
   - templ: Legend
     props: [Variant, Size, Class, Attrs]
+    recipe: legend.variants.json
   - templ: DataList
     props: [ID, Class, Attrs]
   - templ: DataOption
@@ -18,46 +38,108 @@ parts:
     props: [ID, Class, Name, For, Value, Attrs]
   - templ: Meter
     props: [Variant, Size, ID, Class, Value, Min, Max, Low, High, Optimum, Attrs]
+    recipe: meter.variants.json
   - templ: Progress
     props: [Variant, Size, ID, Class, Value, Max, Attrs]
+    recipe: progress.variants.json
+
 api:
-  FieldsetVariant:
+  Variant:
     role: appearance
     type: string
+    cva: true
     enum: [default, card, inline, unstyled]
-    allow-list-source: ui.form.FieldsetVariants.variant
+    allow-list-source: fieldset.variants.json#variant
+    applies-to: Fieldset
+    default: default
+  Size:
+    role: density
+    type: string
+    cva: true
+    enum: [sm, default, lg]
+    allow-list-source: fieldset.variants.json#size
+    applies-to: Fieldset
     default: default
   LegendVariant:
     role: appearance
     type: string
+    cva: true
     enum: [default, muted, unstyled]
-    allow-list-source: ui.form.LegendVariants.variant
+    allow-list-source: legend.variants.json#variant
+    applies-to: Legend
+    default: default
+  LegendSize:
+    role: density
+    type: string
+    cva: true
+    enum: [sm, default, lg]
+    allow-list-source: legend.variants.json#size
+    applies-to: Legend
     default: default
   MeterVariant:
     role: appearance
     type: string
+    cva: true
     enum: [default, muted, unstyled]
-    allow-list-source: ui.form.MeterVariants.variant
+    allow-list-source: meter.variants.json#variant
+    applies-to: Meter
+    default: default
+  MeterSize:
+    role: density
+    type: string
+    cva: true
+    enum: [sm, default, lg]
+    allow-list-source: meter.variants.json#size
+    applies-to: Meter
     default: default
   ProgressVariant:
     role: appearance
     type: string
+    cva: true
     enum: [default, muted, unstyled]
-    allow-list-source: ui.form.ProgressVariants.variant
+    allow-list-source: progress.variants.json#variant
+    applies-to: Progress
     default: default
+  ProgressSize:
+    role: density
+    type: string
+    cva: true
+    enum: [sm, default, lg]
+    allow-list-source: progress.variants.json#size
+    applies-to: Progress
+    default: default
+  Class:
+    role: style-extension
+    type: string
+    cva: false
+
 showcase:
   - id: group.fieldset
-    props: { Variant: card }
+    ref: group.fieldset
   - id: status.progress
-    props: { Value: "40", Max: "100" }
+    ref: status.progress
+
 semantics:
   root: fieldset | legend | datalist | option | output | meter | progress
   behavior: native-form
+  data: controls.data.json
 ---
 
 ## Summary
 
 Form controls covers fieldset, legend, datalist, output, meter, and progress.
+Fieldset, Legend, Meter, and Progress each have distinct variant recipe files.
+
+## Variant recipes
+
+| Part | Recipe file | Variant keys | Size keys |
+|------|-------------|--------------|-----------|
+| Fieldset | fieldset.variants.json | default, card, inline, unstyled | sm, default, lg |
+| Legend | legend.variants.json | default, muted, unstyled | sm, default, lg |
+| Meter | meter.variants.json | default, muted, unstyled | sm, default, lg |
+| Progress | progress.variants.json | default, muted, unstyled | sm, default, lg |
+
+DataList, DataOption, and Output are base-class only (no variant recipe).
 
 ## Use Cases
 

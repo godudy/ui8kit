@@ -27,7 +27,10 @@ type TitleProps struct {
 	Order int
 }
 
-// Title renders one heading element with the resolved level.
+func TitleClasses(p TitleProps) string {
+	return uiutils.Compose(TitleVariants, map[string]string{}, p.Class)
+}
+
 func Title(p TitleProps, value string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -64,7 +67,7 @@ func Title(p TitleProps, value string) templ.Component {
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(value)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/title/title.templ`, Line: 21, Col: 9}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/title/title.templ`, Line: 24, Col: 9}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
@@ -103,7 +106,7 @@ func titleTag(p TitleProps) templ.Component {
 		ctx = templ.ClearChildren(ctx)
 		switch uiutils.TitleTag(p.Order) {
 		case "h1":
-			var templ_7745c5c3_Var5 = []any{p.Class}
+			var templ_7745c5c3_Var5 = []any{TitleClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var5...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -134,7 +137,7 @@ func titleTag(p TitleProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		case "h3":
-			var templ_7745c5c3_Var7 = []any{p.Class}
+			var templ_7745c5c3_Var7 = []any{TitleClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var7...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -165,7 +168,7 @@ func titleTag(p TitleProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		case "h4":
-			var templ_7745c5c3_Var9 = []any{p.Class}
+			var templ_7745c5c3_Var9 = []any{TitleClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var9...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -196,7 +199,7 @@ func titleTag(p TitleProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		case "h5":
-			var templ_7745c5c3_Var11 = []any{p.Class}
+			var templ_7745c5c3_Var11 = []any{TitleClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var11...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -227,7 +230,7 @@ func titleTag(p TitleProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		case "h6":
-			var templ_7745c5c3_Var13 = []any{p.Class}
+			var templ_7745c5c3_Var13 = []any{TitleClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var13...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -258,7 +261,7 @@ func titleTag(p TitleProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		default:
-			var templ_7745c5c3_Var15 = []any{p.Class}
+			var templ_7745c5c3_Var15 = []any{TitleClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var15...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err

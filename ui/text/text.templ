@@ -17,68 +17,71 @@ type TextProps struct {
 	Attrs templ.Attributes
 }
 
-// Text renders plain copy in the chosen semantic tag.
+func TextClasses(p TextProps) string {
+	return uiutils.Compose(TextVariants, map[string]string{}, p.Class)
+}
+
 templ Text(p TextProps, value string) {
 	switch uiutils.ResolveTag(p.Tag, "p", uiutils.TagGroupText) {
 		case "span":
-			<span class={ p.Class } { p.Attrs... }>{ value }</span>
+			<span class={ TextClasses(p) } { p.Attrs... }>{ value }</span>
 		case "small":
-			<small class={ p.Class } { p.Attrs... }>{ value }</small>
+			<small class={ TextClasses(p) } { p.Attrs... }>{ value }</small>
 		case "time":
-			<time class={ p.Class } { p.Attrs... }>{ value }</time>
+			<time class={ TextClasses(p) } { p.Attrs... }>{ value }</time>
 		case "em":
-			<em class={ p.Class } { p.Attrs... }>{ value }</em>
+			<em class={ TextClasses(p) } { p.Attrs... }>{ value }</em>
 		case "strong":
-			<strong class={ p.Class } { p.Attrs... }>{ value }</strong>
+			<strong class={ TextClasses(p) } { p.Attrs... }>{ value }</strong>
 		case "blockquote":
-			<blockquote class={ p.Class } { p.Attrs... }>{ value }</blockquote>
+			<blockquote class={ TextClasses(p) } { p.Attrs... }>{ value }</blockquote>
 		case "figcaption":
-			<figcaption class={ p.Class } { p.Attrs... }>{ value }</figcaption>
+			<figcaption class={ TextClasses(p) } { p.Attrs... }>{ value }</figcaption>
 		case "cite":
-			<cite class={ p.Class } { p.Attrs... }>{ value }</cite>
+			<cite class={ TextClasses(p) } { p.Attrs... }>{ value }</cite>
 		case "abbr":
-			<abbr class={ p.Class } { p.Attrs... }>{ value }</abbr>
+			<abbr class={ TextClasses(p) } { p.Attrs... }>{ value }</abbr>
 		case "address":
-			<address class={ p.Class } { p.Attrs... }>{ value }</address>
+			<address class={ TextClasses(p) } { p.Attrs... }>{ value }</address>
 		case "pre":
-			<pre class={ p.Class } { p.Attrs... }>{ value }</pre>
+			<pre class={ TextClasses(p) } { p.Attrs... }>{ value }</pre>
 		case "code":
-			<code class={ p.Class } { p.Attrs... }>{ value }</code>
+			<code class={ TextClasses(p) } { p.Attrs... }>{ value }</code>
 		case "mark":
-			<mark class={ p.Class } { p.Attrs... }>{ value }</mark>
+			<mark class={ TextClasses(p) } { p.Attrs... }>{ value }</mark>
 		case "data":
-			<data class={ p.Class } { p.Attrs... }>{ value }</data>
+			<data class={ TextClasses(p) } { p.Attrs... }>{ value }</data>
 		case "var":
-			<var class={ p.Class } { p.Attrs... }>{ value }</var>
+			<var class={ TextClasses(p) } { p.Attrs... }>{ value }</var>
 		case "samp":
-			<samp class={ p.Class } { p.Attrs... }>{ value }</samp>
+			<samp class={ TextClasses(p) } { p.Attrs... }>{ value }</samp>
 		case "kbd":
-			<kbd class={ p.Class } { p.Attrs... }>{ value }</kbd>
+			<kbd class={ TextClasses(p) } { p.Attrs... }>{ value }</kbd>
 		case "sub":
-			<sub class={ p.Class } { p.Attrs... }>{ value }</sub>
+			<sub class={ TextClasses(p) } { p.Attrs... }>{ value }</sub>
 		case "sup":
-			<sup class={ p.Class } { p.Attrs... }>{ value }</sup>
+			<sup class={ TextClasses(p) } { p.Attrs... }>{ value }</sup>
 		case "b":
-			<b class={ p.Class } { p.Attrs... }>{ value }</b>
+			<b class={ TextClasses(p) } { p.Attrs... }>{ value }</b>
 		case "i":
-			<i class={ p.Class } { p.Attrs... }>{ value }</i>
+			<i class={ TextClasses(p) } { p.Attrs... }>{ value }</i>
 		case "u":
-			<u class={ p.Class } { p.Attrs... }>{ value }</u>
+			<u class={ TextClasses(p) } { p.Attrs... }>{ value }</u>
 		case "s":
-			<s class={ p.Class } { p.Attrs... }>{ value }</s>
+			<s class={ TextClasses(p) } { p.Attrs... }>{ value }</s>
 		case "q":
-			<q class={ p.Class } { p.Attrs... }>{ value }</q>
+			<q class={ TextClasses(p) } { p.Attrs... }>{ value }</q>
 		case "dfn":
-			<dfn class={ p.Class } { p.Attrs... }>{ value }</dfn>
+			<dfn class={ TextClasses(p) } { p.Attrs... }>{ value }</dfn>
 		case "bdo":
-			<bdo class={ p.Class } { p.Attrs... }>{ value }</bdo>
+			<bdo class={ TextClasses(p) } { p.Attrs... }>{ value }</bdo>
 		case "bdi":
-			<bdi class={ p.Class } { p.Attrs... }>{ value }</bdi>
+			<bdi class={ TextClasses(p) } { p.Attrs... }>{ value }</bdi>
 		case "ins":
-			<ins class={ p.Class } { p.Attrs... }>{ value }</ins>
+			<ins class={ TextClasses(p) } { p.Attrs... }>{ value }</ins>
 		case "del":
-			<del class={ p.Class } { p.Attrs... }>{ value }</del>
+			<del class={ TextClasses(p) } { p.Attrs... }>{ value }</del>
 		default:
-			<p class={ p.Class } { p.Attrs... }>{ value }</p>
+			<p class={ TextClasses(p) } { p.Attrs... }>{ value }</p>
 	}
 }

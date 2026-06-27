@@ -1,37 +1,60 @@
 ---
-id: ui.container
-layer: primitive
-kind: layout
-package: github.com/fastygo/templ/ui/container
-facade: github.com/fastygo/templ/ui
-templ: Container
 api:
-  Tag:
-    role: shell-tag
-    type: string
-    enum: [div, main, section]
-    allow-list-source: utils.tags.TagGroupContainer
-    default: div
-  Class:
-    role: style-extension
-    type: string
-  Attrs:
-    role: html-attrs
-    type: templ.Attributes
-slots:
-  default:
-    required: true
-    accepts: any
-showcase:
-  - id: tag.default
-    props: { Tag: div, Class: "mx-auto max-w-5xl px-6" }
-  - id: tag.main
-    props: { Tag: main, Class: "mx-auto max-w-5xl px-6" }
+    Attrs:
+        cva: false
+        role: html-attrs
+        type: templ.Attributes
+    Class:
+        cva: false
+        role: style-extension
+        type: string
+    Tag:
+        allow-list-source: utils.tags.TagGroupContainer
+        cva: false
+        default: div
+        enum:
+            - div
+            - main
+            - section
+        role: shell-tag
+        type: string
+data: container.data.json
+facade: github.com/fastygo/templ/ui
+id: ui.container
+kind: layout
+layer: primitive
+package: github.com/fastygo/templ/ui/container
 semantics:
-  root: resolved from Tag
-  role: none
-  behavior: static
-
+    behavior: static
+    data: container.data.json
+    role: none
+    root: resolved from Tag
+showcase:
+    - id: tag.default
+      props:
+        Class: mx-auto max-w-5xl px-6
+        Tag: div
+      ref: tag.default
+    - id: tag.main
+      props:
+        Class: mx-auto max-w-5xl px-6
+        Tag: main
+      ref: tag.main
+slots:
+    default:
+        accepts: any
+        required: true
+targets:
+    react:
+        component: Container
+        facade: '@fastygo/templ-react'
+        package: '@fastygo/templ-react/ui/container'
+    templ:
+        component: Container
+        facade: github.com/fastygo/templ/ui
+        package: github.com/fastygo/templ/ui/container
+templ: Container
+variants: container.variants.json
 ---
 ## Summary
 

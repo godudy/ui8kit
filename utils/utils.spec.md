@@ -16,6 +16,12 @@ exports:
     - name: Variants
       role: cva-recipe
       type: struct
+    - name: ParseVariantRecipe
+      role: variant-json-parse
+      signature: ParseVariantRecipe(data []byte) (VariantRecipe, error)
+    - name: MustParseVariantRecipe
+      role: variant-json-parse
+      signature: MustParseVariantRecipe(data []byte) VariantRecipe
   attrs:
     - name: MergeAttrs
       role: attr-merge

@@ -44,7 +44,7 @@ templ Form(p FormProps) {
 		if p.ID != "" {
 			id={ p.ID }
 		}
-		class={ uiutils.Cn("grid gap-4", p.Class) }
+		class={ uiutils.Compose(FormVariants, map[string]string{}, p.Class) }
 		action={ p.Action }
 		method={ p.Method }
 		enctype={ p.Enctype }
@@ -60,7 +60,7 @@ templ Form(p FormProps) {
 
 // FormItem groups a single field with spacing for label and control.
 templ FormItem(p FormItemProps) {
-	<div class={ uiutils.Cn("flex flex-col gap-2", p.Class) }>
+	<div class={ uiutils.Compose(FormItemVariants, map[string]string{}, p.Class) }>
 		{ children... }
 	</div>
 }
@@ -68,10 +68,10 @@ templ FormItem(p FormItemProps) {
 
 // FormDescription renders muted helper copy below a control.
 templ FormDescription(p FormDescriptionProps, value string) {
-	<p class={ uiutils.Cn("text-xs text-muted-foreground", p.Class) }>{ value }</p>
+	<p class={ uiutils.Compose(FormDescriptionVariants, map[string]string{}, p.Class) }>{ value }</p>
 }
 
 // FormMessage renders destructive validation feedback.
 templ FormMessage(p FormMessageProps, value string) {
-	<p class={ uiutils.Cn("text-sm font-medium text-destructive", p.Class) } role="alert">{ value }</p>
+	<p class={ uiutils.Compose(FormMessageVariants, map[string]string{}, p.Class) } role="alert">{ value }</p>
 }

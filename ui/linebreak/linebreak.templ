@@ -6,7 +6,11 @@
 
 package linebreak
 
-import "strings"
+import (
+	"strings"
+
+	"github.com/fastygo/templ/utils"
+)
 
 // BreakProps configures a line or word break.
 type BreakProps struct {
@@ -24,12 +28,16 @@ func breakType(value string) string {
 	}
 }
 
+func BreakClasses(p BreakProps) string {
+	return uiutils.Compose(LinebreakVariants, map[string]string{}, p.Class)
+}
+
 // Break renders br by default, or wbr when Type is wbr/word.
 templ Break(p BreakProps) {
 	switch breakType(p.Type) {
 		case "wbr":
-			<wbr class={ p.Class } { p.Attrs... }/>
+			<wbr class={ BreakClasses(p) } { p.Attrs... }/>
 		default:
-			<br class={ p.Class } { p.Attrs... }/>
+			<br class={ BreakClasses(p) } { p.Attrs... }/>
 	}
 }

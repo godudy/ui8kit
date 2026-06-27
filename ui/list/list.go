@@ -47,3 +47,11 @@ func listItemMergedAttrs(p ListItemProps) templ.Attributes {
 func listSpreadAttrs(p ListProps) templ.Attributes {
 	return uiutils.MergeAttrs(templ.Attributes{}, p.Attrs)
 }
+
+func ListClasses(p ListProps) string {
+	return uiutils.Compose(ListVariants, map[string]string{}, p.Class)
+}
+
+func ListItemClasses(p ListItemProps) string {
+	return uiutils.Compose(ListVariants, map[string]string{}, p.Class)
+}

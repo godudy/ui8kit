@@ -1,43 +1,74 @@
 ---
-id: ui.link
-layer: primitive
-kind: navigation
-package: github.com/fastygo/templ/ui/link
-facade: github.com/fastygo/templ/ui
-templ: Link
 api:
-  Variant:
-    role: appearance
-    type: string
-    enum: [default, muted, nav, block, external, unstyled]
-    allow-list-source: ui.link.LinkVariants
-    default: default
-  Size:
-    role: density
-    type: string
-    enum: [sm, default, lg]
-    allow-list-source: ui.link.LinkVariants
-    default: default
-  Href:
-    role: destination
-    type: string
-  External:
-    role: security
-    type: bool
-    default: false
-  AriaCurrent:
-    role: current-state
-    type: string
-showcase:
-  - id: variant.default
-    props: { Href: "/docs" }
-  - id: variant.external
-    props: { Href: "https://example.com", External: true }
+    AriaCurrent:
+        cva: false
+        role: current-state
+        type: string
+    External:
+        cva: false
+        default: false
+        role: security
+        type: bool
+    Href:
+        cva: false
+        role: destination
+        type: string
+    Size:
+        allow-list-source: link.variants.json#size
+        cva: true
+        default: default
+        enum:
+            - sm
+            - default
+            - md
+            - lg
+        role: density
+        type: string
+    Variant:
+        allow-list-source: link.variants.json#variant
+        cva: true
+        default: default
+        enum:
+            - default
+            - muted
+            - nav
+            - block
+            - external
+            - unstyled
+        role: appearance
+        type: string
+data: link.data.json
+facade: github.com/fastygo/templ/ui
+id: ui.link
+kind: navigation
+layer: primitive
+package: github.com/fastygo/templ/ui/link
 semantics:
-  root: a
-  behavior: interactive
+    behavior: interactive
+    data: link.data.json
+    root: a
+showcase:
+    - id: variant.default
+      props:
+        Href: /docs
+      ref: variant.default
+    - id: variant.external
+      props:
+        External: true
+        Href: https://example.com
+      ref: variant.external
+targets:
+    react:
+        component: Link
+        facade: '@fastygo/templ-react'
+        package: '@fastygo/templ-react/ui/link'
+    templ:
+        component: Link
+        facade: github.com/fastygo/templ/ui
+        package: github.com/fastygo/templ/ui/link
+templ: Link
+variants: link.variants.json
 ---
-
 ## Summary
 
 Link renders a semantic anchor for navigation and prose.

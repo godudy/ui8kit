@@ -1,48 +1,87 @@
 ---
-id: ui.badge
-layer: primitive
-kind: label
-package: github.com/fastygo/templ/ui/badge
-facade: github.com/fastygo/templ/ui
-templ: Badge
 api:
-  Variant:
-    role: appearance
-    type: string
-    enum: [default, secondary, destructive, outline]
-    allow-list-source: ui.badge.BadgeVariants
-    default: default
-  Size:
-    role: density
-    type: string
-    enum: [default, sm, lg]
-    allow-list-source: ui.badge.BadgeVariants
-    default: default
-  Class:
-    role: style-extension
-    type: string
-slots:
-  default:
-    required: true
-    accepts: text
-showcase:
-  - id: variant.default
-    props: { Variant: default, Size: default }
-  - id: variant.secondary
-    props: { Variant: secondary, Size: default }
-  - id: variant.destructive
-    props: { Variant: destructive, Size: default }
-  - id: variant.outline
-    props: { Variant: outline, Size: default }
-  - id: size.sm
-    props: { Variant: default, Size: sm }
-  - id: size.lg
-    props: { Variant: default, Size: lg }
+    Class:
+        cva: false
+        role: style-extension
+        type: string
+    Size:
+        allow-list-source: badge.variants.json#size
+        cva: true
+        default: default
+        enum:
+            - default
+            - sm
+            - lg
+        role: density
+        type: string
+    Variant:
+        allow-list-source: badge.variants.json#variant
+        cva: true
+        default: default
+        enum:
+            - default
+            - secondary
+            - destructive
+            - outline
+        role: appearance
+        type: string
+data: badge.data.json
+facade: github.com/fastygo/templ/ui
+id: ui.badge
+kind: label
+layer: primitive
+package: github.com/fastygo/templ/ui/badge
 semantics:
-  root: div
-  role: none
-  behavior: static
-
+    behavior: static
+    data: badge.data.json
+    role: none
+    root: div
+showcase:
+    - id: variant.default
+      props:
+        Size: default
+        Variant: default
+      ref: variant.default
+    - id: variant.secondary
+      props:
+        Size: default
+        Variant: secondary
+      ref: variant.secondary
+    - id: variant.destructive
+      props:
+        Size: default
+        Variant: destructive
+      ref: variant.destructive
+    - id: variant.outline
+      props:
+        Size: default
+        Variant: outline
+      ref: variant.outline
+    - id: size.sm
+      props:
+        Size: sm
+        Variant: default
+      ref: size.sm
+    - id: size.lg
+      props:
+        Size: lg
+        Variant: default
+      ref: size.lg
+slots:
+    default:
+        accepts: text
+        required: true
+targets:
+    react:
+        component: Badge
+        facade: '@fastygo/templ-react'
+        package: '@fastygo/templ-react/ui/badge'
+    templ:
+        component: Badge
+        facade: github.com/fastygo/templ/ui
+        package: github.com/fastygo/templ/ui/badge
+templ: Badge
+variants: badge.variants.json
 ---
 ## Summary
 

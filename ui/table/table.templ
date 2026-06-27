@@ -9,7 +9,7 @@ package table
 
 // Table renders the root table element.
 templ Table(p TableProps) {
-	<table class={ p.Class } { tableAttrs(p)... }>
+	<table class={ TableClasses(p) } { tableAttrs(p)... }>
 		{ children... }
 	</table>
 }

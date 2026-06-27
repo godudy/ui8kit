@@ -20,50 +20,6 @@ import templruntime "github.com/a-h/templ/runtime"
 
 import "github.com/fastygo/templ/utils"
 
-var DisclosureVariants = uiutils.Variants{
-	Base: "group",
-	Keys: []string{"variant", "size"},
-	Defaults: map[string]string{
-		"variant": "default",
-		"size":    "default",
-	},
-	ByKey: map[string]map[string]string{
-		"variant": {
-			"default":  "rounded-md border border-border",
-			"ghost":    "",
-			"card":     "rounded-md border border-border bg-card text-card-foreground",
-			"unstyled": "",
-		},
-		"size": {
-			"sm":      "text-sm",
-			"default": "text-sm",
-			"lg":      "text-base",
-		},
-	},
-}
-
-var SummaryVariants = uiutils.Variants{
-	Base: "flex cursor-pointer list-none items-center justify-between gap-2 [&::-webkit-details-marker]:hidden",
-	Keys: []string{"variant", "size"},
-	Defaults: map[string]string{
-		"variant": "default",
-		"size":    "default",
-	},
-	ByKey: map[string]map[string]string{
-		"variant": {
-			"default":  "px-4 py-3 font-medium",
-			"ghost":    "py-2 font-medium",
-			"card":     "px-4 py-3 font-medium",
-			"unstyled": "",
-		},
-		"size": {
-			"sm":      "text-sm",
-			"default": "text-sm",
-			"lg":      "text-base",
-		},
-	},
-}
-
 // DisclosureProps configures details.
 type DisclosureProps struct {
 	Variant string

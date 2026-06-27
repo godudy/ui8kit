@@ -3,7 +3,7 @@
   "private": true,
   "packageManager": "bun@1.3.3",
   "scripts": {
-    "generate": "go run ./.validate/cmd/blockgen && go tool templ generate ./...",
+    "generate": "go run ./.validate/cmd/variantgen && go run ./.validate/cmd/blockgen && go tool templ generate ./...",
     "lint:ui8px": "ui8px lint ui components utils examples examples/web/static/css/input.css",
     "validate:aria": "ui8px validate aria examples --manifest examples/web/static/js/manifest.json",
     "verify": "bash .validate/scripts/validate-spec.sh --with-tests && bun run lint:ui8px && bun run validate:aria && go test ./..."

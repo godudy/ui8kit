@@ -12,19 +12,19 @@ import "github.com/fastygo/templ/utils"
 templ List(p ListProps) {
 	switch listTag(p.Tag) {
 		case "ol":
-			<ol class={ p.Class } { listSpreadAttrs(p)... }>
+			<ol class={ ListClasses(p) } { listSpreadAttrs(p)... }>
 				{ children... }
 			</ol>
 		case "dl":
-			<dl class={ p.Class } { listSpreadAttrs(p)... }>
+			<dl class={ ListClasses(p) } { listSpreadAttrs(p)... }>
 				{ children... }
 			</dl>
 		case "menu":
-			<menu class={ p.Class } { listSpreadAttrs(p)... }>
+			<menu class={ ListClasses(p) } { listSpreadAttrs(p)... }>
 				{ children... }
 			</menu>
 		default:
-			<ul class={ p.Class } { listSpreadAttrs(p)... }>
+			<ul class={ ListClasses(p) } { listSpreadAttrs(p)... }>
 				{ children... }
 			</ul>
 	}
@@ -34,15 +34,15 @@ templ List(p ListProps) {
 templ ListItem(p ListItemProps) {
 	switch uiutils.ResolveTag(p.Tag, "li", uiutils.TagGroupListItem) {
 		case "dt":
-			<dt class={ p.Class } { listItemMergedAttrs(p)... }>
+			<dt class={ ListItemClasses(p) } { listItemMergedAttrs(p)... }>
 				{ children... }
 			</dt>
 		case "dd":
-			<dd class={ p.Class } { listItemMergedAttrs(p)... }>
+			<dd class={ ListItemClasses(p) } { listItemMergedAttrs(p)... }>
 				{ children... }
 			</dd>
 		default:
-			<li class={ p.Class } { listItemMergedAttrs(p)... }>
+			<li class={ ListItemClasses(p) } { listItemMergedAttrs(p)... }>
 				{ children... }
 			</li>
 	}

@@ -50,7 +50,10 @@ type SelectProps struct {
 }
 
 func SelectClasses(p SelectProps) string {
-	return uiutils.InputClasses(p.Variant, p.Size, p.Class)
+	return uiutils.Compose(SelectVariants, map[string]string{
+		"variant": p.Variant,
+		"size":    p.Size,
+	}, p.Class)
 }
 
 // Select renders option children from Options slice.

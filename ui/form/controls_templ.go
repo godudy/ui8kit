@@ -20,79 +20,6 @@ import templruntime "github.com/a-h/templ/runtime"
 
 import "github.com/fastygo/templ/utils"
 
-var FieldsetVariants = uiutils.Variants{
-	Base:     "grid gap-4",
-	Keys:     []string{"variant", "size"},
-	Defaults: map[string]string{"variant": "default", "size": "default"},
-	ByKey: map[string]map[string]string{
-		"variant": {
-			"default":  "",
-			"card":     "rounded-md border border-border p-4",
-			"inline":   "flex flex-wrap items-start gap-3",
-			"unstyled": "",
-		},
-		"size": {
-			"sm":      "gap-2",
-			"default": "gap-4",
-			"lg":      "gap-6",
-		},
-	},
-}
-
-var LegendVariants = uiutils.Variants{
-	Base:     "text-sm font-medium",
-	Keys:     []string{"variant", "size"},
-	Defaults: map[string]string{"variant": "default", "size": "default"},
-	ByKey: map[string]map[string]string{
-		"variant": {
-			"default":  "",
-			"muted":    "text-muted-foreground",
-			"unstyled": "",
-		},
-		"size": {
-			"sm":      "text-xs",
-			"default": "text-sm",
-			"lg":      "text-base",
-		},
-	},
-}
-
-var MeterVariants = uiutils.Variants{
-	Base:     "h-2 w-full",
-	Keys:     []string{"variant", "size"},
-	Defaults: map[string]string{"variant": "default", "size": "default"},
-	ByKey: map[string]map[string]string{
-		"variant": {
-			"default":  "accent-primary",
-			"muted":    "accent-muted-foreground",
-			"unstyled": "",
-		},
-		"size": {
-			"sm":      "h-1",
-			"default": "h-2",
-			"lg":      "h-3",
-		},
-	},
-}
-
-var ProgressVariants = uiutils.Variants{
-	Base:     "h-2 w-full",
-	Keys:     []string{"variant", "size"},
-	Defaults: map[string]string{"variant": "default", "size": "default"},
-	ByKey: map[string]map[string]string{
-		"variant": {
-			"default":  "accent-primary",
-			"muted":    "accent-muted-foreground",
-			"unstyled": "",
-		},
-		"size": {
-			"sm":      "h-1",
-			"default": "h-2",
-			"lg":      "h-3",
-		},
-	},
-}
-
 // FieldsetProps configures a fieldset group.
 type FieldsetProps struct {
 	Variant  string
@@ -230,7 +157,7 @@ func Fieldset(p FieldsetProps) templ.Component {
 			var templ_7745c5c3_Var4 string
 			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(p.Name)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 174, Col: 16}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 101, Col: 16}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 			if templ_7745c5c3_Err != nil {
@@ -249,7 +176,7 @@ func Fieldset(p FieldsetProps) templ.Component {
 			var templ_7745c5c3_Var5 string
 			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(p.Form)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 177, Col: 16}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 104, Col: 16}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 			if templ_7745c5c3_Err != nil {
@@ -389,7 +316,7 @@ func DataList(p DataListProps) templ.Component {
 			var templ_7745c5c3_Var11 string
 			templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(p.ID)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 197, Col: 12}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 124, Col: 12}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
 			if templ_7745c5c3_Err != nil {
@@ -466,7 +393,7 @@ func DataOption(p DataOptionProps) templ.Component {
 		var templ_7745c5c3_Var14 string
 		templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(p.Value)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 208, Col: 24}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 135, Col: 24}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var14))
 		if templ_7745c5c3_Err != nil {
@@ -479,7 +406,7 @@ func DataOption(p DataOptionProps) templ.Component {
 		var templ_7745c5c3_Var15 string
 		templ_7745c5c3_Var15, templ_7745c5c3_Err = templ.JoinStringErrs(p.Label)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 208, Col: 42}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 135, Col: 42}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var15))
 		if templ_7745c5c3_Err != nil {
@@ -540,7 +467,7 @@ func Output(p OutputProps) templ.Component {
 			var templ_7745c5c3_Var18 string
 			templ_7745c5c3_Var18, templ_7745c5c3_Err = templ.JoinStringErrs(p.ID)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 215, Col: 12}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 142, Col: 12}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var18))
 			if templ_7745c5c3_Err != nil {
@@ -571,7 +498,7 @@ func Output(p OutputProps) templ.Component {
 		var templ_7745c5c3_Var20 string
 		templ_7745c5c3_Var20, templ_7745c5c3_Err = templ.JoinStringErrs(p.Name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 218, Col: 15}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 145, Col: 15}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var20))
 		if templ_7745c5c3_Err != nil {
@@ -589,7 +516,7 @@ func Output(p OutputProps) templ.Component {
 			var templ_7745c5c3_Var21 string
 			templ_7745c5c3_Var21, templ_7745c5c3_Err = templ.JoinStringErrs(p.For)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 220, Col: 14}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 147, Col: 14}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var21))
 			if templ_7745c5c3_Err != nil {
@@ -611,7 +538,7 @@ func Output(p OutputProps) templ.Component {
 		var templ_7745c5c3_Var22 string
 		templ_7745c5c3_Var22, templ_7745c5c3_Err = templ.JoinStringErrs(p.Value)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 224, Col: 11}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 151, Col: 11}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var22))
 		if templ_7745c5c3_Err != nil {
@@ -668,7 +595,7 @@ func Meter(p MeterProps) templ.Component {
 			var templ_7745c5c3_Var25 string
 			templ_7745c5c3_Var25, templ_7745c5c3_Err = templ.JoinStringErrs(p.ID)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 233, Col: 12}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 160, Col: 12}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var25))
 			if templ_7745c5c3_Err != nil {
@@ -699,7 +626,7 @@ func Meter(p MeterProps) templ.Component {
 		var templ_7745c5c3_Var27 string
 		templ_7745c5c3_Var27, templ_7745c5c3_Err = templ.JoinStringErrs(p.Value)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 236, Col: 17}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 163, Col: 17}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var27))
 		if templ_7745c5c3_Err != nil {
@@ -717,7 +644,7 @@ func Meter(p MeterProps) templ.Component {
 			var templ_7745c5c3_Var28 string
 			templ_7745c5c3_Var28, templ_7745c5c3_Err = templ.JoinStringErrs(p.Min)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 238, Col: 14}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 165, Col: 14}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var28))
 			if templ_7745c5c3_Err != nil {
@@ -736,7 +663,7 @@ func Meter(p MeterProps) templ.Component {
 			var templ_7745c5c3_Var29 string
 			templ_7745c5c3_Var29, templ_7745c5c3_Err = templ.JoinStringErrs(p.Max)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 241, Col: 14}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 168, Col: 14}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var29))
 			if templ_7745c5c3_Err != nil {
@@ -755,7 +682,7 @@ func Meter(p MeterProps) templ.Component {
 			var templ_7745c5c3_Var30 string
 			templ_7745c5c3_Var30, templ_7745c5c3_Err = templ.JoinStringErrs(p.Low)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 244, Col: 14}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 171, Col: 14}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var30))
 			if templ_7745c5c3_Err != nil {
@@ -774,7 +701,7 @@ func Meter(p MeterProps) templ.Component {
 			var templ_7745c5c3_Var31 string
 			templ_7745c5c3_Var31, templ_7745c5c3_Err = templ.JoinStringErrs(p.High)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 247, Col: 16}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 174, Col: 16}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var31))
 			if templ_7745c5c3_Err != nil {
@@ -793,7 +720,7 @@ func Meter(p MeterProps) templ.Component {
 			var templ_7745c5c3_Var32 string
 			templ_7745c5c3_Var32, templ_7745c5c3_Err = templ.JoinStringErrs(p.Optimum)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 250, Col: 22}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 177, Col: 22}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var32))
 			if templ_7745c5c3_Err != nil {
@@ -863,7 +790,7 @@ func Progress(p ProgressProps) templ.Component {
 			var templ_7745c5c3_Var35 string
 			templ_7745c5c3_Var35, templ_7745c5c3_Err = templ.JoinStringErrs(p.ID)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 262, Col: 12}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 189, Col: 12}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var35))
 			if templ_7745c5c3_Err != nil {
@@ -899,7 +826,7 @@ func Progress(p ProgressProps) templ.Component {
 			var templ_7745c5c3_Var37 string
 			templ_7745c5c3_Var37, templ_7745c5c3_Err = templ.JoinStringErrs(p.Value)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 266, Col: 18}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 193, Col: 18}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var37))
 			if templ_7745c5c3_Err != nil {
@@ -918,7 +845,7 @@ func Progress(p ProgressProps) templ.Component {
 			var templ_7745c5c3_Var38 string
 			templ_7745c5c3_Var38, templ_7745c5c3_Err = templ.JoinStringErrs(p.Max)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 269, Col: 14}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/form/controls.templ`, Line: 196, Col: 14}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var38))
 			if templ_7745c5c3_Err != nil {

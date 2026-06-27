@@ -27,61 +27,6 @@ import (
 	"github.com/fastygo/templ/utils"
 )
 
-var ImageVariants = uiutils.Variants{
-	Base: "block max-w-full",
-	Keys: []string{"variant", "size", "fit", "position", "aspect"},
-	Defaults: map[string]string{
-		"variant":  "default",
-		"size":     "auto",
-		"fit":      "cover",
-		"position": "center",
-		"aspect":   "auto",
-	},
-	ByKey: map[string]map[string]string{
-		"variant": {
-			"default":   "",
-			"rounded":   "rounded-md",
-			"avatar":    "rounded-full",
-			"thumbnail": "rounded-md border border-border",
-			"logo":      "object-contain",
-			"unstyled":  "",
-		},
-		"size": {
-			"auto":    "",
-			"default": "",
-			"xs":      "h-6 w-6",
-			"sm":      "h-8 w-8",
-			"md":      "h-12 w-12",
-			"lg":      "h-16 w-16",
-			"xl":      "h-24 w-24",
-			"full":    "h-full w-full",
-		},
-		"fit": {
-			"contain":    "object-contain",
-			"cover":      "object-cover",
-			"fill":       "object-fill",
-			"none":       "object-none",
-			"scale-down": "object-scale-down",
-		},
-		"position": {
-			"bottom":       "object-bottom",
-			"center":       "object-center",
-			"left":         "object-left",
-			"right":        "object-right",
-			"top":          "object-top",
-			"left-bottom":  "object-left-bottom",
-			"left-top":     "object-left-top",
-			"right-bottom": "object-right-bottom",
-			"right-top":    "object-right-top",
-		},
-		"aspect": {
-			"auto":   "aspect-auto",
-			"square": "aspect-square",
-			"video":  "aspect-video",
-		},
-	},
-}
-
 // ImageProps configures a native img element.
 type ImageProps struct {
 	Variant       string
@@ -200,7 +145,7 @@ func Image(p ImageProps) templ.Component {
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(p.Src)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 158, Col: 13}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 103, Col: 13}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
@@ -218,7 +163,7 @@ func Image(p ImageProps) templ.Component {
 			var templ_7745c5c3_Var4 string
 			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(p.SrcSet)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 160, Col: 20}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 105, Col: 20}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 			if templ_7745c5c3_Err != nil {
@@ -237,7 +182,7 @@ func Image(p ImageProps) templ.Component {
 			var templ_7745c5c3_Var5 string
 			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(p.Sizes)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 163, Col: 18}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 108, Col: 18}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 			if templ_7745c5c3_Err != nil {
@@ -255,7 +200,7 @@ func Image(p ImageProps) templ.Component {
 		var templ_7745c5c3_Var6 string
 		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(imageAlt(p))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 165, Col: 19}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 110, Col: 19}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 		if templ_7745c5c3_Err != nil {
@@ -273,7 +218,7 @@ func Image(p ImageProps) templ.Component {
 			var templ_7745c5c3_Var7 string
 			templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(p.Width)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 167, Col: 18}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 112, Col: 18}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 			if templ_7745c5c3_Err != nil {
@@ -292,7 +237,7 @@ func Image(p ImageProps) templ.Component {
 			var templ_7745c5c3_Var8 string
 			templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(p.Height)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 170, Col: 20}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 115, Col: 20}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 			if templ_7745c5c3_Err != nil {
@@ -310,7 +255,7 @@ func Image(p ImageProps) templ.Component {
 		var templ_7745c5c3_Var9 string
 		templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(imageLoading(p.Loading))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 172, Col: 35}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 117, Col: 35}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
 		if templ_7745c5c3_Err != nil {
@@ -323,7 +268,7 @@ func Image(p ImageProps) templ.Component {
 		var templ_7745c5c3_Var10 string
 		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(imageDecoding(p.Decoding))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 173, Col: 38}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 118, Col: 38}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
 		if templ_7745c5c3_Err != nil {
@@ -341,7 +286,7 @@ func Image(p ImageProps) templ.Component {
 			var templ_7745c5c3_Var11 string
 			templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(p.FetchPriority)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 175, Col: 34}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 120, Col: 34}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
 			if templ_7745c5c3_Err != nil {
@@ -479,7 +424,7 @@ func Source(p SourceProps) templ.Component {
 			var templ_7745c5c3_Var17 string
 			templ_7745c5c3_Var17, templ_7745c5c3_Err = templ.JoinStringErrs(p.SrcSet)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 193, Col: 20}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 138, Col: 20}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var17))
 			if templ_7745c5c3_Err != nil {
@@ -498,7 +443,7 @@ func Source(p SourceProps) templ.Component {
 			var templ_7745c5c3_Var18 string
 			templ_7745c5c3_Var18, templ_7745c5c3_Err = templ.JoinStringErrs(p.Src)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 196, Col: 14}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 141, Col: 14}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var18))
 			if templ_7745c5c3_Err != nil {
@@ -517,7 +462,7 @@ func Source(p SourceProps) templ.Component {
 			var templ_7745c5c3_Var19 string
 			templ_7745c5c3_Var19, templ_7745c5c3_Err = templ.JoinStringErrs(p.Media)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 199, Col: 18}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 144, Col: 18}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var19))
 			if templ_7745c5c3_Err != nil {
@@ -536,7 +481,7 @@ func Source(p SourceProps) templ.Component {
 			var templ_7745c5c3_Var20 string
 			templ_7745c5c3_Var20, templ_7745c5c3_Err = templ.JoinStringErrs(p.Type)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 202, Col: 16}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 147, Col: 16}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var20))
 			if templ_7745c5c3_Err != nil {
@@ -555,7 +500,7 @@ func Source(p SourceProps) templ.Component {
 			var templ_7745c5c3_Var21 string
 			templ_7745c5c3_Var21, templ_7745c5c3_Err = templ.JoinStringErrs(p.Sizes)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 205, Col: 18}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/image/image.templ`, Line: 150, Col: 18}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var21))
 			if templ_7745c5c3_Err != nil {

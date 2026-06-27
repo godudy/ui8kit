@@ -17,7 +17,10 @@ type BoxProps struct {
 	Attrs templ.Attributes
 }
 
-// Box renders a flexible layout container.
+func BoxClasses(p BoxProps) string {
+	return uiutils.Compose(BoxVariants, map[string]string{}, p.Class)
+}
+
 templ Box(p BoxProps) {
 	@boxTag(p) {
 		{ children... }
@@ -27,26 +30,26 @@ templ Box(p BoxProps) {
 templ boxTag(p BoxProps) {
 	switch uiutils.ResolveTag(p.Tag, "div", uiutils.TagGroupLayout) {
 		case "section":
-			<section class={ p.Class } { p.Attrs... }>{ children... }</section>
+			<section class={ BoxClasses(p) } { p.Attrs... }>{ children... }</section>
 		case "article":
-			<article class={ p.Class } { p.Attrs... }>{ children... }</article>
+			<article class={ BoxClasses(p) } { p.Attrs... }>{ children... }</article>
 		case "aside":
-			<aside class={ p.Class } { p.Attrs... }>{ children... }</aside>
+			<aside class={ BoxClasses(p) } { p.Attrs... }>{ children... }</aside>
 		case "header":
-			<header class={ p.Class } { p.Attrs... }>{ children... }</header>
+			<header class={ BoxClasses(p) } { p.Attrs... }>{ children... }</header>
 		case "footer":
-			<footer class={ p.Class } { p.Attrs... }>{ children... }</footer>
+			<footer class={ BoxClasses(p) } { p.Attrs... }>{ children... }</footer>
 		case "main":
-			<main class={ p.Class } { p.Attrs... }>{ children... }</main>
+			<main class={ BoxClasses(p) } { p.Attrs... }>{ children... }</main>
 		case "nav":
-			<nav class={ p.Class } { p.Attrs... }>{ children... }</nav>
+			<nav class={ BoxClasses(p) } { p.Attrs... }>{ children... }</nav>
 		case "figure":
-			<figure class={ p.Class } { p.Attrs... }>{ children... }</figure>
+			<figure class={ BoxClasses(p) } { p.Attrs... }>{ children... }</figure>
 		case "search":
-			<search class={ p.Class } { p.Attrs... }>{ children... }</search>
+			<search class={ BoxClasses(p) } { p.Attrs... }>{ children... }</search>
 		case "hgroup":
-			<hgroup class={ p.Class } { p.Attrs... }>{ children... }</hgroup>
+			<hgroup class={ BoxClasses(p) } { p.Attrs... }>{ children... }</hgroup>
 		default:
-			<div class={ p.Class } { p.Attrs... }>{ children... }</div>
+			<div class={ BoxClasses(p) } { p.Attrs... }>{ children... }</div>
 	}
 }
