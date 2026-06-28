@@ -127,7 +127,7 @@ func generateDataFile(specPath string) error {
 	}
 
 	payload := map[string]any{
-		"$schema":  "../../.project/schemas/data.schema.json",
+		"$schema":  "../../schemas/data.schema.json",
 		"id":       id,
 		"showcase": showcaseMap,
 	}

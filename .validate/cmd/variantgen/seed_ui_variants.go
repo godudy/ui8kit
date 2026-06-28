@@ -20,7 +20,7 @@ type recipe struct {
 
 func main() {
 	root := findRoot()
-	schema := "../../.project/schemas/variants.schema.json"
+	schema := "../../schemas/variants.schema.json"
 
 	write := func(rel string, r recipe) {
 		r.ID = r.ID // set per file
@@ -41,9 +41,9 @@ func main() {
 
 	// button
 	write("ui/button/button.variants.json", recipe{
-		ID: "ui.button",
-		Base: "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
-		Keys: []string{"variant", "size"},
+		ID:       "ui.button",
+		Base:     "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+		Keys:     []string{"variant", "size"},
 		Defaults: map[string]string{"variant": "default", "size": "default"},
 		ByKey: map[string]map[string]string{
 			"variant": {
@@ -69,9 +69,9 @@ func main() {
 	})
 
 	write("ui/dialog/dialog.variants.json", recipe{
-		ID: "ui.dialog",
-		Base: "m-auto rounded-lg border border-border bg-background text-foreground shadow-lg backdrop:bg-background/80",
-		Keys: []string{"variant", "size"},
+		ID:       "ui.dialog",
+		Base:     "m-auto rounded-lg border border-border bg-background text-foreground shadow-lg backdrop:bg-background/80",
+		Keys:     []string{"variant", "size"},
 		Defaults: map[string]string{"variant": "default", "size": "default"},
 		ByKey: map[string]map[string]string{
 			"variant": {"default": "", "card": "bg-card text-card-foreground", "sheet": "min-h-screen rounded-none", "unstyled": ""},
@@ -80,9 +80,9 @@ func main() {
 	})
 
 	write("ui/badge/badge.variants.json", recipe{
-		ID: "ui.badge",
-		Base: "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
-		Keys: []string{"variant", "size"},
+		ID:       "ui.badge",
+		Base:     "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+		Keys:     []string{"variant", "size"},
 		Defaults: map[string]string{"variant": "default", "size": "default"},
 		ByKey: map[string]map[string]string{
 			"variant": {"default": "border-transparent bg-primary text-primary-foreground hover:bg-primary/80", "secondary": "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80", "destructive": "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80", "outline": "text-foreground"},
@@ -91,9 +91,9 @@ func main() {
 	})
 
 	write("ui/link/link.variants.json", recipe{
-		ID: "ui.link",
-		Base: "inline-flex items-center gap-1 underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-		Keys: []string{"variant", "size"},
+		ID:       "ui.link",
+		Base:     "inline-flex items-center gap-1 underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+		Keys:     []string{"variant", "size"},
 		Defaults: map[string]string{"variant": "default", "size": "default"},
 		ByKey: map[string]map[string]string{
 			"variant": {"default": "text-primary hover:underline", "muted": "text-muted-foreground hover:text-foreground hover:underline", "nav": "text-foreground hover:text-primary", "block": "flex w-full text-foreground hover:text-primary", "external": "text-primary hover:underline", "unstyled": ""},
@@ -102,9 +102,9 @@ func main() {
 	})
 
 	write("ui/separator/separator.variants.json", recipe{
-		ID: "ui.separator",
-		Base: "shrink-0 border-0 bg-border",
-		Keys: []string{"orientation", "variant"},
+		ID:       "ui.separator",
+		Base:     "shrink-0 border-0 bg-border",
+		Keys:     []string{"orientation", "variant"},
 		Defaults: map[string]string{"orientation": "horizontal", "variant": "default"},
 		ByKey: map[string]map[string]string{
 			"orientation": {"horizontal": "h-px w-full", "vertical": "h-full w-px"},
@@ -113,9 +113,9 @@ func main() {
 	})
 
 	write("ui/icon/icon.variants.json", recipe{
-		ID: "ui.icon",
-		Base: "inline-block shrink-0",
-		Keys: []string{"type", "size"},
+		ID:       "ui.icon",
+		Base:     "inline-block shrink-0",
+		Keys:     []string{"type", "size"},
 		Defaults: map[string]string{"type": "class", "size": "default"},
 		ByKey: map[string]map[string]string{
 			"type": {"class": "", "svg": "", "text": ""},
@@ -124,9 +124,9 @@ func main() {
 	})
 
 	write("ui/image/image.variants.json", recipe{
-		ID: "ui.image",
-		Base: "block max-w-full",
-		Keys: []string{"variant", "size", "fit", "position", "aspect"},
+		ID:       "ui.image",
+		Base:     "block max-w-full",
+		Keys:     []string{"variant", "size", "fit", "position", "aspect"},
 		Defaults: map[string]string{"variant": "default", "size": "auto", "fit": "cover", "position": "center", "aspect": "auto"},
 		ByKey: map[string]map[string]string{
 			"variant":  {"default": "", "rounded": "rounded-md", "avatar": "rounded-full", "thumbnail": "rounded-md border border-border", "logo": "object-contain", "unstyled": ""},
@@ -138,9 +138,9 @@ func main() {
 	})
 
 	write("ui/disclosure/disclosure.variants.json", recipe{
-		ID: "ui.disclosure",
-		Base: "group",
-		Keys: []string{"variant", "size"},
+		ID:       "ui.disclosure",
+		Base:     "group",
+		Keys:     []string{"variant", "size"},
 		Defaults: map[string]string{"variant": "default", "size": "default"},
 		ByKey: map[string]map[string]string{
 			"variant": {"default": "rounded-md border border-border", "ghost": "", "card": "rounded-md border border-border bg-card text-card-foreground", "unstyled": ""},
@@ -149,9 +149,9 @@ func main() {
 	})
 
 	write("ui/disclosure/summary.variants.json", recipe{
-		ID: "ui.disclosure.summary",
-		Base: "flex cursor-pointer list-none items-center justify-between gap-2 [&::-webkit-details-marker]:hidden",
-		Keys: []string{"variant", "size"},
+		ID:       "ui.disclosure.summary",
+		Base:     "flex cursor-pointer list-none items-center justify-between gap-2 [&::-webkit-details-marker]:hidden",
+		Keys:     []string{"variant", "size"},
 		Defaults: map[string]string{"variant": "default", "size": "default"},
 		ByKey: map[string]map[string]string{
 			"variant": {"default": "px-4 py-3 font-medium", "ghost": "py-2 font-medium", "card": "px-4 py-3 font-medium", "unstyled": ""},
@@ -197,9 +197,9 @@ func main() {
 	})
 
 	inputRecipe := recipe{
-		ID: "ui.input",
-		Base: "w-full rounded-md border px-3 py-2 text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
-		Keys: []string{"variant", "size"},
+		ID:       "ui.input",
+		Base:     "w-full rounded-md border px-3 py-2 text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+		Keys:     []string{"variant", "size"},
 		Defaults: map[string]string{"variant": "default", "size": "default"},
 		ByKey: map[string]map[string]string{
 			"variant": {"unstyled": "", "": "border-border bg-background", "default": "border-border bg-background", "outline": "border-border bg-background", "ghost": "border-transparent bg-muted"},
@@ -211,9 +211,9 @@ func main() {
 	write("ui/select/select.variants.json", recipe{ID: "ui.select", Base: inputRecipe.Base, Keys: inputRecipe.Keys, Defaults: inputRecipe.Defaults, ByKey: inputRecipe.ByKey})
 
 	controlRecipe := recipe{
-		ID: "ui.checkbox",
-		Base: "rounded border border-primary text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
-		Keys: []string{"variant", "size"},
+		ID:       "ui.checkbox",
+		Base:     "rounded border border-primary text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+		Keys:     []string{"variant", "size"},
 		Defaults: map[string]string{"variant": "default", "size": "default"},
 		ByKey: map[string]map[string]string{
 			"variant": {"unstyled": "", "": "border-primary", "default": "border-primary", "outline": "border-primary", "ghost": "border-primary bg-muted/30"},
