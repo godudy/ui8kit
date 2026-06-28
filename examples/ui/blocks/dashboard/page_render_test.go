@@ -14,13 +14,12 @@ func TestPageRendersDefaultDashboardBlock(t *testing.T) {
 	}
 	html := buf.String()
 	for _, want := range []string{
-		"FastyGo app shell is ready",
-		"Sidebar shell",
-		"Header navigation",
-		"Current layer",
-		"github.com/fastygo/framework",
-		"Catalog copy, not runtime code",
-		"Shell readiness",
+		"Component registry preview",
+		"UI primitives",
+		"Registry inventory",
+		"ui.button",
+		"Catalog snapshot",
+		"Registry coverage",
 		`<progress`,
 		`data-ui8kit="sheet"`,
 		`id="dashboard-mobile-sheet-trigger"`,
@@ -29,6 +28,7 @@ func TestPageRendersDefaultDashboardBlock(t *testing.T) {
 		`aria-current="page"`,
 		`<article`,
 		`<section`,
+		"Live component gallery",
 	} {
 		if !strings.Contains(html, want) {
 			t.Fatalf("expected rendered block to contain %q", want)

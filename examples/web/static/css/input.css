@@ -1,9 +1,16 @@
 @import "tailwindcss";
-@source "../../../ui/**/*.templ";
-@source "../../../ui/**/*_templ.go";
-@source "../../../components/**/*.templ";
-@source "../../../components/**/*_templ.go";
-@source "../../*.templ";
-@source "../../*_templ.go";
+/* Repo root is four levels up from examples/web/static/css/ */
+@source "../../../../ui/**/*.templ";
+@source "../../../../ui/**/*_templ.go";
+@source "../../../../ui/**/*.variants.json";
+@source "../../../../components/**/*.templ";
+@source "../../../../components/**/*_templ.go";
+@source "../../../../utils/**/*.go";
+/* Examples catalog blocks live under examples/ui/blocks/ */
+@source "../../../ui/blocks/**/*.templ";
+@source "../../../ui/blocks/**/*_templ.go";
+@source "../../../ui/blocks/**/*.variants.json";
+@source "../../../*.templ";
+@source "../../../*_templ.go";
 
 @import "./tokens.css";

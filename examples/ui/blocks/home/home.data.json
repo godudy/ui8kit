@@ -7,31 +7,31 @@
         "Brand": "BuildY",
         "Workspace": "My workspace",
         "Prototype": "Prototype mode",
-        "ProfileName": "Alex Developer",
+        "ProfileName": "Alex",
         "Sidebar": [
           { "Label": "Home", "Href": "#home", "Icon": "home" },
           { "Label": "Models", "Href": "#models", "Icon": "box" },
           { "Label": "Files", "Href": "#files", "Icon": "file" },
-          { "Label": "Data", "Href": "#data", "Icon": "database" },
+          { "Label": "Data", "Href": "#data", "Icon": "data" },
           { "Label": "Source", "Href": "#source", "Icon": "code" },
-          { "Label": "Reports", "Href": "#reports", "Icon": "chart" }
+          { "Label": "Dashboard", "Href": "/", "Icon": "grid" }
         ],
         "HeaderNav": [
-          { "Label": "Documentation", "Href": "#documentation", "Icon": "book" },
-          { "Label": "Templates", "Href": "#templates", "Icon": "layout" },
-          { "Label": "Settings", "Href": "#settings", "Icon": "settings" }
+          { "Label": "Documentation", "Href": "#documentation" },
+          { "Label": "Templates", "Href": "#templates" },
+          { "Label": "Settings", "Href": "#settings" }
         ],
         "Hero": {
           "Title": "What do you want to create?",
-          "Subtitle": "Describe your idea in natural language. BuildY will analyze, model, and generate a FastyGo prototype from mocks.",
-          "Prompt": "Describe an application, landing page, CRM, CMS, or portal...",
+          "Subtitle": "Describe your idea in natural language. BuildY turns prompts into structured plans, models, and FastyGo prototypes.",
+          "Prompt": "Describe an application, landing page, CRM, CMS, or portal…",
           "PrimaryAction": "Generate prototype",
-          "AttachmentLabel": "Attach",
-          "AssistantLabel": "Refine",
-          "ShortcutLabel": "Slash command",
-          "SuggestionsLabel": "Suggestions:",
+          "AttachmentLabel": "Attach files",
+          "AssistantLabel": "Refine with AI",
+          "ShortcutLabel": "Slash commands",
+          "SuggestionsLabel": "Try a suggestion",
           "Suggestions": [
-            "SaaS landing with CMS content",
+            "SaaS landing with CMS",
             "Admin dashboard",
             "CRM workspace",
             "Content portal"
@@ -46,61 +46,61 @@
         },
         "Tools": [
           {
-            "Title": "Request Plan",
-            "Description": "Turn a prompt into a structured request plan.",
-            "Icon": "list",
+            "Title": "Request plan",
+            "Description": "Turn a prompt into a structured product brief.",
+            "Icon": "plan",
             "Tone": "blue"
           },
           {
-            "Title": "CMS Model",
-            "Description": "Define content, fields, relations, and ownership.",
-            "Icon": "database",
+            "Title": "CMS model",
+            "Description": "Define content types, fields, and relations.",
+            "Icon": "data",
             "Tone": "green"
           },
           {
-            "Title": "Preview",
-            "Description": "Open a live behavior-aware preview.",
+            "Title": "Live preview",
+            "Description": "Open an interactive behavior-aware preview.",
             "Icon": "eye",
             "Tone": "blue"
           },
           {
-            "Title": "Source Code",
-            "Description": "Generate ready Go and Templ source files.",
+            "Title": "Source code",
+            "Description": "Generate Go and Templ source files.",
             "Icon": "code",
             "Tone": "muted"
           },
           {
-            "Title": "Change Review",
-            "Description": "Review changes in code, content, and schema.",
-            "Icon": "spark",
+            "Title": "Change review",
+            "Description": "Review diffs across code, content, and schema.",
+            "Icon": "diff",
             "Tone": "amber"
           },
           {
-            "Title": "Export",
-            "Description": "Export the source code or demo package.",
-            "Icon": "download",
+            "Title": "Export pack",
+            "Description": "Download a demo package or source bundle.",
+            "Icon": "export",
             "Tone": "blue"
           }
         ],
         "Showcase": {
           "Title": "Powerful starting points",
-          "Description": "Use any mock application as a starting point for your workspace.",
+          "Description": "Starter applications you can clone into a workspace and customize with tokens.",
           "ActionLabel": "All templates",
           "Items": [
             {
               "Name": "AppCMS",
               "Category": "CMS",
-              "Description": "Sites, pages, media, and taxonomies.",
-              "Capabilities": ["Content model", "Pages and navigation", "Media library"],
-              "UseLabel": "Use",
+              "Description": "Sites, pages, media library, and taxonomies.",
+              "Capabilities": ["Content model", "Pages & navigation", "Media library"],
+              "UseLabel": "Use template",
               "PreviewLabel": "Preview"
             },
             {
               "Name": "AppCRM",
               "Category": "CRM",
-              "Description": "Leads, contacts, deals, and activities.",
-              "Capabilities": ["People and contacts", "Funnels and stages", "Activity timeline"],
-              "UseLabel": "Use",
+              "Description": "Leads, contacts, deals, and activity timeline.",
+              "Capabilities": ["People & contacts", "Pipelines & stages", "Activity feed"],
+              "UseLabel": "Use template",
               "PreviewLabel": "Preview"
             },
             {
@@ -108,39 +108,39 @@
               "Category": "Suite",
               "Description": "Launcher and shared workspace tools.",
               "Capabilities": ["Workspace switcher", "Product hub", "Role access"],
-              "UseLabel": "Use",
+              "UseLabel": "Use template",
               "PreviewLabel": "Preview"
             },
             {
               "Name": "Director",
               "Category": "Ops",
-              "Description": "Operations dashboard and approvals.",
-              "Capabilities": ["Review operations", "Approvals and flows", "Status reports"],
-              "UseLabel": "Use",
+              "Description": "Operations dashboard with approvals.",
+              "Capabilities": ["Review queue", "Approval flows", "Status reports"],
+              "UseLabel": "Use template",
               "PreviewLabel": "Preview"
             },
             {
               "Name": "Contentor",
               "Category": "Editorial",
-              "Description": "Planning, editing, and publishing.",
-              "Capabilities": ["Planning canvas", "Editorial process", "Publication workflow"],
-              "UseLabel": "Use",
+              "Description": "Planning, editing, and publishing workflow.",
+              "Capabilities": ["Editorial calendar", "Draft review", "Publish pipeline"],
+              "UseLabel": "Use template",
               "PreviewLabel": "Preview"
             },
             {
               "Name": "Webmaster",
               "Category": "SEO",
-              "Description": "SEO, redirects, and site health.",
-              "Capabilities": ["Site monitoring", "Redirect control", "SEO optimization"],
-              "UseLabel": "Use",
+              "Description": "SEO health, redirects, and monitoring.",
+              "Capabilities": ["Site monitoring", "Redirect rules", "SEO checks"],
+              "UseLabel": "Use template",
               "PreviewLabel": "Preview"
             }
           ]
         },
         "Notice": {
           "Title": "You are in prototype mode",
-          "Description": "This block uses mock data only: no external services, no repositories, no billing. It is ideal for research and design.",
-          "ActionLabel": "Learn about prototype mode"
+          "Description": "Mock data only — no external services, billing, or production backends. Ideal for design and registry research.",
+          "ActionLabel": "About prototype mode"
         }
       }
     }

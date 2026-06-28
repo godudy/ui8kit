@@ -23,15 +23,18 @@ type NavItem struct {
 
 // HeroProps configures the main dashboard intro.
 type HeroProps struct {
-	Eyebrow     string
-	Title       string
-	Description string
-	PrimaryCTA  string
+	Eyebrow      string
+	Title        string
+	Description  string
+	PrimaryCTA   string
 	SecondaryCTA string
+	Progress     string
+	ProgressLabel string
 }
 
-// StatusCard describes one current app-shell capability.
+// StatusCard describes one registry capability KPI.
 type StatusCard struct {
+	Value       string
 	Title       string
 	Description string
 	Meta        string
@@ -39,7 +42,7 @@ type StatusCard struct {
 	Tone        string
 }
 
-// LayerItem describes one technical layer visible in the current app.
+// LayerItem describes one brick in the registry inventory.
 type LayerItem struct {
 	Name        string
 	Description string

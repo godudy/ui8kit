@@ -4,84 +4,95 @@
   "showcase": {
     "default": {
       "props": {
-        "Brand": "FastyGo",
-        "Workspace": "Application workspace",
-        "Status": "Prototype shell",
+        "Brand": "UI8Kit",
+        "Workspace": "Templ registry",
+        "Status": "Preview",
         "ProfileName": "Developer",
         "Sidebar": [
-          { "Label": "Home", "Href": "#home", "Icon": "home" },
-          { "Label": "Sample", "Href": "#sample", "Icon": "box" },
-          { "Label": "Routes", "Href": "#routes", "Icon": "route" },
-          { "Label": "Assets", "Href": "#assets", "Icon": "file" },
-          { "Label": "Tests", "Href": "#tests", "Icon": "check" }
+          { "Label": "Overview", "Href": "#overview", "Icon": "grid" },
+          { "Label": "Primitives", "Href": "#primitives", "Icon": "box" },
+          { "Label": "Composites", "Href": "#composites", "Icon": "layers" },
+          { "Label": "Blocks", "Href": "#blocks", "Icon": "layout" },
+          { "Label": "Home demo", "Href": "/home/", "Icon": "spark" }
         ],
         "HeaderNav": [
-          { "Label": "Documentation", "Href": "#documentation" },
-          { "Label": "Templates", "Href": "#templates" },
-          { "Label": "Settings", "Href": "#settings" }
+          { "Label": "Documentation", "Href": "#docs" },
+          { "Label": "Components", "Href": "#gallery" },
+          { "Label": "Home block", "Href": "/home/" }
         ],
         "Hero": {
-          "Eyebrow": "Current application layer",
-          "Title": "FastyGo app shell is ready",
-          "Description": "This catalog block mirrors the current app layer: sidebar navigation, header navigation, a content area, static routes, assets, and render tests.",
-          "PrimaryCTA": "Open workspace",
-          "SecondaryCTA": "View routes"
+          "Eyebrow": "FastyGo · Templ stack",
+          "Title": "Component registry preview",
+          "Description": "A polished app shell built from ui primitives and composites. Copy bricks, wire tokens in your app, and ship SSR pages without guessing class recipes.",
+          "PrimaryCTA": "Browse gallery",
+          "SecondaryCTA": "View home block",
+          "Progress": "72",
+          "ProgressLabel": "Registry coverage"
         },
         "Cards": [
           {
-            "Title": "Sidebar shell",
-            "Description": "Desktop sidebar with primary navigation and active state.",
-            "Meta": "layout",
-            "Icon": "s",
+            "Value": "27",
+            "Title": "UI primitives",
+            "Description": "Button, input, dialog, layout bricks with JSON variants.",
+            "Meta": "ui/*",
+            "Icon": "UI",
             "Tone": "default"
           },
           {
-            "Title": "Header navigation",
-            "Description": "Separate top navigation that moves into the mobile menu group.",
-            "Meta": "navigation",
-            "Icon": "h",
+            "Value": "6",
+            "Title": "Composites",
+            "Description": "Card, nav, sheet, alert — composed from primitives.",
+            "Meta": "components",
+            "Icon": "CP",
             "Tone": "default"
           },
           {
-            "Title": "Static assets",
-            "Description": "CSS, theme script, and UI behavior bundles are served by the app.",
-            "Meta": "assets",
-            "Icon": "a",
+            "Value": "2",
+            "Title": "Catalog blocks",
+            "Description": "Dashboard and home page scaffolds for examples.",
+            "Meta": "blocks",
+            "Icon": "BL",
             "Tone": "muted"
           },
           {
-            "Title": "Render tests",
-            "Description": "Wireframe render tests cover the shell, sheet hooks, and visible copy.",
-            "Meta": "testing",
-            "Icon": "t",
+            "Value": "100%",
+            "Title": "Token ready",
+            "Description": "Semantic colors from app-layer tokens.css.",
+            "Meta": "theme",
+            "Icon": "TK",
             "Tone": "muted"
           }
         ],
         "Layers": [
           {
-            "Name": "github.com/fastygo/framework",
-            "Description": "HTTP host, routes, locales, static assets.",
-            "Status": "wired"
+            "Name": "ui.button",
+            "Description": "CVA variants from button.variants.json via Compose.",
+            "Status": "primitive"
           },
           {
-            "Name": "github.com/fastygo/templ",
-            "Description": "Templ primitives and composites used by the app shell.",
-            "Status": "wired"
+            "Name": "components.card",
+            "Description": "Surface recipe from utils.CardVariants.",
+            "Status": "composite"
           },
           {
-            "Name": "internal/ui/layout",
-            "Description": "Runtime sidebar, header, mobile sheet, footer, and shell props.",
-            "Status": "runtime"
+            "Name": "components.sheet",
+            "Description": "Mobile nav with ui8kit behavior hooks.",
+            "Status": "composite"
           },
           {
-            "Name": "internal/fixtures",
-            "Description": "English and Russian locale fixtures for visible copy.",
-            "Status": "runtime"
+            "Name": "components.nav",
+            "Description": "Primary navigation with active states.",
+            "Status": "composite"
+          },
+          {
+            "Name": "blocks.dashboard",
+            "Description": "This shell — sidebar, header, KPI row, inventory.",
+            "Status": "block"
           }
         ],
         "Notice": {
-          "Title": "Catalog copy, not runtime code",
-          "Description": "This block is a portable snapshot of the current FastyGo app layer. It duplicates shell ideas intentionally and does not import runtime layout or fixtures."
+          "Title": "Catalog snapshot",
+          "Description": "Examples mirror the public registry contract: spec, variants JSON, data JSON, and thin templ runtime. Not wired to product runtime."
         }
       }
     }
