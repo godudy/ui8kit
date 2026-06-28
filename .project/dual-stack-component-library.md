@@ -394,7 +394,7 @@ When creating or editing a brick:
 7. Add dual `## Example` fences when both runtimes exist
 8. Run validators + ui8px in the reference app
 
-For example blocks under `examples/ui/blocks/`:
+For example blocks under `examples/templ/ui/blocks/`:
 
 1. Edit `*.spec.md`, `*.data.json`, `*.variants.json`, `props.go`, `page.templ`.
 2. Run `bun run generate` — emits `page_gen.go` and `page_templ.go`.

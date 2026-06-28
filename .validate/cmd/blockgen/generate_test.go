@@ -12,7 +12,7 @@ func TestGenerateBlockOutput(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	specPath := filepath.Join(repoRoot, "examples", "ui", "blocks", "home", "home.spec.md")
+	specPath := filepath.Join(repoRoot, "examples", "templ", "ui", "blocks", "home", "home.spec.md")
 	doc, err := loadSpec(specPath)
 	if err != nil {
 		t.Fatal(err)

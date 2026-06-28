@@ -1,0 +1,11 @@
+{
+  "ui8kit": {
+    "file": "ui8kit.js"
+  },
+  "ariaMode": "subset",
+  "ariaVersion": "0.1.0",
+  "patterns": [
+    "alert",
+    "dialog"
+  ]
+}

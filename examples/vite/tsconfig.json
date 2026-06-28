@@ -11,19 +11,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "esModuleInterop": true,
+    "types": ["vite/client"],
     "baseUrl": ".",
     "paths": {
-      "@registry/ui": ["ui/index.ts"],
-      "@registry/ui/*": ["ui/*"],
-      "@registry/components": ["components/index.ts"],
-      "@registry/components/*": ["components/*"]
+      "@registry/ui": ["../../ui/index.ts"],
+      "@registry/ui/*": ["../../ui/*"],
+      "@registry/components": ["../../components/index.ts"],
+      "@registry/components/*": ["../../components/*"]
     }
   },
-  "include": [
-    "ui/**/*.tsx",
-    "components/**/*.tsx",
-    "utils/**/*.ts",
-    "examples/vite/src/**/*.tsx"
-  ],
-  "exclude": ["node_modules"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "vite.config.ts"]
 }

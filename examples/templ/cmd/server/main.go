@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/fastygo/templ/examples"
+	templpreview "github.com/fastygo/templ/examples/templ"
 )
 
 func main() {
@@ -19,12 +19,12 @@ func main() {
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /{$}", func(w http.ResponseWriter, r *http.Request) {
-		if err := examples.Page().Render(r.Context(), w); err != nil {
+		if err := templpreview.Page().Render(r.Context(), w); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
 	})
 	mux.HandleFunc("GET /home/{$}", func(w http.ResponseWriter, r *http.Request) {
-		if err := examples.HomePage().Render(r.Context(), w); err != nil {
+		if err := templpreview.HomePage().Render(r.Context(), w); err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 		}
 	})

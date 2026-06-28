@@ -2,14 +2,14 @@
 id: blocks.dashboard
 layer: catalog-block
 kind: page-scaffold
-package: github.com/fastygo/templ/examples/ui/blocks/dashboard
-facade: github.com/fastygo/templ/examples/ui/blocks/dashboard
+package: github.com/fastygo/templ/examples/templ/ui/blocks/dashboard
+facade: github.com/fastygo/templ/examples/templ/ui/blocks/dashboard
 templ: Page
 
 targets:
   templ:
-    package: github.com/fastygo/templ/examples/ui/blocks/dashboard
-    facade: github.com/fastygo/templ/examples/ui/blocks/dashboard
+    package: github.com/fastygo/templ/examples/templ/ui/blocks/dashboard
+    facade: github.com/fastygo/templ/examples/templ/ui/blocks/dashboard
     component: Page
 
 variants: dashboard.variants.json
@@ -89,7 +89,7 @@ The block composes Sheet, Nav, and IconBadge for mobile menu, navigation lists, 
 ## Example default
 
 ```templ
-import "github.com/fastygo/templ/examples/ui/blocks/dashboard"
+import "github.com/fastygo/templ/examples/templ/ui/blocks/dashboard"
 
 templ Example() {
 	@dashboard.Page(dashboard.DefaultPage()) {

@@ -2,14 +2,14 @@
 id: blocks.home
 layer: catalog-block
 kind: page-scaffold
-package: github.com/fastygo/templ/examples/ui/blocks/home
-facade: github.com/fastygo/templ/examples/ui/blocks/home
+package: github.com/fastygo/templ/examples/templ/ui/blocks/home
+facade: github.com/fastygo/templ/examples/templ/ui/blocks/home
 templ: Page
 
 targets:
   templ:
-    package: github.com/fastygo/templ/examples/ui/blocks/home
-    facade: github.com/fastygo/templ/examples/ui/blocks/home
+    package: github.com/fastygo/templ/examples/templ/ui/blocks/home
+    facade: github.com/fastygo/templ/examples/templ/ui/blocks/home
     component: Page
 
 variants: home.variants.json
@@ -89,7 +89,7 @@ The shell composes Sheet, Nav, and IconBadge from the registry.
 ## Example default
 
 ```templ
-import "github.com/fastygo/templ/examples/ui/blocks/home"
+import "github.com/fastygo/templ/examples/templ/ui/blocks/home"
 
 templ Example() {
 	@home.Page(home.DefaultPage())

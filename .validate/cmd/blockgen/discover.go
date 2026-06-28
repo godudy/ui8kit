@@ -7,7 +7,7 @@ import (
 )
 
 func discoverBlockSpecs(repoRoot string) ([]blockSpec, error) {
-	root := filepath.Join(repoRoot, "examples", "ui", "blocks")
+	root := filepath.Join(repoRoot, "examples", "templ", "ui", "blocks")
 	var specs []blockSpec
 	err := filepath.WalkDir(root, func(path string, d os.DirEntry, err error) error {
 		if err != nil {

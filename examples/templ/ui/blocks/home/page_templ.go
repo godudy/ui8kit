@@ -401,7 +401,7 @@ func CatalogPrimaryNav(items []NavItem, class string) templ.Component {
 							var templ_7745c5c3_Var16 string
 							templ_7745c5c3_Var16, templ_7745c5c3_Err = templ.JoinStringErrs(item.Label)
 							if templ_7745c5c3_Err != nil {
-								return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 74, Col: 18}
+								return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/templ/ui/blocks/home/page.templ`, Line: 74, Col: 18}
 							}
 							_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var16))
 							if templ_7745c5c3_Err != nil {
@@ -509,7 +509,7 @@ func CatalogHeaderNav(items []NavItem, class string) templ.Component {
 							var templ_7745c5c3_Var22 string
 							templ_7745c5c3_Var22, templ_7745c5c3_Err = templ.JoinStringErrs(item.Label)
 							if templ_7745c5c3_Err != nil {
-								return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 88, Col: 18}
+								return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/templ/ui/blocks/home/page.templ`, Line: 88, Col: 18}
 							}
 							_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var22))
 							if templ_7745c5c3_Err != nil {
@@ -806,7 +806,7 @@ func CatalogHeader(props PageProps) templ.Component {
 					var templ_7745c5c3_Var35 string
 					templ_7745c5c3_Var35, templ_7745c5c3_Err = templ.JoinStringErrs(props.Workspace)
 					if templ_7745c5c3_Err != nil {
-						return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 130, Col: 21}
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/templ/ui/blocks/home/page.templ`, Line: 130, Col: 21}
 					}
 					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var35))
 					if templ_7745c5c3_Err != nil {
@@ -880,7 +880,7 @@ func CatalogHeader(props PageProps) templ.Component {
 								var templ_7745c5c3_Var40 string
 								templ_7745c5c3_Var40, templ_7745c5c3_Err = templ.JoinStringErrs(item.Label)
 								if templ_7745c5c3_Err != nil {
-									return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 138, Col: 19}
+									return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/templ/ui/blocks/home/page.templ`, Line: 138, Col: 19}
 								}
 								_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var40))
 								if templ_7745c5c3_Err != nil {
@@ -942,7 +942,7 @@ func CatalogHeader(props PageProps) templ.Component {
 					var templ_7745c5c3_Var43 string
 					templ_7745c5c3_Var43, templ_7745c5c3_Err = templ.JoinStringErrs(props.Prototype)
 					if templ_7745c5c3_Err != nil {
-						return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 146, Col: 21}
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/templ/ui/blocks/home/page.templ`, Line: 146, Col: 21}
 					}
 					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var43))
 					if templ_7745c5c3_Err != nil {
@@ -973,7 +973,7 @@ func CatalogHeader(props PageProps) templ.Component {
 					var templ_7745c5c3_Var45 string
 					templ_7745c5c3_Var45, templ_7745c5c3_Err = templ.JoinStringErrs(props.ProfileName)
 					if templ_7745c5c3_Err != nil {
-						return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 149, Col: 23}
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/templ/ui/blocks/home/page.templ`, Line: 149, Col: 23}
 					}
 					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var45))
 					if templ_7745c5c3_Err != nil {
@@ -1290,7 +1290,7 @@ func HeroChat(props HeroProps) templ.Component {
 										var templ_7745c5c3_Var61 string
 										templ_7745c5c3_Var61, templ_7745c5c3_Err = templ.JoinStringErrs(props.PrimaryAction)
 										if templ_7745c5c3_Err != nil {
-											return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 182, Col: 30}
+											return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/templ/ui/blocks/home/page.templ`, Line: 182, Col: 30}
 										}
 										_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var61))
 										if templ_7745c5c3_Err != nil {
@@ -1366,7 +1366,7 @@ func HeroChat(props HeroProps) templ.Component {
 											var templ_7745c5c3_Var65 string
 											templ_7745c5c3_Var65, templ_7745c5c3_Err = templ.JoinStringErrs(suggestion)
 											if templ_7745c5c3_Err != nil {
-												return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 191, Col: 22}
+												return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/templ/ui/blocks/home/page.templ`, Line: 191, Col: 22}
 											}
 											_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var65))
 											if templ_7745c5c3_Err != nil {
@@ -1768,7 +1768,7 @@ func ShowcaseGrid(props ShowcaseProps) templ.Component {
 					var templ_7745c5c3_Var82 string
 					templ_7745c5c3_Var82, templ_7745c5c3_Err = templ.JoinStringErrs(props.ActionLabel)
 					if templ_7745c5c3_Err != nil {
-						return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 244, Col: 23}
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/templ/ui/blocks/home/page.templ`, Line: 244, Col: 23}
 					}
 					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var82))
 					if templ_7745c5c3_Err != nil {
@@ -1986,7 +1986,7 @@ func ShowcaseCardView(item ShowcaseItem) templ.Component {
 							var templ_7745c5c3_Var93 string
 							templ_7745c5c3_Var93, templ_7745c5c3_Err = templ.JoinStringErrs(item.Category)
 							if templ_7745c5c3_Err != nil {
-								return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 270, Col: 21}
+								return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/templ/ui/blocks/home/page.templ`, Line: 270, Col: 21}
 							}
 							_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var93))
 							if templ_7745c5c3_Err != nil {
@@ -2089,7 +2089,7 @@ func ShowcaseCardView(item ShowcaseItem) templ.Component {
 							var templ_7745c5c3_Var98 string
 							templ_7745c5c3_Var98, templ_7745c5c3_Err = templ.JoinStringErrs(item.UseLabel)
 							if templ_7745c5c3_Err != nil {
-								return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 283, Col: 21}
+								return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/templ/ui/blocks/home/page.templ`, Line: 283, Col: 21}
 							}
 							_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var98))
 							if templ_7745c5c3_Err != nil {
@@ -2120,7 +2120,7 @@ func ShowcaseCardView(item ShowcaseItem) templ.Component {
 							var templ_7745c5c3_Var100 string
 							templ_7745c5c3_Var100, templ_7745c5c3_Err = templ.JoinStringErrs(item.PreviewLabel)
 							if templ_7745c5c3_Err != nil {
-								return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 286, Col: 25}
+								return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/templ/ui/blocks/home/page.templ`, Line: 286, Col: 25}
 							}
 							_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var100))
 							if templ_7745c5c3_Err != nil {
@@ -2254,7 +2254,7 @@ func PrototypeNotice(props NoticeProps) templ.Component {
 					var templ_7745c5c3_Var106 string
 					templ_7745c5c3_Var106, templ_7745c5c3_Err = templ.JoinStringErrs(props.ActionLabel)
 					if templ_7745c5c3_Err != nil {
-						return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/ui/blocks/home/page.templ`, Line: 302, Col: 23}
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `examples/templ/ui/blocks/home/page.templ`, Line: 302, Col: 23}
 					}
 					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var106))
 					if templ_7745c5c3_Err != nil {
