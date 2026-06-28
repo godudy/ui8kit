@@ -1,4 +1,4 @@
-import { forwardRef, type HTMLAttributes } from "react";
+import { forwardRef, type HTMLAttributes, type Ref } from "react";
 import linebreakRecipe from "./linebreak.variants.json";
 import { composeRecipe } from "../../utils/variants";
 
@@ -17,7 +17,7 @@ export const Break = forwardRef<HTMLElement, BreakProps>(function Break(
 ) {
   const cls = composeRecipe(linebreakRecipe, {}, className);
   if (breakType(type) === "wbr") {
-    return <wbr ref={ref as never} className={cls} {...rest} />;
+    return <wbr ref={ref as Ref<HTMLElement>} className={cls} {...rest} />;
   }
-  return <br ref={ref as never} className={cls} {...rest} />;
+  return <br ref={ref as unknown as Ref<HTMLBRElement>} className={cls} {...rest} />;
 });

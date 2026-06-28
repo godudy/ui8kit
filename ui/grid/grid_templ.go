@@ -19,7 +19,6 @@ import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
 import (
-	"strconv"
 	"strings"
 
 	"github.com/fastygo/templ/utils"
@@ -40,6 +39,84 @@ type GridColProps struct {
 	Order int
 }
 
+var gridColsClassMap = map[string]string{
+	"1":   "grid-cols-1",
+	"2":   "grid-cols-2",
+	"3":   "grid-cols-3",
+	"4":   "grid-cols-4",
+	"5":   "grid-cols-5",
+	"6":   "grid-cols-6",
+	"7":   "grid-cols-7",
+	"8":   "grid-cols-8",
+	"9":   "grid-cols-9",
+	"10":  "grid-cols-10",
+	"11":  "grid-cols-11",
+	"12":  "grid-cols-12",
+	"1-2": "grid-cols-1 md:grid-cols-2",
+	"1-3": "grid-cols-1 md:grid-cols-2 xl:grid-cols-3",
+	"1-4": "grid-cols-1 md:grid-cols-2 xl:grid-cols-4",
+}
+
+var gridColSpanClassMap = map[int]string{
+	1:  "col-span-1",
+	2:  "col-span-2",
+	3:  "col-span-3",
+	4:  "col-span-4",
+	5:  "col-span-5",
+	6:  "col-span-6",
+	7:  "col-span-7",
+	8:  "col-span-8",
+	9:  "col-span-9",
+	10: "col-span-10",
+	11: "col-span-11",
+	12: "col-span-12",
+}
+
+var gridColStartClassMap = map[int]string{
+	1:  "col-start-1",
+	2:  "col-start-2",
+	3:  "col-start-3",
+	4:  "col-start-4",
+	5:  "col-start-5",
+	6:  "col-start-6",
+	7:  "col-start-7",
+	8:  "col-start-8",
+	9:  "col-start-9",
+	10: "col-start-10",
+	11: "col-start-11",
+	12: "col-start-12",
+}
+
+var gridColEndClassMap = map[int]string{
+	1:  "col-end-1",
+	2:  "col-end-2",
+	3:  "col-end-3",
+	4:  "col-end-4",
+	5:  "col-end-5",
+	6:  "col-end-6",
+	7:  "col-end-7",
+	8:  "col-end-8",
+	9:  "col-end-9",
+	10: "col-end-10",
+	11: "col-end-11",
+	12: "col-end-12",
+}
+
+var gridOrderClassMap = map[int]string{
+	1:  "order-1",
+	2:  "order-2",
+	3:  "order-3",
+	4:  "order-4",
+	5:  "order-5",
+	6:  "order-6",
+	7:  "order-7",
+	8:  "order-8",
+	9:  "order-9",
+	10: "order-10",
+	11: "order-11",
+	12: "order-12",
+}
+
 func GridClasses(p GridProps) string {
 	return uiutils.Compose(GridVariants, map[string]string{}, gridColsClass(p.Cols, p.Class), p.Class)
 }
@@ -52,37 +129,20 @@ func gridColsClass(cols, class string) string {
 	if strings.Contains(class, "grid-cols-") {
 		return ""
 	}
-	switch strings.TrimSpace(cols) {
-	case "", "1":
-		return "grid-cols-1"
-	case "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12":
-		return "grid-cols-" + strings.TrimSpace(cols)
-	case "1-2":
-		return "grid-cols-1 md:grid-cols-2"
-	case "1-3":
-		return "grid-cols-1 md:grid-cols-2 xl:grid-cols-3"
-	case "1-4":
-		return "grid-cols-1 md:grid-cols-2 xl:grid-cols-4"
-	default:
-		return cols
+	trimmed := strings.TrimSpace(cols)
+	if trimmed == "" {
+		trimmed = "1"
 	}
+	return gridColsClassMap[trimmed]
 }
 
 func gridColClass(span, start, end, order int) string {
-	parts := []string{}
-	if span > 0 {
-		parts = append(parts, "col-span-"+strconv.Itoa(span))
-	}
-	if start > 0 {
-		parts = append(parts, "col-start-"+strconv.Itoa(start))
-	}
-	if end > 0 {
-		parts = append(parts, "col-end-"+strconv.Itoa(end))
-	}
-	if order > 0 {
-		parts = append(parts, "order-"+strconv.Itoa(order))
-	}
-	return uiutils.Cn(parts...)
+	return uiutils.Cn(
+		gridColSpanClassMap[span],
+		gridColStartClassMap[start],
+		gridColEndClassMap[end],
+		gridOrderClassMap[order],
+	)
 }
 
 // Grid renders a display:grid container.

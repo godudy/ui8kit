@@ -1,4 +1,4 @@
-import { forwardRef, type DetailsHTMLAttributes, type HTMLAttributes } from "react";
+import { forwardRef, type DetailsHTMLAttributes, type HTMLAttributes, type Ref } from "react";
 import disclosureRecipe from "./disclosure.variants.json";
 import summaryRecipe from "./summary.variants.json";
 import { composeRecipe } from "../../utils/variants";
@@ -39,7 +39,7 @@ export const Summary = forwardRef<HTMLElement, SummaryProps>(function Summary(
 ) {
   return (
     <summary
-      ref={ref as never}
+      ref={ref as Ref<HTMLElement>}
       className={composeRecipe(summaryRecipe, { variant: variant ?? "", size: size ?? "" }, className)}
       {...rest}
     >

@@ -1,7 +1,6 @@
 import { forwardRef, type HTMLAttributes, type ThHTMLAttributes, type TdHTMLAttributes } from "react";
 import tableRecipe from "./table.variants.json";
 import { composeRecipe } from "../../utils/variants";
-import { mergeAttrs } from "../../utils/attrs";
 
 export type TableProps = HTMLAttributes<HTMLTableElement>;
 export type TableCaptionProps = HTMLAttributes<HTMLTableCaptionElement>;
@@ -134,7 +133,7 @@ export const TableHeadCell = forwardRef<HTMLTableCellElement, TableHeadCellProps
       <th
         ref={ref}
         className={className}
-        {...mergeAttrs(tableCellAttrs(scope, colSpan, rowSpan, headers, abbr, true))}
+        {...tableCellAttrs(scope, colSpan, rowSpan, headers, abbr, true)}
         {...rest}
       >
         {children}
@@ -151,7 +150,7 @@ export const TableCell = forwardRef<HTMLTableCellElement, TableCellProps>(functi
     <td
       ref={ref}
       className={className}
-      {...mergeAttrs(tableCellAttrs(scope, colSpan, rowSpan, headers, abbr, false))}
+      {...tableCellAttrs(scope, colSpan, rowSpan, headers, abbr, false)}
       {...rest}
     >
       {children}

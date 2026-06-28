@@ -1,7 +1,6 @@
-import { forwardRef, type HTMLAttributes } from "react";
+import { forwardRef, type ButtonHTMLAttributes, type HTMLAttributes } from "react";
 import sheetRecipe from "./sheet.variants.json";
 import { cn, composeRecipe } from "../../utils";
-import { mergeAttrs, spreadAttrs } from "../../utils/attrs";
 import { Button } from "../../ui/button/button";
 
 export type SheetProps = HTMLAttributes<HTMLDivElement> & {
@@ -14,7 +13,7 @@ export type SheetProps = HTMLAttributes<HTMLDivElement> & {
   behavior?: string;
 };
 
-export type SheetTriggerProps = HTMLAttributes<HTMLButtonElement> & {
+export type SheetTriggerProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   id?: string;
   for?: string;
   variant?: string;
@@ -35,7 +34,7 @@ export type SheetHeaderProps = HTMLAttributes<HTMLDivElement>;
 export type SheetTitleProps = HTMLAttributes<HTMLHeadingElement>;
 export type SheetDescriptionProps = HTMLAttributes<HTMLParagraphElement>;
 
-export type SheetCloseProps = HTMLAttributes<HTMLButtonElement> & {
+export type SheetCloseProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   for?: string;
   variant?: string;
   size?: string;
@@ -58,9 +57,9 @@ function sheetRootAttrs(
   ariaLabelledBy?: string,
   ariaDescribedBy?: string,
   behavior?: string,
-  rest?: Record<string, string>
-): ReturnType<typeof spreadAttrs> {
-  const attrs = mergeAttrs(rest ?? {});
+  rest?: HTMLAttributes<HTMLDivElement>
+): Record<string, unknown> {
+  const attrs: Record<string, unknown> = { ...(rest ?? {}) };
   if (id?.trim()) attrs.id = id.trim();
   attrs.role = "dialog";
   attrs["aria-modal"] = true;
@@ -72,16 +71,16 @@ function sheetRootAttrs(
     attrs["data-ui8kit"] = "sheet";
     attrs["data-ui8kit-dialog"] = true;
   }
-  return spreadAttrs(attrs);
+  return attrs;
 }
 
 function sheetTriggerAttrs(
   forId?: string,
   open?: boolean,
   behavior?: string,
-  rest?: Record<string, string>
-): ReturnType<typeof spreadAttrs> {
-  const attrs = mergeAttrs(rest ?? {});
+  rest?: ButtonHTMLAttributes<HTMLButtonElement>
+): Record<string, unknown> {
+  const attrs: Record<string, unknown> = { ...(rest ?? {}) };
   if (forId?.trim()) attrs["aria-controls"] = forId.trim();
   attrs["aria-haspopup"] = "dialog";
   attrs["aria-expanded"] = open ?? false;
@@ -89,20 +88,20 @@ function sheetTriggerAttrs(
     attrs["data-ui8kit-dialog-open"] = true;
     attrs["data-ui8kit-dialog-target"] = forId.trim();
   }
-  return spreadAttrs(attrs);
+  return attrs;
 }
 
 function sheetCloseAttrs(
   forId?: string,
   behavior?: string,
-  rest?: Record<string, string>
-): ReturnType<typeof spreadAttrs> {
-  const out = mergeAttrs(rest ?? {});
+  rest?: HTMLAttributes<HTMLElement>
+): Record<string, unknown> {
+  const out: Record<string, unknown> = { ...(rest ?? {}) };
   if (sheetBehavior(behavior) === "ui8kit") {
     out["data-ui8kit-dialog-close"] = true;
     if (forId?.trim()) out["data-ui8kit-dialog-target"] = forId.trim();
   }
-  return spreadAttrs(out);
+  return out;
 }
 
 export const Sheet = forwardRef<HTMLDivElement, SheetProps>(function Sheet(
@@ -140,7 +139,7 @@ export const Sheet = forwardRef<HTMLDivElement, SheetProps>(function Sheet(
         ariaLabelledBy,
         ariaDescribedBy,
         behavior,
-        rest as Record<string, string>
+        rest
       )}
     >
       {children}
@@ -172,7 +171,7 @@ export const SheetTrigger = forwardRef<HTMLButtonElement, SheetTriggerProps>(
         size={size}
         className={className}
         aria-label={ariaLabel}
-        {...sheetTriggerAttrs(forId, open, behavior, { ...rest } as Record<string, string>)}
+        {...sheetTriggerAttrs(forId, open, behavior, rest)}
       >
         {children}
       </Button>
@@ -190,7 +189,7 @@ export const SheetOverlay = forwardRef<HTMLDivElement, SheetOverlayProps>(functi
       ref={ref}
       hidden={isHidden}
       className={cn("fixed inset-0 z-40 bg-background/80", className)}
-      {...sheetCloseAttrs(forId, behavior, rest as Record<string, string>)}
+      {...sheetCloseAttrs(forId, behavior, rest)}
     />
   );
 });
@@ -259,7 +258,7 @@ export const SheetClose = forwardRef<HTMLButtonElement, SheetCloseProps>(functio
       size={size}
       className={className}
       aria-label={ariaLabel}
-      {...sheetCloseAttrs(forId, behavior, { ...rest } as Record<string, string>)}
+      {...sheetCloseAttrs(forId, behavior, rest)}
     >
       {children}
     </Button>

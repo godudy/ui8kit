@@ -1,4 +1,4 @@
-import { forwardRef, type HTMLAttributes } from "react";
+import { forwardRef, type ElementType, type HTMLAttributes, type Ref } from "react";
 import listRecipe from "./list.variants.json";
 import { composeRecipe } from "../../utils/variants";
 import { resolveTag, TagGroup } from "../../utils/tags";
@@ -15,9 +15,9 @@ export const List = forwardRef<HTMLElement, ListProps>(function List(
   { tag, className, children, ...rest },
   ref
 ) {
-  const Tag = listTag(tag) as "ul" | "ol" | "dl" | "menu";
+  const Tag = listTag(tag) as ElementType;
   return (
-    <Tag ref={ref as never} className={composeRecipe(listRecipe, {}, className)} {...rest}>
+    <Tag ref={ref as Ref<HTMLElement>} className={composeRecipe(listRecipe, {}, className)} {...rest}>
       {children}
     </Tag>
   );
@@ -33,12 +33,12 @@ export const ListItem = forwardRef<HTMLElement, ListItemProps>(function ListItem
   ref
 ) {
   const resolved = resolveTag(tag, "li", TagGroup.ListItem);
-  const Tag = resolved as "li" | "dt" | "dd";
+  const Tag = resolved as ElementType;
   const valueAttr =
     value && value > 0 && resolved === "li" ? { value } : {};
   return (
     <Tag
-      ref={ref as never}
+      ref={ref as Ref<HTMLElement>}
       className={composeRecipe(listRecipe, {}, className)}
       {...valueAttr}
       {...rest}

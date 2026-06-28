@@ -1,13 +1,34 @@
-import { forwardRef, type ButtonHTMLAttributes, type AnchorHTMLAttributes } from "react";
+import {
+  forwardRef,
+  type AnchorHTMLAttributes,
+  type ButtonHTMLAttributes,
+  type ReactNode,
+  type Ref,
+} from "react";
 import buttonRecipe from "./button.variants.json";
 import { cn, composeRecipe } from "../../utils";
-import { controlAttrs, defaultButtonType, spreadAttrs } from "../../utils/attrs";
+import { defaultButtonType } from "../../utils/attrs";
 
-export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
-  AnchorHTMLAttributes<HTMLAnchorElement> & {
-    variant?: string;
-    size?: string;
+type ButtonBaseProps = {
+  variant?: string;
+  size?: string;
+  className?: string;
+  children?: ReactNode;
+};
+
+type ButtonAsButtonProps = ButtonBaseProps &
+  Omit<ButtonHTMLAttributes<HTMLButtonElement>, "className" | "type"> & {
+    href?: undefined;
+    type?: "button" | "submit" | "reset";
   };
+
+type ButtonAsAnchorProps = ButtonBaseProps &
+  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "className"> & {
+    href: string;
+    disabled?: boolean;
+  };
+
+export type ButtonProps = ButtonAsButtonProps | ButtonAsAnchorProps;
 
 function buttonClasses(
   variant?: string,
@@ -26,80 +47,53 @@ function buttonClasses(
   );
 }
 
-function buttonSpreadAttrs(
-  id?: string,
-  role?: string,
-  tabIndex?: string,
-  ariaLabel?: string,
-  href?: string,
-  disabled?: boolean,
-  rest?: Record<string, string>
-): ReturnType<typeof spreadAttrs> {
-  const attrs = spreadAttrs(
-    controlAttrs(id, role, tabIndex, ariaLabel, rest as Record<string, string>)
-  );
-  if (href?.trim() && disabled) {
-    attrs["aria-disabled"] = true;
-    attrs.tabIndex = -1;
-    if (!attrs.role) attrs.role = "link";
-  }
-  return attrs;
-}
-
 export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
-  function Button(
-    {
-      variant,
-      size,
-      type,
-      form,
-      disabled,
-      href,
-      id,
-      role,
-      tabIndex,
-      "aria-label": ariaLabel,
-      className,
-      children,
-      ...rest
-    },
-    ref
-  ) {
-    const cls = buttonClasses(variant, size, disabled, className);
-    const spread = buttonSpreadAttrs(
-      id,
-      role,
-      tabIndex !== undefined ? String(tabIndex) : undefined,
-      ariaLabel,
-      href,
-      disabled,
-      rest as Record<string, string>
-    );
+  function Button(props, ref) {
+    if ("href" in props && props.href?.trim()) {
+      const anchorProps = props as ButtonAsAnchorProps;
+      const {
+        href,
+        variant,
+        size,
+        disabled,
+        className,
+        children,
+        rel,
+        tabIndex,
+        role,
+        ...rest
+      } = anchorProps;
 
-    if (href?.trim()) {
+      const cls = buttonClasses(variant, size, disabled, className);
+      const resolvedRel = disabled ? rel || "nofollow noopener noreferrer" : rel;
+
       return (
         <a
-          ref={ref as never}
+          ref={ref as Ref<HTMLAnchorElement>}
           href={href}
-          id={id || undefined}
           className={cls}
-          rel={disabled ? "nofollow noopener noreferrer" : undefined}
-          {...spread}
+          rel={resolvedRel}
+          aria-disabled={disabled || undefined}
+          tabIndex={disabled ? -1 : tabIndex}
+          role={disabled ? role || "link" : role}
+          {...rest}
         >
           {children}
         </a>
       );
     }
 
+    const buttonProps = props as ButtonAsButtonProps;
+    const { variant, size, type, disabled, className, children, ...rest } = buttonProps;
+    const cls = buttonClasses(variant, size, disabled, className);
+
     return (
       <button
-        ref={ref as never}
+        ref={ref as Ref<HTMLButtonElement>}
         type={defaultButtonType(type)}
         className={cls}
         disabled={disabled}
-        id={id || undefined}
-        form={form || undefined}
-        {...spread}
+        {...rest}
       >
         {children}
       </button>

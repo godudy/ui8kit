@@ -1,8 +1,7 @@
-import { forwardRef, type HTMLAttributes } from "react";
+import { forwardRef, type ElementType, type HTMLAttributes, type Ref } from "react";
 import containerRecipe from "./container.variants.json";
 import { composeRecipe } from "../../utils/variants";
-import { LayoutTag } from "../../utils/layout-tag";
-import { TagGroup } from "../../utils/tags";
+import { resolveTag, TagGroup } from "../../utils/tags";
 
 export type ContainerProps = HTMLAttributes<HTMLElement> & {
   tag?: string;
@@ -12,16 +11,14 @@ export const Container = forwardRef<HTMLElement, ContainerProps>(function Contai
   { tag, className, children, ...rest },
   ref
 ) {
+  const Tag = resolveTag(tag, "div", TagGroup.Container) as ElementType;
   return (
-    <LayoutTag
-      ref={ref}
-      tag={tag}
-      fallback="div"
-      group={TagGroup.Container}
+    <Tag
+      ref={ref as Ref<HTMLElement>}
       className={composeRecipe(containerRecipe, {}, className)}
       {...rest}
     >
       {children}
-    </LayoutTag>
+    </Tag>
   );
 });

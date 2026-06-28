@@ -1,6 +1,5 @@
 import { forwardRef, type HTMLAttributes } from "react";
 import { cn } from "../../utils";
-import { breadcrumbItemAttrs, breadcrumbRootAttrs } from "../../utils/attrs";
 
 export type BreadcrumbItem = {
   label: string;
@@ -31,9 +30,14 @@ export const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(function Brea
   { items = [], className, "aria-label": ariaLabel, dataUI8Kit, ...rest },
   ref
 ) {
-  const rootAttrs = breadcrumbRootAttrs(ariaLabel, dataUI8Kit, rest as Record<string, string>);
   return (
-    <nav ref={ref as never} className={cn("text-sm", className?.trim())} {...rootAttrs}>
+    <nav
+      ref={ref}
+      className={cn("text-sm", className?.trim())}
+      aria-label={ariaLabel?.trim() || undefined}
+      data-ui8kit={dataUI8Kit?.trim() || undefined}
+      {...rest}
+    >
       <ol className="flex flex-wrap items-center gap-2">
         {items.map((item, index) => (
           <li key={`${item.label}-${index}`} className="inline-flex items-center">
@@ -41,14 +45,14 @@ export const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(function Brea
               <a
                 href={item.href}
                 className={breadcrumbLinkClasses(item)}
-                {...breadcrumbItemAttrs(item.current ?? false)}
+                aria-current={item.current ? "page" : undefined}
               >
                 {item.label}
               </a>
             ) : (
               <span
                 className={breadcrumbLinkClasses(item)}
-                {...breadcrumbItemAttrs(item.current ?? false)}
+                aria-current={item.current ? "page" : undefined}
               >
                 {item.label}
               </span>

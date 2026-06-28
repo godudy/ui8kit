@@ -1,7 +1,6 @@
 import { forwardRef, type DialogHTMLAttributes } from "react";
 import dialogRecipe from "./dialog.variants.json";
 import { composeRecipe } from "../../utils/variants";
-import { mergeAttrs } from "../../utils/attrs";
 
 export type DialogProps = DialogHTMLAttributes<HTMLDialogElement> & {
   variant?: string;
@@ -28,23 +27,21 @@ export const Dialog = forwardRef<HTMLDialogElement, DialogProps>(function Dialog
   },
   ref
 ) {
-  const attrs = mergeAttrs(rest as Record<string, string>);
-  if (id?.trim()) attrs.id = id.trim();
-  if (dataUI8Kit?.trim()) attrs["data-ui8kit"] = dataUI8Kit.trim();
-  if (ariaLabel?.trim()) attrs["aria-label"] = ariaLabel.trim();
-  if (ariaLabelledBy?.trim()) attrs["aria-labelledby"] = ariaLabelledBy.trim();
-  if (ariaDescribedBy?.trim()) attrs["aria-describedby"] = ariaDescribedBy.trim();
-
   return (
     <dialog
       ref={ref}
+      id={id || undefined}
       open={open}
       className={composeRecipe(
         dialogRecipe,
         { variant: variant ?? "", size: size ?? "" },
         className
       )}
-      {...attrs}
+      data-ui8kit={dataUI8Kit?.trim() || undefined}
+      aria-label={ariaLabel?.trim() || undefined}
+      aria-labelledby={ariaLabelledBy?.trim() || undefined}
+      aria-describedby={ariaDescribedBy?.trim() || undefined}
+      {...rest}
     >
       {children}
     </dialog>

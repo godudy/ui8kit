@@ -1,19 +1,16 @@
 import { forwardRef, type OptionHTMLAttributes, type SelectHTMLAttributes } from "react";
 import selectRecipe from "./select.variants.json";
 import { composeRecipe } from "../../utils/variants";
-import { controlAttrs, spreadAttrs } from "../../utils/attrs";
 
 export type SelectOption = {
   value: string;
   label: string;
 };
 
-export type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
+export type SelectProps = Omit<SelectHTMLAttributes<HTMLSelectElement>, "size"> & {
   variant?: string;
   size?: string;
   options?: SelectOption[];
-  role?: string;
-  tabIndex?: string;
 };
 
 export type SelectOptionProps = OptionHTMLAttributes<HTMLOptionElement> & {
@@ -28,10 +25,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
     size,
     options,
     value,
-    id,
-    role,
-    tabIndex,
-    "aria-label": ariaLabel,
     className,
     children,
     ...rest
@@ -41,14 +34,13 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
   return (
     <select
       ref={ref}
-      id={id || undefined}
       value={value}
       className={composeRecipe(
         selectRecipe,
         { variant: variant ?? "", size: size ?? "" },
         className
       )}
-      {...spreadAttrs(controlAttrs(id, role, tabIndex, ariaLabel, rest as Record<string, string>))}
+      {...rest}
     >
       {options?.map((opt) => (
         <option key={opt.value} value={opt.value}>

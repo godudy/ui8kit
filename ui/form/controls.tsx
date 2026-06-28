@@ -33,7 +33,7 @@ export type ProgressProps = ProgressHTMLAttributes<HTMLProgressElement> & {
 };
 
 export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(function Fieldset(
-  { variant, size, name, form, disabled, className, children, ...rest },
+  { variant, size, className, children, ...rest },
   ref
 ) {
   return (
@@ -44,9 +44,6 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(function 
         { variant: variant ?? "", size: size ?? "" },
         className
       )}
-      name={name || undefined}
-      form={form || undefined}
-      disabled={disabled}
       {...rest}
     >
       {children}
@@ -70,11 +67,11 @@ export const Legend = forwardRef<HTMLLegendElement, LegendProps>(function Legend
 });
 
 export const DataList = forwardRef<HTMLDataListElement, DataListProps>(function DataList(
-  { id, className, children, ...rest },
+  { className, children, ...rest },
   ref
 ) {
   return (
-    <datalist ref={ref} id={id || undefined} className={className} {...rest}>
+    <datalist ref={ref} className={className} {...rest}>
       {children}
     </datalist>
   );
@@ -88,16 +85,13 @@ export const DataOption = forwardRef<HTMLOptionElement, DataOptionProps>(functio
 });
 
 export const Output = forwardRef<HTMLOutputElement, OutputProps>(function Output(
-  { id, className, name, htmlFor, value, children, ...rest },
+  { className, value, children, ...rest },
   ref
 ) {
   return (
     <output
       ref={ref}
-      id={id || undefined}
       className={className}
-      name={name}
-      htmlFor={htmlFor || undefined}
       {...rest}
     >
       {value}
@@ -107,20 +101,13 @@ export const Output = forwardRef<HTMLOutputElement, OutputProps>(function Output
 });
 
 export const Meter = forwardRef<HTMLMeterElement, MeterProps>(function Meter(
-  { variant, size, id, className, value, min, max, low, high, optimum, children, ...rest },
+  { variant, size, className, children, ...rest },
   ref
 ) {
   return (
     <meter
       ref={ref}
-      id={id || undefined}
       className={composeRecipe(meterRecipe, { variant: variant ?? "", size: size ?? "" }, className)}
-      value={value}
-      min={min}
-      max={max}
-      low={low}
-      high={high}
-      optimum={optimum}
       {...rest}
     >
       {children}
@@ -129,20 +116,17 @@ export const Meter = forwardRef<HTMLMeterElement, MeterProps>(function Meter(
 });
 
 export const Progress = forwardRef<HTMLProgressElement, ProgressProps>(function Progress(
-  { variant, size, id, className, value, max, children, ...rest },
+  { variant, size, className, children, ...rest },
   ref
 ) {
   return (
     <progress
       ref={ref}
-      id={id || undefined}
       className={composeRecipe(
         progressRecipe,
         { variant: variant ?? "", size: size ?? "" },
         className
       )}
-      value={value}
-      max={max}
       {...rest}
     >
       {children}

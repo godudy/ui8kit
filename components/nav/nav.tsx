@@ -1,8 +1,13 @@
-import { forwardRef, type HTMLAttributes, type LiHTMLAttributes } from "react";
+import {
+  forwardRef,
+  type AnchorHTMLAttributes,
+  type HTMLAttributes,
+  type LiHTMLAttributes,
+  type Ref,
+} from "react";
 import navLinkRecipe from "./nav-link.variants.json";
 import navListRecipe from "./nav-list.variants.json";
 import { composeRecipe } from "../../utils";
-import { mergeAttrs, spreadAttrs } from "../../utils/attrs";
 import { Link } from "../../ui/link/link";
 
 export type NavProps = HTMLAttributes<HTMLElement> & {
@@ -17,14 +22,12 @@ export type NavListProps = HTMLAttributes<HTMLUListElement> & {
 
 export type NavItemProps = LiHTMLAttributes<HTMLLIElement>;
 
-export type NavLinkProps = HTMLAttributes<HTMLElement> & {
+export type NavLinkProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> & {
   href?: string;
   variant?: string;
   size?: string;
   active?: boolean;
   disabled?: boolean;
-  "aria-current"?: string;
-  "aria-label"?: string;
 };
 
 function navLinkClasses(
@@ -40,32 +43,27 @@ function navLinkClasses(
   return composeRecipe(navLinkRecipe, { variant: v, size: size ?? "" }, state, className);
 }
 
-function navLinkAttrs(
+function navLinkCurrent(
   active?: boolean,
-  disabled?: boolean,
-  ariaCurrent?: string,
-  rest?: Record<string, string>
-): ReturnType<typeof spreadAttrs> {
-  const attrs = mergeAttrs(rest ?? {});
-  let current = (ariaCurrent ?? "").trim();
-  if (active && !current) current = "page";
-  if (current) attrs["aria-current"] = current;
-  if (disabled) {
-    attrs["aria-disabled"] = true;
-    attrs.tabIndex = "-1";
-  }
-  return spreadAttrs(attrs);
+  ariaCurrent?: AnchorHTMLAttributes<HTMLAnchorElement>["aria-current"]
+): AnchorHTMLAttributes<HTMLAnchorElement>["aria-current"] {
+  if (ariaCurrent !== undefined && ariaCurrent !== false) return ariaCurrent;
+  if (active) return "page";
+  return undefined;
 }
 
 export const Nav = forwardRef<HTMLElement, NavProps>(function Nav(
   { className, "aria-label": ariaLabel, dataUI8Kit, children, ...rest },
   ref
 ) {
-  const attrs = mergeAttrs(rest as Record<string, string>);
-  if (ariaLabel?.trim()) attrs["aria-label"] = ariaLabel.trim();
-  if (dataUI8Kit?.trim()) attrs["data-ui8kit"] = dataUI8Kit.trim();
   return (
-    <nav ref={ref as never} className={className} {...attrs}>
+    <nav
+      ref={ref as Ref<HTMLElement>}
+      className={className}
+      aria-label={ariaLabel?.trim() || undefined}
+      data-ui8kit={dataUI8Kit?.trim() || undefined}
+      {...rest}
+    >
       {children}
     </nav>
   );
@@ -110,6 +108,7 @@ export const NavLink = forwardRef<HTMLElement, NavLinkProps>(function NavLink(
     disabled,
     "aria-current": ariaCurrent,
     "aria-label": ariaLabel,
+    tabIndex,
     className,
     children,
     ...rest
@@ -117,11 +116,18 @@ export const NavLink = forwardRef<HTMLElement, NavLinkProps>(function NavLink(
   ref
 ) {
   const cls = navLinkClasses(variant, size, active, disabled, className);
-  const attrs = navLinkAttrs(active, disabled, ariaCurrent, rest as Record<string, string>);
+  const resolvedCurrent = navLinkCurrent(active, ariaCurrent);
 
   if (disabled || !href?.trim()) {
     return (
-      <span ref={ref as never} className={cls} {...attrs}>
+      <span
+        ref={ref as Ref<HTMLElement>}
+        className={cls}
+        aria-current={resolvedCurrent}
+        aria-disabled={disabled || undefined}
+        tabIndex={disabled ? -1 : tabIndex}
+        {...rest}
+      >
         {children}
       </span>
     );
@@ -129,12 +135,15 @@ export const NavLink = forwardRef<HTMLElement, NavLinkProps>(function NavLink(
 
   return (
     <Link
-      ref={ref as never}
+      ref={ref as Ref<HTMLAnchorElement>}
       href={href}
       variant="unstyled"
       className={cls}
       aria-label={ariaLabel}
-      {...attrs}
+      aria-current={resolvedCurrent}
+      aria-disabled={disabled || undefined}
+      tabIndex={disabled ? -1 : tabIndex}
+      {...rest}
     >
       {children}
     </Link>

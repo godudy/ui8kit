@@ -12,6 +12,11 @@
     "isolatedModules": true,
     "esModuleInterop": true
   },
-  "include": ["ui/**/*.tsx", "components/**/*.tsx", "utils/**/*.ts"],
+  "include": [
+    "ui/**/*.tsx",
+    "components/**/*.tsx",
+    "utils/**/*.ts",
+    "examples/react/**/*.tsx"
+  ],
   "exclude": ["node_modules"]
 }

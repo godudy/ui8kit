@@ -6,34 +6,28 @@ export type GridProps = HTMLAttributes<HTMLDivElement> & {
   cols?: string;
 };
 
+const GRID_COLS_CLASS: Record<string, string> = {
+  "1": "grid-cols-1",
+  "2": "grid-cols-2",
+  "3": "grid-cols-3",
+  "4": "grid-cols-4",
+  "5": "grid-cols-5",
+  "6": "grid-cols-6",
+  "7": "grid-cols-7",
+  "8": "grid-cols-8",
+  "9": "grid-cols-9",
+  "10": "grid-cols-10",
+  "11": "grid-cols-11",
+  "12": "grid-cols-12",
+  "1-2": "grid-cols-1 md:grid-cols-2",
+  "1-3": "grid-cols-1 md:grid-cols-2 xl:grid-cols-3",
+  "1-4": "grid-cols-1 md:grid-cols-2 xl:grid-cols-4",
+};
+
 function gridColsClass(cols?: string, className?: string): string {
   if (className?.includes("grid-cols-")) return "";
-  const c = (cols ?? "").trim();
-  switch (c) {
-    case "":
-    case "1":
-      return "grid-cols-1";
-    case "2":
-    case "3":
-    case "4":
-    case "5":
-    case "6":
-    case "7":
-    case "8":
-    case "9":
-    case "10":
-    case "11":
-    case "12":
-      return `grid-cols-${c}`;
-    case "1-2":
-      return "grid-cols-1 md:grid-cols-2";
-    case "1-3":
-      return "grid-cols-1 md:grid-cols-2 xl:grid-cols-3";
-    case "1-4":
-      return "grid-cols-1 md:grid-cols-2 xl:grid-cols-4";
-    default:
-      return c;
-  }
+  const c = (cols ?? "1").trim() || "1";
+  return GRID_COLS_CLASS[c] ?? "";
 }
 
 export const Grid = forwardRef<HTMLDivElement, GridProps>(function Grid(
@@ -58,13 +52,78 @@ export type GridColProps = HTMLAttributes<HTMLDivElement> & {
   order?: number;
 };
 
+const GRID_COL_SPAN_CLASS: Record<number, string> = {
+  1: "col-span-1",
+  2: "col-span-2",
+  3: "col-span-3",
+  4: "col-span-4",
+  5: "col-span-5",
+  6: "col-span-6",
+  7: "col-span-7",
+  8: "col-span-8",
+  9: "col-span-9",
+  10: "col-span-10",
+  11: "col-span-11",
+  12: "col-span-12",
+};
+
+const GRID_COL_START_CLASS: Record<number, string> = {
+  1: "col-start-1",
+  2: "col-start-2",
+  3: "col-start-3",
+  4: "col-start-4",
+  5: "col-start-5",
+  6: "col-start-6",
+  7: "col-start-7",
+  8: "col-start-8",
+  9: "col-start-9",
+  10: "col-start-10",
+  11: "col-start-11",
+  12: "col-start-12",
+};
+
+const GRID_COL_END_CLASS: Record<number, string> = {
+  1: "col-end-1",
+  2: "col-end-2",
+  3: "col-end-3",
+  4: "col-end-4",
+  5: "col-end-5",
+  6: "col-end-6",
+  7: "col-end-7",
+  8: "col-end-8",
+  9: "col-end-9",
+  10: "col-end-10",
+  11: "col-end-11",
+  12: "col-end-12",
+};
+
+const GRID_ORDER_CLASS: Record<number, string> = {
+  1: "order-1",
+  2: "order-2",
+  3: "order-3",
+  4: "order-4",
+  5: "order-5",
+  6: "order-6",
+  7: "order-7",
+  8: "order-8",
+  9: "order-9",
+  10: "order-10",
+  11: "order-11",
+  12: "order-12",
+};
+
+function gridToken(map: Record<number, string>, value?: number): string {
+  if (!value || value <= 0) return "";
+  return map[value] ?? "";
+}
+
 function gridColClass(span?: number, start?: number, end?: number, order?: number): string {
-  const parts: string[] = [];
-  if (span && span > 0) parts.push(`col-span-${span}`);
-  if (start && start > 0) parts.push(`col-start-${start}`);
-  if (end && end > 0) parts.push(`col-end-${end}`);
-  if (order && order > 0) parts.push(`order-${order}`);
-  return cn(...parts);
+  return cn(
+    gridToken(GRID_COL_SPAN_CLASS, span),
+    gridToken(GRID_COL_START_CLASS, start),
+    gridToken(GRID_COL_END_CLASS, end),
+    gridToken(GRID_ORDER_CLASS, order)
+  );
 }
 
 export const GridCol = forwardRef<HTMLDivElement, GridColProps>(function GridCol(

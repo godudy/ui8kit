@@ -1,9 +1,8 @@
-import { forwardRef, type ElementType, type HTMLAttributes } from "react";
+import { forwardRef, type ElementType, type HTMLAttributes, type Ref } from "react";
 import cardRecipe from "./card.variants.json";
 import { cn, composeRecipe } from "../../utils";
 import { titleTag } from "../../utils/attrs";
-import { LayoutTag } from "../../utils/layout-tag";
-import { TagGroup } from "../../utils/tags";
+import { resolveTag, TagGroup } from "../../utils/tags";
 
 export type CardProps = HTMLAttributes<HTMLElement> & {
   variant?: string;
@@ -14,7 +13,7 @@ export type CardHeaderProps = HTMLAttributes<HTMLDivElement>;
 export type CardContentProps = HTMLAttributes<HTMLDivElement>;
 export type CardFooterProps = HTMLAttributes<HTMLDivElement>;
 
-export type CardTitleProps = HTMLAttributes<HTMLElement> & {
+export type CardTitleProps = HTMLAttributes<HTMLHeadingElement> & {
   order?: number;
 };
 
@@ -24,21 +23,20 @@ export const Card = forwardRef<HTMLElement, CardProps>(function Card(
   { variant, tag, className, children, ...rest },
   ref
 ) {
+  const Tag = resolveTag(tag, "div", TagGroup.Layout) as ElementType;
   return (
-    <LayoutTag
-      ref={ref}
-      tag={tag}
-      fallback="div"
-      group={TagGroup.Layout}
+    <Tag
+      ref={ref as Ref<HTMLElement>}
       className={composeRecipe(cardRecipe, { variant: variant ?? "" }, className)}
       {...rest}
     >
       {children}
-    </LayoutTag>
+    </Tag>
   );
 });
 
-export const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(function CardHeader(
+export const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
+  function CardHeader(
   { className, children, ...rest },
   ref
 ) {
@@ -49,13 +47,17 @@ export const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(function C
   );
 });
 
-export const CardTitle = forwardRef<HTMLElement, CardTitleProps>(function CardTitle(
+export const CardTitle = forwardRef<HTMLHeadingElement, CardTitleProps>(function CardTitle(
   { order, className, children, ...rest },
   ref
 ) {
   const Tag = titleTag(order) as ElementType;
   return (
-    <Tag ref={ref as never} className={cn("text-sm font-semibold", className)} {...rest}>
+    <Tag
+      ref={ref as Ref<HTMLHeadingElement>}
+      className={cn("text-sm font-semibold", className)}
+      {...rest}
+    >
       {children}
     </Tag>
   );

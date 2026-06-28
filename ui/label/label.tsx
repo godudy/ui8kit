@@ -12,7 +12,7 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>(function Label(
     <label
       ref={ref}
       className={composeRecipe(labelRecipe, {}, className)}
-      htmlFor={htmlFor || undefined}
+      htmlFor={htmlFor}
       {...rest}
     >
       {children}

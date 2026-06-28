@@ -1,7 +1,6 @@
 import { forwardRef, type AnchorHTMLAttributes } from "react";
 import linkRecipe from "./link.variants.json";
 import { composeRecipe } from "../../utils/variants";
-import { controlAttrs, spreadAttrs } from "../../utils/attrs";
 
 export type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
   variant?: string;
@@ -34,9 +33,6 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
     disabled,
     "aria-current": ariaCurrent,
     "aria-label": ariaLabel,
-    id,
-    role,
-    tabIndex,
     className,
     children,
     ...rest
@@ -50,22 +46,6 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
     state,
     className
   );
-  const attrs = spreadAttrs(
-    controlAttrs(
-      id,
-      role,
-      tabIndex !== undefined ? String(tabIndex) : undefined,
-      ariaLabel,
-      rest as Record<string, string>
-    )
-  );
-  if (ariaCurrent !== undefined && ariaCurrent !== false) {
-    attrs["aria-current"] = ariaCurrent;
-  }
-  if (disabled) {
-    attrs["aria-disabled"] = true;
-    attrs.tabIndex = -1;
-  }
   const resolvedTarget = linkTarget(target, external);
   const resolvedRel = linkRel(rel, external, resolvedTarget);
 
@@ -73,12 +53,15 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
     <a
       ref={ref}
       href={href}
-      id={id || undefined}
       className={cls}
       target={resolvedTarget}
       rel={resolvedRel}
       download={download || undefined}
-      {...attrs}
+      {...rest}
+      aria-label={ariaLabel}
+      aria-current={ariaCurrent}
+      aria-disabled={disabled || undefined}
+      tabIndex={disabled ? -1 : rest.tabIndex}
     >
       {children}
     </a>

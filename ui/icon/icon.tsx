@@ -1,9 +1,8 @@
-import { forwardRef, type SVGProps } from "react";
+import { forwardRef, type HTMLAttributes, type Ref, type SVGProps } from "react";
 import iconRecipe from "./icon.variants.json";
 import { cn, composeRecipe } from "../../utils";
-import { mergeAttrs, spreadAttrs } from "../../utils/attrs";
 
-export type IconProps = {
+export type IconProps = HTMLAttributes<HTMLElement> & {
   name?: string;
   type?: string;
   baseClass?: string;
@@ -13,7 +12,6 @@ export type IconProps = {
   title?: string;
   decorative?: boolean;
   className?: string;
-  children?: React.ReactNode;
   "aria-label"?: string;
 };
 
@@ -40,16 +38,16 @@ function iconAttrs(
   decorative?: boolean,
   title?: string,
   ariaLabel?: string,
-  rest?: Record<string, string>
-): ReturnType<typeof spreadAttrs> {
-  const attrs = mergeAttrs(rest ?? {});
+  rest?: HTMLAttributes<HTMLElement>
+): HTMLAttributes<HTMLElement> {
+  const attrs: HTMLAttributes<HTMLElement> = { ...(rest ?? {}) };
   if (iconIsDecorative(decorative, title, ariaLabel)) {
-    attrs["aria-hidden"] = "true";
-    return spreadAttrs(attrs);
+    attrs["aria-hidden"] = true;
+    return attrs;
   }
   attrs.role = "img";
   if (ariaLabel?.trim()) attrs["aria-label"] = ariaLabel.trim();
-  return spreadAttrs(attrs);
+  return attrs;
 }
 
 function iconClasses(
@@ -86,13 +84,13 @@ export const Icon = forwardRef<HTMLElement | SVGSVGElement, IconProps>(function 
   ref
 ) {
   const cls = iconClasses(type, size, name, baseClass, prefix, className);
-  const attrs = iconAttrs(decorative, title, ariaLabel, rest as Record<string, string>);
+  const attrs = iconAttrs(decorative, title, ariaLabel, rest);
   const resolved = iconType(type);
 
   if (resolved === "svg") {
     return (
       <svg
-        ref={ref as never}
+        ref={ref as Ref<SVGSVGElement>}
         className={cls}
         {...(attrs as SVGProps<SVGSVGElement>)}
       >
@@ -105,11 +103,11 @@ export const Icon = forwardRef<HTMLElement | SVGSVGElement, IconProps>(function 
 
   if (resolved === "text") {
     return (
-      <span ref={ref as never} className={cls} {...attrs}>
+      <span ref={ref as Ref<HTMLElement>} className={cls} {...attrs}>
         {children}
       </span>
     );
   }
 
-  return <span ref={ref as never} className={cls} {...attrs} />;
+  return <span ref={ref as Ref<HTMLElement>} className={cls} {...attrs} />;
 });

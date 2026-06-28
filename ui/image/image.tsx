@@ -1,7 +1,11 @@
-import { forwardRef, type HTMLAttributes, type ImgHTMLAttributes, type SourceHTMLAttributes } from "react";
+import {
+  forwardRef,
+  type HTMLAttributes,
+  type ImgHTMLAttributes,
+  type SourceHTMLAttributes,
+} from "react";
 import imageRecipe from "./image.variants.json";
 import { composeRecipe } from "../../utils/variants";
-import { mergeAttrs } from "../../utils/attrs";
 
 export type ImageProps = ImgHTMLAttributes<HTMLImageElement> & {
   variant?: string;
@@ -13,7 +17,7 @@ export type ImageProps = ImgHTMLAttributes<HTMLImageElement> & {
   decorative?: boolean;
 };
 
-export type PictureProps = HTMLAttributes<HTMLElement>;
+export type PictureProps = HTMLAttributes<HTMLPictureElement>;
 export type SourceProps = SourceHTMLAttributes<HTMLSourceElement>;
 
 function imageAlt(alt?: string, decorative?: boolean): string {
@@ -52,13 +56,10 @@ export const Image = forwardRef<HTMLImageElement, ImageProps>(function Image(
   },
   ref
 ) {
-  const attrs = mergeAttrs(rest as Record<string, string>);
-  if (id?.trim()) attrs.id = id.trim();
-  if (decorative) attrs["aria-hidden"] = "true";
-
   return (
     <img
       ref={ref}
+      id={id?.trim() || undefined}
       src={src}
       srcSet={srcSet || undefined}
       sizes={sizes || undefined}
@@ -79,17 +80,18 @@ export const Image = forwardRef<HTMLImageElement, ImageProps>(function Image(
         },
         className
       )}
-      {...attrs}
+      aria-hidden={decorative ? true : rest["aria-hidden"]}
+      {...rest}
     />
   );
 });
 
-export const Picture = forwardRef<HTMLElement, PictureProps>(function Picture(
+export const Picture = forwardRef<HTMLPictureElement, PictureProps>(function Picture(
   { className, children, ...rest },
   ref
 ) {
   return (
-    <picture ref={ref as never} className={className} {...rest}>
+    <picture ref={ref} className={className} {...rest}>
       {children}
     </picture>
   );

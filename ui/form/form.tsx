@@ -11,17 +11,11 @@ export type FormDescriptionProps = HTMLAttributes<HTMLParagraphElement>;
 export type FormMessageProps = HTMLAttributes<HTMLParagraphElement>;
 
 export const Form = forwardRef<HTMLFormElement, FormProps>(function Form(
-  { id, className, noValidate, children, ...rest },
+  { className, children, ...rest },
   ref
 ) {
   return (
-    <form
-      ref={ref}
-      id={id || undefined}
-      className={composeRecipe(formRecipe, {}, className)}
-      noValidate={noValidate}
-      {...rest}
-    >
+    <form ref={ref} className={composeRecipe(formRecipe, {}, className)} {...rest}>
       {children}
     </form>
   );
