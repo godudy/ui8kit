@@ -1,5 +1,5 @@
 {
-  "$schema": "../../.project/schemas/variants.schema.json",
+  "$schema": "../../schemas/variants.schema.json",
   "base": "inline-flex items-center gap-1 underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
   "byKey": {
     "size": {

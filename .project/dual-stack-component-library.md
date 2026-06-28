@@ -187,7 +187,7 @@ Single recipe consumed by Go (`uiutils.Variants`) and React (`class-variance-aut
 
 ```json
 {
-  "$schema": "../../.project/schemas/variants.schema.json",
+  "$schema": "../../schemas/variants.schema.json",
   "id": "ui.dialog",
   "base": "m-auto rounded-lg border border-border bg-background text-foreground shadow-lg backdrop:bg-background/80",
   "keys": ["variant", "size"],
@@ -243,7 +243,7 @@ Stack-neutral props and sample content for docs, tests, and LLM.
 
 ```json
 {
-  "$schema": "../../.project/schemas/data.schema.json",
+  "$schema": "../../schemas/data.schema.json",
   "id": "ui.dialog",
   "showcase": {
     "variant.default": {

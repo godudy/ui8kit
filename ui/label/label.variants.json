@@ -1,5 +1,5 @@
 {
-  "$schema": "../../.project/schemas/variants.schema.json",
+  "$schema": "../../schemas/variants.schema.json",
   "base": "text-sm font-medium leading-none",
   "byKey": {},
   "defaults": {},

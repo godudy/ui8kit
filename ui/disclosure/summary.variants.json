@@ -1,5 +1,5 @@
 {
-  "$schema": "../../.project/schemas/variants.schema.json",
+  "$schema": "../../schemas/variants.schema.json",
   "base": "flex cursor-pointer list-none items-center justify-between gap-2 [\u0026::-webkit-details-marker]:hidden",
   "byKey": {
     "size": {

@@ -1,5 +1,5 @@
 {
-  "$schema": "../../.project/schemas/variants.schema.json",
+  "$schema": "../../schemas/variants.schema.json",
   "base": "w-full rounded-md border px-3 py-2 text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
   "byKey": {
     "size": {

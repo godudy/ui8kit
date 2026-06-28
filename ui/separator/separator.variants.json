@@ -1,5 +1,5 @@
 {
-  "$schema": "../../.project/schemas/variants.schema.json",
+  "$schema": "../../schemas/variants.schema.json",
   "base": "shrink-0 border-0 bg-border",
   "byKey": {
     "orientation": {
