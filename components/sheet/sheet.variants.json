@@ -1,0 +1,33 @@
+{
+  "$schema": "../../schemas/variant.schema.json",
+  "id": "components.sheet",
+  "base": "fixed z-50 border-border bg-background text-foreground shadow-lg transition-transform",
+  "keys": ["side", "size", "variant"],
+  "defaults": {
+    "side": "right",
+    "size": "default",
+    "variant": "default"
+  },
+  "byKey": {
+    "side": {
+      "left": "inset-y-0 left-0 border-r",
+      "right": "inset-y-0 right-0 border-l",
+      "top": "inset-x-0 top-0 border-b",
+      "bottom": "inset-x-0 bottom-0 border-t"
+    },
+    "size": {
+      "sm": "w-64 max-w-full",
+      "default": "w-80 max-w-full",
+      "md": "w-80 max-w-full",
+      "lg": "w-96 max-w-full",
+      "xl": "w-[28rem] max-w-full",
+      "full": "h-full w-full max-w-none"
+    },
+    "variant": {
+      "default": "",
+      "card": "bg-card text-card-foreground",
+      "ghost": "border-transparent shadow-none",
+      "unstyled": ""
+    }
+  }
+}

@@ -71,7 +71,7 @@
           },
           {
             "Name": "components.card",
-            "Description": "Surface recipe from utils.CardVariants.",
+            "Description": "Surface recipe from components/card/card.variants.json.",
             "Status": "composite"
           },
           {

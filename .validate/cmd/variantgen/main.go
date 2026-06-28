@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 )
 
@@ -23,7 +24,7 @@ func main() {
 		os.Exit(1)
 	}
 	if len(dirs) == 0 {
-		fmt.Println("variantgen: no *.variants.json found under ui/")
+		fmt.Println("variantgen: no *.variants.json found under ui/ or components/")
 		return
 	}
 	var stale []string
@@ -87,24 +88,26 @@ func findRepoRoot() (string, error) {
 }
 
 func discoverVariantDirs(repoRoot string) ([]string, error) {
-	root := filepath.Join(repoRoot, "ui")
 	var dirs []string
-	err := filepath.WalkDir(root, func(path string, d os.DirEntry, err error) error {
-		if err != nil {
-			return err
-		}
-		if d.IsDir() {
+	for _, rootName := range []string{"ui", "components"} {
+		root := filepath.Join(repoRoot, rootName)
+		err := filepath.WalkDir(root, func(path string, d os.DirEntry, err error) error {
+			if err != nil {
+				return err
+			}
+			if d.IsDir() {
+				return nil
+			}
+			if !strings.HasSuffix(path, ".variants.json") {
+				return nil
+			}
+			dir := filepath.Dir(path)
+			dirs = append(dirs, dir)
 			return nil
+		})
+		if err != nil && !os.IsNotExist(err) {
+			return nil, err
 		}
-		if !strings.HasSuffix(path, ".variants.json") {
-			return nil
-		}
-		dir := filepath.Dir(path)
-		dirs = append(dirs, dir)
-		return nil
-	})
-	if err != nil && !os.IsNotExist(err) {
-		return nil, err
 	}
 	// unique dirs
 	seen := map[string]bool{}
@@ -115,6 +118,7 @@ func discoverVariantDirs(repoRoot string) ([]string, error) {
 			out = append(out, d)
 		}
 	}
+	sort.Strings(out)
 	return out, nil
 }
 

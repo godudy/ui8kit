@@ -23,31 +23,6 @@ import (
 	"github.com/fastygo/templ/utils"
 )
 
-var IconBadgeVariants = uiutils.Variants{
-	Base: "inline-flex shrink-0 items-center justify-center rounded-md font-semibold",
-	Keys: []string{"variant", "size"},
-	Defaults: map[string]string{
-		"variant": "default",
-		"size":    "default",
-	},
-	ByKey: map[string]map[string]string{
-		"variant": {
-			"default":     "bg-muted text-muted-foreground",
-			"accent":      "bg-accent text-accent-foreground",
-			"secondary":   "bg-secondary text-secondary-foreground",
-			"outline":     "border border-border text-foreground",
-			"destructive": "bg-destructive text-destructive-foreground",
-			"unstyled":    "",
-		},
-		"size": {
-			"xs":      "h-6 w-6 text-xs",
-			"sm":      "h-8 w-8 text-xs",
-			"default": "h-10 w-10 text-sm",
-			"lg":      "h-12 w-12 text-base",
-		},
-	},
-}
-
 // IconBadgeProps configures an icon surface.
 type IconBadgeProps struct {
 	Variant   string
@@ -64,7 +39,7 @@ type IconBadgeProps struct {
 }
 
 func IconBadgeClasses(p IconBadgeProps) string {
-	return uiutils.Compose(IconBadgeVariants, map[string]string{
+	return uiutils.Compose(IconbadgeVariants, map[string]string{
 		"variant": p.Variant,
 		"size":    p.Size,
 	}, p.Class)
@@ -148,7 +123,7 @@ func IconBadge(p IconBadgeProps) templ.Component {
 			var templ_7745c5c3_Var4 string
 			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(iconBadgeText(p))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/iconbadge/iconbadge.templ`, Line: 84, Col: 21}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/iconbadge/iconbadge.templ`, Line: 59, Col: 21}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 			if templ_7745c5c3_Err != nil {

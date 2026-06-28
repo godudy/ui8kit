@@ -2,10 +2,14 @@
 /* Repo root is four levels up from examples/web/static/css/ */
 @source "../../../../ui/**/*.templ";
 @source "../../../../ui/**/*_templ.go";
+@source "../../../../ui/**/*.tsx";
 @source "../../../../ui/**/*.variants.json";
 @source "../../../../components/**/*.templ";
 @source "../../../../components/**/*_templ.go";
+@source "../../../../components/**/*.tsx";
+@source "../../../../components/**/*.variants.json";
 @source "../../../../utils/**/*.go";
+@source "../../../../utils/**/*.ts";
 /* Examples catalog blocks live under examples/ui/blocks/ */
 @source "../../../ui/blocks/**/*.templ";
 @source "../../../ui/blocks/**/*_templ.go";

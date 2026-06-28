@@ -24,7 +24,9 @@ type AlertProps struct {
 }
 
 func AlertClasses(p AlertProps) string {
-	return uiutils.AlertClasses(p.Variant, strings.TrimSpace(p.Class))
+	return uiutils.Compose(AlertVariants, map[string]string{
+		"variant": strings.TrimSpace(p.Variant),
+	}, strings.TrimSpace(p.Class))
 }
 
 func alertAttrs(p AlertProps) templ.Attributes {

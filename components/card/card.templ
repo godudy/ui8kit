@@ -57,7 +57,9 @@ type CardFooterProps struct {
 }
 
 func CardClasses(p CardProps) string {
-	return uiutils.CardClasses(p.Variant, strings.TrimSpace(p.Class))
+	return uiutils.Compose(CardVariants, map[string]string{
+		"variant": strings.TrimSpace(p.Variant),
+	}, strings.TrimSpace(p.Class))
 }
 
 // Card renders the bordered surface wrapper.

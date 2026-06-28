@@ -86,7 +86,7 @@ func loadRecipeKeys(repoRoot string) (map[string][]string, error) {
 	}
 	src := string(data)
 
-	recipes := []string{"InputChrome", "InputSize", "ControlChrome", "ControlSize", "CardVariants", "AlertVariants"}
+	recipes := []string{"InputChrome", "InputSize", "ControlChrome", "ControlSize"}
 	for _, varName := range recipes {
 		sourceID := "utils.recipes." + varName
 		for _, fieldKey := range []string{"variant", "size"} {
@@ -124,10 +124,6 @@ func loadRecipeKeys(repoRoot string) (map[string][]string, error) {
 	addTemplRecipe("ui/form/controls.templ", "ui.form.LegendVariants", "variant", "size")
 	addTemplRecipe("ui/form/controls.templ", "ui.form.MeterVariants", "variant", "size")
 	addTemplRecipe("ui/form/controls.templ", "ui.form.ProgressVariants", "variant", "size")
-	addTemplRecipe("components/sheet/sheet.templ", "components.sheet.SheetVariants", "variant", "side", "size")
-	addTemplRecipe("components/nav/nav.templ", "components.nav.NavListVariants", "orientation", "gap")
-	addTemplRecipe("components/nav/nav.templ", "components.nav.NavLinkVariants", "variant", "size")
-	addTemplRecipe("components/iconbadge/iconbadge.templ", "components.iconbadge.IconBadgeVariants", "variant", "size")
 
 	out["utils.helpers.TitleTag"] = []string{"1", "2", "3", "4", "5", "6"}
 	return out, nil

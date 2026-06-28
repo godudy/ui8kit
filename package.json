@@ -6,9 +6,13 @@
     "generate": "go run ./.validate/cmd/variantgen && go run ./.validate/cmd/blockgen && go tool templ generate ./...",
     "lint:ui8px": "ui8px lint ui components utils examples examples/web/static/css/input.css",
     "validate:aria": "ui8px validate aria examples --manifest examples/web/static/js/manifest.json",
-    "verify": "bash .validate/scripts/validate-spec.sh --with-tests && bun run lint:ui8px && bun run validate:aria && go test ./..."
+    "verify": "bash .validate/scripts/validate-spec.sh --with-tests && bun run typecheck:react && bun run lint:ui8px && bun run validate:aria && go test ./...",
+    "typecheck:react": "tsc -p tsconfig.react.json"
   },
   "devDependencies": {
+    "@types/react": "^19.1.8",
+    "react": "^19.1.0",
+    "typescript": "^5.8.3",
     "ui8px": "0.2.4"
   }
 }

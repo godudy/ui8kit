@@ -25,50 +25,6 @@ import (
 	"github.com/fastygo/templ/utils"
 )
 
-var NavListVariants = uiutils.Variants{
-	Base: "flex",
-	Keys: []string{"orientation", "gap"},
-	Defaults: map[string]string{
-		"orientation": "vertical",
-		"gap":         "default",
-	},
-	ByKey: map[string]map[string]string{
-		"orientation": {
-			"vertical":   "flex-col",
-			"horizontal": "flex-row flex-wrap items-center",
-		},
-		"gap": {
-			"none":    "gap-0",
-			"sm":      "gap-1",
-			"default": "gap-2",
-			"lg":      "gap-3",
-		},
-	},
-}
-
-var NavLinkVariants = uiutils.Variants{
-	Base: "inline-flex min-w-0 items-center gap-2 rounded-md text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-	Keys: []string{"variant", "size"},
-	Defaults: map[string]string{
-		"variant": "default",
-		"size":    "default",
-	},
-	ByKey: map[string]map[string]string{
-		"variant": {
-			"default":  "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
-			"active":   "bg-accent text-accent-foreground",
-			"ghost":    "text-foreground hover:bg-accent hover:text-accent-foreground",
-			"muted":    "text-muted-foreground hover:text-foreground",
-			"unstyled": "",
-		},
-		"size": {
-			"sm":      "px-2 py-1 text-xs",
-			"default": "px-3 py-2 text-sm",
-			"lg":      "px-4 py-2 text-base",
-		},
-	},
-}
-
 // NavProps configures the nav landmark.
 type NavProps struct {
 	Class      string

@@ -32,7 +32,7 @@ api:
     role: appearance
     type: string
     enum: [default, raised, kpi, muted, ghost, compact, flat, accent]
-    allow-list-source: utils.recipes.CardVariants
+    allow-list-source: card.variants.json#variant
     default: default
   Tag:
     role: root-tag

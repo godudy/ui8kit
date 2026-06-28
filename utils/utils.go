@@ -230,52 +230,6 @@ func ControlClasses(variant, size string, extra ...string) string {
 	return Cn(append([]string{chrome, sz}, extra...)...)
 }
 
-// CardVariants is the card surface recipe.
-var CardVariants = Variants{
-	Base:     "rounded-md border border-border bg-card text-card-foreground shadow-sm",
-	Keys:     []string{"variant"},
-	Defaults: map[string]string{"variant": ""},
-	ByKey: map[string]map[string]string{
-		"variant": {
-			"":        "",
-			"default": "",
-			"raised":  "",
-			"kpi":     "bg-card/50",
-			"muted":   "bg-muted/40",
-			"ghost":   "border-dashed bg-background shadow-none",
-			"compact": "p-4",
-			"flat":    "shadow-none",
-			"accent":  "border-transparent bg-accent/30",
-		},
-	},
-}
-
-// CardClasses merges card variant presets.
-func CardClasses(variant, extra string) string {
-	return Compose(CardVariants, map[string]string{"variant": strings.TrimSpace(variant)}, extra)
-}
-
-// AlertVariants is the alert surface recipe.
-var AlertVariants = Variants{
-	Base:     "rounded-lg border px-4 py-3 shadow-sm outline-none ring-offset-background gap-6",
-	Keys:     []string{"variant"},
-	Defaults: map[string]string{"variant": ""},
-	ByKey: map[string]map[string]string{
-		"variant": {
-			"":            "bg-card text-card-foreground",
-			"default":     "bg-card text-card-foreground",
-			"destructive": "border-destructive bg-destructive/10 text-destructive",
-			"success":     "border-primary bg-primary/10 text-primary",
-			"warning":     "border-border bg-accent text-accent-foreground",
-		},
-	},
-}
-
-// AlertClasses merges alert variant presets.
-func AlertClasses(variant, extra string) string {
-	return Compose(AlertVariants, map[string]string{"variant": strings.TrimSpace(variant)}, extra)
-}
-
 // AlertAttrs returns static alert semantics.
 func AlertAttrs() templ.Attributes {
 	return MergeAttrs(

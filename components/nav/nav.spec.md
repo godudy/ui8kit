@@ -19,13 +19,13 @@ api:
     role: direction
     type: string
     enum: [vertical, horizontal]
-    allow-list-source: components.nav.NavListVariants
+    allow-list-source: nav-list.variants.json#orientation
     default: vertical
   LinkVariant:
     role: appearance
     type: string
     enum: [default, active, ghost, muted, unstyled]
-    allow-list-source: components.nav.NavLinkVariants.variant
+    allow-list-source: nav-link.variants.json#variant
     default: default
   Size:
     role: density
