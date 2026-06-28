@@ -6,7 +6,8 @@
       "files": [
         "ui/**",
         "components/**",
-        "utils/**"
+        "utils/*.go",
+        "utils/**/*.go"
       ],
       "spacing": "control"
     },
@@ -16,13 +17,6 @@
         "examples/**"
       ],
       "spacing": "layout"
-    },
-    {
-      "name": "fonts",
-      "files": [
-        "examples/web/static/css/tokens.css"
-      ],
-      "spacing": "control"
     }
   ]
 }

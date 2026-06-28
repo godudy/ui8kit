@@ -265,7 +265,7 @@ func GallerySection() templ.Component {
 					}
 					return nil
 				})
-				templ_7745c5c3_Err = ui.Stack(ui.StackProps{Class: "gap-1"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var10), templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = ui.Stack(ui.StackProps{Class: "gap-2"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var10), templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -780,7 +780,7 @@ func DashboardSidebar(props PageProps) templ.Component {
 				}
 				return nil
 			})
-			templ_7745c5c3_Err = ui.Box(ui.BoxProps{Class: "flex h-15 items-center gap-3 border-b border-border px-4"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var31), templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.Box(ui.BoxProps{Class: "flex h-16 items-center gap-4 border-b border-border px-4"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var31), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -1144,7 +1144,7 @@ func DashboardHeader(props PageProps) templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = ui.Box(ui.BoxProps{Tag: "header", Class: "grid h-15 shrink-0 grid-cols-[1fr_auto_1fr] items-center gap-3 border-b border-border bg-card/80 px-4 backdrop-blur-sm"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var37), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ui.Box(ui.BoxProps{Tag: "header", Class: "grid h-16 shrink-0 grid-cols-[1fr_auto_1fr] items-center gap-4 border-b border-border bg-card/80 px-4 backdrop-blur-sm"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var37), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -1394,7 +1394,7 @@ func DashboardHero(props HeroProps) templ.Component {
 							}
 							return nil
 						})
-						templ_7745c5c3_Err = ui.Stack(ui.StackProps{Class: "max-w-2xl gap-3"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var66), templ_7745c5c3_Buffer)
+						templ_7745c5c3_Err = ui.Stack(ui.StackProps{Class: "max-w-2xl gap-4"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var66), templ_7745c5c3_Buffer)
 						if templ_7745c5c3_Err != nil {
 							return templ_7745c5c3_Err
 						}
@@ -1653,7 +1653,7 @@ func StatusCards(items []StatusCard) templ.Component {
 									}
 									return nil
 								})
-								templ_7745c5c3_Err = ui.Group(ui.GroupProps{Class: "items-start justify-between gap-3"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var77), templ_7745c5c3_Buffer)
+								templ_7745c5c3_Err = ui.Group(ui.GroupProps{Class: "items-start justify-between gap-4"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var77), templ_7745c5c3_Buffer)
 								if templ_7745c5c3_Err != nil {
 									return templ_7745c5c3_Err
 								}
@@ -1695,7 +1695,7 @@ func StatusCards(items []StatusCard) templ.Component {
 									}
 									return nil
 								})
-								templ_7745c5c3_Err = ui.Stack(ui.StackProps{Class: "gap-1"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var80), templ_7745c5c3_Buffer)
+								templ_7745c5c3_Err = ui.Stack(ui.StackProps{Class: "gap-2"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var80), templ_7745c5c3_Buffer)
 								if templ_7745c5c3_Err != nil {
 									return templ_7745c5c3_Err
 								}
@@ -1707,7 +1707,7 @@ func StatusCards(items []StatusCard) templ.Component {
 							}
 							return nil
 						})
-						templ_7745c5c3_Err = cmp.CardContent(cmp.CardContentProps{Class: "p-5"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var75), templ_7745c5c3_Buffer)
+						templ_7745c5c3_Err = cmp.CardContent(cmp.CardContentProps{Class: "p-6"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var75), templ_7745c5c3_Buffer)
 						if templ_7745c5c3_Err != nil {
 							return templ_7745c5c3_Err
 						}
@@ -1864,7 +1864,7 @@ func LayerTable(items []LayerItem) templ.Component {
 								}
 								return nil
 							})
-							templ_7745c5c3_Err = ui.Stack(ui.StackProps{Class: "gap-0.5 min-w-0"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var87), templ_7745c5c3_Buffer)
+							templ_7745c5c3_Err = ui.Stack(ui.StackProps{Class: "gap-2 min-w-0"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var87), templ_7745c5c3_Buffer)
 							if templ_7745c5c3_Err != nil {
 								return templ_7745c5c3_Err
 							}
@@ -1878,7 +1878,7 @@ func LayerTable(items []LayerItem) templ.Component {
 							}
 							return nil
 						})
-						templ_7745c5c3_Err = ui.Group(ui.GroupProps{Class: "items-center justify-between gap-4 rounded-md border border-border bg-muted/20 px-4 py-3"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var86), templ_7745c5c3_Buffer)
+						templ_7745c5c3_Err = ui.Group(ui.GroupProps{Class: "items-center justify-between gap-4 rounded-md border border-border bg-muted/20 px-4 py-4"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var86), templ_7745c5c3_Buffer)
 						if templ_7745c5c3_Err != nil {
 							return templ_7745c5c3_Err
 						}
@@ -2088,7 +2088,7 @@ func DashboardNotice(props NoticeProps) templ.Component {
 				}
 				return nil
 			})
-			templ_7745c5c3_Err = ui.Stack(ui.StackProps{Class: "gap-1"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var96), templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.Stack(ui.StackProps{Class: "gap-2"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var96), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

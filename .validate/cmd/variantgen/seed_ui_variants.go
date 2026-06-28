@@ -57,8 +57,8 @@ func main() {
 			},
 			"size": {
 				"default": "h-10 px-4 py-2",
-				"sm":      "h-9 rounded-md px-3",
-				"lg":      "h-11 rounded-md px-8",
+				"sm":      "h-8 rounded-md px-3",
+				"lg":      "h-12 rounded-md px-8",
 				"icon":    "h-10 w-10",
 			},
 		},
@@ -81,12 +81,12 @@ func main() {
 
 	write("ui/badge/badge.variants.json", recipe{
 		ID:       "ui.badge",
-		Base:     "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+		Base:     "inline-flex items-center rounded-full border px-2 py-1 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
 		Keys:     []string{"variant", "size"},
 		Defaults: map[string]string{"variant": "default", "size": "default"},
 		ByKey: map[string]map[string]string{
 			"variant": {"default": "border-transparent bg-primary text-primary-foreground hover:bg-primary/80", "secondary": "border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80", "destructive": "border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80", "outline": "text-foreground"},
-			"size":    {"default": "px-2.5 py-0.5 text-xs", "sm": "px-2 py-0.5 text-xs", "lg": "px-3 py-1 text-sm"},
+			"size":    {"default": "px-2 py-1 text-xs", "sm": "px-2 py-1 text-xs", "lg": "px-3 py-1 text-sm"},
 		},
 	})
 
@@ -203,7 +203,7 @@ func main() {
 		Defaults: map[string]string{"variant": "default", "size": "default"},
 		ByKey: map[string]map[string]string{
 			"variant": {"unstyled": "", "": "border-border bg-background", "default": "border-border bg-background", "outline": "border-border bg-background", "ghost": "border-transparent bg-muted"},
-			"size":    {"": "h-10 px-3 py-2 text-sm", "default": "h-10 px-3 py-2 text-sm", "xs": "h-8 px-2 text-xs", "sm": "h-9 px-3 text-sm", "lg": "h-11 px-4 text-base"},
+			"size":    {"": "h-10 px-3 py-2 text-sm", "default": "h-10 px-3 py-2 text-sm", "xs": "h-8 px-2 text-xs", "sm": "h-8 px-3 text-sm", "lg": "h-12 px-4 text-base"},
 		},
 	}
 	write("ui/input/input.variants.json", inputRecipe)
@@ -217,7 +217,7 @@ func main() {
 		Defaults: map[string]string{"variant": "default", "size": "default"},
 		ByKey: map[string]map[string]string{
 			"variant": {"unstyled": "", "": "border-primary", "default": "border-primary", "outline": "border-primary", "ghost": "border-primary bg-muted/30"},
-			"size":    {"": "h-4 w-4", "default": "h-4 w-4", "xs": "h-3 w-3", "sm": "h-3.5 w-3.5", "lg": "h-5 w-5"},
+			"size":    {"": "h-4 w-4", "default": "h-4 w-4", "xs": "h-3 w-3", "sm": "h-4 w-4", "lg": "h-5 w-5"},
 		},
 	}
 	write("ui/checkbox/checkbox.variants.json", recipe{ID: "ui.checkbox", Base: controlRecipe.Base, Keys: controlRecipe.Keys, Defaults: controlRecipe.Defaults, ByKey: controlRecipe.ByKey})

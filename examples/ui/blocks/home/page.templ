@@ -95,7 +95,7 @@ templ CatalogHeaderNav(items []NavItem, class string) {
 
 templ CatalogSidebar(props PageProps) {
 	@ui.Box(ui.BoxProps{Tag: "aside", Class: "hidden w-64 shrink-0 border-r border-border bg-card md:flex md:flex-col"}) {
-		@ui.Box(ui.BoxProps{Class: "flex h-15 items-center gap-3 border-b border-border px-4"}) {
+		@ui.Box(ui.BoxProps{Class: "flex h-16 items-center gap-4 border-b border-border px-4"}) {
 			@cmp.IconBadge(cmp.IconBadgeProps{Text: "BY", Size: "sm", Variant: "accent"})
 			@ui.Stack(ui.StackProps{Class: "gap-0"}) {
 				@ui.Text(ui.TextProps{Tag: "span", Class: "text-sm font-semibold tracking-tight"}, props.Brand)
@@ -114,7 +114,7 @@ templ CatalogSidebar(props PageProps) {
 }
 
 templ CatalogHeader(props PageProps) {
-	@ui.Box(ui.BoxProps{Tag: "header", Class: "grid h-15 shrink-0 grid-cols-[1fr_auto_1fr] items-center gap-3 border-b border-border bg-card/80 px-4 backdrop-blur-sm"}) {
+	@ui.Box(ui.BoxProps{Tag: "header", Class: "grid h-16 shrink-0 grid-cols-[1fr_auto_1fr] items-center gap-4 border-b border-border bg-card/80 px-4 backdrop-blur-sm"}) {
 		@ui.Group(ui.GroupProps{Class: "col-start-1 items-center gap-2 justify-self-start"}) {
 			@cmp.SheetTrigger(cmp.SheetTriggerProps{
 				ID:        homeSheetTriggerID,
@@ -157,7 +157,7 @@ templ HeroChat(props HeroProps) {
 		@ui.Grid(ui.GridProps{Class: "gap-0 md:grid-cols-2"}) {
 			@ui.GridCol(ui.GridColProps{}) {
 				@ui.Box(ui.BoxProps{Class: "border-b border-border p-6 md:border-b-0 md:border-r"}) {
-					@ui.Stack(ui.StackProps{Class: "gap-5"}) {
+					@ui.Stack(ui.StackProps{Class: "gap-6"}) {
 						@ui.Stack(ui.StackProps{Class: "gap-2"}) {
 							@ui.Badge(ui.BadgeProps{Variant: "outline"}) { AI workspace }
 							@ui.Title(ui.TitleProps{Order: 1, Class: "text-3xl font-bold tracking-tight md:text-4xl"}, props.Title)
@@ -170,7 +170,7 @@ templ HeroChat(props HeroProps) {
 								Rows:        4,
 								Class:       "min-h-[7rem] border-0 bg-transparent shadow-none focus-visible:ring-0",
 							})
-							@ui.Group(ui.GroupProps{Class: "mt-3 items-center justify-between gap-2"}) {
+							@ui.Group(ui.GroupProps{Class: "mt-4 items-center justify-between gap-2"}) {
 								@ui.Group(ui.GroupProps{Class: "items-center gap-2"}) {
 									@ui.Button(ui.ButtonProps{Variant: "outline", Size: "sm", AriaLabel: props.AttachmentLabel}) { + }
 									@ui.Button(ui.ButtonProps{Variant: "outline", Size: "sm", AriaLabel: props.AssistantLabel}) { AI }
@@ -198,10 +198,10 @@ templ HeroChat(props HeroProps) {
 			}
 			@ui.GridCol(ui.GridColProps{}) {
 				@ui.Box(ui.BoxProps{Class: "bg-muted/30 p-6"}) {
-					@ui.Stack(ui.StackProps{Class: "gap-3"}) {
+					@ui.Stack(ui.StackProps{Class: "gap-4"}) {
 						@ui.Text(ui.TextProps{Class: "text-xs font-semibold uppercase tracking-wide text-muted-foreground"}, "Workflow")
 						for index, step := range props.Workflow {
-							@ui.Group(ui.GroupProps{Class: "items-center gap-3 rounded-md border border-border bg-card px-4 py-3 shadow-sm"}) {
+							@ui.Group(ui.GroupProps{Class: "items-center gap-4 rounded-md border border-border bg-card px-4 py-4 shadow-sm"}) {
 								@cmp.IconBadge(cmp.IconBadgeProps{Text: workflowStepLabel(index), Size: "sm", Variant: workflowStepVariant(index)})
 								@ui.Text(ui.TextProps{Class: "text-sm font-medium"}, step.Label)
 							}
@@ -218,10 +218,10 @@ templ ToolCards(items []ToolCard) {
 		for _, item := range items {
 			@ui.GridCol(ui.GridColProps{}) {
 				@cmp.Card(cmp.CardProps{Tag: "article", Variant: "default", Class: "h-full hover:bg-muted/20"}) {
-					@cmp.CardContent(cmp.CardContentProps{Class: "p-5"}) {
+					@cmp.CardContent(cmp.CardContentProps{Class: "p-6"}) {
 						@ui.Group(ui.GroupProps{Class: "items-start gap-4"}) {
 							@cmp.IconBadge(cmp.IconBadgeProps{Text: toolIconLetter(item.Icon), Size: "default", Variant: BlockVariant("toolTone", item.Tone)})
-							@ui.Stack(ui.StackProps{Class: "gap-1"}) {
+							@ui.Stack(ui.StackProps{Class: "gap-2"}) {
 								@ui.Text(ui.TextProps{Class: "text-sm font-semibold"}, item.Title)
 								@ui.Text(ui.TextProps{Class: "text-xs leading-relaxed text-muted-foreground"}, item.Description)
 							}
@@ -234,9 +234,9 @@ templ ToolCards(items []ToolCard) {
 }
 
 templ ShowcaseGrid(props ShowcaseProps) {
-	@ui.Stack(ui.StackProps{Class: "gap-5"}) {
+	@ui.Stack(ui.StackProps{Class: "gap-6"}) {
 		@ui.Group(ui.GroupProps{Class: "items-end justify-between gap-4"}) {
-			@ui.Stack(ui.StackProps{Class: "gap-1"}) {
+			@ui.Stack(ui.StackProps{Class: "gap-2"}) {
 				@ui.Title(ui.TitleProps{Order: 2, Class: "text-xl font-semibold tracking-tight"}, props.Title)
 				@ui.Text(ui.TextProps{Class: "text-sm text-muted-foreground"}, props.Description)
 			}
@@ -256,13 +256,13 @@ templ ShowcaseGrid(props ShowcaseProps) {
 
 templ ShowcaseCardView(item ShowcaseItem) {
 	@cmp.Card(cmp.CardProps{Tag: "article", Variant: "raised", Class: "h-full"}) {
-		@cmp.CardContent(cmp.CardContentProps{Class: "p-5"}) {
+		@cmp.CardContent(cmp.CardContentProps{Class: "p-6"}) {
 			@ui.Stack(ui.StackProps{Class: "gap-4"}) {
 				@ui.Box(ui.BoxProps{Class: "flex h-28 items-center justify-center rounded-md border border-dashed border-border bg-muted/50"}) {
 					@cmp.IconBadge(cmp.IconBadgeProps{Text: showcaseIconLetter(item.Name), Size: "lg", Variant: "accent"})
 				}
-				@ui.Group(ui.GroupProps{Class: "items-start justify-between gap-3"}) {
-					@ui.Stack(ui.StackProps{Class: "gap-1"}) {
+				@ui.Group(ui.GroupProps{Class: "items-start justify-between gap-4"}) {
+					@ui.Stack(ui.StackProps{Class: "gap-2"}) {
 						@ui.Title(ui.TitleProps{Order: 3, Class: "text-base font-semibold"}, item.Name)
 						@ui.Text(ui.TextProps{Class: "text-sm leading-relaxed text-muted-foreground"}, item.Description)
 					}
@@ -270,7 +270,7 @@ templ ShowcaseCardView(item ShowcaseItem) {
 						{ item.Category }
 					}
 				}
-				@ui.Stack(ui.StackProps{Class: "gap-1.5"}) {
+				@ui.Stack(ui.StackProps{Class: "gap-2"}) {
 					for _, capability := range item.Capabilities {
 						@ui.Group(ui.GroupProps{Class: "items-center gap-2"}) {
 							@cmp.IconBadge(cmp.IconBadgeProps{Text: "✓", Size: "xs", Variant: "secondary"})
@@ -294,7 +294,7 @@ templ ShowcaseCardView(item ShowcaseItem) {
 templ PrototypeNotice(props NoticeProps) {
 	@cmp.Alert(cmp.AlertProps{Variant: "default", Role: "status", AriaLive: "polite"}) {
 		@ui.Group(ui.GroupProps{Class: "items-center justify-between gap-4 flex-wrap"}) {
-			@ui.Stack(ui.StackProps{Class: "gap-1"}) {
+			@ui.Stack(ui.StackProps{Class: "gap-2"}) {
 				@ui.Text(ui.TextProps{Class: "text-sm font-semibold"}, props.Title)
 				@ui.Text(ui.TextProps{Class: "text-sm text-muted-foreground"}, props.Description)
 			}

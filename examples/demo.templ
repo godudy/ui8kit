@@ -22,7 +22,7 @@ templ ComponentExamples() {
 		@ui.Grid(ui.GridProps{Class: "gap-0 lg:grid-cols-2"}) {
 			@ui.GridCol(ui.GridColProps{}) {
 				@GalleryPanel("Actions", "Button variants from button.variants.json") {
-					@ui.Stack(ui.StackProps{Class: "gap-3"}) {
+					@ui.Stack(ui.StackProps{Class: "gap-4"}) {
 						@ui.Group(ui.GroupProps{Class: "flex flex-wrap gap-2"}) {
 							@ui.Button(ui.ButtonProps{Variant: "default"}) { Primary }
 							@ui.Button(ui.ButtonProps{Variant: "secondary"}) { Secondary }
@@ -76,7 +76,7 @@ templ ComponentExamples() {
 			}
 			@ui.GridCol(ui.GridColProps{}) {
 				@GalleryPanel("Surfaces", "Nav, icons, sheet, cards") {
-					@ui.Stack(ui.StackProps{Class: "gap-3"}) {
+					@ui.Stack(ui.StackProps{Class: "gap-4"}) {
 						@cmp.Nav(cmp.NavProps{AriaLabel: "Gallery navigation"}) {
 							@cmp.NavList(cmp.NavListProps{Gap: "sm", Orientation: "horizontal"}) {
 								@cmp.NavItem(cmp.NavItemProps{}) {
@@ -140,7 +140,7 @@ templ ComponentExamples() {
 }
 
 templ GalleryPanel(title, description string) {
-	@ui.Box(ui.BoxProps{Class: "border-b border-border p-5 last:border-b-0 lg:border-b-0 lg:border-r lg:last:border-r-0"}) {
+	@ui.Box(ui.BoxProps{Class: "border-b border-border p-6 last:border-b-0 lg:border-b-0 lg:border-r lg:last:border-r-0"}) {
 		@ui.Stack(ui.StackProps{Class: "gap-4"}) {
 			@ui.Stack(ui.StackProps{Class: "gap-1"}) {
 				@ui.Text(ui.TextProps{Class: "text-sm font-semibold"}, title)

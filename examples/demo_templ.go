@@ -396,7 +396,7 @@ func ComponentExamples() templ.Component {
 							}
 							return nil
 						})
-						templ_7745c5c3_Err = ui.Stack(ui.StackProps{Class: "gap-3"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var6), templ_7745c5c3_Buffer)
+						templ_7745c5c3_Err = ui.Stack(ui.StackProps{Class: "gap-4"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var6), templ_7745c5c3_Buffer)
 						if templ_7745c5c3_Err != nil {
 							return templ_7745c5c3_Err
 						}
@@ -1084,7 +1084,7 @@ func ComponentExamples() templ.Component {
 							}
 							return nil
 						})
-						templ_7745c5c3_Err = ui.Stack(ui.StackProps{Class: "gap-3"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var34), templ_7745c5c3_Buffer)
+						templ_7745c5c3_Err = ui.Stack(ui.StackProps{Class: "gap-4"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var34), templ_7745c5c3_Buffer)
 						if templ_7745c5c3_Err != nil {
 							return templ_7745c5c3_Err
 						}
@@ -1211,7 +1211,7 @@ func GalleryPanel(title, description string) templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = ui.Box(ui.BoxProps{Class: "border-b border-border p-5 last:border-b-0 lg:border-b-0 lg:border-r lg:last:border-r-0"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var48), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ui.Box(ui.BoxProps{Class: "border-b border-border p-6 last:border-b-0 lg:border-b-0 lg:border-r lg:last:border-r-0"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var48), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
