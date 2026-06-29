@@ -128,6 +128,7 @@ export const Sheet = forwardRef<HTMLDivElement, SheetProps>(function Sheet(
     side,
     size,
     open,
+    onOpenChange,
     "aria-label": ariaLabel,
     "aria-labelledby": ariaLabelledBy,
     "aria-describedby": ariaDescribedBy,
@@ -139,6 +140,7 @@ export const Sheet = forwardRef<HTMLDivElement, SheetProps>(function Sheet(
   },
   ref
 ) {
+  void onOpenChange;
   const isHidden = hidden ?? !open;
   return (
     <div
@@ -240,7 +242,7 @@ export const SheetContent = forwardRef<HTMLDivElement, SheetContentProps>(functi
     <div
       ref={ref}
       id={id || undefined}
-      className={cn("flex h-full flex-col overflow-y-auto p-4", className)}
+      className={cn("relative z-50 flex h-full flex-col overflow-y-auto p-4", className)}
       {...rest}
     >
       {children}
