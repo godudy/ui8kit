@@ -6,7 +6,7 @@ package: github.com/fastygo/templ/components/card
 facade: github.com/fastygo/templ/components
 parts:
   - templ: Card
-    props: [Class, Variant, Tag, Attrs]
+    props: [Class, Variant, Attrs]
   - templ: CardHeader
     props: [Class, Attrs]
     slot: header
@@ -34,19 +34,19 @@ api:
     enum: [default, raised, kpi, muted, ghost, compact, flat, accent]
     allow-list-source: card.variants.json#variant
     default: default
-  Tag:
-    role: root-tag
-    type: string
-    enum: [div, section, article, aside, header, footer, main, nav, figure, search, hgroup]
-    allow-list-source: utils.tags.TagGroupLayout
-    default: div
+  AsChild:
+    role: composition
+    type: bool
+    default: false
   Attrs:
     role: html-attrs
     type: templ.Attributes
   Order:
     role: heading-level
     type: int
+    enum: [1, 2, 3, 4, 5, 6]
     applies-to: CardTitle
+    default: 2
 showcase:
   - id: variant.default
     props: { Variant: default }
@@ -69,11 +69,13 @@ showcase:
   - id: title.order-h3
     props: { Variant: default }
     parts: [Card, CardHeader, CardTitle]
+  - id: composition.aschild-section
+    props: { AsChild: true, Variant: default }
 semantics:
-  root: div | section | article | aside | header | footer | main | nav | figure | search | hgroup
+  root: div
   role: none
   behavior: static
-  title-root: h1 | h2 | h3
+  title-root: h1 | h2 | h3 | h4 | h5 | h6
   description-root: p
 
 ---
@@ -81,6 +83,7 @@ semantics:
 
 Card groups related content in one bordered surface.
 Card uses header, content, and footer slots.
+For semantic root elements (section, article), use `asChild` (React) or `CardClasses` (Go).
 
 ## Use Cases
 
@@ -90,8 +93,8 @@ Card uses header, content, and footer slots.
 
 ## Semantics
 
-- Card root element is resolved from Tag
-- CardTitle maps Order to h1, h2, or h3
+- Card root is a `<div>` by default; for semantic roots use `asChild` (React) or wrap manually with `CardClasses` (Go)
+- CardTitle maps Order to h1-h6 (default h2)
 - CardDescription renders a p element
 - Card parts compose in document order
 
@@ -245,5 +248,44 @@ templ Example() {
 			@cmp.CardTitle(cmp.CardTitleProps{Order: 3}, "Nested section title")
 		}
 	}
+}
+```
+
+## Example composition.aschild-section
+
+React only — `asChild` merges Card classes onto the child section:
+
+```tsx
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@registry/components";
+
+export function Example() {
+  return (
+    <Card asChild variant="default">
+      <section>
+        <CardHeader>
+          <CardTitle order={2}>Section card</CardTitle>
+          <CardDescription>Semantic root via asChild.</CardDescription>
+        </CardHeader>
+        <CardContent>Body</CardContent>
+      </section>
+    </Card>
+  );
+}
+```
+
+Go equivalent — use `CardClasses` on a manual wrapper:
+
+```templ
+import cmp "github.com/fastygo/templ/components"
+
+templ Example() {
+	<section class={ cmp.CardClasses(cmp.CardProps{Variant: "default"}) }>
+		@cmp.CardHeader(cmp.CardHeaderProps{}) {
+			@cmp.CardTitle(cmp.CardTitleProps{Order: 2}, "Section card")
+		}
+		@cmp.CardContent(cmp.CardContentProps{}) {
+			Body
+		}
+	</section>
 }
 ```

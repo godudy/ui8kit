@@ -1,9 +1,13 @@
-import { forwardRef, type HTMLAttributes } from "react";
+import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
 import gridRecipe from "./grid.variants.json";
-import { composeRecipe, cn } from "../../utils";
+import { composeRecipe, cn, type VariantRecipe } from "../../utils";
+import { Slot } from "../slot/slot";
 
-export type GridProps = HTMLAttributes<HTMLDivElement> & {
+export type GridProps = Omit<HTMLAttributes<HTMLDivElement>, "className"> & {
   cols?: string;
+  className?: string;
+  children?: ReactNode;
+  asChild?: boolean;
 };
 
 const GRID_COLS_CLASS: Record<string, string> = {
@@ -31,19 +35,28 @@ function gridColsClass(cols?: string, className?: string): string {
 }
 
 export const Grid = forwardRef<HTMLDivElement, GridProps>(function Grid(
-  { cols, className, children, ...rest },
+  { cols, className, children, asChild, ...rest },
   ref
 ) {
+  const cls = composeRecipe(gridRecipe as VariantRecipe, {}, gridColsClass(cols, className), className);
+  if (asChild) {
+    return (
+      <Slot ref={ref} className={cls} {...rest}>
+        {children}
+      </Slot>
+    );
+  }
   return (
     <div
       ref={ref}
-      className={composeRecipe(gridRecipe, {}, gridColsClass(cols, className), className)}
+      className={cls}
       {...rest}
     >
       {children}
     </div>
   );
 });
+Grid.displayName = "Grid";
 
 export type GridColProps = HTMLAttributes<HTMLDivElement> & {
   span?: number;
@@ -136,3 +149,4 @@ export const GridCol = forwardRef<HTMLDivElement, GridColProps>(function GridCol
     </div>
   );
 });
+GridCol.displayName = "GridCol";

@@ -1,51 +1,81 @@
-import { forwardRef, type ElementType, type HTMLAttributes, type Ref } from "react";
+import { forwardRef, type ElementType, type HTMLAttributes, type ReactNode } from "react";
 import cardRecipe from "./card.variants.json";
-import { cn, composeRecipe } from "../../utils";
+import { cn, composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
 import { titleTag } from "../../utils/attrs";
-import { resolveTag, TagGroup } from "../../utils/tags";
+import { Slot } from "../../ui/slot/slot";
 
-export type CardProps = HTMLAttributes<HTMLElement> & {
-  variant?: string;
-  tag?: string;
+type CardVariant = RecipeKey<typeof cardRecipe, "variant">;
+
+export type CardProps = Omit<HTMLAttributes<HTMLDivElement>, "className"> & {
+  variant?: CardVariant;
+  className?: string;
+  children?: ReactNode;
+  asChild?: boolean;
 };
 
-export type CardHeaderProps = HTMLAttributes<HTMLDivElement>;
-export type CardContentProps = HTMLAttributes<HTMLDivElement>;
-export type CardFooterProps = HTMLAttributes<HTMLDivElement>;
-
-export type CardTitleProps = HTMLAttributes<HTMLHeadingElement> & {
-  order?: number;
+export type CardHeaderProps = Omit<HTMLAttributes<HTMLDivElement>, "className"> & {
+  className?: string;
+  children?: ReactNode;
 };
 
-export type CardDescriptionProps = HTMLAttributes<HTMLParagraphElement>;
+export type CardContentProps = Omit<HTMLAttributes<HTMLDivElement>, "className"> & {
+  className?: string;
+  children?: ReactNode;
+};
 
-export const Card = forwardRef<HTMLElement, CardProps>(function Card(
-  { variant, tag, className, children, ...rest },
+export type CardFooterProps = Omit<HTMLAttributes<HTMLDivElement>, "className"> & {
+  className?: string;
+  children?: ReactNode;
+};
+
+export type CardTitleProps = Omit<HTMLAttributes<HTMLHeadingElement>, "className"> & {
+  order?: 1 | 2 | 3 | 4 | 5 | 6;
+  className?: string;
+  children?: ReactNode;
+};
+
+export type CardDescriptionProps = Omit<HTMLAttributes<HTMLParagraphElement>, "className"> & {
+  className?: string;
+  children?: ReactNode;
+};
+
+const cardHeaderBase = "border-b border-border px-4 py-2";
+const cardTitleBase = "text-sm font-semibold";
+const cardDescriptionBase = "text-sm text-muted-foreground";
+const cardContentBase = "p-4";
+const cardFooterBase = "border-t border-border px-4 py-3";
+
+export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
+  { variant, className, children, asChild, ...rest },
   ref
 ) {
-  const Tag = resolveTag(tag, "div", TagGroup.Layout) as ElementType;
+  const cls = composeRecipe(cardRecipe as VariantRecipe, { variant: variant ?? "" }, className);
+  if (asChild) {
+    return (
+      <Slot ref={ref} className={cls} {...rest}>
+        {children}
+      </Slot>
+    );
+  }
   return (
-    <Tag
-      ref={ref as Ref<HTMLElement>}
-      className={composeRecipe(cardRecipe, { variant: variant ?? "" }, className)}
-      {...rest}
-    >
-      {children}
-    </Tag>
-  );
-});
-
-export const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(
-  function CardHeader(
-  { className, children, ...rest },
-  ref
-) {
-  return (
-    <div ref={ref} className={cn("border-b border-border px-4 py-2", className)} {...rest}>
+    <div ref={ref} className={cls} {...rest}>
       {children}
     </div>
   );
 });
+Card.displayName = "Card";
+
+export const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(function CardHeader(
+  { className, children, ...rest },
+  ref
+) {
+  return (
+    <div ref={ref} className={cn(cardHeaderBase, className)} {...rest}>
+      {children}
+    </div>
+  );
+});
+CardHeader.displayName = "CardHeader";
 
 export const CardTitle = forwardRef<HTMLHeadingElement, CardTitleProps>(function CardTitle(
   { order, className, children, ...rest },
@@ -53,44 +83,52 @@ export const CardTitle = forwardRef<HTMLHeadingElement, CardTitleProps>(function
 ) {
   const Tag = titleTag(order) as ElementType;
   return (
-    <Tag
-      ref={ref as Ref<HTMLHeadingElement>}
-      className={cn("text-sm font-semibold", className)}
-      {...rest}
-    >
+    <Tag ref={ref} className={cn(cardTitleBase, className)} {...rest}>
       {children}
     </Tag>
   );
 });
+CardTitle.displayName = "CardTitle";
 
 export const CardDescription = forwardRef<HTMLParagraphElement, CardDescriptionProps>(
   function CardDescription({ className, children, ...rest }, ref) {
     return (
-      <p ref={ref} className={cn("text-sm text-muted-foreground", className)} {...rest}>
+      <p ref={ref} className={cn(cardDescriptionBase, className)} {...rest}>
         {children}
       </p>
     );
   }
 );
+CardDescription.displayName = "CardDescription";
 
 export const CardContent = forwardRef<HTMLDivElement, CardContentProps>(function CardContent(
   { className, children, ...rest },
   ref
 ) {
   return (
-    <div ref={ref} className={cn("p-4", className)} {...rest}>
+    <div ref={ref} className={cn(cardContentBase, className)} {...rest}>
       {children}
     </div>
   );
 });
+CardContent.displayName = "CardContent";
 
 export const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(function CardFooter(
   { className, children, ...rest },
   ref
 ) {
   return (
-    <div ref={ref} className={cn("border-t border-border px-4 py-3", className)} {...rest}>
+    <div ref={ref} className={cn(cardFooterBase, className)} {...rest}>
       {children}
     </div>
   );
+});
+CardFooter.displayName = "CardFooter";
+
+Object.assign(Card, {
+  Header: CardHeader,
+  Title: CardTitle,
+  Description: CardDescription,
+  Content: CardContent,
+  Footer: CardFooter,
 });

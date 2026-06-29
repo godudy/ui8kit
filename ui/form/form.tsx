@@ -3,7 +3,7 @@ import formRecipe from "./form.variants.json";
 import formItemRecipe from "./form-item.variants.json";
 import formDescriptionRecipe from "./form-description.variants.json";
 import formMessageRecipe from "./form-message.variants.json";
-import { composeRecipe } from "../../utils/variants";
+import { composeRecipe, type VariantRecipe } from "../../utils";
 
 export type FormProps = FormHTMLAttributes<HTMLFormElement>;
 export type FormItemProps = HTMLAttributes<HTMLDivElement>;
@@ -15,32 +15,35 @@ export const Form = forwardRef<HTMLFormElement, FormProps>(function Form(
   ref
 ) {
   return (
-    <form ref={ref} className={composeRecipe(formRecipe, {}, className)} {...rest}>
+    <form ref={ref} className={composeRecipe(formRecipe as VariantRecipe, {}, className)} {...rest}>
       {children}
     </form>
   );
 });
+Form.displayName = "Form";
 
 export const FormItem = forwardRef<HTMLDivElement, FormItemProps>(function FormItem(
   { className, children, ...rest },
   ref
 ) {
   return (
-    <div ref={ref} className={composeRecipe(formItemRecipe, {}, className)} {...rest}>
+    <div ref={ref} className={composeRecipe(formItemRecipe as VariantRecipe, {}, className)} {...rest}>
       {children}
     </div>
   );
 });
+FormItem.displayName = "FormItem";
 
 export const FormDescription = forwardRef<HTMLParagraphElement, FormDescriptionProps>(
   function FormDescription({ className, children, ...rest }, ref) {
     return (
-      <p ref={ref} className={composeRecipe(formDescriptionRecipe, {}, className)} {...rest}>
+      <p ref={ref} className={composeRecipe(formDescriptionRecipe as VariantRecipe, {}, className)} {...rest}>
         {children}
       </p>
     );
   }
 );
+FormDescription.displayName = "FormDescription";
 
 export const FormMessage = forwardRef<HTMLParagraphElement, FormMessageProps>(
   function FormMessage({ className, children, ...rest }, ref) {
@@ -48,7 +51,7 @@ export const FormMessage = forwardRef<HTMLParagraphElement, FormMessageProps>(
       <p
         ref={ref}
         role="alert"
-        className={composeRecipe(formMessageRecipe, {}, className)}
+        className={composeRecipe(formMessageRecipe as VariantRecipe, {}, className)}
         {...rest}
       >
         {children}
@@ -56,3 +59,4 @@ export const FormMessage = forwardRef<HTMLParagraphElement, FormMessageProps>(
     );
   }
 );
+FormMessage.displayName = "FormMessage";

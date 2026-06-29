@@ -1,10 +1,14 @@
 import { forwardRef, type InputHTMLAttributes } from "react";
 import switchRecipe from "./switch.variants.json";
-import { composeRecipe } from "../../utils/variants";
+import { composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
 
-export type SwitchProps = Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "type"> & {
-  variant?: string;
-  size?: string;
+type SwitchVariant = RecipeKey<typeof switchRecipe, "variant">;
+type SwitchSize = RecipeKey<typeof switchRecipe, "size">;
+
+export type SwitchProps = Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "type" | "className"> & {
+  variant?: SwitchVariant;
+  size?: SwitchSize;
+  className?: string;
 };
 
 export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
@@ -21,7 +25,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
       role={role ?? "switch"}
       aria-checked={Boolean(isChecked)}
       className={composeRecipe(
-        switchRecipe,
+        switchRecipe as VariantRecipe,
         { variant: variant ?? "", size: size ?? "" },
         className
       )}
@@ -29,3 +33,4 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
     />
   );
 });
+Switch.displayName = "Switch";

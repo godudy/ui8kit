@@ -63,3 +63,4 @@ export const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(function Brea
     </nav>
   );
 });
+Breadcrumb.displayName = "Breadcrumb";

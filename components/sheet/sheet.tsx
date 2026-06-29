@@ -1,13 +1,18 @@
 import { forwardRef, type ButtonHTMLAttributes, type HTMLAttributes } from "react";
 import sheetRecipe from "./sheet.variants.json";
-import { cn, composeRecipe } from "../../utils";
-import { Button } from "../../ui/button/button";
+import { cn, composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
+import { Button, type ButtonVariant, type ButtonSize } from "../../ui/button/button";
 
-export type SheetProps = HTMLAttributes<HTMLDivElement> & {
-  variant?: string;
-  side?: string;
-  size?: string;
+type SheetVariant = RecipeKey<typeof sheetRecipe, "variant">;
+type SheetSide = RecipeKey<typeof sheetRecipe, "side">;
+type SheetSize = RecipeKey<typeof sheetRecipe, "size">;
+
+export type SheetProps = Omit<HTMLAttributes<HTMLDivElement>, "className"> & {
+  variant?: SheetVariant;
+  side?: SheetSide;
+  size?: SheetSize;
   open?: boolean;
+  className?: string;
   "aria-labelledby"?: string;
   "aria-describedby"?: string;
   behavior?: string;
@@ -16,8 +21,8 @@ export type SheetProps = HTMLAttributes<HTMLDivElement> & {
 export type SheetTriggerProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   id?: string;
   for?: string;
-  variant?: string;
-  size?: string;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
   open?: boolean;
   behavior?: string;
   "aria-label"?: string;
@@ -36,8 +41,8 @@ export type SheetDescriptionProps = HTMLAttributes<HTMLParagraphElement>;
 
 export type SheetCloseProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   for?: string;
-  variant?: string;
-  size?: string;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
   behavior?: string;
   "aria-label"?: string;
 };
@@ -128,7 +133,7 @@ export const Sheet = forwardRef<HTMLDivElement, SheetProps>(function Sheet(
       ref={ref}
       hidden={isHidden}
       className={composeRecipe(
-        sheetRecipe,
+        sheetRecipe as VariantRecipe,
         { side: side ?? "", size: size ?? "", variant: variant ?? "" },
         className
       )}
@@ -146,6 +151,7 @@ export const Sheet = forwardRef<HTMLDivElement, SheetProps>(function Sheet(
     </div>
   );
 });
+Sheet.displayName = "Sheet";
 
 export const SheetTrigger = forwardRef<HTMLButtonElement, SheetTriggerProps>(
   function SheetTrigger(
@@ -178,6 +184,7 @@ export const SheetTrigger = forwardRef<HTMLButtonElement, SheetTriggerProps>(
     );
   }
 );
+SheetTrigger.displayName = "SheetTrigger";
 
 export const SheetOverlay = forwardRef<HTMLDivElement, SheetOverlayProps>(function SheetOverlay(
   { for: forId, open, behavior, className, hidden, ...rest },
@@ -193,6 +200,7 @@ export const SheetOverlay = forwardRef<HTMLDivElement, SheetOverlayProps>(functi
     />
   );
 });
+SheetOverlay.displayName = "SheetOverlay";
 
 export const SheetContent = forwardRef<HTMLDivElement, SheetContentProps>(function SheetContent(
   { id, className, children, ...rest },
@@ -209,6 +217,7 @@ export const SheetContent = forwardRef<HTMLDivElement, SheetContentProps>(functi
     </div>
   );
 });
+SheetContent.displayName = "SheetContent";
 
 export const SheetHeader = forwardRef<HTMLDivElement, SheetHeaderProps>(function SheetHeader(
   { className, children, ...rest },
@@ -220,6 +229,7 @@ export const SheetHeader = forwardRef<HTMLDivElement, SheetHeaderProps>(function
     </div>
   );
 });
+SheetHeader.displayName = "SheetHeader";
 
 export const SheetTitle = forwardRef<HTMLHeadingElement, SheetTitleProps>(function SheetTitle(
   { id, className, children, ...rest },
@@ -231,6 +241,7 @@ export const SheetTitle = forwardRef<HTMLHeadingElement, SheetTitleProps>(functi
     </h2>
   );
 });
+SheetTitle.displayName = "SheetTitle";
 
 export const SheetDescription = forwardRef<HTMLParagraphElement, SheetDescriptionProps>(
   function SheetDescription({ id, className, children, ...rest }, ref) {
@@ -246,6 +257,7 @@ export const SheetDescription = forwardRef<HTMLParagraphElement, SheetDescriptio
     );
   }
 );
+SheetDescription.displayName = "SheetDescription";
 
 export const SheetClose = forwardRef<HTMLButtonElement, SheetCloseProps>(function SheetClose(
   { for: forId, variant, size, behavior, "aria-label": ariaLabel, className, children, ...rest },
@@ -264,3 +276,4 @@ export const SheetClose = forwardRef<HTMLButtonElement, SheetCloseProps>(functio
     </Button>
   );
 });
+SheetClose.displayName = "SheetClose";

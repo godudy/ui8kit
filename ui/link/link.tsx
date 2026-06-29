@@ -1,12 +1,16 @@
 import { forwardRef, type AnchorHTMLAttributes } from "react";
 import linkRecipe from "./link.variants.json";
-import { composeRecipe } from "../../utils/variants";
+import { composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
 
-export type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
-  variant?: string;
-  size?: string;
+type LinkVariant = RecipeKey<typeof linkRecipe, "variant">;
+type LinkSize = RecipeKey<typeof linkRecipe, "size">;
+
+export type LinkProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "className"> & {
+  variant?: LinkVariant;
+  size?: LinkSize;
   external?: boolean;
   disabled?: boolean;
+  className?: string;
 };
 
 function linkTarget(target?: string, external?: boolean): string | undefined {
@@ -41,7 +45,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
 ) {
   const state = disabled ? "pointer-events-none opacity-50" : "";
   const cls = composeRecipe(
-    linkRecipe,
+    linkRecipe as VariantRecipe,
     { variant: variant ?? "", size: size ?? "" },
     state,
     className
@@ -67,3 +71,4 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
     </a>
   );
 });
+Link.displayName = "Link";

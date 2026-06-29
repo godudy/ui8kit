@@ -1,0 +1,33 @@
+.cursorignore
+.cursor/
+.manual/
+.example/
+.vscode/
+node_modules/
+dist/
+build/
+.env
+bun.lock
+bun.lockb
+package-lock.json
+*.log
+
+## testing
+html/
+coverage/
+test-results/
+playwright-report/
+playwright/.cache/
+
+## build
+vite.config.d.ts
+tsconfig.tsbuildinfo
+tsconfig.node.tsbuildinfo
+bash.exe.stackdump
+
+## turbo
+.turbo/
+turbo.json
+turbo.lock
+turbo.log
+turbo.log.*

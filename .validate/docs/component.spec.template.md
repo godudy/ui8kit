@@ -162,6 +162,25 @@ showcase:
 | `state.*` | Interaction state |
 | `layout.*` | Composite composition |
 | `order.*` | Heading level |
+| `composition.aschild-*` | `asChild` Slot composition (React) or `*Classes` manual wrap (Go) |
+
+## `AsChild` prop (composition)
+
+Components that support element substitution expose `AsChild: true`:
+
+- **React**: when `asChild` is set, the component renders a `Slot` that merges its props (className via `cn`, ref, event handlers) onto its single child element. Use this to swap the root element (e.g., `<Button asChild><a href="/x">x</a></Button>`).
+- **Go `templ`**: there is no `cloneElement` equivalent. Go consumers wrap manually using the component's `*Classes` helper (e.g., `<a href="/x" class={ ui.ButtonClasses(p) }>x</a>`).
+
+Spec API declaration:
+
+```yaml
+api:
+  AsChild:
+    role: composition
+    type: bool
+    default: false
+```
+
 
 ## Sync with `.templ` source
 

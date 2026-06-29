@@ -1,11 +1,15 @@
 import { forwardRef, type TextareaHTMLAttributes } from "react";
 import textareaRecipe from "./textarea.variants.json";
-import { composeRecipe } from "../../utils/variants";
+import { composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
 import { textareaRows } from "../../utils/attrs";
 
-export type TextareaProps = Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "size"> & {
-  variant?: string;
-  size?: string;
+type TextareaVariant = RecipeKey<typeof textareaRecipe, "variant">;
+type TextareaSize = RecipeKey<typeof textareaRecipe, "size">;
+
+export type TextareaProps = Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "size" | "className"> & {
+  variant?: TextareaVariant;
+  size?: TextareaSize;
+  className?: string;
 };
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function Textarea(
@@ -17,7 +21,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
       ref={ref}
       rows={textareaRows(rows)}
       className={composeRecipe(
-        textareaRecipe,
+        textareaRecipe as VariantRecipe,
         { variant: variant ?? "", size: size ?? "" },
         className
       )}
@@ -25,3 +29,4 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
     />
   );
 });
+Textarea.displayName = "Textarea";

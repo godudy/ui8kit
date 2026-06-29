@@ -5,16 +5,23 @@ import {
   type SourceHTMLAttributes,
 } from "react";
 import imageRecipe from "./image.variants.json";
-import { composeRecipe } from "../../utils/variants";
+import { composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
 
-export type ImageProps = ImgHTMLAttributes<HTMLImageElement> & {
-  variant?: string;
-  size?: string;
-  fit?: string;
-  position?: string;
-  aspect?: string;
+type ImageVariant = RecipeKey<typeof imageRecipe, "variant">;
+type ImageSize = RecipeKey<typeof imageRecipe, "size">;
+type ImageFit = RecipeKey<typeof imageRecipe, "fit">;
+type ImagePosition = RecipeKey<typeof imageRecipe, "position">;
+type ImageAspect = RecipeKey<typeof imageRecipe, "aspect">;
+
+export type ImageProps = Omit<ImgHTMLAttributes<HTMLImageElement>, "className"> & {
+  variant?: ImageVariant;
+  size?: ImageSize;
+  fit?: ImageFit;
+  position?: ImagePosition;
+  aspect?: ImageAspect;
   fetchPriority?: string;
   decorative?: boolean;
+  className?: string;
 };
 
 export type PictureProps = HTMLAttributes<HTMLPictureElement>;
@@ -70,7 +77,7 @@ export const Image = forwardRef<HTMLImageElement, ImageProps>(function Image(
       decoding={imageDecoding(decoding)}
       fetchPriority={fetchPriority || undefined}
       className={composeRecipe(
-        imageRecipe,
+        imageRecipe as VariantRecipe,
         {
           variant: variant ?? "",
           size: size ?? "",
@@ -85,6 +92,7 @@ export const Image = forwardRef<HTMLImageElement, ImageProps>(function Image(
     />
   );
 });
+Image.displayName = "Image";
 
 export const Picture = forwardRef<HTMLPictureElement, PictureProps>(function Picture(
   { className, children, ...rest },
@@ -96,6 +104,7 @@ export const Picture = forwardRef<HTMLPictureElement, PictureProps>(function Pic
     </picture>
   );
 });
+Picture.displayName = "Picture";
 
 export const Source = forwardRef<HTMLSourceElement, SourceProps>(function Source(
   { srcSet, src, media, type, sizes, ...rest },
@@ -113,3 +122,4 @@ export const Source = forwardRef<HTMLSourceElement, SourceProps>(function Source
     />
   );
 });
+Source.displayName = "Source";

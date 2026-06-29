@@ -106,9 +106,9 @@ templ CatalogSidebar(props PageProps) {
 			@CatalogPrimaryNav(props.Sidebar, "")
 		}
 		@ui.Box(ui.BoxProps{Class: "border-t border-border p-4"}) {
-			@ui.Button(ui.ButtonProps{Href: "/", Variant: "outline", Size: "sm", Class: "w-full"}) {
+			<a href="/" class={ ui.ButtonClasses(ui.ButtonProps{Variant: "outline", Size: "sm", Class: "w-full"}) }>
 				Dashboard block
-			}
+			</a>
 		}
 	}
 }
@@ -126,9 +126,9 @@ templ CatalogHeader(props PageProps) {
 			}) {
 				☰
 			}
-			@ui.Button(ui.ButtonProps{Href: "#workspace", Variant: "outline", Size: "sm"}) {
+			<a href="#workspace" class={ ui.ButtonClasses(ui.ButtonProps{Variant: "outline", Size: "sm"}) }>
 				{ props.Workspace }
-			}
+			</a>
 		}
 		@cmp.Nav(cmp.NavProps{Class: "col-start-2 hidden justify-self-center md:block"}) {
 			@cmp.NavList(cmp.NavListProps{Orientation: "horizontal", Gap: "sm"}) {
@@ -145,9 +145,9 @@ templ CatalogHeader(props PageProps) {
 			@ui.Badge(ui.BadgeProps{Variant: "secondary"}) {
 				{ props.Prototype }
 			}
-			@ui.Button(ui.ButtonProps{Href: "#profile", Variant: "ghost", Size: "sm"}) {
+			<a href="#profile" class={ ui.ButtonClasses(ui.ButtonProps{Variant: "ghost", Size: "sm"}) }>
 				{ props.ProfileName }
-			}
+			</a>
 		}
 	}
 }
@@ -217,7 +217,7 @@ templ ToolCards(items []ToolCard) {
 	@ui.Grid(ui.GridProps{Class: "gap-4 md:grid-cols-2 xl:grid-cols-3"}) {
 		for _, item := range items {
 			@ui.GridCol(ui.GridColProps{}) {
-				@cmp.Card(cmp.CardProps{Tag: "article", Variant: "default", Class: "h-full hover:bg-muted/20"}) {
+				<article class={ cmp.CardClasses(cmp.CardProps{Variant: "default", Class: "h-full hover:bg-muted/20"}) }>
 					@cmp.CardContent(cmp.CardContentProps{Class: "p-6"}) {
 						@ui.Group(ui.GroupProps{Class: "items-start gap-4"}) {
 							@cmp.IconBadge(cmp.IconBadgeProps{Text: toolIconLetter(item.Icon), Size: "default", Variant: BlockVariant("toolTone", item.Tone)})
@@ -227,7 +227,7 @@ templ ToolCards(items []ToolCard) {
 							}
 						}
 					}
-				}
+				</article>
 			}
 		}
 	}
@@ -240,9 +240,9 @@ templ ShowcaseGrid(props ShowcaseProps) {
 				@ui.Title(ui.TitleProps{Order: 2, Class: "text-xl font-semibold tracking-tight"}, props.Title)
 				@ui.Text(ui.TextProps{Class: "text-sm text-muted-foreground"}, props.Description)
 			}
-			@ui.Button(ui.ButtonProps{Variant: "outline", Size: "sm", Href: "#templates"}) {
+			<a href="#templates" class={ ui.ButtonClasses(ui.ButtonProps{Variant: "outline", Size: "sm"}) }>
 				{ props.ActionLabel }
-			}
+			</a>
 		}
 		@ui.Grid(ui.GridProps{Class: "gap-4 md:grid-cols-2 xl:grid-cols-3"}) {
 			for _, item := range props.Items {
@@ -255,7 +255,7 @@ templ ShowcaseGrid(props ShowcaseProps) {
 }
 
 templ ShowcaseCardView(item ShowcaseItem) {
-	@cmp.Card(cmp.CardProps{Tag: "article", Variant: "raised", Class: "h-full"}) {
+	<article class={ cmp.CardClasses(cmp.CardProps{Variant: "raised", Class: "h-full"}) }>
 		@cmp.CardContent(cmp.CardContentProps{Class: "p-6"}) {
 			@ui.Stack(ui.StackProps{Class: "gap-4"}) {
 				@ui.Box(ui.BoxProps{Class: "flex h-28 items-center justify-center rounded-md border border-dashed border-border bg-muted/50"}) {
@@ -279,16 +279,16 @@ templ ShowcaseCardView(item ShowcaseItem) {
 					}
 				}
 				@ui.Group(ui.GroupProps{Class: "gap-2"}) {
-					@ui.Button(ui.ButtonProps{Variant: "default", Size: "sm", Href: "#use"}) {
+					<a href="#use" class={ ui.ButtonClasses(ui.ButtonProps{Variant: "default", Size: "sm"}) }>
 						{ item.UseLabel }
-					}
-					@ui.Button(ui.ButtonProps{Variant: "outline", Size: "sm", Href: "#preview"}) {
+					</a>
+					<a href="#preview" class={ ui.ButtonClasses(ui.ButtonProps{Variant: "outline", Size: "sm"}) }>
 						{ item.PreviewLabel }
-					}
+					</a>
 				}
 			}
 		}
-	}
+	</article>
 }
 
 templ PrototypeNotice(props NoticeProps) {
@@ -298,9 +298,9 @@ templ PrototypeNotice(props NoticeProps) {
 				@ui.Text(ui.TextProps{Class: "text-sm font-semibold"}, props.Title)
 				@ui.Text(ui.TextProps{Class: "text-sm text-muted-foreground"}, props.Description)
 			}
-			@ui.Button(ui.ButtonProps{Variant: "outline", Size: "sm", Href: "#prototype-mode"}) {
+			<a href="#prototype-mode" class={ ui.ButtonClasses(ui.ButtonProps{Variant: "outline", Size: "sm"}) }>
 				{ props.ActionLabel }
-			}
+			</a>
 		}
 	}
 }

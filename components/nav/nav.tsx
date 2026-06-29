@@ -3,44 +3,53 @@ import {
   type AnchorHTMLAttributes,
   type HTMLAttributes,
   type LiHTMLAttributes,
+  type ReactNode,
   type Ref,
 } from "react";
 import navLinkRecipe from "./nav-link.variants.json";
 import navListRecipe from "./nav-list.variants.json";
-import { composeRecipe } from "../../utils";
+import { composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
 import { Link } from "../../ui/link/link";
+
+type NavLinkVariant = RecipeKey<typeof navLinkRecipe, "variant">;
+type NavLinkSize = RecipeKey<typeof navLinkRecipe, "size">;
+type NavListOrientation = RecipeKey<typeof navListRecipe, "orientation">;
+type NavListGap = RecipeKey<typeof navListRecipe, "gap">;
 
 export type NavProps = HTMLAttributes<HTMLElement> & {
   "aria-label"?: string;
   dataUI8Kit?: string;
 };
 
-export type NavListProps = HTMLAttributes<HTMLUListElement> & {
-  orientation?: string;
-  gap?: string;
+export type NavListProps = Omit<HTMLAttributes<HTMLUListElement>, "className"> & {
+  orientation?: NavListOrientation;
+  gap?: NavListGap;
+  className?: string;
+  children?: ReactNode;
 };
 
 export type NavItemProps = LiHTMLAttributes<HTMLLIElement>;
 
-export type NavLinkProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> & {
+export type NavLinkProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "className"> & {
   href?: string;
-  variant?: string;
-  size?: string;
+  variant?: NavLinkVariant;
+  size?: NavLinkSize;
   active?: boolean;
   disabled?: boolean;
+  className?: string;
 };
 
 function navLinkClasses(
-  variant?: string,
-  size?: string,
+  variant: NavLinkVariant | undefined,
+  size: NavLinkSize | undefined,
   active?: boolean,
   disabled?: boolean,
   className?: string
 ): string {
-  let v = variant ?? "";
+  let v: string = variant ?? "";
   if (active && !v.trim()) v = "active";
   const state = disabled ? "pointer-events-none opacity-50" : "";
-  return composeRecipe(navLinkRecipe, { variant: v, size: size ?? "" }, state, className);
+  return composeRecipe(navLinkRecipe as VariantRecipe, { variant: v, size: size ?? "" }, state, className);
 }
 
 function navLinkCurrent(
@@ -68,6 +77,7 @@ export const Nav = forwardRef<HTMLElement, NavProps>(function Nav(
     </nav>
   );
 });
+Nav.displayName = "Nav";
 
 export const NavList = forwardRef<HTMLUListElement, NavListProps>(function NavList(
   { orientation, gap, className, children, ...rest },
@@ -77,7 +87,7 @@ export const NavList = forwardRef<HTMLUListElement, NavListProps>(function NavLi
     <ul
       ref={ref}
       className={composeRecipe(
-        navListRecipe,
+        navListRecipe as VariantRecipe,
         { orientation: orientation ?? "", gap: gap ?? "" },
         className
       )}
@@ -87,6 +97,7 @@ export const NavList = forwardRef<HTMLUListElement, NavListProps>(function NavLi
     </ul>
   );
 });
+NavList.displayName = "NavList";
 
 export const NavItem = forwardRef<HTMLLIElement, NavItemProps>(function NavItem(
   { className, children, ...rest },
@@ -98,6 +109,7 @@ export const NavItem = forwardRef<HTMLLIElement, NavItemProps>(function NavItem(
     </li>
   );
 });
+NavItem.displayName = "NavItem";
 
 export const NavLink = forwardRef<HTMLElement, NavLinkProps>(function NavLink(
   {
@@ -149,3 +161,4 @@ export const NavLink = forwardRef<HTMLElement, NavLinkProps>(function NavLink(
     </Link>
   );
 });
+NavLink.displayName = "NavLink";

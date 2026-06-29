@@ -8,7 +8,7 @@ export function defaultButtonType(t?: string): "button" | "submit" | "reset" {
   return "button";
 }
 
-export function titleTag(order?: number): string {
+export function titleTag(order?: 1 | 2 | 3 | 4 | 5 | 6): string {
   switch (order) {
     case 1:
       return "h1";
@@ -20,6 +20,7 @@ export function titleTag(order?: number): string {
       return "h5";
     case 6:
       return "h6";
+    case 2:
     default:
       return "h2";
   }

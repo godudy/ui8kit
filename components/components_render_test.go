@@ -52,9 +52,9 @@ func TestNavLinkActiveState(t *testing.T) {
 	}
 }
 
-func TestCardTagRendersSemanticRoot(t *testing.T) {
-	html := renderComponent(t, Card(CardProps{Tag: "article"}))
-	if !strings.Contains(html, "<article") {
-		t.Fatalf("card should render requested semantic tag: %s", html)
+func TestCardClassesOnManualWrapper(t *testing.T) {
+	cls := CardClasses(CardProps{Variant: "default"})
+	if !strings.Contains(cls, "rounded-md") {
+		t.Fatalf("card classes should include base: %s", cls)
 	}
 }

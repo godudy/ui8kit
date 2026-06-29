@@ -1,6 +1,6 @@
 /**
  * Button triggers an action on click.
- * Button navigates when Href is set.
+ * For navigation, render an `<a>` manually using ButtonClasses.
  */
 
 // Copy: components/ui/button/button.templ — requires github.com/fastygo/templ/utils
@@ -27,8 +27,6 @@ type ButtonProps struct {
 	Form      string
 	// Disabled blocks interaction
 	Disabled  bool
-	// Href renders anchor instead of button
-	Href      string
 	ID        string
 	Role      string
 	TabIndex  string
@@ -56,58 +54,24 @@ func ButtonClasses(p ButtonProps) string {
 }
 
 func buttonSpreadAttrs(p ButtonProps) templ.Attributes {
-	attrs := uiutils.ControlAttrs(p.ID, p.Role, p.TabIndex, p.AriaLabel, p.Attrs)
-	if strings.TrimSpace(p.Href) != "" && p.Disabled {
-		attrs["aria-disabled"] = "true"
-		attrs["tabindex"] = "-1"
-		if _, ok := attrs["role"]; !ok {
-			attrs["role"] = "link"
-		}
-	}
-	return attrs
+	return uiutils.ControlAttrs(p.ID, p.Role, p.TabIndex, p.AriaLabel, p.Attrs)
 }
 
-// Button renders button or anchor with variant classes.
+// Button renders a button with variant classes. For anchor rendering,
+// use ButtonClasses manually: <a href="..." class={ ButtonClasses(p) }>...</a>.
 templ Button(p ButtonProps) {
-	if strings.TrimSpace(p.Href) != "" {
-		if p.Disabled {
-			<a
-				href={ templ.SafeURL(p.Href) }
-				class={ ButtonClasses(p) }
-				rel="nofollow noopener noreferrer"
-				if p.ID != "" {
-					id={ p.ID }
-				}
-				{ buttonSpreadAttrs(p)... }
-			>
-				{ children... }
-			</a>
-		} else {
-			<a
-				href={ templ.SafeURL(p.Href) }
-				class={ ButtonClasses(p) }
-				if p.ID != "" {
-					id={ p.ID }
-				}
-				{ buttonSpreadAttrs(p)... }
-			>
-				{ children... }
-			</a>
+	<button
+		type={ uiutils.DefaultButtonType(p.Type) }
+		class={ ButtonClasses(p) }
+		disabled?={ p.Disabled }
+		if p.ID != "" {
+			id={ p.ID }
 		}
-	} else {
-		<button
-			type={ uiutils.DefaultButtonType(p.Type) }
-			class={ ButtonClasses(p) }
-			disabled?={ p.Disabled }
-			if p.ID != "" {
-				id={ p.ID }
-			}
-			if p.Form != "" {
-				form={ p.Form }
-			}
-			{ buttonSpreadAttrs(p)... }
-		>
-			{ children... }
-		</button>
-	}
+		if p.Form != "" {
+			form={ p.Form }
+		}
+		{ buttonSpreadAttrs(p)... }
+	>
+		{ children... }
+	</button>
 }

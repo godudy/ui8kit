@@ -11,7 +11,9 @@
   },
   "devDependencies": {
     "@types/react": "^19.1.8",
+    "clsx": "^2.1.1",
     "react": "^19.1.0",
+    "tailwind-merge": "^3.6.0",
     "typescript": "^5.8.3",
     "ui8px": "0.2.4"
   }

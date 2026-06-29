@@ -4,6 +4,11 @@ api:
         cva: false
         role: accessible-name
         type: string
+    AsChild:
+        cva: false
+        default: false
+        role: composition
+        type: bool
     Attrs:
         cva: false
         role: html-attrs
@@ -20,10 +25,6 @@ api:
     Form:
         cva: false
         role: association
-        type: string
-    Href:
-        cva: false
-        role: navigation
         type: string
     ID:
         cva: false
@@ -73,9 +74,7 @@ semantics:
     behavior: interactive
     data: button.data.json
     role: button
-    role-when-href: link
     root: button
-    root-when-href: a
 showcase:
     - id: variant.default
       props:
@@ -104,7 +103,6 @@ showcase:
       ref: variant.ghost
     - id: variant.link
       props:
-        Href: /docs
         Variant: link
       ref: variant.link
     - id: variant.unstyled
@@ -133,12 +131,6 @@ showcase:
         Disabled: true
         Variant: default
       ref: state.disabled
-    - id: state.disabled-link
-      props:
-        Disabled: true
-        Href: /locked
-        Variant: link
-      ref: state.disabled-link
     - id: state.submit
       props:
         Type: submit
@@ -149,6 +141,12 @@ showcase:
         Type: reset
         Variant: outline
       ref: state.reset
+    - id: composition.aschild-link
+      props:
+        AsChild: true
+        Variant: outline
+        Size: sm
+      ref: composition.aschild-link
 slots:
     default:
         accepts: text
@@ -168,21 +166,20 @@ variants: button.variants.json
 ## Summary
 
 Button triggers an action on click.
-Button navigates when Href is set.
+For navigation, render an `<a>` using `ButtonClasses` (Go) or use `asChild` (React).
 
 ## Use Cases
 
 - Submit a form action
-- Open a page from a primary action
+- Open a page from a primary action via `asChild` + `<a>`
 - Show a destructive confirm action
 - Show a low-emphasis ghost action
 
 ## Semantics
 
-- Root element is button when Href is empty
-- Root element is a when Href is set
-- Disabled sets native disabled on button
-- Disabled link sets aria-disabled true
+- Root element is always a `<button>`
+- Disabled sets native `disabled` attribute
+- For navigation: React uses `asChild` to merge classes onto a child `<a>`; Go uses `ButtonClasses` helper to wrap a manual `<a>`
 
 ## Example variant.default
 
@@ -250,9 +247,9 @@ templ Example() {
 import "github.com/fastygo/templ/ui"
 
 templ Example() {
-	@ui.Button(ui.ButtonProps{Variant: "link", Href: "/docs"}) {
+	<a href="/docs" class={ ui.ButtonClasses(ui.ButtonProps{Variant: "link"}) }>
 		Learn more
-	}
+	</a>
 }
 ```
 
@@ -328,18 +325,6 @@ templ Example() {
 }
 ```
 
-## Example state.disabled-link
-
-```templ
-import "github.com/fastygo/templ/ui"
-
-templ Example() {
-	@ui.Button(ui.ButtonProps{Variant: "link", Href: "/locked", Disabled: true}) {
-		Disabled link
-	}
-}
-```
-
 ## Example state.reset
 
 ```templ
@@ -349,5 +334,34 @@ templ Example() {
 	@ui.Button(ui.ButtonProps{Variant: "outline", Type: "reset"}) {
 		Reset
 	}
+}
+```
+
+## Example composition.aschild-link
+
+For navigation, React uses `asChild` to merge Button classes onto a child anchor,
+and Go wraps a manual `<a>` with `ButtonClasses`:
+
+```templ
+import "github.com/fastygo/templ/ui"
+
+templ Example() {
+	<a href="/docs" class={ ui.ButtonClasses(ui.ButtonProps{Variant: "outline", Size: "sm"}) }>
+		Learn more
+	</a>
+}
+```
+
+React equivalent:
+
+```tsx
+import { Button } from "@registry/ui";
+
+export function Example() {
+  return (
+    <Button asChild variant="outline" size="sm">
+      <a href="/docs">Learn more</a>
+    </Button>
+  );
 }
 ```

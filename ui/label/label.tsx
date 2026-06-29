@@ -1,6 +1,6 @@
 import { forwardRef, type LabelHTMLAttributes } from "react";
 import labelRecipe from "./label.variants.json";
-import { composeRecipe } from "../../utils/variants";
+import { composeRecipe, type VariantRecipe } from "../../utils";
 
 export type LabelProps = LabelHTMLAttributes<HTMLLabelElement>;
 
@@ -11,7 +11,7 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>(function Label(
   return (
     <label
       ref={ref}
-      className={composeRecipe(labelRecipe, {}, className)}
+      className={composeRecipe(labelRecipe as VariantRecipe, {}, className)}
       htmlFor={htmlFor}
       {...rest}
     >
@@ -19,3 +19,4 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>(function Label(
     </label>
   );
 });
+Label.displayName = "Label";

@@ -1,15 +1,19 @@
 import { forwardRef, type OptionHTMLAttributes, type SelectHTMLAttributes } from "react";
 import selectRecipe from "./select.variants.json";
-import { composeRecipe } from "../../utils/variants";
+import { composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
+
+type SelectVariant = RecipeKey<typeof selectRecipe, "variant">;
+type SelectSize = RecipeKey<typeof selectRecipe, "size">;
 
 export type SelectOption = {
   value: string;
   label: string;
 };
 
-export type SelectProps = Omit<SelectHTMLAttributes<HTMLSelectElement>, "size"> & {
-  variant?: string;
-  size?: string;
+export type SelectProps = Omit<SelectHTMLAttributes<HTMLSelectElement>, "size" | "className"> & {
+  variant?: SelectVariant;
+  size?: SelectSize;
+  className?: string;
   options?: SelectOption[];
 };
 
@@ -36,7 +40,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
       ref={ref}
       value={value}
       className={composeRecipe(
-        selectRecipe,
+        selectRecipe as VariantRecipe,
         { variant: variant ?? "", size: size ?? "" },
         className
       )}
@@ -51,6 +55,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
     </select>
   );
 });
+Select.displayName = "Select";
 
 export const SelectOption = forwardRef<HTMLOptionElement, SelectOptionProps>(
   function SelectOption({ value, label, selected, disabled, children, ...rest }, ref) {
@@ -61,6 +66,7 @@ export const SelectOption = forwardRef<HTMLOptionElement, SelectOptionProps>(
     );
   }
 );
+SelectOption.displayName = "SelectOption";
 
 export const OptGroup = forwardRef<HTMLOptGroupElement, OptGroupProps>(function OptGroup(
   { label, disabled, className, children, ...rest },
@@ -72,3 +78,4 @@ export const OptGroup = forwardRef<HTMLOptGroupElement, OptGroupProps>(function 
     </optgroup>
   );
 });
+OptGroup.displayName = "OptGroup";

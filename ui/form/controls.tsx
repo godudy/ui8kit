@@ -3,16 +3,25 @@ import fieldsetRecipe from "./fieldset.variants.json";
 import legendRecipe from "./legend.variants.json";
 import meterRecipe from "./meter.variants.json";
 import progressRecipe from "./progress.variants.json";
-import { composeRecipe } from "../../utils/variants";
+import { composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
+
+type FieldsetVariant = RecipeKey<typeof fieldsetRecipe, "variant">;
+type FieldsetSize = RecipeKey<typeof fieldsetRecipe, "size">;
+type LegendVariant = RecipeKey<typeof legendRecipe, "variant">;
+type LegendSize = RecipeKey<typeof legendRecipe, "size">;
+type MeterVariant = RecipeKey<typeof meterRecipe, "variant">;
+type MeterSize = RecipeKey<typeof meterRecipe, "size">;
+type ProgressVariant = RecipeKey<typeof progressRecipe, "variant">;
+type ProgressSize = RecipeKey<typeof progressRecipe, "size">;
 
 export type FieldsetProps = FieldsetHTMLAttributes<HTMLFieldSetElement> & {
-  variant?: string;
-  size?: string;
+  variant?: FieldsetVariant;
+  size?: FieldsetSize;
 };
 
 export type LegendProps = HTMLAttributes<HTMLLegendElement> & {
-  variant?: string;
-  size?: string;
+  variant?: LegendVariant;
+  size?: LegendSize;
 };
 
 export type DataListProps = HTMLAttributes<HTMLDataListElement>;
@@ -23,13 +32,13 @@ export type OutputProps = OutputHTMLAttributes<HTMLOutputElement> & {
 };
 
 export type MeterProps = MeterHTMLAttributes<HTMLMeterElement> & {
-  variant?: string;
-  size?: string;
+  variant?: MeterVariant;
+  size?: MeterSize;
 };
 
 export type ProgressProps = ProgressHTMLAttributes<HTMLProgressElement> & {
-  variant?: string;
-  size?: string;
+  variant?: ProgressVariant;
+  size?: ProgressSize;
 };
 
 export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(function Fieldset(
@@ -40,7 +49,7 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(function 
     <fieldset
       ref={ref}
       className={composeRecipe(
-        fieldsetRecipe,
+        fieldsetRecipe as VariantRecipe,
         { variant: variant ?? "", size: size ?? "" },
         className
       )}
@@ -50,6 +59,7 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(function 
     </fieldset>
   );
 });
+Fieldset.displayName = "Fieldset";
 
 export const Legend = forwardRef<HTMLLegendElement, LegendProps>(function Legend(
   { variant, size, className, children, ...rest },
@@ -58,13 +68,14 @@ export const Legend = forwardRef<HTMLLegendElement, LegendProps>(function Legend
   return (
     <legend
       ref={ref}
-      className={composeRecipe(legendRecipe, { variant: variant ?? "", size: size ?? "" }, className)}
+      className={composeRecipe(legendRecipe as VariantRecipe, { variant: variant ?? "", size: size ?? "" }, className)}
       {...rest}
     >
       {children}
     </legend>
   );
 });
+Legend.displayName = "Legend";
 
 export const DataList = forwardRef<HTMLDataListElement, DataListProps>(function DataList(
   { className, children, ...rest },
@@ -76,6 +87,7 @@ export const DataList = forwardRef<HTMLDataListElement, DataListProps>(function 
     </datalist>
   );
 });
+DataList.displayName = "DataList";
 
 export const DataOption = forwardRef<HTMLOptionElement, DataOptionProps>(function DataOption(
   { value, label, ...rest },
@@ -83,6 +95,7 @@ export const DataOption = forwardRef<HTMLOptionElement, DataOptionProps>(functio
 ) {
   return <option ref={ref} value={value} label={label} {...rest} />;
 });
+DataOption.displayName = "DataOption";
 
 export const Output = forwardRef<HTMLOutputElement, OutputProps>(function Output(
   { className, value, children, ...rest },
@@ -99,6 +112,7 @@ export const Output = forwardRef<HTMLOutputElement, OutputProps>(function Output
     </output>
   );
 });
+Output.displayName = "Output";
 
 export const Meter = forwardRef<HTMLMeterElement, MeterProps>(function Meter(
   { variant, size, className, children, ...rest },
@@ -107,13 +121,14 @@ export const Meter = forwardRef<HTMLMeterElement, MeterProps>(function Meter(
   return (
     <meter
       ref={ref}
-      className={composeRecipe(meterRecipe, { variant: variant ?? "", size: size ?? "" }, className)}
+      className={composeRecipe(meterRecipe as VariantRecipe, { variant: variant ?? "", size: size ?? "" }, className)}
       {...rest}
     >
       {children}
     </meter>
   );
 });
+Meter.displayName = "Meter";
 
 export const Progress = forwardRef<HTMLProgressElement, ProgressProps>(function Progress(
   { variant, size, className, children, ...rest },
@@ -123,7 +138,7 @@ export const Progress = forwardRef<HTMLProgressElement, ProgressProps>(function 
     <progress
       ref={ref}
       className={composeRecipe(
-        progressRecipe,
+        progressRecipe as VariantRecipe,
         { variant: variant ?? "", size: size ?? "" },
         className
       )}
@@ -133,3 +148,4 @@ export const Progress = forwardRef<HTMLProgressElement, ProgressProps>(function 
     </progress>
   );
 });
+Progress.displayName = "Progress";

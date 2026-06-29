@@ -1,17 +1,23 @@
 import { forwardRef, type HTMLAttributes } from "react";
 import iconBadgeRecipe from "./iconbadge.variants.json";
-import { composeRecipe } from "../../utils";
-import { Icon } from "../../ui/icon/icon";
+import { composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
+import { Icon, type IconType } from "../../ui/icon/icon";
 
-export type IconBadgeProps = HTMLAttributes<HTMLSpanElement> & {
-  variant?: string;
-  size?: string;
+type IconBadgeVariant = RecipeKey<typeof iconBadgeRecipe, "variant">;
+type IconBadgeSize = RecipeKey<typeof iconBadgeRecipe, "size">;
+
+export type { IconBadgeVariant, IconBadgeSize };
+
+export type IconBadgeProps = Omit<HTMLAttributes<HTMLSpanElement>, "className"> & {
+  variant?: IconBadgeVariant;
+  size?: IconBadgeSize;
   name?: string;
-  iconType?: string;
+  iconType?: IconType;
   baseClass?: string;
   prefix?: string;
   text?: string;
   title?: string;
+  className?: string;
   "aria-label"?: string;
 };
 
@@ -43,7 +49,7 @@ export const IconBadge = forwardRef<HTMLSpanElement, IconBadgeProps>(function Ic
     <span
       ref={ref}
       className={composeRecipe(
-        iconBadgeRecipe,
+        iconBadgeRecipe as VariantRecipe,
         { variant: variant ?? "", size: size ?? "" },
         className
       )}
@@ -65,3 +71,4 @@ export const IconBadge = forwardRef<HTMLSpanElement, IconBadgeProps>(function Ic
     </span>
   );
 });
+IconBadge.displayName = "IconBadge";

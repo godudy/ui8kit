@@ -1,11 +1,15 @@
 import { forwardRef, type InputHTMLAttributes } from "react";
 import inputRecipe from "./input.variants.json";
-import { composeRecipe } from "../../utils/variants";
+import { composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
 import { defaultInputType } from "../../utils/attrs";
 
-export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "size"> & {
-  variant?: string;
-  size?: string;
+type InputVariant = RecipeKey<typeof inputRecipe, "variant">;
+type InputSize = RecipeKey<typeof inputRecipe, "size">;
+
+export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "className"> & {
+  variant?: InputVariant;
+  size?: InputSize;
+  className?: string;
 };
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
@@ -17,7 +21,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
       ref={ref}
       type={defaultInputType(type)}
       className={composeRecipe(
-        inputRecipe,
+        inputRecipe as VariantRecipe,
         { variant: variant ?? "", size: size ?? "" },
         className
       )}
@@ -25,3 +29,4 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
     />
   );
 });
+Input.displayName = "Input";

@@ -1,13 +1,18 @@
 import { forwardRef, type HTMLAttributes, type Ref, type SVGProps } from "react";
 import iconRecipe from "./icon.variants.json";
-import { cn, composeRecipe } from "../../utils";
+import { cn, composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
 
-export type IconProps = HTMLAttributes<HTMLElement> & {
+type IconType = RecipeKey<typeof iconRecipe, "type">;
+type IconSize = RecipeKey<typeof iconRecipe, "size">;
+
+export type { IconType, IconSize };
+
+export type IconProps = Omit<HTMLAttributes<HTMLElement>, "className"> & {
   name?: string;
-  type?: string;
+  type?: IconType;
   baseClass?: string;
   prefix?: string;
-  size?: string;
+  size?: IconSize;
   href?: string;
   title?: string;
   decorative?: boolean;
@@ -59,7 +64,7 @@ function iconClasses(
   className?: string
 ): string {
   const resolved = iconType(type);
-  const base = composeRecipe(iconRecipe, { type: resolved, size: size ?? "" });
+  const base = composeRecipe(iconRecipe as VariantRecipe, { type: resolved, size: size ?? "" });
   if (resolved === "class") {
     return cn(base, iconClassName(name, baseClass, prefix), className);
   }
@@ -111,3 +116,4 @@ export const Icon = forwardRef<HTMLElement | SVGSVGElement, IconProps>(function 
 
   return <span ref={ref as Ref<HTMLElement>} className={cls} {...attrs} />;
 });
+Icon.displayName = "Icon";

@@ -39,9 +39,10 @@ func Compose(v Variants, selection map[string]string, extra ...string) string {
 			if strings.TrimSpace(cls) != "" {
 				parts = append(parts, cls)
 			}
-		} else {
-			parts = append(parts, choice)
 		}
+		// Unknown choices are silently dropped to avoid leaking typos into the
+		// DOM as literal class names. The TS variant throws in dev for the
+		// same case; Go has no dev/prod split so we only drop here.
 	}
 	parts = append(parts, extra...)
 	return Cn(parts...)

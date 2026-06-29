@@ -1,13 +1,7 @@
 import { cn } from "./cn";
+import type { VariantRecipe } from "./recipe-types";
 
-/** JSON shape for `*.variants.json` (shared with Go variantgen). */
-export type VariantRecipe = {
-  id: string;
-  base: string;
-  keys: string[];
-  defaults: Record<string, string>;
-  byKey: Record<string, Record<string, string>>;
-};
+export type { VariantRecipe };
 
 export type Variants = {
   base: string;
@@ -15,6 +9,16 @@ export type Variants = {
   defaults: Record<string, string>;
   byKey: Record<string, Record<string, string>>;
 };
+
+function isDevEnv(): boolean {
+  try {
+    const env = (import.meta as unknown as { env?: { DEV?: boolean } }).env;
+    if (env && typeof env.DEV === "boolean") return env.DEV;
+  } catch {
+    // import.meta may be unavailable in some contexts
+  }
+  return false;
+}
 
 export function recipeToVariants(recipe: VariantRecipe): Variants {
   return {
@@ -46,9 +50,13 @@ export function compose(
     const cls = choices[choice];
     if (cls !== undefined) {
       if (cls.trim() !== "") parts.push(cls.trim());
-    } else {
-      parts.push(choice);
+    } else if (isDevEnv()) {
+      throw new Error(
+        `[compose] unknown variant "${choice}" for key "${key}" (recipe id: ${String((v as Variants & { id?: string }).id ?? "?")})`
+      );
     }
+    // Unknown choices are silently dropped in production to avoid leaking
+    // typos into the DOM as literal class names.
   }
   return cn(...parts, ...extra);
 }

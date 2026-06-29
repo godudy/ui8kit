@@ -133,8 +133,8 @@ function DashboardSidebar({ props }: { props: DashboardPageProps }) {
         <DashboardPrimaryNav items={props.Sidebar} />
       </Box>
       <Box className="border-t border-border p-4">
-        <Button href="/home/" variant="outline" size="sm" className="w-full">
-          Open home block
+        <Button asChild variant="outline" size="sm" className="w-full">
+          <a href="/home/">Open home block</a>
         </Button>
       </Box>
     </Box>
@@ -158,7 +158,9 @@ function DashboardHeader({ props }: { props: DashboardPageProps }) {
         >
           ☰
         </SheetTrigger>
-        <Button href="#gallery" variant="outline" size="sm">{props.Workspace}</Button>
+        <Button asChild variant="outline" size="sm">
+          <a href="#gallery">{props.Workspace}</a>
+        </Button>
       </Group>
       <Nav className="col-start-2 hidden justify-self-center md:block">
         <NavList orientation="horizontal" gap="sm">
@@ -171,7 +173,9 @@ function DashboardHeader({ props }: { props: DashboardPageProps }) {
       </Nav>
       <Group className="col-start-3 items-center justify-end gap-2 justify-self-end">
         <Badge variant="secondary">{props.Status}</Badge>
-        <Button href="#profile" variant="ghost" size="sm">{props.ProfileName}</Button>
+        <Button asChild variant="ghost" size="sm">
+          <a href="#profile">{props.ProfileName}</a>
+        </Button>
       </Group>
     </Box>
   );
@@ -184,8 +188,12 @@ function DashboardHero({ hero }: { hero: HeroProps }) {
         <Group className="items-center justify-between gap-4">
           <Badge variant="outline">{hero.Eyebrow}</Badge>
           <Group className="items-center gap-2">
-            <Button variant="outline" size="sm" href="/home/">{hero.SecondaryCTA}</Button>
-            <Button variant="default" size="sm" href="#gallery">{hero.PrimaryCTA}</Button>
+            <Button asChild variant="outline" size="sm">
+              <a href="/home/">{hero.SecondaryCTA}</a>
+            </Button>
+            <Button asChild variant="default" size="sm">
+              <a href="#gallery">{hero.PrimaryCTA}</a>
+            </Button>
           </Group>
         </Group>
       </Box>
@@ -223,14 +231,15 @@ function StatusCards({ items }: { items: StatusCard[] }) {
     <Grid className="gap-4 md:grid-cols-2 xl:grid-cols-4">
       {items.map((item) => (
         <GridCol key={item.Title}>
-          <Card tag="article" variant="default" className="h-full transition-colors hover:bg-muted/20">
+          <Card asChild variant="default" className="h-full transition-colors hover:bg-muted/20">
+            <article>
             <CardContent className="p-6">
               <Stack className="gap-4">
                 <Group className="items-start justify-between gap-4">
                   <IconBadge
                     text={item.Icon}
                     size="default"
-                    variant={blockVariant(dashboardVariants, "statusTone", item.Tone)}
+                    className={blockVariant(dashboardVariants, "statusTone", item.Tone)}
                   />
                   <Badge variant="outline" size="sm">{item.Meta}</Badge>
                 </Group>
@@ -241,6 +250,7 @@ function StatusCards({ items }: { items: StatusCard[] }) {
                 </Stack>
               </Stack>
             </CardContent>
+            </article>
           </Card>
         </GridCol>
       ))}
@@ -257,7 +267,8 @@ function LayerStatusBadge({ status }: { status: string }) {
 
 function LayerTable({ items }: { items: LayerItem[] }) {
   return (
-    <Card tag="section" variant="default">
+    <Card asChild variant="default">
+      <section>
       <CardHeader>
         <CardTitle order={2}>Registry inventory</CardTitle>
         <CardDescription>
@@ -280,6 +291,7 @@ function LayerTable({ items }: { items: LayerItem[] }) {
           ))}
         </Stack>
       </CardContent>
+      </section>
     </Card>
   );
 }

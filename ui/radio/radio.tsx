@@ -1,10 +1,14 @@
 import { forwardRef, type InputHTMLAttributes } from "react";
 import radioRecipe from "./radio.variants.json";
-import { composeRecipe } from "../../utils/variants";
+import { composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
 
-export type RadioProps = Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "type"> & {
-  variant?: string;
-  size?: string;
+type RadioVariant = RecipeKey<typeof radioRecipe, "variant">;
+type RadioSize = RecipeKey<typeof radioRecipe, "size">;
+
+export type RadioProps = Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "type" | "className"> & {
+  variant?: RadioVariant;
+  size?: RadioSize;
+  className?: string;
 };
 
 export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
@@ -16,7 +20,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
       ref={ref}
       type="radio"
       className={composeRecipe(
-        radioRecipe,
+        radioRecipe as VariantRecipe,
         { variant: variant ?? "", size: size ?? "" },
         className
       )}
@@ -24,3 +28,4 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
     />
   );
 });
+Radio.displayName = "Radio";

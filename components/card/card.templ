@@ -1,6 +1,7 @@
 /**
  * Card groups related content in one bordered surface.
  * Card uses header, content, and footer slots.
+ * For semantic root elements (section, article), use CardClasses on a manual wrapper.
  */
 
 // Copy: components/ui/card/card.templ
@@ -19,8 +20,6 @@ type CardProps struct {
 	Class   string
 	// Variant sets surface preset: default, raised, kpi, muted, ghost, compact, flat, accent
 	Variant string
-	// Tag overrides root element name
-	Tag     string
 	Attrs   templ.Attributes
 }
 
@@ -33,7 +32,7 @@ type CardHeaderProps struct {
 // CardTitleProps holds title text and heading level.
 type CardTitleProps struct {
 	Class string
-	// Order maps to h1, h2, or h3
+	// Order maps to h1-h6 (default h2)
 	Order int
 	Attrs templ.Attributes
 }
@@ -62,32 +61,11 @@ func CardClasses(p CardProps) string {
 	}, strings.TrimSpace(p.Class))
 }
 
-// Card renders the bordered surface wrapper.
+// Card renders the bordered surface wrapper. For semantic root elements,
+// use CardClasses on a manual wrapper:
+//   <section class={ card.CardClasses(p) }>...</section>
 templ Card(p CardProps) {
-	switch uiutils.ResolveTag(p.Tag, "div", uiutils.TagGroupLayout) {
-		case "section":
-			<section class={ CardClasses(p) } { p.Attrs... }>{ children... }</section>
-		case "article":
-			<article class={ CardClasses(p) } { p.Attrs... }>{ children... }</article>
-		case "aside":
-			<aside class={ CardClasses(p) } { p.Attrs... }>{ children... }</aside>
-		case "header":
-			<header class={ CardClasses(p) } { p.Attrs... }>{ children... }</header>
-		case "footer":
-			<footer class={ CardClasses(p) } { p.Attrs... }>{ children... }</footer>
-		case "main":
-			<main class={ CardClasses(p) } { p.Attrs... }>{ children... }</main>
-		case "nav":
-			<nav class={ CardClasses(p) } { p.Attrs... }>{ children... }</nav>
-		case "figure":
-			<figure class={ CardClasses(p) } { p.Attrs... }>{ children... }</figure>
-		case "search":
-			<search class={ CardClasses(p) } { p.Attrs... }>{ children... }</search>
-		case "hgroup":
-			<hgroup class={ CardClasses(p) } { p.Attrs... }>{ children... }</hgroup>
-		default:
-			<div class={ CardClasses(p) } { p.Attrs... }>{ children... }</div>
-	}
+	<div class={ CardClasses(p) } { p.Attrs... }>{ children... }</div>
 }
 
 // CardHeader renders the top slot with bottom border.
@@ -110,6 +88,12 @@ templ cardTitleTag(p CardTitleProps) {
 			<h1 class={ uiutils.Cn("text-sm font-semibold", p.Class) } { p.Attrs... }>{ children... }</h1>
 		case "h3":
 			<h3 class={ uiutils.Cn("text-sm font-semibold", p.Class) } { p.Attrs... }>{ children... }</h3>
+		case "h4":
+			<h4 class={ uiutils.Cn("text-sm font-semibold", p.Class) } { p.Attrs... }>{ children... }</h4>
+		case "h5":
+			<h5 class={ uiutils.Cn("text-sm font-semibold", p.Class) } { p.Attrs... }>{ children... }</h5>
+		case "h6":
+			<h6 class={ uiutils.Cn("text-sm font-semibold", p.Class) } { p.Attrs... }>{ children... }</h6>
 		default:
 			<h2 class={ uiutils.Cn("text-sm font-semibold", p.Class) } { p.Attrs... }>{ children... }</h2>
 	}

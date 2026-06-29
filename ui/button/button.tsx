@@ -1,102 +1,68 @@
 import {
   forwardRef,
-  type AnchorHTMLAttributes,
   type ButtonHTMLAttributes,
   type ReactNode,
-  type Ref,
 } from "react";
 import buttonRecipe from "./button.variants.json";
-import { cn, composeRecipe } from "../../utils";
+import { cn, composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
 import { defaultButtonType } from "../../utils/attrs";
+import { Slot } from "../slot/slot";
 
-type ButtonBaseProps = {
-  variant?: string;
-  size?: string;
+type ButtonVariant = RecipeKey<typeof buttonRecipe, "variant">;
+type ButtonSize = RecipeKey<typeof buttonRecipe, "size">;
+
+export type { ButtonVariant, ButtonSize };
+
+export type ButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "className"> & {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
   className?: string;
   children?: ReactNode;
+  asChild?: boolean;
 };
 
-type ButtonAsButtonProps = ButtonBaseProps &
-  Omit<ButtonHTMLAttributes<HTMLButtonElement>, "className" | "type"> & {
-    href?: undefined;
-    type?: "button" | "submit" | "reset";
-  };
-
-type ButtonAsAnchorProps = ButtonBaseProps &
-  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "className"> & {
-    href: string;
-    disabled?: boolean;
-  };
-
-export type ButtonProps = ButtonAsButtonProps | ButtonAsAnchorProps;
-
 function buttonClasses(
-  variant?: string,
-  size?: string,
-  disabled?: boolean,
-  className?: string
+  variant: ButtonVariant | undefined,
+  size: ButtonSize | undefined,
+  disabled: boolean | undefined,
+  className: string | undefined
 ): string {
   const state = disabled ? "pointer-events-none opacity-50" : "";
   if ((variant ?? "").trim() === "unstyled") {
     return cn(state, className);
   }
   return cn(
-    composeRecipe(buttonRecipe, { variant: variant ?? "", size: size ?? "" }),
+    composeRecipe(buttonRecipe as VariantRecipe, { variant: variant ?? "", size: size ?? "" }),
     state,
     className
   );
 }
 
-export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
-  function Button(props, ref) {
-    if ("href" in props && props.href?.trim()) {
-      const anchorProps = props as ButtonAsAnchorProps;
-      const {
-        href,
-        variant,
-        size,
-        disabled,
-        className,
-        children,
-        rel,
-        tabIndex,
-        role,
-        ...rest
-      } = anchorProps;
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+  { variant, size, type, disabled, className, children, asChild, ...rest },
+  ref
+) {
+  const cls = buttonClasses(variant, size, disabled, className);
 
-      const cls = buttonClasses(variant, size, disabled, className);
-      const resolvedRel = disabled ? rel || "nofollow noopener noreferrer" : rel;
-
-      return (
-        <a
-          ref={ref as Ref<HTMLAnchorElement>}
-          href={href}
-          className={cls}
-          rel={resolvedRel}
-          aria-disabled={disabled || undefined}
-          tabIndex={disabled ? -1 : tabIndex}
-          role={disabled ? role || "link" : role}
-          {...rest}
-        >
-          {children}
-        </a>
-      );
-    }
-
-    const buttonProps = props as ButtonAsButtonProps;
-    const { variant, size, type, disabled, className, children, ...rest } = buttonProps;
-    const cls = buttonClasses(variant, size, disabled, className);
-
+  if (asChild) {
     return (
-      <button
-        ref={ref as Ref<HTMLButtonElement>}
-        type={defaultButtonType(type)}
-        className={cls}
-        disabled={disabled}
-        {...rest}
-      >
+      <Slot ref={ref} className={cls} type={defaultButtonType(type)} disabled={disabled} {...rest}>
         {children}
-      </button>
+      </Slot>
     );
   }
-);
+
+  return (
+    <button
+      ref={ref}
+      type={defaultButtonType(type)}
+      className={cls}
+      disabled={disabled}
+      {...rest}
+    >
+      {children}
+    </button>
+  );
+});
+
+Button.displayName = "Button";

@@ -1,12 +1,16 @@
 import { forwardRef, type DialogHTMLAttributes } from "react";
 import dialogRecipe from "./dialog.variants.json";
-import { composeRecipe } from "../../utils/variants";
+import { composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
 
-export type DialogProps = DialogHTMLAttributes<HTMLDialogElement> & {
-  variant?: string;
-  size?: string;
+type DialogVariant = RecipeKey<typeof dialogRecipe, "variant">;
+type DialogSize = RecipeKey<typeof dialogRecipe, "size">;
+
+export type DialogProps = Omit<DialogHTMLAttributes<HTMLDialogElement>, "className"> & {
+  variant?: DialogVariant;
+  size?: DialogSize;
   open?: boolean;
   dataUI8Kit?: string;
+  className?: string;
   "aria-labelledby"?: string;
   "aria-describedby"?: string;
 };
@@ -33,7 +37,7 @@ export const Dialog = forwardRef<HTMLDialogElement, DialogProps>(function Dialog
       id={id || undefined}
       open={open}
       className={composeRecipe(
-        dialogRecipe,
+        dialogRecipe as VariantRecipe,
         { variant: variant ?? "", size: size ?? "" },
         className
       )}
@@ -47,3 +51,4 @@ export const Dialog = forwardRef<HTMLDialogElement, DialogProps>(function Dialog
     </dialog>
   );
 });
+Dialog.displayName = "Dialog";

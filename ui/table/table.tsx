@@ -1,6 +1,6 @@
 import { forwardRef, type HTMLAttributes, type ThHTMLAttributes, type TdHTMLAttributes } from "react";
 import tableRecipe from "./table.variants.json";
-import { composeRecipe } from "../../utils/variants";
+import { composeRecipe, type VariantRecipe } from "../../utils";
 
 export type TableProps = HTMLAttributes<HTMLTableElement>;
 export type TableCaptionProps = HTMLAttributes<HTMLTableCaptionElement>;
@@ -67,11 +67,12 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(function Table(
   ref
 ) {
   return (
-    <table ref={ref} className={composeRecipe(tableRecipe, {}, className)} {...rest}>
+    <table ref={ref} className={composeRecipe(tableRecipe as VariantRecipe, {}, className)} {...rest}>
       {children}
     </table>
   );
 });
+Table.displayName = "Table";
 
 export const TableCaption = forwardRef<HTMLTableCaptionElement, TableCaptionProps>(
   function TableCaption({ className, children, ...rest }, ref) {
@@ -82,6 +83,7 @@ export const TableCaption = forwardRef<HTMLTableCaptionElement, TableCaptionProp
     );
   }
 );
+TableCaption.displayName = "TableCaption";
 
 export const TableHead = forwardRef<HTMLTableSectionElement, TableSectionProps>(
   function TableHead({ className, children, ...rest }, ref) {
@@ -92,6 +94,7 @@ export const TableHead = forwardRef<HTMLTableSectionElement, TableSectionProps>(
     );
   }
 );
+TableHead.displayName = "TableHead";
 
 export const TableBody = forwardRef<HTMLTableSectionElement, TableSectionProps>(
   function TableBody({ className, children, ...rest }, ref) {
@@ -102,6 +105,7 @@ export const TableBody = forwardRef<HTMLTableSectionElement, TableSectionProps>(
     );
   }
 );
+TableBody.displayName = "TableBody";
 
 export const TableFoot = forwardRef<HTMLTableSectionElement, TableSectionProps>(
   function TableFoot({ className, children, ...rest }, ref) {
@@ -112,6 +116,7 @@ export const TableFoot = forwardRef<HTMLTableSectionElement, TableSectionProps>(
     );
   }
 );
+TableFoot.displayName = "TableFoot";
 
 export const TableRow = forwardRef<HTMLTableRowElement, TableRowProps>(function TableRow(
   { className, children, ...rest },
@@ -123,6 +128,7 @@ export const TableRow = forwardRef<HTMLTableRowElement, TableRowProps>(function 
     </tr>
   );
 });
+TableRow.displayName = "TableRow";
 
 export const TableHeadCell = forwardRef<HTMLTableCellElement, TableHeadCellProps>(
   function TableHeadCell(
@@ -141,6 +147,7 @@ export const TableHeadCell = forwardRef<HTMLTableCellElement, TableHeadCellProps
     );
   }
 );
+TableHeadCell.displayName = "TableHeadCell";
 
 export const TableCell = forwardRef<HTMLTableCellElement, TableCellProps>(function TableCell(
   { className, scope, colSpan, rowSpan, headers, abbr, children, ...rest },
@@ -157,6 +164,7 @@ export const TableCell = forwardRef<HTMLTableCellElement, TableCellProps>(functi
     </td>
   );
 });
+TableCell.displayName = "TableCell";
 
 export const TableColGroup = forwardRef<HTMLTableColElement, TableColGroupProps>(
   function TableColGroup({ className, span, children, ...rest }, ref) {
@@ -167,6 +175,7 @@ export const TableColGroup = forwardRef<HTMLTableColElement, TableColGroupProps>
     );
   }
 );
+TableColGroup.displayName = "TableColGroup";
 
 export const TableCol = forwardRef<HTMLTableColElement, TableColProps>(function TableCol(
   { className, span, ...rest },
@@ -174,3 +183,4 @@ export const TableCol = forwardRef<HTMLTableColElement, TableColProps>(function 
 ) {
   return <col ref={ref} className={className} {...spanAttrs(span)} {...rest} />;
 });
+TableCol.displayName = "TableCol";

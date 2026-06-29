@@ -124,9 +124,9 @@ templ DashboardSidebar(props PageProps) {
 			@DashboardPrimaryNav(props.Sidebar, "")
 		}
 		@ui.Box(ui.BoxProps{Class: "border-t border-border p-4"}) {
-			@ui.Button(ui.ButtonProps{Href: "/home/", Variant: "outline", Size: "sm", Class: "w-full"}) {
+			<a href="/home/" class={ ui.ButtonClasses(ui.ButtonProps{Variant: "outline", Size: "sm", Class: "w-full"}) }>
 				Open home block
-			}
+			</a>
 		}
 	}
 }
@@ -144,9 +144,9 @@ templ DashboardHeader(props PageProps) {
 			}) {
 				☰
 			}
-			@ui.Button(ui.ButtonProps{Href: "#gallery", Variant: "outline", Size: "sm"}) {
+			<a href="#gallery" class={ ui.ButtonClasses(ui.ButtonProps{Variant: "outline", Size: "sm"}) }>
 				{ props.Workspace }
-			}
+			</a>
 		}
 		@cmp.Nav(cmp.NavProps{Class: "col-start-2 hidden justify-self-center md:block"}) {
 			@cmp.NavList(cmp.NavListProps{Orientation: "horizontal", Gap: "sm"}) {
@@ -163,9 +163,9 @@ templ DashboardHeader(props PageProps) {
 			@ui.Badge(ui.BadgeProps{Variant: "secondary"}) {
 				{ props.Status }
 			}
-			@ui.Button(ui.ButtonProps{Href: "#profile", Variant: "ghost", Size: "sm"}) {
+			<a href="#profile" class={ ui.ButtonClasses(ui.ButtonProps{Variant: "ghost", Size: "sm"}) }>
 				{ props.ProfileName }
-			}
+			</a>
 		}
 	}
 }
@@ -178,12 +178,12 @@ templ DashboardHero(props HeroProps) {
 					{ props.Eyebrow }
 				}
 				@ui.Group(ui.GroupProps{Class: "items-center gap-2"}) {
-					@ui.Button(ui.ButtonProps{Variant: "outline", Size: "sm", Href: "/home/"}) {
+					<a href="/home/" class={ ui.ButtonClasses(ui.ButtonProps{Variant: "outline", Size: "sm"}) }>
 						{ props.SecondaryCTA }
-					}
-					@ui.Button(ui.ButtonProps{Variant: "default", Size: "sm", Href: "#gallery"}) {
+					</a>
+					<a href="#gallery" class={ ui.ButtonClasses(ui.ButtonProps{Variant: "default", Size: "sm"}) }>
 						{ props.PrimaryCTA }
-					}
+					</a>
 				}
 			}
 		}
@@ -215,30 +215,30 @@ templ StatusCards(items []StatusCard) {
 	@ui.Grid(ui.GridProps{Class: "gap-4 md:grid-cols-2 xl:grid-cols-4"}) {
 		for _, item := range items {
 			@ui.GridCol(ui.GridColProps{}) {
-				@cmp.Card(cmp.CardProps{Tag: "article", Variant: "default", Class: "h-full transition-colors hover:bg-muted/20"}) {
-					@cmp.CardContent(cmp.CardContentProps{Class: "p-6"}) {
-						@ui.Stack(ui.StackProps{Class: "gap-4"}) {
-							@ui.Group(ui.GroupProps{Class: "items-start justify-between gap-4"}) {
-								@cmp.IconBadge(cmp.IconBadgeProps{Text: item.Icon, Size: "default", Variant: BlockVariant("statusTone", item.Tone)})
-								@ui.Badge(ui.BadgeProps{Variant: "outline", Size: "sm"}) {
-									{ item.Meta }
-								}
+			<article class={ cmp.CardClasses(cmp.CardProps{Variant: "default", Class: "h-full transition-colors hover:bg-muted/20"}) }>
+				@cmp.CardContent(cmp.CardContentProps{Class: "p-6"}) {
+					@ui.Stack(ui.StackProps{Class: "gap-4"}) {
+						@ui.Group(ui.GroupProps{Class: "items-start justify-between gap-4"}) {
+							@cmp.IconBadge(cmp.IconBadgeProps{Text: item.Icon, Size: "default", Variant: BlockVariant("statusTone", item.Tone)})
+							@ui.Badge(ui.BadgeProps{Variant: "outline", Size: "sm"}) {
+								{ item.Meta }
 							}
-							@ui.Stack(ui.StackProps{Class: "gap-2"}) {
-								@ui.Text(ui.TextProps{Class: "text-2xl font-bold tracking-tight"}, item.Value)
-								@ui.Text(ui.TextProps{Class: "text-sm font-semibold"}, item.Title)
-								@ui.Text(ui.TextProps{Class: "text-xs leading-relaxed text-muted-foreground"}, item.Description)
-							}
+						}
+						@ui.Stack(ui.StackProps{Class: "gap-2"}) {
+							@ui.Text(ui.TextProps{Class: "text-2xl font-bold tracking-tight"}, item.Value)
+							@ui.Text(ui.TextProps{Class: "text-sm font-semibold"}, item.Title)
+							@ui.Text(ui.TextProps{Class: "text-xs leading-relaxed text-muted-foreground"}, item.Description)
 						}
 					}
 				}
+			</article>
 			}
 		}
 	}
 }
 
 templ LayerTable(items []LayerItem) {
-	@cmp.Card(cmp.CardProps{Tag: "section", Variant: "default"}) {
+	<section class={ cmp.CardClasses(cmp.CardProps{Variant: "default"}) }>
 		@cmp.CardHeader(cmp.CardHeaderProps{}) {
 			@cmp.CardTitle(cmp.CardTitleProps{Order: 2}, "Registry inventory")
 			@cmp.CardDescription(cmp.CardDescriptionProps{}, "Public bricks included in this preview and how they layer together.")
@@ -256,7 +256,7 @@ templ LayerTable(items []LayerItem) {
 				}
 			}
 		}
-	}
+	</section>
 }
 
 templ layerStatusBadge(status string) {

@@ -27,13 +27,6 @@
         "Variant": "default"
       }
     },
-    "state.disabled-link": {
-      "props": {
-        "Disabled": true,
-        "Href": "/locked",
-        "Variant": "link"
-      }
-    },
     "state.reset": {
       "props": {
         "Type": "reset",
@@ -66,7 +59,6 @@
     },
     "variant.link": {
       "props": {
-        "Href": "/docs",
         "Variant": "link"
       }
     },
@@ -86,6 +78,13 @@
       "props": {
         "Class": "underline",
         "Variant": "unstyled"
+      }
+    },
+    "composition.aschild-link": {
+      "props": {
+        "AsChild": true,
+        "Variant": "outline",
+        "Size": "sm"
       }
     }
   }

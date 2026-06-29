@@ -123,7 +123,9 @@ function CatalogSidebar({ props }: { props: HomePageProps }) {
         <CatalogPrimaryNav items={props.Sidebar} />
       </Box>
       <Box className="border-t border-border p-4">
-        <Button href="/" variant="outline" size="sm" className="w-full">Dashboard block</Button>
+        <Button asChild variant="outline" size="sm" className="w-full">
+          <a href="/">Dashboard block</a>
+        </Button>
       </Box>
     </Box>
   );
@@ -146,7 +148,9 @@ function CatalogHeader({ props }: { props: HomePageProps }) {
         >
           ☰
         </SheetTrigger>
-        <Button href="#workspace" variant="outline" size="sm">{props.Workspace}</Button>
+        <Button asChild variant="outline" size="sm">
+          <a href="#workspace">{props.Workspace}</a>
+        </Button>
       </Group>
       <Nav className="col-start-2 hidden justify-self-center md:block">
         <NavList orientation="horizontal" gap="sm">
@@ -159,7 +163,9 @@ function CatalogHeader({ props }: { props: HomePageProps }) {
       </Nav>
       <Group className="col-start-3 items-center justify-end gap-2 justify-self-end">
         <Badge variant="secondary">{props.Prototype}</Badge>
-        <Button href="#profile" variant="ghost" size="sm">{props.ProfileName}</Button>
+        <Button asChild variant="ghost" size="sm">
+          <a href="#profile">{props.ProfileName}</a>
+        </Button>
       </Group>
     </Box>
   );
@@ -234,13 +240,14 @@ function ToolCards({ items }: { items: ToolCard[] }) {
     <Grid className="gap-4 md:grid-cols-2 xl:grid-cols-3">
       {items.map((item) => (
         <GridCol key={item.Title}>
-          <Card tag="article" variant="default" className="h-full hover:bg-muted/20">
+          <Card asChild variant="default" className="h-full hover:bg-muted/20">
+            <article>
             <CardContent className="p-6">
               <Group className="items-start gap-4">
                 <IconBadge
                   text={toolIconLetter(item.Icon)}
                   size="default"
-                  variant={blockVariant(homeVariants, "toolTone", item.Tone)}
+                  className={blockVariant(homeVariants, "toolTone", item.Tone)}
                 />
                 <Stack className="gap-2">
                   <Text className="text-sm font-semibold">{item.Title}</Text>
@@ -248,6 +255,7 @@ function ToolCards({ items }: { items: ToolCard[] }) {
                 </Stack>
               </Group>
             </CardContent>
+            </article>
           </Card>
         </GridCol>
       ))}
@@ -257,7 +265,8 @@ function ToolCards({ items }: { items: ToolCard[] }) {
 
 function ShowcaseCardView({ item }: { item: ShowcaseItem }) {
   return (
-    <Card tag="article" variant="raised" className="h-full">
+    <Card asChild variant="raised" className="h-full">
+      <article>
       <CardContent className="p-6">
         <Stack className="gap-4">
           <Box className="flex h-28 items-center justify-center rounded-md border border-dashed border-border bg-muted/50">
@@ -279,11 +288,16 @@ function ShowcaseCardView({ item }: { item: ShowcaseItem }) {
             ))}
           </Stack>
           <Group className="gap-2">
-            <Button variant="default" size="sm" href="#use">{item.UseLabel}</Button>
-            <Button variant="outline" size="sm" href="#preview">{item.PreviewLabel}</Button>
+            <Button asChild variant="default" size="sm">
+              <a href="#use">{item.UseLabel}</a>
+            </Button>
+            <Button asChild variant="outline" size="sm">
+              <a href="#preview">{item.PreviewLabel}</a>
+            </Button>
           </Group>
         </Stack>
       </CardContent>
+      </article>
     </Card>
   );
 }
@@ -296,7 +310,9 @@ function ShowcaseGrid({ showcase }: { showcase: ShowcaseProps }) {
           <Title order={2} className="text-xl font-semibold tracking-tight">{showcase.Title}</Title>
           <Text className="text-sm text-muted-foreground">{showcase.Description}</Text>
         </Stack>
-        <Button variant="outline" size="sm" href="#templates">{showcase.ActionLabel}</Button>
+        <Button asChild variant="outline" size="sm">
+          <a href="#templates">{showcase.ActionLabel}</a>
+        </Button>
       </Group>
       <Grid className="gap-4 md:grid-cols-2 xl:grid-cols-3">
         {showcase.Items.map((item) => (
@@ -317,7 +333,9 @@ function PrototypeNotice({ notice }: { notice: NoticeProps }) {
           <Text className="text-sm font-semibold">{notice.Title}</Text>
           <Text className="text-sm text-muted-foreground">{notice.Description}</Text>
         </Stack>
-        <Button variant="outline" size="sm" href="#prototype-mode">{notice.ActionLabel}</Button>
+        <Button asChild variant="outline" size="sm">
+          <a href="#prototype-mode">{notice.ActionLabel}</a>
+        </Button>
       </Group>
     </Alert>
   );

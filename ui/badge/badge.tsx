@@ -1,10 +1,14 @@
 import { forwardRef, type HTMLAttributes } from "react";
 import badgeRecipe from "./badge.variants.json";
-import { composeRecipe } from "../../utils/variants";
+import { composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
 
-export type BadgeProps = HTMLAttributes<HTMLDivElement> & {
-  variant?: string;
-  size?: string;
+type BadgeVariant = RecipeKey<typeof badgeRecipe, "variant">;
+type BadgeSize = RecipeKey<typeof badgeRecipe, "size">;
+
+export type BadgeProps = Omit<HTMLAttributes<HTMLDivElement>, "className"> & {
+  variant?: BadgeVariant;
+  size?: BadgeSize;
+  className?: string;
 };
 
 export const Badge = forwardRef<HTMLDivElement, BadgeProps>(function Badge(
@@ -14,10 +18,11 @@ export const Badge = forwardRef<HTMLDivElement, BadgeProps>(function Badge(
   return (
     <div
       ref={ref}
-      className={composeRecipe(badgeRecipe, { variant: variant ?? "", size: size ?? "" }, className)}
+      className={composeRecipe(badgeRecipe as VariantRecipe, { variant: variant ?? "", size: size ?? "" }, className)}
       {...rest}
     >
       {children}
     </div>
   );
 });
+Badge.displayName = "Badge";
