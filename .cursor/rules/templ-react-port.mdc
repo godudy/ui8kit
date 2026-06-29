@@ -1,0 +1,77 @@
+---
+description: Templ registry — React TSX port rules (parity with .templ, shadcn-friendly DX)
+globs: "**/*.tsx,**/*.ts,ui/**,components/**,utils/**,examples/vite/**"
+alwaysApply: false
+---
+
+# React TSX port
+
+`*.tsx` files are the React runtime beside `*.templ`. Both are thin
+implementations of the same `*.spec.md` + `*.variants.json` contract.
+
+See [`dual-stack-component-library.md`](../../.project/dual-stack-component-library.md)
+and [`react-tsx-mental-model.md`](../../.project/react-tsx-mental-model.md).
+
+## Layout grammar (applies to TSX too)
+
+The Templ layout grammar is binding on the React side as well. See
+[`templ-layout-grammar.mdc`](templ-layout-grammar.mdc).
+
+- `Block` opens every block exactly once per file and carries the landmark `tag`.
+- `Box` lives only inside `Block` (or another layout primitive).
+- `Stack` is vertical flex; `Group` is horizontal flex (or `fieldset`).
+- No raw markup (`<div>`, `<aside>`, `<section>`, …) inside `ui/`, `components/`,
+  or example blocks when a primitive or composite exists.
+
+## Variants and class composition
+
+- `cva: true` props map to literal unions via `RecipeKey<typeof recipe, K>`.
+- `composeRecipe<R>(recipe, selection, ...extra)` is generic; never cast with
+  `as VariantRecipe`.
+- `*.variants.json` is the only source of truth for variant class strings; do
+  not duplicate recipes in TS.
+- `cn` = `clsx + tailwind-merge`; caller `className` wins over recipe classes.
+- Empty-string variant keys are forbidden. `defaults[k]` must reference a real
+  key in `byKey[k]`.
+
+## Composition primitives
+
+- Every clickable brick supports `asChild` via the shared `Slot`:
+  `Button`, `NavLink`, `SheetTrigger`, `SheetClose`, and any future trigger.
+- `asChild` merges `className` and event handlers onto the single child
+  (Radix-style). Use it for `<a>` wrapped as a button.
+- TSX uses `htmlFor`/`target` (or other neutral names), not `for`. The Go
+  `For string` field stays unchanged.
+
+## Controlled behavior bricks
+
+- `Sheet` and `Dialog` expose `open?: boolean` and
+  `onOpenChange?: (open: boolean) => void`.
+- `behavior?: "ui8kit"` is **opt-in**. When set, the brick still emits
+  `data-ui8kit-*` hook attributes so SSR parity with `.templ` holds, while
+  React keeps the controlled `open` state for visibility.
+- When `behavior` is unset, React manages `aria-expanded`, `hidden`, and focus
+  handoff locally. Custom JS pattern implementations are forbidden — see
+  [`ui8kit-aria-boundary.md`](../../.project/ui8kit-aria-boundary.md).
+
+## Dependencies
+
+- `ui/` and `components/` MUST NOT import npm packages beyond `react` and
+  `clsx`/`tailwind-merge` (the `cn` helpers).
+- `react`, `clsx`, and `tailwind-merge` are `peerDependencies`, not bundled.
+- Behavior is opt-in via `behavior="ui8kit"`; do not pull `@ui8kit/aria` into
+  bricks. The app registers the pattern subset it ships.
+
+## Imports
+
+- Inside the registry use relative paths (`../../utils`, `../slot/slot`).
+- Inside `examples/vite` use the `@registry/ui` and `@registry/components`
+  aliases only. Do not mix deep relative imports with aliases in the same file.
+
+## Validation
+
+- `bun run typecheck:react` must pass.
+- `bun run lint:ui8px` covers `ui/`, `components/`, `utils/`, and `examples/`
+  including `examples/vite/src/**/*.tsx`.
+- `bun run validate:aria` covers `examples/` markup against the registered
+  `@ui8kit/aria` manifest.

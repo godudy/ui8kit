@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "Tags",
+  "type": "object",
+  "required": ["groups", "aliases"],
+  "additionalProperties": false,
+  "properties": {
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "tags"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string", "pattern": "^[A-Z][A-Za-z0-9]*$" },
+          "tags": { "type": "array", "items": { "type": "string", "pattern": "^[a-z][a-z0-9]*$" }, "minItems": 1, "uniqueItems": true }
+        }
+      }
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string", "pattern": "^[A-Z][A-Za-z0-9]*$" },
+          "of": { "type": "array", "items": { "type": "string" } },
+          "tags": { "type": "array", "items": { "type": "string", "pattern": "^[a-z][a-z0-9]*$" }, "uniqueItems": true }
+        }
+      }
+    }
+  }
+}

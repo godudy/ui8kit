@@ -2,20 +2,20 @@
   "$schema": "../../schemas/data.schema.json",
   "id": "ui.title",
   "showcase": {
-    "order.h1": {
+    "as.h1": {
       "props": {
-        "Order": 1
+        "As": 1
       }
     },
-    "order.h2": {
+    "as.h2": {
       "props": {
-        "Order": 2
+        "As": 2
       }
     },
-    "order.h3": {
+    "as.h3": {
       "props": {
-        "Class": "text-lg",
-        "Order": 3
+        "As": 3,
+        "Class": "text-lg"
       }
     }
   }

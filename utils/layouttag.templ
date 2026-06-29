@@ -1,0 +1,57 @@
+/**
+ * LayoutTag renders a resolved layout element (div, section, article, aside,
+ * header, footer, main, nav, figure, search, hgroup, ul, ol, fieldset) with
+ * the supplied class and attrs. It collapses the per-brick 12-case switch into
+ * one shared component. The tag set must match utils/tags.json.
+ */
+
+package uiutils
+
+// LayoutTagProps configures the resolved layout element.
+type LayoutTagProps struct {
+	Tag      string
+	Fallback string
+	Group    TagGroup
+	Class    string
+	Attrs    templ.Attributes
+}
+
+// LayoutTag renders the resolved element with children.
+templ LayoutTag(p LayoutTagProps) {
+	@layoutTagInner(ResolveTag(p.Tag, p.Fallback, p.Group), p.Class, p.Attrs) {
+		{ children... }
+	}
+}
+
+templ layoutTagInner(tag, class string, attrs templ.Attributes) {
+	switch tag {
+		case "section":
+			<section class={ class } { attrs... }>{ children... }</section>
+		case "article":
+			<article class={ class } { attrs... }>{ children... }</article>
+		case "aside":
+			<aside class={ class } { attrs... }>{ children... }</aside>
+		case "header":
+			<header class={ class } { attrs... }>{ children... }</header>
+		case "footer":
+			<footer class={ class } { attrs... }>{ children... }</footer>
+		case "main":
+			<main class={ class } { attrs... }>{ children... }</main>
+		case "nav":
+			<nav class={ class } { attrs... }>{ children... }</nav>
+		case "figure":
+			<figure class={ class } { attrs... }>{ children... }</figure>
+		case "search":
+			<search class={ class } { attrs... }>{ children... }</search>
+		case "hgroup":
+			<hgroup class={ class } { attrs... }>{ children... }</hgroup>
+		case "ul":
+			<ul class={ class } { attrs... }>{ children... }</ul>
+		case "ol":
+			<ol class={ class } { attrs... }>{ children... }</ol>
+		case "fieldset":
+			<fieldset class={ class } { attrs... }>{ children... }</fieldset>
+		default:
+			<div class={ class } { attrs... }>{ children... }</div>
+	}
+}

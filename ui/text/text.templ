@@ -1,6 +1,6 @@
 /**
- * Text renders inline or block prose with a resolved semantic tag.
- * Pass copy as value; use Tag for span, small, code, blockquote, etc.
+ * Text renders a paragraph of body copy. Use Inline for inline <span> copy
+ * and Title (as={1..6}) for headings.
  */
 
 // Copy: components/ui/text/text.templ
@@ -9,11 +9,9 @@ package text
 
 import "github.com/fastygo/templ/utils"
 
-// TextProps configures typography element and classes.
+// TextProps configures paragraph classes.
 type TextProps struct {
 	Class string
-	// Tag — p, span, small, code, kbd, blockquote, ins, del, …; defaults to p
-	Tag   string
 	Attrs templ.Attributes
 }
 
@@ -22,66 +20,5 @@ func TextClasses(p TextProps) string {
 }
 
 templ Text(p TextProps, value string) {
-	switch uiutils.ResolveTag(p.Tag, "p", uiutils.TagGroupText) {
-		case "span":
-			<span class={ TextClasses(p) } { p.Attrs... }>{ value }</span>
-		case "small":
-			<small class={ TextClasses(p) } { p.Attrs... }>{ value }</small>
-		case "time":
-			<time class={ TextClasses(p) } { p.Attrs... }>{ value }</time>
-		case "em":
-			<em class={ TextClasses(p) } { p.Attrs... }>{ value }</em>
-		case "strong":
-			<strong class={ TextClasses(p) } { p.Attrs... }>{ value }</strong>
-		case "blockquote":
-			<blockquote class={ TextClasses(p) } { p.Attrs... }>{ value }</blockquote>
-		case "figcaption":
-			<figcaption class={ TextClasses(p) } { p.Attrs... }>{ value }</figcaption>
-		case "cite":
-			<cite class={ TextClasses(p) } { p.Attrs... }>{ value }</cite>
-		case "abbr":
-			<abbr class={ TextClasses(p) } { p.Attrs... }>{ value }</abbr>
-		case "address":
-			<address class={ TextClasses(p) } { p.Attrs... }>{ value }</address>
-		case "pre":
-			<pre class={ TextClasses(p) } { p.Attrs... }>{ value }</pre>
-		case "code":
-			<code class={ TextClasses(p) } { p.Attrs... }>{ value }</code>
-		case "mark":
-			<mark class={ TextClasses(p) } { p.Attrs... }>{ value }</mark>
-		case "data":
-			<data class={ TextClasses(p) } { p.Attrs... }>{ value }</data>
-		case "var":
-			<var class={ TextClasses(p) } { p.Attrs... }>{ value }</var>
-		case "samp":
-			<samp class={ TextClasses(p) } { p.Attrs... }>{ value }</samp>
-		case "kbd":
-			<kbd class={ TextClasses(p) } { p.Attrs... }>{ value }</kbd>
-		case "sub":
-			<sub class={ TextClasses(p) } { p.Attrs... }>{ value }</sub>
-		case "sup":
-			<sup class={ TextClasses(p) } { p.Attrs... }>{ value }</sup>
-		case "b":
-			<b class={ TextClasses(p) } { p.Attrs... }>{ value }</b>
-		case "i":
-			<i class={ TextClasses(p) } { p.Attrs... }>{ value }</i>
-		case "u":
-			<u class={ TextClasses(p) } { p.Attrs... }>{ value }</u>
-		case "s":
-			<s class={ TextClasses(p) } { p.Attrs... }>{ value }</s>
-		case "q":
-			<q class={ TextClasses(p) } { p.Attrs... }>{ value }</q>
-		case "dfn":
-			<dfn class={ TextClasses(p) } { p.Attrs... }>{ value }</dfn>
-		case "bdo":
-			<bdo class={ TextClasses(p) } { p.Attrs... }>{ value }</bdo>
-		case "bdi":
-			<bdi class={ TextClasses(p) } { p.Attrs... }>{ value }</bdi>
-		case "ins":
-			<ins class={ TextClasses(p) } { p.Attrs... }>{ value }</ins>
-		case "del":
-			<del class={ TextClasses(p) } { p.Attrs... }>{ value }</del>
-		default:
-			<p class={ TextClasses(p) } { p.Attrs... }>{ value }</p>
-	}
+	<p class={ TextClasses(p) } { p.Attrs... }>{ value }</p>
 }

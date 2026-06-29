@@ -32,6 +32,13 @@ api:
     type: string
     enum: [sm, default, lg]
     default: default
+  Gap:
+    role: layout-spacing
+    type: string
+    enum: [none, sm, default, lg]
+    allow-list-source: nav-list.variants.json#gap
+    default: default
+    applies-to: NavList
 showcase:
   - id: layout.vertical
     props: { AriaLabel: "Primary navigation" }

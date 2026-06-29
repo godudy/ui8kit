@@ -1,5 +1,7 @@
 /**
  * IconBadge renders a small icon surface for nav rows, cards, and status blocks.
+ * Pass the letter, glyph, or Icon node as children. The legacy Text/Name/
+ * IconType/BaseClass/Prefix/Title/AriaLabel fields are deprecated and ignored.
  */
 
 // Copy: components/ui/iconbadge/iconbadge.templ
@@ -7,7 +9,6 @@
 package iconbadge
 
 import (
-	"github.com/fastygo/templ/ui"
 	"github.com/fastygo/templ/utils"
 )
 
@@ -16,14 +17,21 @@ type IconBadgeProps struct {
 	Variant   string
 	Size      string
 	Class     string
-	Name      string
-	IconType  string
-	BaseClass string
-	Prefix    string
-	Text      string
-	Title     string
-	AriaLabel string
 	Attrs     templ.Attributes
+	// Deprecated: pass content as children.
+	Name string
+	// Deprecated: pass an Icon as children instead.
+	IconType string
+	// Deprecated: pass an Icon as children instead.
+	BaseClass string
+	// Deprecated: pass an Icon as children instead.
+	Prefix string
+	// Deprecated: pass content as children.
+	Text string
+	// Deprecated: pass an Icon as children instead.
+	Title string
+	// Deprecated: pass an Icon as children instead.
+	AriaLabel string
 }
 
 func IconBadgeClasses(p IconBadgeProps) string {
@@ -33,30 +41,9 @@ func IconBadgeClasses(p IconBadgeProps) string {
 	}, p.Class)
 }
 
-func iconBadgeText(p IconBadgeProps) string {
-	if p.Text != "" {
-		return p.Text
-	}
-	if p.Name == "" {
-		return "*"
-	}
-	return string([]rune(p.Name)[0])
-}
-
-// IconBadge renders an icon if configured, otherwise a text fallback.
+// IconBadge renders children as the badge content.
 templ IconBadge(p IconBadgeProps) {
 	<span class={ IconBadgeClasses(p) } { p.Attrs... }>
-		if p.BaseClass != "" || p.IconType == "svg" {
-			@ui.Icon(ui.IconProps{
-				Type:      p.IconType,
-				Name:      p.Name,
-				BaseClass: p.BaseClass,
-				Prefix:    p.Prefix,
-				Title:     p.Title,
-				AriaLabel: p.AriaLabel,
-			})
-		} else {
-			{ iconBadgeText(p) }
-		}
+		{ children... }
 	</span>
 }

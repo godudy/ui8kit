@@ -1,18 +1,23 @@
 import { forwardRef, type FieldsetHTMLAttributes, type HTMLAttributes, type MeterHTMLAttributes, type OptionHTMLAttributes, type OutputHTMLAttributes, type ProgressHTMLAttributes } from "react";
-import fieldsetRecipe from "./fieldset.variants.json";
-import legendRecipe from "./legend.variants.json";
-import meterRecipe from "./meter.variants.json";
-import progressRecipe from "./progress.variants.json";
-import { composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
+import fieldsetRecipeJson from "./fieldset.variants.json";
+import legendRecipeJson from "./legend.variants.json";
+import meterRecipeJson from "./meter.variants.json";
+import progressRecipeJson from "./progress.variants.json";
+import { composeRecipe, defineRecipe } from "../../utils";
 
-type FieldsetVariant = RecipeKey<typeof fieldsetRecipe, "variant">;
-type FieldsetSize = RecipeKey<typeof fieldsetRecipe, "size">;
-type LegendVariant = RecipeKey<typeof legendRecipe, "variant">;
-type LegendSize = RecipeKey<typeof legendRecipe, "size">;
-type MeterVariant = RecipeKey<typeof meterRecipe, "variant">;
-type MeterSize = RecipeKey<typeof meterRecipe, "size">;
-type ProgressVariant = RecipeKey<typeof progressRecipe, "variant">;
-type ProgressSize = RecipeKey<typeof progressRecipe, "size">;
+const { recipe: fieldsetRecipe, keys: fieldsetKeys } = defineRecipe(fieldsetRecipeJson);
+const { recipe: legendRecipe, keys: legendKeys } = defineRecipe(legendRecipeJson);
+const { recipe: meterRecipe, keys: meterKeys } = defineRecipe(meterRecipeJson);
+const { recipe: progressRecipe, keys: progressKeys } = defineRecipe(progressRecipeJson);
+
+type FieldsetVariant = typeof fieldsetKeys.variant;
+type FieldsetSize = typeof fieldsetKeys.size;
+type LegendVariant = typeof legendKeys.variant;
+type LegendSize = typeof legendKeys.size;
+type MeterVariant = typeof meterKeys.variant;
+type MeterSize = typeof meterKeys.size;
+type ProgressVariant = typeof progressKeys.variant;
+type ProgressSize = typeof progressKeys.size;
 
 export type FieldsetProps = FieldsetHTMLAttributes<HTMLFieldSetElement> & {
   variant?: FieldsetVariant;
@@ -49,8 +54,8 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(function 
     <fieldset
       ref={ref}
       className={composeRecipe(
-        fieldsetRecipe as VariantRecipe,
-        { variant: variant ?? "", size: size ?? "" },
+        fieldsetRecipe,
+        { variant, size },
         className
       )}
       {...rest}
@@ -68,7 +73,7 @@ export const Legend = forwardRef<HTMLLegendElement, LegendProps>(function Legend
   return (
     <legend
       ref={ref}
-      className={composeRecipe(legendRecipe as VariantRecipe, { variant: variant ?? "", size: size ?? "" }, className)}
+      className={composeRecipe(legendRecipe, { variant, size }, className)}
       {...rest}
     >
       {children}
@@ -121,7 +126,7 @@ export const Meter = forwardRef<HTMLMeterElement, MeterProps>(function Meter(
   return (
     <meter
       ref={ref}
-      className={composeRecipe(meterRecipe as VariantRecipe, { variant: variant ?? "", size: size ?? "" }, className)}
+      className={composeRecipe(meterRecipe, { variant, size }, className)}
       {...rest}
     >
       {children}
@@ -138,8 +143,8 @@ export const Progress = forwardRef<HTMLProgressElement, ProgressProps>(function 
     <progress
       ref={ref}
       className={composeRecipe(
-        progressRecipe as VariantRecipe,
-        { variant: variant ?? "", size: size ?? "" },
+        progressRecipe,
+        { variant, size },
         className
       )}
       {...rest}

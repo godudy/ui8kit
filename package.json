@@ -3,8 +3,9 @@
   "private": true,
   "packageManager": "bun@1.3.3",
   "scripts": {
-    "generate": "go run ./.validate/cmd/variantgen && go run ./.validate/cmd/blockgen && go tool templ generate ./...",
-    "lint:ui8px": "ui8px lint ui components utils examples examples/web/static/css/input.css",
+    "generate": "go run ./.validate/cmd/variantgen && go run ./.validate/cmd/blockgen && go run ./.validate/cmd/tagsgen && go tool templ generate ./...",
+    "lint:ui8px": "ui8px lint ui components utils examples examples/web/static/css/input.css examples/vite/dist/static/css/input.css",
+    "lint:ui8px:vite": "cd examples/vite && bun run build && cd ../.. && ui8px lint examples/vite/dist/static/css/app.css",
     "validate:aria": "ui8px validate aria examples --manifest examples/web/static/js/manifest.json",
     "verify": "bash .validate/scripts/validate-spec.sh --with-tests && bun run typecheck:react && bun run lint:ui8px && bun run validate:aria && go test ./...",
     "typecheck:react": "tsc -p tsconfig.react.json"

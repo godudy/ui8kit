@@ -1,21 +1,21 @@
-import { forwardRef, type ElementType, type HTMLAttributes, type ReactNode, type Ref } from "react";
-import textRecipe from "./text.variants.json";
-import { composeRecipe, type VariantRecipe } from "../../utils";
-import { resolveTag, TagGroup } from "../../utils/tags";
+import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
+import textRecipeJson from "./text.variants.json";
+import { composeRecipe, defineRecipe } from "../../utils";
 import { Slot } from "../slot/slot";
 
-export type TextProps = Omit<HTMLAttributes<HTMLElement>, "className"> & {
-  tag?: string;
+const { recipe: textRecipe } = defineRecipe(textRecipeJson);
+
+export type TextProps = Omit<HTMLAttributes<HTMLParagraphElement>, "className"> & {
   className?: string;
   children?: ReactNode;
   asChild?: boolean;
 };
 
-export const Text = forwardRef<HTMLElement, TextProps>(function Text(
-  { tag, className, children, asChild, ...rest },
+export const Text = forwardRef<HTMLParagraphElement, TextProps>(function Text(
+  { className, children, asChild, ...rest },
   ref
 ) {
-  const cls = composeRecipe(textRecipe as VariantRecipe, {}, className);
+  const cls = composeRecipe(textRecipe, {}, className);
   if (asChild) {
     return (
       <Slot ref={ref} className={cls} {...rest}>
@@ -23,11 +23,10 @@ export const Text = forwardRef<HTMLElement, TextProps>(function Text(
       </Slot>
     );
   }
-  const Tag = resolveTag(tag, "p", TagGroup.Text) as ElementType;
   return (
-    <Tag ref={ref as Ref<HTMLElement>} className={cls} {...rest}>
+    <p ref={ref} className={cls} {...rest}>
       {children}
-    </Tag>
+    </p>
   );
 });
 Text.displayName = "Text";

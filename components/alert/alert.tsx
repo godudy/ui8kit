@@ -1,31 +1,34 @@
 import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
-import alertRecipe from "./alert.variants.json";
-import { composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
+import alertRecipeJson from "./alert.variants.json";
+import { composeRecipe, defineRecipe } from "../../utils";
 import { Slot } from "../../ui/slot/slot";
 
-type AlertVariant = RecipeKey<typeof alertRecipe, "variant">;
+const { recipe: alertRecipe, keys: alertKeys } = defineRecipe(alertRecipeJson);
 
-export type AlertProps = Omit<HTMLAttributes<HTMLElement>, "className"> & {
+type AlertVariant = typeof alertKeys.variant;
+
+export type AlertProps = Omit<HTMLAttributes<HTMLDivElement>, "className"> & {
   variant?: AlertVariant;
-  role?: string;
+  role?: "status" | "alert";
   "aria-live"?: "off" | "polite" | "assertive";
   className?: string;
   children?: ReactNode;
   asChild?: boolean;
 };
 
-export const Alert = forwardRef<HTMLElement, AlertProps>(function Alert(
+export const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
   { variant, role, "aria-live": ariaLive, className, children, asChild, ...rest },
   ref
 ) {
   const resolvedLive: AlertProps["aria-live"] = ariaLive ?? "polite";
-  const cls = composeRecipe(alertRecipe as VariantRecipe, { variant: variant ?? "" }, className);
+  const resolvedRole: "status" | "alert" = role ?? "status";
+  const cls = composeRecipe(alertRecipe, { variant }, className);
   if (asChild) {
     return (
       <Slot
         ref={ref}
         className={cls}
-        role={role?.trim() || "status"}
+        role={resolvedRole}
         aria-live={resolvedLive}
         {...rest}
       >
@@ -34,15 +37,15 @@ export const Alert = forwardRef<HTMLElement, AlertProps>(function Alert(
     );
   }
   return (
-    <section
+    <div
       ref={ref}
       className={cls}
-      role={role?.trim() || "status"}
+      role={resolvedRole}
       aria-live={resolvedLive}
       {...rest}
     >
       {children}
-    </section>
+    </div>
   );
 });
 Alert.displayName = "Alert";

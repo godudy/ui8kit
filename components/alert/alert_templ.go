@@ -31,7 +31,8 @@ import (
 type AlertProps struct {
 	Class string
 	// Variant — default, destructive, or wireframe preset
-	Variant  string
+	Variant string
+	// Role — status or alert (defaults to status)
 	Role     string
 	AriaLive string
 	Attrs    templ.Attributes
@@ -48,6 +49,9 @@ func alertAttrs(p AlertProps) templ.Attributes {
 	if role == "" {
 		role = "status"
 	}
+	if role != "status" && role != "alert" {
+		role = "status"
+	}
 	live := strings.TrimSpace(p.AriaLive)
 	if live == "" {
 		live = "polite"
@@ -59,7 +63,7 @@ func alertAttrs(p AlertProps) templ.Attributes {
 	)
 }
 
-// Alert renders a landmark section with alert semantics.
+// Alert renders a div with alert or status semantics.
 func Alert(p AlertProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -86,7 +90,7 @@ func Alert(p AlertProps) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<section class=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -115,7 +119,7 @@ func Alert(p AlertProps) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</section>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

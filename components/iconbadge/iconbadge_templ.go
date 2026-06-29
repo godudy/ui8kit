@@ -7,6 +7,12 @@
  * IconBadge renders a small icon surface for nav rows, cards, and status blocks.
 
 
+ * Pass the letter, glyph, or Icon node as children. The legacy Text/Name/
+
+
+ * IconType/BaseClass/Prefix/Title/AriaLabel fields are deprecated and ignored.
+
+
  */
 
 // Copy: components/ui/iconbadge/iconbadge.templ
@@ -19,23 +25,29 @@ import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
 import (
-	"github.com/fastygo/templ/ui"
 	"github.com/fastygo/templ/utils"
 )
 
 // IconBadgeProps configures an icon surface.
 type IconBadgeProps struct {
-	Variant   string
-	Size      string
-	Class     string
-	Name      string
-	IconType  string
+	Variant string
+	Size    string
+	Class   string
+	Attrs   templ.Attributes
+	// Deprecated: pass content as children.
+	Name string
+	// Deprecated: pass an Icon as children instead.
+	IconType string
+	// Deprecated: pass an Icon as children instead.
 	BaseClass string
-	Prefix    string
-	Text      string
-	Title     string
+	// Deprecated: pass an Icon as children instead.
+	Prefix string
+	// Deprecated: pass content as children.
+	Text string
+	// Deprecated: pass an Icon as children instead.
+	Title string
+	// Deprecated: pass an Icon as children instead.
 	AriaLabel string
-	Attrs     templ.Attributes
 }
 
 func IconBadgeClasses(p IconBadgeProps) string {
@@ -45,17 +57,7 @@ func IconBadgeClasses(p IconBadgeProps) string {
 	}, p.Class)
 }
 
-func iconBadgeText(p IconBadgeProps) string {
-	if p.Text != "" {
-		return p.Text
-	}
-	if p.Name == "" {
-		return "*"
-	}
-	return string([]rune(p.Name)[0])
-}
-
-// IconBadge renders an icon if configured, otherwise a text fallback.
+// IconBadge renders children as the badge content.
 func IconBadge(p IconBadgeProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -107,28 +109,9 @@ func IconBadge(p IconBadgeProps) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		if p.BaseClass != "" || p.IconType == "svg" {
-			templ_7745c5c3_Err = ui.Icon(ui.IconProps{
-				Type:      p.IconType,
-				Name:      p.Name,
-				BaseClass: p.BaseClass,
-				Prefix:    p.Prefix,
-				Title:     p.Title,
-				AriaLabel: p.AriaLabel,
-			}).Render(ctx, templ_7745c5c3_Buffer)
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
-		} else {
-			var templ_7745c5c3_Var4 string
-			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(iconBadgeText(p))
-			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/iconbadge/iconbadge.templ`, Line: 59, Col: 21}
-			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
-			if templ_7745c5c3_Err != nil {
-				return templ_7745c5c3_Err
-			}
+		templ_7745c5c3_Err = templ_7745c5c3_Var1.Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
 		}
 		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</span>")
 		if templ_7745c5c3_Err != nil {

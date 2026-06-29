@@ -1,15 +1,18 @@
 import { forwardRef, type DialogHTMLAttributes } from "react";
-import dialogRecipe from "./dialog.variants.json";
-import { composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
+import dialogRecipeJson from "./dialog.variants.json";
+import { composeRecipe, defineRecipe, type BehaviorMode } from "../../utils";
 
-type DialogVariant = RecipeKey<typeof dialogRecipe, "variant">;
-type DialogSize = RecipeKey<typeof dialogRecipe, "size">;
+const { recipe: dialogRecipe, keys: dialogKeys } = defineRecipe(dialogRecipeJson);
+
+type DialogVariant = typeof dialogKeys.variant;
+type DialogSize = typeof dialogKeys.size;
 
 export type DialogProps = Omit<DialogHTMLAttributes<HTMLDialogElement>, "className"> & {
   variant?: DialogVariant;
   size?: DialogSize;
   open?: boolean;
-  dataUI8Kit?: string;
+  onOpenChange?: (open: boolean) => void;
+  behavior?: BehaviorMode;
   className?: string;
   "aria-labelledby"?: string;
   "aria-describedby"?: string;
@@ -21,12 +24,14 @@ export const Dialog = forwardRef<HTMLDialogElement, DialogProps>(function Dialog
     size,
     id,
     open,
-    dataUI8Kit,
+    onOpenChange,
+    behavior,
     "aria-label": ariaLabel,
     "aria-labelledby": ariaLabelledBy,
     "aria-describedby": ariaDescribedBy,
     className,
     children,
+    onClose,
     ...rest
   },
   ref
@@ -37,14 +42,18 @@ export const Dialog = forwardRef<HTMLDialogElement, DialogProps>(function Dialog
       id={id || undefined}
       open={open}
       className={composeRecipe(
-        dialogRecipe as VariantRecipe,
-        { variant: variant ?? "", size: size ?? "" },
+        dialogRecipe,
+        { variant, size },
         className
       )}
-      data-ui8kit={dataUI8Kit?.trim() || undefined}
+      data-ui8kit={behavior === "ui8kit" ? "dialog" : undefined}
       aria-label={ariaLabel?.trim() || undefined}
       aria-labelledby={ariaLabelledBy?.trim() || undefined}
       aria-describedby={ariaDescribedBy?.trim() || undefined}
+      onClose={(event) => {
+        onOpenChange?.(false);
+        onClose?.(event);
+      }}
       {...rest}
     >
       {children}

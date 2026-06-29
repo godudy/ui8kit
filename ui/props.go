@@ -25,6 +25,7 @@ import (
 	"github.com/fastygo/templ/ui/group"
 	"github.com/fastygo/templ/ui/icon"
 	"github.com/fastygo/templ/ui/image"
+	"github.com/fastygo/templ/ui/inline"
 	"github.com/fastygo/templ/ui/input"
 	"github.com/fastygo/templ/ui/label"
 	"github.com/fastygo/templ/ui/linebreak"
@@ -70,6 +71,7 @@ type (
 	DialogProps          = dialog.DialogProps
 	BreakProps           = linebreak.BreakProps
 	TextProps            = text.TextProps
+	InlineProps          = inline.InlineProps
 	TitleProps           = title.TitleProps
 	ButtonProps          = button.ButtonProps
 	BadgeProps           = badge.BadgeProps

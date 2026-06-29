@@ -6,19 +6,22 @@ import {
   type ReactNode,
   type Ref,
 } from "react";
-import navLinkRecipe from "./nav-link.variants.json";
-import navListRecipe from "./nav-list.variants.json";
-import { composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
+import navLinkRecipeJson from "./nav-link.variants.json";
+import navListRecipeJson from "./nav-list.variants.json";
+import { composeRecipe, defineRecipe, type BehaviorMode } from "../../utils";
 import { Link } from "../../ui/link/link";
 
-type NavLinkVariant = RecipeKey<typeof navLinkRecipe, "variant">;
-type NavLinkSize = RecipeKey<typeof navLinkRecipe, "size">;
-type NavListOrientation = RecipeKey<typeof navListRecipe, "orientation">;
-type NavListGap = RecipeKey<typeof navListRecipe, "gap">;
+const { recipe: navLinkRecipe, keys: navLinkKeys } = defineRecipe(navLinkRecipeJson);
+const { recipe: navListRecipe, keys: navListKeys } = defineRecipe(navListRecipeJson);
+
+type NavLinkVariant = typeof navLinkKeys.variant;
+type NavLinkSize = typeof navLinkKeys.size;
+type NavListOrientation = typeof navListKeys.orientation;
+type NavListGap = typeof navListKeys.gap;
 
 export type NavProps = HTMLAttributes<HTMLElement> & {
   "aria-label"?: string;
-  dataUI8Kit?: string;
+  behavior?: BehaviorMode;
 };
 
 export type NavListProps = Omit<HTMLAttributes<HTMLUListElement>, "className"> & {
@@ -46,10 +49,11 @@ function navLinkClasses(
   disabled?: boolean,
   className?: string
 ): string {
-  let v: string = variant ?? "";
-  if (active && !v.trim()) v = "active";
   const state = disabled ? "pointer-events-none opacity-50" : "";
-  return composeRecipe(navLinkRecipe as VariantRecipe, { variant: v, size: size ?? "" }, state, className);
+  if (active && !variant) {
+    return composeRecipe(navLinkRecipe, { variant: "active", size }, state, className);
+  }
+  return composeRecipe(navLinkRecipe, { variant, size }, state, className);
 }
 
 function navLinkCurrent(
@@ -62,7 +66,7 @@ function navLinkCurrent(
 }
 
 export const Nav = forwardRef<HTMLElement, NavProps>(function Nav(
-  { className, "aria-label": ariaLabel, dataUI8Kit, children, ...rest },
+  { className, "aria-label": ariaLabel, behavior, children, ...rest },
   ref
 ) {
   return (
@@ -70,7 +74,7 @@ export const Nav = forwardRef<HTMLElement, NavProps>(function Nav(
       ref={ref as Ref<HTMLElement>}
       className={className}
       aria-label={ariaLabel?.trim() || undefined}
-      data-ui8kit={dataUI8Kit?.trim() || undefined}
+      data-ui8kit={behavior === "ui8kit" ? "nav" : undefined}
       {...rest}
     >
       {children}
@@ -87,8 +91,8 @@ export const NavList = forwardRef<HTMLUListElement, NavListProps>(function NavLi
     <ul
       ref={ref}
       className={composeRecipe(
-        navListRecipe as VariantRecipe,
-        { orientation: orientation ?? "", gap: gap ?? "" },
+        navListRecipe,
+        { orientation, gap },
         className
       )}
       {...rest}

@@ -6,6 +6,8 @@ package: github.com/fastygo/templ/utils
 facade: github.com/fastygo/templ/utils
 go-package: uiutils
 parent: utils
+source: utils/tags.json
+generator: .validate/cmd/tagsgen
 exports:
   types:
     - name: TagGroup
@@ -56,7 +58,8 @@ ResolveTag returns fallback when tag is not allowed.
 
 ## Semantics
 
-- TagGroup is an int enum in the same Go package
+- Source of truth is `utils/tags.json`; `tagsgen` emits `utils/tags.go` and `utils/tags.ts`
+- TagGroup is an int enum in Go, a string union in TypeScript
 - ResolveTag lowercases and trims the requested tag
 - Invalid tags never render; fallback always wins
 

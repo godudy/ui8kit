@@ -1,9 +1,11 @@
 import { forwardRef, type OptionHTMLAttributes, type SelectHTMLAttributes } from "react";
-import selectRecipe from "./select.variants.json";
-import { composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
+import selectRecipeJson from "./select.variants.json";
+import { composeRecipe, defineRecipe } from "../../utils";
 
-type SelectVariant = RecipeKey<typeof selectRecipe, "variant">;
-type SelectSize = RecipeKey<typeof selectRecipe, "size">;
+const { recipe: selectRecipe, keys: selectKeys } = defineRecipe(selectRecipeJson);
+
+type SelectVariant = typeof selectKeys.variant;
+type SelectSize = typeof selectKeys.size;
 
 export type SelectOption = {
   value: string;
@@ -40,8 +42,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
       ref={ref}
       value={value}
       className={composeRecipe(
-        selectRecipe as VariantRecipe,
-        { variant: variant ?? "", size: size ?? "" },
+        selectRecipe,
+        { variant, size },
         className
       )}
       {...rest}

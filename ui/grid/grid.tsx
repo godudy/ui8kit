@@ -1,6 +1,6 @@
 import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
 import gridRecipe from "./grid.variants.json";
-import { composeRecipe, cn, type VariantRecipe } from "../../utils";
+import { composeRecipe, cn } from "../../utils";
 import { Slot } from "../slot/slot";
 
 export type GridProps = Omit<HTMLAttributes<HTMLDivElement>, "className"> & {
@@ -38,7 +38,7 @@ export const Grid = forwardRef<HTMLDivElement, GridProps>(function Grid(
   { cols, className, children, asChild, ...rest },
   ref
 ) {
-  const cls = composeRecipe(gridRecipe as VariantRecipe, {}, gridColsClass(cols, className), className);
+  const cls = composeRecipe(gridRecipe, {}, gridColsClass(cols, className), className);
   if (asChild) {
     return (
       <Slot ref={ref} className={cls} {...rest}>

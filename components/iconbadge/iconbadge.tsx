@@ -1,72 +1,53 @@
-import { forwardRef, type HTMLAttributes } from "react";
-import iconBadgeRecipe from "./iconbadge.variants.json";
-import { composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
-import { Icon, type IconType } from "../../ui/icon/icon";
+import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
+import iconBadgeRecipeJson from "./iconbadge.variants.json";
+import { composeRecipe, defineRecipe } from "../../utils";
 
-type IconBadgeVariant = RecipeKey<typeof iconBadgeRecipe, "variant">;
-type IconBadgeSize = RecipeKey<typeof iconBadgeRecipe, "size">;
+const { recipe: iconBadgeRecipe, keys: iconBadgeKeys } = defineRecipe(iconBadgeRecipeJson);
+
+type IconBadgeVariant = typeof iconBadgeKeys.variant;
+type IconBadgeSize = typeof iconBadgeKeys.size;
 
 export type { IconBadgeVariant, IconBadgeSize };
 
-export type IconBadgeProps = Omit<HTMLAttributes<HTMLSpanElement>, "className"> & {
+export type IconBadgeProps = Omit<HTMLAttributes<HTMLSpanElement>, "className" | "title"> & {
   variant?: IconBadgeVariant;
   size?: IconBadgeSize;
-  name?: string;
-  iconType?: IconType;
-  baseClass?: string;
-  prefix?: string;
-  text?: string;
-  title?: string;
   className?: string;
-  "aria-label"?: string;
+  children?: ReactNode;
+  /** @deprecated Pass the letter or glyph as children. */
+  name?: string;
+  /** @deprecated Pass an <Icon /> as children instead. */
+  iconType?: "svg" | "img" | "font";
+  /** @deprecated Pass an <Icon /> as children instead. */
+  baseClass?: string;
+  /** @deprecated Pass an <Icon /> as children instead. */
+  prefix?: string;
+  /** @deprecated Pass content as children. */
+  text?: string;
+  /** @deprecated Pass an <Icon /> as children instead. */
+  title?: string;
 };
-
-function iconBadgeText(name?: string, text?: string): string {
-  if (text) return text;
-  if (!name) return "*";
-  return [...name][0] ?? "*";
-}
 
 export const IconBadge = forwardRef<HTMLSpanElement, IconBadgeProps>(function IconBadge(
   {
     variant,
     size,
-    name,
-    iconType,
-    baseClass,
-    prefix,
-    text,
-    title,
-    "aria-label": ariaLabel,
     className,
     children,
+    name: _name,
+    iconType: _iconType,
+    baseClass: _baseClass,
+    prefix: _prefix,
+    text: _text,
+    title: _title,
     ...rest
   },
   ref
 ) {
-  const showIcon = baseClass?.trim() || iconType === "svg";
+  void _name; void _iconType; void _baseClass; void _prefix; void _text; void _title;
+  const cls = composeRecipe(iconBadgeRecipe, { variant, size }, className);
   return (
-    <span
-      ref={ref}
-      className={composeRecipe(
-        iconBadgeRecipe as VariantRecipe,
-        { variant: variant ?? "", size: size ?? "" },
-        className
-      )}
-      {...rest}
-    >
-      {showIcon ? (
-        <Icon
-          type={iconType}
-          name={name}
-          baseClass={baseClass}
-          prefix={prefix}
-          title={title}
-          aria-label={ariaLabel}
-        />
-      ) : (
-        iconBadgeText(name, text)
-      )}
+    <span ref={ref} className={cls} {...rest}>
       {children}
     </span>
   );

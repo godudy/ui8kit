@@ -1,10 +1,12 @@
 import { forwardRef, type TextareaHTMLAttributes } from "react";
-import textareaRecipe from "./textarea.variants.json";
-import { composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
+import textareaRecipeJson from "./textarea.variants.json";
+import { composeRecipe, defineRecipe } from "../../utils";
 import { textareaRows } from "../../utils/attrs";
 
-type TextareaVariant = RecipeKey<typeof textareaRecipe, "variant">;
-type TextareaSize = RecipeKey<typeof textareaRecipe, "size">;
+const { recipe: textareaRecipe, keys: textareaKeys } = defineRecipe(textareaRecipeJson);
+
+type TextareaVariant = typeof textareaKeys.variant;
+type TextareaSize = typeof textareaKeys.size;
 
 export type TextareaProps = Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "size" | "className"> & {
   variant?: TextareaVariant;
@@ -21,8 +23,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
       ref={ref}
       rows={textareaRows(rows)}
       className={composeRecipe(
-        textareaRecipe as VariantRecipe,
-        { variant: variant ?? "", size: size ?? "" },
+        textareaRecipe,
+        { variant, size },
         className
       )}
       {...rest}

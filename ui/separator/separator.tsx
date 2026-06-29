@@ -1,9 +1,11 @@
 import { forwardRef, type HTMLAttributes } from "react";
-import separatorRecipe from "./separator.variants.json";
-import { composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
+import separatorRecipeJson from "./separator.variants.json";
+import { composeRecipe, defineRecipe } from "../../utils";
 
-type SeparatorVariant = RecipeKey<typeof separatorRecipe, "variant">;
-type SeparatorOrientation = RecipeKey<typeof separatorRecipe, "orientation">;
+const { recipe: separatorRecipe, keys: separatorKeys } = defineRecipe(separatorRecipeJson);
+
+type SeparatorVariant = typeof separatorKeys.variant;
+type SeparatorOrientation = typeof separatorKeys.orientation;
 
 export type SeparatorProps = Omit<HTMLAttributes<HTMLHRElement>, "className"> & {
   variant?: SeparatorVariant;
@@ -20,8 +22,8 @@ export const Separator = forwardRef<HTMLHRElement, SeparatorProps>(function Sepa
     <hr
       ref={ref}
       className={composeRecipe(
-        separatorRecipe as VariantRecipe,
-        { variant: variant ?? "", orientation: orientation ?? "" },
+        separatorRecipe,
+        { variant, orientation },
         className
       )}
       {...rest}

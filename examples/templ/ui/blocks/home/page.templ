@@ -70,7 +70,7 @@ templ CatalogPrimaryNav(items []NavItem, class string) {
 			for index, item := range items {
 				@cmp.NavItem(cmp.NavItemProps{}) {
 					@cmp.NavLink(cmp.NavLinkProps{Href: item.Href, Active: index == 0, AriaLabel: item.Label}) {
-						@cmp.IconBadge(cmp.IconBadgeProps{Text: navIconLetter(item.Icon), Size: "sm", Variant: navIconVariant(index == 0)})
+						@cmp.IconBadge(cmp.IconBadgeProps{Size: "sm", Variant: navIconVariant(index == 0)}) { navIconLetter(item.Icon) }
 						{ item.Label }
 					}
 				}
@@ -96,10 +96,10 @@ templ CatalogHeaderNav(items []NavItem, class string) {
 templ CatalogSidebar(props PageProps) {
 	@ui.Box(ui.BoxProps{Tag: "aside", Class: "hidden w-64 shrink-0 border-r border-border bg-card md:flex md:flex-col"}) {
 		@ui.Box(ui.BoxProps{Class: "flex h-16 items-center gap-4 border-b border-border px-4"}) {
-			@cmp.IconBadge(cmp.IconBadgeProps{Text: "BY", Size: "sm", Variant: "accent"})
+			@cmp.IconBadge(cmp.IconBadgeProps{Size: "sm", Variant: "accent"}) { BY }
 			@ui.Stack(ui.StackProps{Class: "gap-0"}) {
-				@ui.Text(ui.TextProps{Tag: "span", Class: "text-sm font-semibold tracking-tight"}, props.Brand)
-				@ui.Text(ui.TextProps{Tag: "span", Class: "text-xs text-muted-foreground"}, "Workspace catalog")
+				@ui.Inline(ui.InlineProps{Class: "text-sm font-semibold tracking-tight"}, props.Brand)
+				@ui.Inline(ui.InlineProps{Class: "text-xs text-muted-foreground"}, "Workspace catalog")
 			}
 		}
 		@ui.Box(ui.BoxProps{Class: "flex-1 py-2"}) {
@@ -160,7 +160,7 @@ templ HeroChat(props HeroProps) {
 					@ui.Stack(ui.StackProps{Class: "gap-6"}) {
 						@ui.Stack(ui.StackProps{Class: "gap-2"}) {
 							@ui.Badge(ui.BadgeProps{Variant: "outline"}) { AI workspace }
-							@ui.Title(ui.TitleProps{Order: 1, Class: "text-3xl font-bold tracking-tight md:text-4xl"}, props.Title)
+							@ui.Title(ui.TitleProps{As: 1, Class: "text-3xl font-bold tracking-tight md:text-4xl"}, props.Title)
 							@ui.Text(ui.TextProps{Class: "text-sm leading-relaxed text-muted-foreground md:text-base"}, props.Subtitle)
 						}
 						@ui.Box(ui.BoxProps{Class: "rounded-lg border border-border bg-background p-4 shadow-sm"}) {
@@ -168,7 +168,7 @@ templ HeroChat(props HeroProps) {
 								Name:        "prompt",
 								Placeholder: props.Prompt,
 								Rows:        4,
-								Class:       "min-h-[7rem] border-0 bg-transparent shadow-none focus-visible:ring-0",
+								Class:       "min-h-28 border-0 bg-transparent shadow-none focus-visible:ring-0",
 							})
 							@ui.Group(ui.GroupProps{Class: "mt-4 items-center justify-between gap-2"}) {
 								@ui.Group(ui.GroupProps{Class: "items-center gap-2"}) {
@@ -202,7 +202,7 @@ templ HeroChat(props HeroProps) {
 						@ui.Text(ui.TextProps{Class: "text-xs font-semibold uppercase tracking-wide text-muted-foreground"}, "Workflow")
 						for index, step := range props.Workflow {
 							@ui.Group(ui.GroupProps{Class: "items-center gap-4 rounded-md border border-border bg-card px-4 py-4 shadow-sm"}) {
-								@cmp.IconBadge(cmp.IconBadgeProps{Text: workflowStepLabel(index), Size: "sm", Variant: workflowStepVariant(index)})
+								@cmp.IconBadge(cmp.IconBadgeProps{Size: "sm", Variant: workflowStepVariant(index)}) { workflowStepLabel(index) }
 								@ui.Text(ui.TextProps{Class: "text-sm font-medium"}, step.Label)
 							}
 						}
@@ -220,7 +220,7 @@ templ ToolCards(items []ToolCard) {
 				<article class={ cmp.CardClasses(cmp.CardProps{Variant: "default", Class: "h-full hover:bg-muted/20"}) }>
 					@cmp.CardContent(cmp.CardContentProps{Class: "p-6"}) {
 						@ui.Group(ui.GroupProps{Class: "items-start gap-4"}) {
-							@cmp.IconBadge(cmp.IconBadgeProps{Text: toolIconLetter(item.Icon), Size: "default", Variant: BlockVariant("toolTone", item.Tone)})
+							@cmp.IconBadge(cmp.IconBadgeProps{Size: "default", Variant: BlockVariant("toolTone", item.Tone)}) { toolIconLetter(item.Icon) }
 							@ui.Stack(ui.StackProps{Class: "gap-2"}) {
 								@ui.Text(ui.TextProps{Class: "text-sm font-semibold"}, item.Title)
 								@ui.Text(ui.TextProps{Class: "text-xs leading-relaxed text-muted-foreground"}, item.Description)
@@ -237,7 +237,7 @@ templ ShowcaseGrid(props ShowcaseProps) {
 	@ui.Stack(ui.StackProps{Class: "gap-6"}) {
 		@ui.Group(ui.GroupProps{Class: "items-end justify-between gap-4"}) {
 			@ui.Stack(ui.StackProps{Class: "gap-2"}) {
-				@ui.Title(ui.TitleProps{Order: 2, Class: "text-xl font-semibold tracking-tight"}, props.Title)
+				@ui.Title(ui.TitleProps{As: 2, Class: "text-xl font-semibold tracking-tight"}, props.Title)
 				@ui.Text(ui.TextProps{Class: "text-sm text-muted-foreground"}, props.Description)
 			}
 			<a href="#templates" class={ ui.ButtonClasses(ui.ButtonProps{Variant: "outline", Size: "sm"}) }>
@@ -259,11 +259,11 @@ templ ShowcaseCardView(item ShowcaseItem) {
 		@cmp.CardContent(cmp.CardContentProps{Class: "p-6"}) {
 			@ui.Stack(ui.StackProps{Class: "gap-4"}) {
 				@ui.Box(ui.BoxProps{Class: "flex h-28 items-center justify-center rounded-md border border-dashed border-border bg-muted/50"}) {
-					@cmp.IconBadge(cmp.IconBadgeProps{Text: showcaseIconLetter(item.Name), Size: "lg", Variant: "accent"})
+					@cmp.IconBadge(cmp.IconBadgeProps{Size: "lg", Variant: "accent"}) { showcaseIconLetter(item.Name) }
 				}
 				@ui.Group(ui.GroupProps{Class: "items-start justify-between gap-4"}) {
 					@ui.Stack(ui.StackProps{Class: "gap-2"}) {
-						@ui.Title(ui.TitleProps{Order: 3, Class: "text-base font-semibold"}, item.Name)
+						@ui.Title(ui.TitleProps{As: 3, Class: "text-base font-semibold"}, item.Name)
 						@ui.Text(ui.TextProps{Class: "text-sm leading-relaxed text-muted-foreground"}, item.Description)
 					}
 					@ui.Badge(ui.BadgeProps{Variant: "outline"}) {
@@ -273,7 +273,7 @@ templ ShowcaseCardView(item ShowcaseItem) {
 				@ui.Stack(ui.StackProps{Class: "gap-2"}) {
 					for _, capability := range item.Capabilities {
 						@ui.Group(ui.GroupProps{Class: "items-center gap-2"}) {
-							@cmp.IconBadge(cmp.IconBadgeProps{Text: "✓", Size: "xs", Variant: "secondary"})
+							@cmp.IconBadge(cmp.IconBadgeProps{Size: "xs", Variant: "secondary"}) { ✓ }
 							@ui.Text(ui.TextProps{Class: "text-xs text-muted-foreground"}, capability)
 						}
 					}

@@ -46,6 +46,21 @@ api:
     type: string
     enum: ["", ui8kit]
     default: ""
+  Open:
+    role: state
+    type: bool
+    default: false
+    react-only: true
+    notes: 'React controlled open state; onOpenChange fires on trigger / overlay / close / Esc.'
+  OnOpenChange:
+    role: state-callback
+    type: '(open: boolean) => void'
+    react-only: true
+  Target:
+    role: id-reference
+    type: string
+    react-only: true
+    notes: 'Replaces Go For on SheetTrigger, SheetOverlay, SheetClose.'
 showcase:
   - id: side.left
     props: { ID: demo-sheet, Side: left, Size: sm, AriaLabel: "Navigation" }
@@ -55,6 +70,19 @@ semantics:
   root: div
   role: dialog
   behavior: optional
+targets:
+  react:
+    component: Sheet
+    facade: '@fastygo/templ-react'
+    package: '@fastygo/templ-react/components/sheet'
+    notes:
+      - 'Controlled open state via open?: boolean and onOpenChange?: (open: boolean) => void.'
+      - 'SheetTrigger, SheetOverlay, SheetClose use target (id reference) instead of Go For string.'
+      - 'behavior="ui8kit" stays opt-in and emits data-ui8kit-* hooks for SSR parity.'
+  templ:
+    component: Sheet
+    facade: github.com/fastygo/templ/components
+    package: github.com/fastygo/templ/components/sheet
 ---
 
 ## Summary

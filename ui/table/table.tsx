@@ -1,6 +1,6 @@
 import { forwardRef, type HTMLAttributes, type ThHTMLAttributes, type TdHTMLAttributes } from "react";
 import tableRecipe from "./table.variants.json";
-import { composeRecipe, type VariantRecipe } from "../../utils";
+import { composeRecipe } from "../../utils";
 
 export type TableProps = HTMLAttributes<HTMLTableElement>;
 export type TableCaptionProps = HTMLAttributes<HTMLTableCaptionElement>;
@@ -67,7 +67,7 @@ export const Table = forwardRef<HTMLTableElement, TableProps>(function Table(
   ref
 ) {
   return (
-    <table ref={ref} className={composeRecipe(tableRecipe as VariantRecipe, {}, className)} {...rest}>
+    <table ref={ref} className={composeRecipe(tableRecipe, {}, className)} {...rest}>
       {children}
     </table>
   );

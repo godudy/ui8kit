@@ -11,7 +11,7 @@ parts:
     props: [Class, Attrs]
     slot: header
   - templ: CardTitle
-    props: [Class, Order, Attrs]
+    props: [Class, As, Attrs]
     slot: title
     value: string
   - templ: CardDescription
@@ -41,7 +41,7 @@ api:
   Attrs:
     role: html-attrs
     type: templ.Attributes
-  Order:
+  As:
     role: heading-level
     type: int
     enum: [1, 2, 3, 4, 5, 6]
@@ -66,7 +66,7 @@ showcase:
     props: { Variant: accent }
   - id: layout.header-only
     parts: [Card, CardHeader, CardTitle]
-  - id: title.order-h3
+  - id: title.as-h3
     props: { Variant: default }
     parts: [Card, CardHeader, CardTitle]
   - id: composition.aschild-section
@@ -94,7 +94,7 @@ For semantic root elements (section, article), use `asChild` (React) or `CardCla
 ## Semantics
 
 - Card root is a `<div>` by default; for semantic roots use `asChild` (React) or wrap manually with `CardClasses` (Go)
-- CardTitle maps Order to h1-h6 (default h2)
+- CardTitle maps As to h1-h6 (default h2)
 - CardDescription renders a p element
 - Card parts compose in document order
 
@@ -107,7 +107,7 @@ import cmp "github.com/fastygo/templ/components"
 templ Example() {
 	@cmp.Card(cmp.CardProps{Variant: "default"}) {
 		@cmp.CardHeader(cmp.CardHeaderProps{}) {
-			@cmp.CardTitle(cmp.CardTitleProps{Order: 2}, "Card title")
+			@cmp.CardTitle(cmp.CardTitleProps{As: 2}, "Card title")
 			@cmp.CardDescription(cmp.CardDescriptionProps{}, "Short supporting text.")
 		}
 		@cmp.CardContent(cmp.CardContentProps{}) {
@@ -144,7 +144,7 @@ import cmp "github.com/fastygo/templ/components"
 templ Example() {
 	@cmp.Card(cmp.CardProps{Variant: "kpi"}) {
 		@cmp.CardHeader(cmp.CardHeaderProps{}) {
-			@cmp.CardTitle(cmp.CardTitleProps{Order: 2}, "Revenue")
+			@cmp.CardTitle(cmp.CardTitleProps{As: 2}, "Revenue")
 		}
 		@cmp.CardContent(cmp.CardContentProps{}) {
 			$12,450
@@ -231,13 +231,13 @@ import cmp "github.com/fastygo/templ/components"
 templ Example() {
 	@cmp.Card(cmp.CardProps{}) {
 		@cmp.CardHeader(cmp.CardHeaderProps{}) {
-			@cmp.CardTitle(cmp.CardTitleProps{Order: 2}, "Title only")
+			@cmp.CardTitle(cmp.CardTitleProps{As: 2}, "Title only")
 		}
 	}
 }
 ```
 
-## Example title.order-h3
+## Example title.as-h3
 
 ```templ
 import cmp "github.com/fastygo/templ/components"
@@ -245,7 +245,7 @@ import cmp "github.com/fastygo/templ/components"
 templ Example() {
 	@cmp.Card(cmp.CardProps{}) {
 		@cmp.CardHeader(cmp.CardHeaderProps{}) {
-			@cmp.CardTitle(cmp.CardTitleProps{Order: 3}, "Nested section title")
+			@cmp.CardTitle(cmp.CardTitleProps{As: 3}, "Nested section title")
 		}
 	}
 }
@@ -263,7 +263,7 @@ export function Example() {
     <Card asChild variant="default">
       <section>
         <CardHeader>
-          <CardTitle order={2}>Section card</CardTitle>
+          <CardTitle as={2}>Section card</CardTitle>
           <CardDescription>Semantic root via asChild.</CardDescription>
         </CardHeader>
         <CardContent>Body</CardContent>
@@ -281,7 +281,7 @@ import cmp "github.com/fastygo/templ/components"
 templ Example() {
 	<section class={ cmp.CardClasses(cmp.CardProps{Variant: "default"}) }>
 		@cmp.CardHeader(cmp.CardHeaderProps{}) {
-			@cmp.CardTitle(cmp.CardTitleProps{Order: 2}, "Section card")
+			@cmp.CardTitle(cmp.CardTitleProps{As: 2}, "Section card")
 		}
 		@cmp.CardContent(cmp.CardContentProps{}) {
 			Body

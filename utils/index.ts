@@ -1,3 +1,4 @@
+export * from "./behavior";
 export * from "./cn";
 export * from "./variants";
 export * from "./attrs";

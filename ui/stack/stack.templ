@@ -23,38 +23,13 @@ func StackClasses(p StackProps) string {
 
 // Stack renders a vertical flex container.
 templ Stack(p StackProps) {
-	@stackTag(p) {
+	@uiutils.LayoutTag(uiutils.LayoutTagProps{
+		Tag:      p.Tag,
+		Fallback: "div",
+		Group:    uiutils.TagGroupStack,
+		Class:    StackClasses(p),
+		Attrs:    p.Attrs,
+	}) {
 		{ children... }
-	}
-}
-
-templ stackTag(p StackProps) {
-	switch uiutils.ResolveTag(p.Tag, "div", uiutils.TagGroupStack) {
-		case "nav":
-			<nav class={ StackClasses(p) } { p.Attrs... }>{ children... }</nav>
-		case "section":
-			<section class={ StackClasses(p) } { p.Attrs... }>{ children... }</section>
-		case "article":
-			<article class={ StackClasses(p) } { p.Attrs... }>{ children... }</article>
-		case "aside":
-			<aside class={ StackClasses(p) } { p.Attrs... }>{ children... }</aside>
-		case "header":
-			<header class={ StackClasses(p) } { p.Attrs... }>{ children... }</header>
-		case "footer":
-			<footer class={ StackClasses(p) } { p.Attrs... }>{ children... }</footer>
-		case "main":
-			<main class={ StackClasses(p) } { p.Attrs... }>{ children... }</main>
-		case "figure":
-			<figure class={ StackClasses(p) } { p.Attrs... }>{ children... }</figure>
-		case "search":
-			<search class={ StackClasses(p) } { p.Attrs... }>{ children... }</search>
-		case "hgroup":
-			<hgroup class={ StackClasses(p) } { p.Attrs... }>{ children... }</hgroup>
-		case "ul":
-			<ul class={ StackClasses(p) } { p.Attrs... }>{ children... }</ul>
-		case "ol":
-			<ol class={ StackClasses(p) } { p.Attrs... }>{ children... }</ol>
-		default:
-			<div class={ StackClasses(p) } { p.Attrs... }>{ children... }</div>
 	}
 }

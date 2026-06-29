@@ -2,48 +2,11 @@
 api:
     Attrs:
         cva: false
-        role: html-attrs
+        role: html-attributes
         type: templ.Attributes
     Class:
         cva: false
         role: style-extension
-        type: string
-    Tag:
-        allow-list-source: utils.tags.TagGroupText
-        cva: false
-        default: p
-        enum:
-            - p
-            - blockquote
-            - figcaption
-            - address
-            - pre
-            - span
-            - em
-            - strong
-            - small
-            - abbr
-            - cite
-            - code
-            - kbd
-            - mark
-            - time
-            - data
-            - var
-            - samp
-            - sub
-            - sup
-            - b
-            - i
-            - u
-            - s
-            - q
-            - dfn
-            - bdo
-            - bdi
-            - ins
-            - del
-        role: prose-tag
         type: string
     value:
         cva: false
@@ -60,26 +23,24 @@ semantics:
     behavior: static
     data: text.data.json
     role: none
-    root: resolved from Tag
+    root: p
 showcase:
-    - id: tag.p
-      props:
-        Tag: p
-      ref: tag.p
-    - id: tag.small
+    - id: default
+      ref: default
+    - id: muted
       props:
         Class: text-muted-foreground
-        Tag: small
-      ref: tag.small
-    - id: tag.code
+      ref: muted
+    - id: code
       props:
-        Class: text-sm
-        Tag: code
-      ref: tag.code
+        Class: text-sm font-mono
+      ref: code
 targets:
     react:
         component: Text
         facade: '@fastygo/templ-react'
+        notes:
+          - "Renders <p>. Use Inline for <span> copy, Title for headings."
         package: '@fastygo/templ-react/ui/text'
     templ:
         component: Text
@@ -90,20 +51,20 @@ variants: text.variants.json
 ---
 ## Summary
 
-Text renders plain copy in a semantic tag.
-Pass copy as the second value argument.
+Text renders a paragraph of body copy as a `<p>`.
+Use `Inline` for inline `<span>` copy and `Title` (or `H1`–`H6`) for headings.
 
 ## Use Cases
 
 - Render body paragraph copy
-- Render muted helper line with Tag small
+- Render muted helper line with `Class: text-muted-foreground`
 
 ## Semantics
 
-- ResolveTag uses TagGroupText from utils
-- Invalid Tag falls back to p
+- Root element is always `<p>`
+- For inline copy use `Inline`; for code spans wrap `Inline` with `font-mono`
 
-## Example tag.p
+## Example default
 
 ```templ
 import "github.com/fastygo/templ/ui"
@@ -113,22 +74,22 @@ templ Example() {
 }
 ```
 
-## Example tag.small
+## Example muted
 
 ```templ
 import "github.com/fastygo/templ/ui"
 
 templ Example() {
-	@ui.Text(ui.TextProps{Tag: "small", Class: "text-muted-foreground"}, "Helper line.")
+	@ui.Text(ui.TextProps{Class: "text-muted-foreground"}, "Helper line.")
 }
 ```
 
-## Example tag.code
+## Example code
 
 ```templ
 import "github.com/fastygo/templ/ui"
 
 templ Example() {
-	@ui.Text(ui.TextProps{Tag: "code", Class: "text-sm"}, "npm install")
+	@ui.Text(ui.TextProps{Class: "text-sm font-mono"}, "npm install")
 }
 ```

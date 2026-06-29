@@ -1,5 +1,5 @@
 import { forwardRef, type HTMLAttributes } from "react";
-import { cn } from "../../utils";
+import { cn, type BehaviorMode } from "../../utils";
 
 export type BreadcrumbItem = {
   label: string;
@@ -11,7 +11,7 @@ export type BreadcrumbItem = {
 export type BreadcrumbProps = HTMLAttributes<HTMLElement> & {
   items?: BreadcrumbItem[];
   "aria-label"?: string;
-  dataUI8Kit?: string;
+  behavior?: BehaviorMode;
 };
 
 function breadcrumbLinkClasses(item: BreadcrumbItem): string {
@@ -27,7 +27,7 @@ function breadcrumbLinkClasses(item: BreadcrumbItem): string {
 }
 
 export const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(function Breadcrumb(
-  { items = [], className, "aria-label": ariaLabel, dataUI8Kit, ...rest },
+  { items = [], className, "aria-label": ariaLabel, behavior, ...rest },
   ref
 ) {
   return (
@@ -35,7 +35,7 @@ export const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(function Brea
       ref={ref}
       className={cn("text-sm", className?.trim())}
       aria-label={ariaLabel?.trim() || undefined}
-      data-ui8kit={dataUI8Kit?.trim() || undefined}
+      data-ui8kit={behavior === "ui8kit" ? "breadcrumb" : undefined}
       {...rest}
     >
       <ol className="flex flex-wrap items-center gap-2">

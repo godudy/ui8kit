@@ -47,8 +47,11 @@ Mark props in `api:`:
 3. Primitives: `templ: Name`. Composites: `parts[]`. Helpers (`layer: helper`): `exports` — see `utils/utils.spec.md`.
 4. Every `showcase[].id` MUST have `## Example {id}` with at least one ` ```templ ` fence (helpers: ` ```go `).
 5. When `allow-list-source` is set, enum MUST match tag group, utils recipe, or `*.variants.json`.
-6. STE prose only: `Summary`, `Use Cases`, `Semantics` — short sentences, active voice.
-7. `/** */` in `.templ` MUST match `## Summary`. `//` prop comments MUST match `api` enums.
+6. `*.variants.json` MUST NOT use empty-string (`""`) keys in `byKey`. Every
+   `defaults[k]` MUST reference a non-empty key present in `byKey[k]`. The
+   validator fails the spec when this contract is broken.
+7. STE prose only: `Summary`, `Use Cases`, `Semantics` — short sentences, active voice.
+8. `/** */` in `.templ` MUST match `## Summary`. `//` prop comments MUST match `api` enums.
 
 Run: `bash .validate/scripts/validate-spec.sh --with-tests`
 

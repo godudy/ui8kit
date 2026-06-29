@@ -22,18 +22,13 @@ func ContainerClasses(p ContainerProps) string {
 }
 
 templ Container(p ContainerProps) {
-	@containerTag(p) {
+	@uiutils.LayoutTag(uiutils.LayoutTagProps{
+		Tag:      p.Tag,
+		Fallback: "div",
+		Group:    uiutils.TagGroupContainer,
+		Class:    ContainerClasses(p),
+		Attrs:    p.Attrs,
+	}) {
 		{ children... }
-	}
-}
-
-templ containerTag(p ContainerProps) {
-	switch uiutils.ResolveTag(p.Tag, "div", uiutils.TagGroupContainer) {
-		case "main":
-			<main class={ ContainerClasses(p) } { p.Attrs... }>{ children... }</main>
-		case "section":
-			<section class={ ContainerClasses(p) } { p.Attrs... }>{ children... }</section>
-		default:
-			<div class={ ContainerClasses(p) } { p.Attrs... }>{ children... }</div>
 	}
 }

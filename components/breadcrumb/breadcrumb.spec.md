@@ -18,6 +18,8 @@ api:
   DataUI8Kit:
     role: behavior-hook
     type: string
+    enum: ["", ui8kit]
+    default: ""
   Attrs:
     role: html-attrs
     type: templ.Attributes

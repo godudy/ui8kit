@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { Box, Group, Grid, GridCol, Stack, Text } from "@registry/ui";
 import {
   Alert,
@@ -36,7 +36,7 @@ function GalleryPanel({ title, description, children }: { title: string; descrip
   return (
     <Box className="border-b border-border p-6 last:border-b-0 lg:border-b-0 lg:border-r lg:last:border-r-0">
       <Stack className="gap-4">
-        <Stack className="gap-1">
+        <Stack className="gap-2">
           <Text className="text-sm font-semibold">{title}</Text>
           <Text className="text-xs text-muted-foreground">{description}</Text>
         </Stack>
@@ -47,6 +47,7 @@ function GalleryPanel({ title, description, children }: { title: string; descrip
 }
 
 export function ComponentExamples() {
+  const [demoSheetOpen, setDemoSheetOpen] = useState(false);
   return (
     <Box id="component-examples" tag="section" className="rounded-lg border border-border bg-card shadow-sm">
       <Grid className="gap-0 lg:grid-cols-2">
@@ -106,24 +107,26 @@ export function ComponentExamples() {
                 <NavList gap="sm" orientation="horizontal">
                   <NavItem>
                     <NavLink href="/" active>
-                      <IconBadge text="H" size="sm" variant="accent" />
+                      <IconBadge size="sm" variant="accent">H</IconBadge>
                       Home
                     </NavLink>
                   </NavItem>
                   <NavItem>
                     <NavLink href="/docs">
-                      <IconBadge text="D" size="sm" variant="secondary" />
+                      <IconBadge size="sm" variant="secondary">D</IconBadge>
                       Docs
                     </NavLink>
                   </NavItem>
                 </NavList>
               </Nav>
               <Group className="flex flex-wrap gap-2">
-                <IconBadge text="★" size="default" variant="accent" />
-                <IconBadge text="!" size="default" variant="destructive" />
+                <IconBadge size="default" variant="accent">★</IconBadge>
+                <IconBadge size="default" variant="destructive">!</IconBadge>
                 <SheetTrigger
                   id={demoSheetTriggerID}
-                  for={demoSheetID}
+                  target={demoSheetID}
+                  open={demoSheetOpen}
+                  onOpenChange={setDemoSheetOpen}
                   behavior="ui8kit"
                   variant="outline"
                   size="sm"
@@ -135,15 +138,27 @@ export function ComponentExamples() {
               <Sheet
                 id={demoSheetID}
                 side="right"
+                open={demoSheetOpen}
+                onOpenChange={setDemoSheetOpen}
                 behavior="ui8kit"
                 aria-label="Demo sheet"
                 aria-labelledby={demoSheetTitleID}
               >
-                <SheetOverlay for={demoSheetID} behavior="ui8kit" />
+                <SheetOverlay
+                  target={demoSheetID}
+                  open={demoSheetOpen}
+                  onOpenChange={setDemoSheetOpen}
+                  behavior="ui8kit"
+                />
                 <SheetContent>
                   <SheetHeader>
                     <SheetTitle id={demoSheetTitleID}>Sheet panel</SheetTitle>
-                    <SheetClose for={demoSheetID} behavior="ui8kit" aria-label="Close demo sheet">
+                    <SheetClose
+                      target={demoSheetID}
+                      onOpenChange={setDemoSheetOpen}
+                      behavior="ui8kit"
+                      aria-label="Close demo sheet"
+                    >
                       Close
                     </SheetClose>
                   </SheetHeader>

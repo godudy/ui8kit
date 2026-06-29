@@ -1,0 +1,78 @@
+---
+description: Templ registry — Block/Box/Stack/Group layout grammar for bricks and blocks
+globs: "**/*.templ,**/*.tsx,**/*.spec.md,examples/**"
+alwaysApply: false
+---
+
+# Layout grammar
+
+The registry ships four layout primitives. They are not interchangeable and
+they are not "the same thing with different names". Use them correctly in
+`ui/`, `components/`, and example blocks (including `examples/vite`).
+
+## The four primitives
+
+| Primitive | Renders | Direction | Role |
+|-----------|---------|-----------|------|
+| `Block`   | semantic landmark (`tag`) | — | Opens every block exactly once per file. Carries the landmark `tag` (`aside`, `header`, `main`, `section`, `nav`, …). |
+| `Box`     | `<div>` (or other layout tag) | — | Free-form inner container. Lives **only** inside `Block` (or another layout primitive). Never opens a block. |
+| `Stack`   | `<div>` (vertical flex) | column | Vertical rhythm: sections, form fields, list rows. Base: `flex flex-col items-start justify-start`. |
+| `Group`   | `<div>` or `<fieldset>` | row | Horizontal flex grouping. Base: `flex min-w-0`. Use `tag="fieldset"` for related form controls. |
+
+## Rules
+
+1. **`Block` is the entry point of a block.** Each file or composite block
+   begins with exactly one `Block`. Do not nest `Block` inside `Block` in the
+   same file.
+2. **`Box` is strictly inside `Block`.** `Box` never carries a landmark
+   `tag` (`aside`, `header`, `main`, `section`, `nav`). Use `Block` for that.
+3. **No raw markup in bricks or blocks.** Inside `ui/`, `components/`, and
+   `examples/ui/blocks/`, do not write `<div>`, `<aside>`, `<section>`,
+   `<header>`, etc. directly. Use `Block`/`Box`/`Stack`/`Group` (or another
+   primitive/composite that wraps them).
+   - Exception: brick root elements required by semantics (`<dialog>`,
+     `<button>`, `<details>`, `<table>` family, `<form>`, `<fieldset>`).
+   - Exception: `examples/page.templ` and document shells (`<!DOCTYPE>`,
+     `<html>`, `<head>`, `<body>`, asset tags).
+4. **`Stack` is vertical.** Use it for top-to-bottom rhythm. Do not add
+   `flex-row` overrides; if you need horizontal, switch to `Group`.
+5. **`Group` is horizontal.** Use `tag="fieldset"` only when grouping related
+   form controls; otherwise default `<div>`.
+
+## Examples
+
+Correct (block opens with `Block`, inner boxes use `Box`, vertical rhythm via
+`Stack`, horizontal row via `Group`):
+
+```templ
+@ui.Block(ui.BlockProps{Tag: "aside", Class: "hidden w-64 md:flex md:flex-col"}) {
+  @ui.Box(ui.BoxProps{Class: "flex h-16 items-center gap-4 border-b"}) {
+    @cmp.IconBadge(cmp.IconBadgeProps{Size: "sm", Variant: "accent"}) { BY }
+    @ui.Stack(ui.StackProps{Class: "gap-0"}) {
+      @ui.Text(ui.TextProps{Class: "text-sm font-semibold"}) { Brand }
+      @ui.Text(ui.TextProps{Class: "text-xs text-muted-foreground"}) { Subtitle }
+    }
+  }
+}
+```
+
+Incorrect (raw markup, nested `Block`, wrong direction):
+
+```templ
+<aside class="hidden w-64 md:flex">            // raw markup — forbidden
+  @ui.Block(ui.BlockProps{Tag: "div"}) {        // Block inside Block — forbidden
+    @ui.Stack(ui.StackProps{Class: "flex-row"}) // Stack used for row — use Group
+      …
+    }
+  }
+}
+```
+
+## Validation
+
+- `bun run lint:ui8px` scans `ui/`, `components/`, `utils/`, and `examples/`.
+- `bash .validate/scripts/validate-spec.sh --with-tests` enforces spec contracts.
+- `bun run typecheck:react` keeps the TSX side aligned.
+
+See [`templ-atomic-ui8px.mdc`](templ-atomic-ui8px.mdc) for the styling model
+and [`templ-react-port.mdc`](templ-react-port.mdc) for the React port rules.

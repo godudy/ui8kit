@@ -1,4 +1,5 @@
 import homeVariants from "../../../../templ/ui/blocks/home/home.variants.json";
+import { useState } from "react";
 import { defaultHomePage } from "../../data/home";
 import { blockVariant } from "../../lib/block-variant";
 import {
@@ -35,6 +36,7 @@ import {
   Group,
   Grid,
   GridCol,
+  Inline,
   Stack,
   Text,
   Textarea,
@@ -52,7 +54,7 @@ function CatalogPrimaryNav({ items, className }: { items: NavItemData[]; classNa
         {items.map((item, index) => (
           <NavItem key={item.Label}>
             <NavLink href={item.Href} active={index === 0} aria-label={item.Label}>
-              <IconBadge text={navIconLetter(item.Icon)} size="sm" variant={navIconVariant(index === 0)} />
+              <IconBadge size="sm" variant={navIconVariant(index === 0)}>{navIconLetter(item.Icon)}</IconBadge>
               {item.Label}
             </NavLink>
           </NavItem>
@@ -76,24 +78,41 @@ function CatalogHeaderNav({ items, className }: { items: NavItemData[]; classNam
   );
 }
 
-function CatalogMobileSheet({ props }: { props: HomePageProps }) {
+function CatalogMobileSheet({
+  props,
+  open,
+  onOpenChange,
+}: {
+  props: HomePageProps;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) {
   return (
     <Sheet
       id={homeSheetPanelID}
       side="left"
       size="default"
       variant="card"
+      open={open}
+      onOpenChange={onOpenChange}
       behavior="ui8kit"
       aria-label="Navigation menu"
       aria-labelledby={homeSheetTitleID}
       className="md:hidden max-h-dvh overflow-y-auto p-0"
     >
-      <SheetOverlay for={homeSheetPanelID} behavior="ui8kit" className="cursor-pointer bg-background/80" />
+      <SheetOverlay
+        target={homeSheetPanelID}
+        open={open}
+        onOpenChange={onOpenChange}
+        behavior="ui8kit"
+        className="cursor-pointer bg-background/80"
+      />
       <SheetContent className="p-4">
         <SheetHeader>
           <SheetTitle id={homeSheetTitleID} className="text-sm font-medium">{props.Brand}</SheetTitle>
           <SheetClose
-            for={homeSheetPanelID}
+            target={homeSheetPanelID}
+            onOpenChange={onOpenChange}
             behavior="ui8kit"
             variant="outline"
             size="icon"
@@ -113,10 +132,10 @@ function CatalogSidebar({ props }: { props: HomePageProps }) {
   return (
     <Box tag="aside" className="hidden w-64 shrink-0 border-r border-border bg-card md:flex md:flex-col">
       <Box className="flex h-16 items-center gap-4 border-b border-border px-4">
-        <IconBadge text="BY" size="sm" variant="accent" />
+        <IconBadge size="sm" variant="accent">BY</IconBadge>
         <Stack className="gap-0">
-          <Text tag="span" className="text-sm font-semibold tracking-tight">{props.Brand}</Text>
-          <Text tag="span" className="text-xs text-muted-foreground">Workspace catalog</Text>
+          <Inline className="text-sm font-semibold tracking-tight">{props.Brand}</Inline>
+          <Inline className="text-xs text-muted-foreground">Workspace catalog</Inline>
         </Stack>
       </Box>
       <Box className="flex-1 py-2">
@@ -131,7 +150,15 @@ function CatalogSidebar({ props }: { props: HomePageProps }) {
   );
 }
 
-function CatalogHeader({ props }: { props: HomePageProps }) {
+function CatalogHeader({
+  props,
+  open,
+  onOpenChange,
+}: {
+  props: HomePageProps;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) {
   return (
     <Box
       tag="header"
@@ -140,7 +167,9 @@ function CatalogHeader({ props }: { props: HomePageProps }) {
       <Group className="col-start-1 items-center gap-2 justify-self-start">
         <SheetTrigger
           id={homeSheetTriggerID}
-          for={homeSheetPanelID}
+          target={homeSheetPanelID}
+          open={open}
+          onOpenChange={onOpenChange}
           behavior="ui8kit"
           variant="outline"
           size="icon"
@@ -180,7 +209,7 @@ function HeroChat({ hero }: { hero: HeroProps }) {
             <Stack className="gap-6">
               <Stack className="gap-2">
                 <Badge variant="outline">AI workspace</Badge>
-                <Title order={1} className="text-3xl font-bold tracking-tight md:text-4xl">{hero.Title}</Title>
+                <Title as={1} className="text-3xl font-bold tracking-tight md:text-4xl">{hero.Title}</Title>
                 <Text className="text-sm leading-relaxed text-muted-foreground md:text-base">{hero.Subtitle}</Text>
               </Stack>
               <Box className="rounded-lg border border-border bg-background p-4 shadow-sm">
@@ -188,7 +217,7 @@ function HeroChat({ hero }: { hero: HeroProps }) {
                   name="prompt"
                   placeholder={hero.Prompt}
                   rows={4}
-                  className="min-h-[7rem] border-0 bg-transparent shadow-none focus-visible:ring-0"
+                  className="min-h-28 border-0 bg-transparent shadow-none focus-visible:ring-0"
                 />
                 <Group className="mt-4 items-center justify-between gap-2">
                   <Group className="items-center gap-2">
@@ -220,10 +249,11 @@ function HeroChat({ hero }: { hero: HeroProps }) {
                   className="items-center gap-4 rounded-md border border-border bg-card px-4 py-4 shadow-sm"
                 >
                   <IconBadge
-                    text={workflowStepLabel(index)}
                     size="sm"
                     variant={workflowStepVariant(index)}
-                  />
+                  >
+                    {workflowStepLabel(index)}
+                  </IconBadge>
                   <Text className="text-sm font-medium">{step.Label}</Text>
                 </Group>
               ))}
@@ -245,10 +275,11 @@ function ToolCards({ items }: { items: ToolCard[] }) {
             <CardContent className="p-6">
               <Group className="items-start gap-4">
                 <IconBadge
-                  text={toolIconLetter(item.Icon)}
                   size="default"
                   className={blockVariant(homeVariants, "toolTone", item.Tone)}
-                />
+                >
+                  {toolIconLetter(item.Icon)}
+                </IconBadge>
                 <Stack className="gap-2">
                   <Text className="text-sm font-semibold">{item.Title}</Text>
                   <Text className="text-xs leading-relaxed text-muted-foreground">{item.Description}</Text>
@@ -270,11 +301,11 @@ function ShowcaseCardView({ item }: { item: ShowcaseItem }) {
       <CardContent className="p-6">
         <Stack className="gap-4">
           <Box className="flex h-28 items-center justify-center rounded-md border border-dashed border-border bg-muted/50">
-            <IconBadge text={showcaseIconLetter(item.Name)} size="lg" variant="accent" />
+            <IconBadge size="lg" variant="accent">{showcaseIconLetter(item.Name)}</IconBadge>
           </Box>
           <Group className="items-start justify-between gap-4">
             <Stack className="gap-2">
-              <Title order={3} className="text-base font-semibold">{item.Name}</Title>
+              <Title as={3} className="text-base font-semibold">{item.Name}</Title>
               <Text className="text-sm leading-relaxed text-muted-foreground">{item.Description}</Text>
             </Stack>
             <Badge variant="outline">{item.Category}</Badge>
@@ -282,7 +313,7 @@ function ShowcaseCardView({ item }: { item: ShowcaseItem }) {
           <Stack className="gap-2">
             {item.Capabilities.map((capability) => (
               <Group key={capability} className="items-center gap-2">
-                <IconBadge text="✓" size="xs" variant="secondary" />
+                <IconBadge size="xs" variant="secondary">✓</IconBadge>
                 <Text className="text-xs text-muted-foreground">{capability}</Text>
               </Group>
             ))}
@@ -307,7 +338,7 @@ function ShowcaseGrid({ showcase }: { showcase: ShowcaseProps }) {
     <Stack className="gap-6">
       <Group className="items-end justify-between gap-4">
         <Stack className="gap-2">
-          <Title order={2} className="text-xl font-semibold tracking-tight">{showcase.Title}</Title>
+          <Title as={2} className="text-xl font-semibold tracking-tight">{showcase.Title}</Title>
           <Text className="text-sm text-muted-foreground">{showcase.Description}</Text>
         </Stack>
         <Button asChild variant="outline" size="sm">
@@ -343,14 +374,15 @@ function PrototypeNotice({ notice }: { notice: NoticeProps }) {
 
 export function HomePage() {
   const props = defaultHomePage;
+  const [sheetOpen, setSheetOpen] = useState(false);
 
   return (
     <Block tag="main" className="min-h-screen bg-muted/30 text-foreground">
-      <CatalogMobileSheet props={props} />
+      <CatalogMobileSheet props={props} open={sheetOpen} onOpenChange={setSheetOpen} />
       <Group className="min-h-screen w-full items-stretch">
         <CatalogSidebar props={props} />
         <Box className="flex min-w-0 flex-1 flex-col bg-background">
-          <CatalogHeader props={props} />
+          <CatalogHeader props={props} open={sheetOpen} onOpenChange={setSheetOpen} />
           <Box className="flex flex-1 flex-col gap-8 p-4 md:p-8">
             <HeroChat hero={props.Hero} />
             <ToolCards items={props.Tools} />

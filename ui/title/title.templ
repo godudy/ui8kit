@@ -1,5 +1,6 @@
 /**
- * Title renders a heading (h1–h6) from Order without picking tags manually.
+ * Title renders a heading (h1–h6) from As (1–6). Defaults to h2 when As is 0
+ * or out of range.
  */
 
 // Copy: components/ui/title/title.templ
@@ -11,8 +12,9 @@ import "github.com/fastygo/templ/utils"
 // TitleProps configures heading level and classes.
 type TitleProps struct {
 	Class string
-	// Order — maps to h1–h6; 0 and 2 default to h2
-	Order int
+	// As — maps to h1–h6; 0 and 2 default to h2
+	As int
+	Attrs templ.Attributes
 }
 
 func TitleClasses(p TitleProps) string {
@@ -20,24 +22,11 @@ func TitleClasses(p TitleProps) string {
 }
 
 templ Title(p TitleProps, value string) {
-	@titleTag(p) {
+	@uiutils.HeadingTag(uiutils.HeadingTagProps{
+		As:    p.As,
+		Class: TitleClasses(p),
+		Attrs: p.Attrs,
+	}) {
 		{ value }
-	}
-}
-
-templ titleTag(p TitleProps) {
-	switch uiutils.TitleTag(p.Order) {
-		case "h1":
-			<h1 class={ TitleClasses(p) }>{ children... }</h1>
-		case "h3":
-			<h3 class={ TitleClasses(p) }>{ children... }</h3>
-		case "h4":
-			<h4 class={ TitleClasses(p) }>{ children... }</h4>
-		case "h5":
-			<h5 class={ TitleClasses(p) }>{ children... }</h5>
-		case "h6":
-			<h6 class={ TitleClasses(p) }>{ children... }</h6>
-		default:
-			<h2 class={ TitleClasses(p) }>{ children... }</h2>
 	}
 }

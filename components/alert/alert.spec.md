@@ -18,6 +18,7 @@ api:
   Role:
     role: live-region-role
     type: string
+    enum: [status, alert]
     default: status
   AriaLive:
     role: live-region-politeness
@@ -41,7 +42,7 @@ showcase:
   - id: variant.warning
     props: { Variant: warning }
 semantics:
-  root: section
+  root: div
   role: status
   aria-live: polite
   behavior: static
@@ -60,8 +61,8 @@ Alert uses role status and aria-live polite.
 
 ## Semantics
 
-- Root element is section
-- Role defaults to status
+- Root element is `<div>` (matches shadcn alert)
+- Role defaults to `status`; allowed values are `status` and `alert`
 - AriaLive defaults to polite
 - Children carry the visible message body
 

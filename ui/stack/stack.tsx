@@ -1,6 +1,6 @@
 import { forwardRef, type ElementType, type HTMLAttributes, type ReactNode, type Ref } from "react";
 import stackRecipe from "./stack.variants.json";
-import { composeRecipe, type VariantRecipe } from "../../utils";
+import { composeRecipe } from "../../utils";
 import { resolveTag, TagGroup } from "../../utils/tags";
 import { Slot } from "../slot/slot";
 
@@ -15,7 +15,7 @@ export const Stack = forwardRef<HTMLElement, StackProps>(function Stack(
   { tag, className, children, asChild, ...rest },
   ref
 ) {
-  const cls = composeRecipe(stackRecipe as VariantRecipe, {}, className);
+  const cls = composeRecipe(stackRecipe, {}, className);
   if (asChild) {
     return (
       <Slot ref={ref} className={cls} {...rest}>

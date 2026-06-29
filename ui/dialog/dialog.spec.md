@@ -5,6 +5,7 @@ api:
         default: ""
         role: behavior-hook
         type: string
+        enum: ["", ui8kit]
     Open:
         cva: false
         default: false

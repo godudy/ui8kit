@@ -10,7 +10,7 @@
     "variant": {
       "card": "rounded-md border border-border p-4",
       "default": "",
-      "inline": "flex flex-wrap items-start gap-3",
+      "inline": "flex flex-wrap items-start gap-4",
       "unstyled": ""
     }
   },

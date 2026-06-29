@@ -93,17 +93,41 @@ func validateVariantsFile(doc *specDoc, rel, specDir, variantsFile string) []val
 	if err != nil {
 		return []validationError{{rel, "variants", fmt.Sprintf("missing variants file %q", variantsFile)}}
 	}
-	keys, err := loadVariantsByKey(raw)
+	byKey, defaults, err := loadVariantsByKey(raw)
 	if err != nil {
 		return []validationError{{rel, "variants", err.Error()}}
 	}
 
-	api, _ := doc.fm["api"].(map[string]any)
-	if api == nil {
-		return nil
+	var errs []validationError
+
+	// Forbid empty-string byKey entries; every key must be non-empty.
+	for k, m := range byKey {
+		if _, ok := m[""]; ok {
+			errs = append(errs, validationError{rel, "variants", fmt.Sprintf("byKey[%s] contains empty-string key; move its class under a named variant (e.g. \"default\")", k)})
+		}
 	}
 
-	var errs []validationError
+	// defaults[k] must reference a non-empty key present in byKey[k].
+	for k, def := range defaults {
+		if def == "" {
+			errs = append(errs, validationError{rel, "variants", fmt.Sprintf("defaults[%s] is empty-string; set it to a real key in byKey[%s]", k, k)})
+			continue
+		}
+		allowed, ok := byKey[k]
+		if !ok {
+			errs = append(errs, validationError{rel, "variants", fmt.Sprintf("defaults[%s] references missing byKey[%s]", k, k)})
+			continue
+		}
+		if _, present := allowed[def]; !present {
+			errs = append(errs, validationError{rel, "variants", fmt.Sprintf("defaults[%s]=%q not found in byKey[%s]", k, def, k)})
+		}
+	}
+
+	api, _ := doc.fm["api"].(map[string]any)
+	if api == nil {
+		return errs
+	}
+
 	for field, rawField := range api {
 		fm, _ := rawField.(map[string]any)
 		if fm == nil {
@@ -115,7 +139,7 @@ func validateVariantsFile(doc *specDoc, rel, specDir, variantsFile string) []val
 		}
 		key := strings.TrimPrefix(source, variantsFile+"#")
 		specEnum := getStringSliceAny(fm["enum"])
-		codeEnum := sortedMapKeys(keys[key])
+		codeEnum := sortedMapKeys(byKey[key])
 		missing, extra := diffEnum(specEnum, codeEnum)
 		if len(missing) > 0 {
 			errs = append(errs, validationError{rel, field, fmt.Sprintf("api.enum missing values from %s: %v", source, missing)})
@@ -127,17 +151,18 @@ func validateVariantsFile(doc *specDoc, rel, specDir, variantsFile string) []val
 	return errs
 }
 
-func loadVariantsByKey(raw []byte) (map[string]map[string]string, error) {
+func loadVariantsByKey(raw []byte) (map[string]map[string]string, map[string]string, error) {
 	var payload struct {
-		ByKey map[string]map[string]string `json:"byKey"`
+		ByKey    map[string]map[string]string `json:"byKey"`
+		Defaults map[string]string            `json:"defaults"`
 	}
 	if err := json.Unmarshal(raw, &payload); err != nil {
-		return nil, fmt.Errorf("invalid variants JSON: %w", err)
+		return nil, nil, fmt.Errorf("invalid variants JSON: %w", err)
 	}
 	if payload.ByKey == nil {
-		return nil, fmt.Errorf("variants JSON missing byKey")
+		return nil, nil, fmt.Errorf("variants JSON missing byKey")
 	}
-	return payload.ByKey, nil
+	return payload.ByKey, payload.Defaults, nil
 }
 
 func sortedMapKeys(m map[string]string) []string {

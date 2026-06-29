@@ -2,21 +2,17 @@
   "$schema": "../../schemas/data.schema.json",
   "id": "ui.text",
   "showcase": {
-    "tag.code": {
+    "default": {
+      "props": {}
+    },
+    "muted": {
       "props": {
-        "Class": "text-sm",
-        "Tag": "code"
+        "Class": "text-muted-foreground"
       }
     },
-    "tag.p": {
+    "code": {
       "props": {
-        "Tag": "p"
-      }
-    },
-    "tag.small": {
-      "props": {
-        "Class": "text-muted-foreground",
-        "Tag": "small"
+        "Class": "text-sm font-mono"
       }
     }
   }

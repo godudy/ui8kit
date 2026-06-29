@@ -4,7 +4,7 @@
   "base": "",
   "keys": ["statusTone"],
   "defaults": {
-    "statusTone": "accent"
+    "statusTone": "default"
   },
   "byKey": {
     "statusTone": {

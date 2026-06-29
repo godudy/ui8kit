@@ -1,6 +1,6 @@
 import { forwardRef, type ElementType, type HTMLAttributes, type ReactNode, type Ref } from "react";
 import listRecipe from "./list.variants.json";
-import { composeRecipe, type VariantRecipe } from "../../utils";
+import { composeRecipe } from "../../utils";
 import { resolveTag, TagGroup } from "../../utils/tags";
 
 export type ListProps = Omit<HTMLAttributes<HTMLElement>, "className"> & {
@@ -19,7 +19,7 @@ export const List = forwardRef<HTMLElement, ListProps>(function List(
 ) {
   const Tag = listTag(tag) as ElementType;
   return (
-    <Tag ref={ref as Ref<HTMLElement>} className={composeRecipe(listRecipe as VariantRecipe, {}, className)} {...rest}>
+    <Tag ref={ref as Ref<HTMLElement>} className={composeRecipe(listRecipe, {}, className)} {...rest}>
       {children}
     </Tag>
   );
@@ -44,7 +44,7 @@ export const ListItem = forwardRef<HTMLElement, ListItemProps>(function ListItem
   return (
     <Tag
       ref={ref as Ref<HTMLElement>}
-      className={composeRecipe(listRecipe as VariantRecipe, {}, className)}
+      className={composeRecipe(listRecipe, {}, className)}
       {...valueAttr}
       {...rest}
     >

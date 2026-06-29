@@ -4,14 +4,16 @@ import {
   type ImgHTMLAttributes,
   type SourceHTMLAttributes,
 } from "react";
-import imageRecipe from "./image.variants.json";
-import { composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
+import imageRecipeJson from "./image.variants.json";
+import { composeRecipe, defineRecipe } from "../../utils";
 
-type ImageVariant = RecipeKey<typeof imageRecipe, "variant">;
-type ImageSize = RecipeKey<typeof imageRecipe, "size">;
-type ImageFit = RecipeKey<typeof imageRecipe, "fit">;
-type ImagePosition = RecipeKey<typeof imageRecipe, "position">;
-type ImageAspect = RecipeKey<typeof imageRecipe, "aspect">;
+const { recipe: imageRecipe, keys: imageKeys } = defineRecipe(imageRecipeJson);
+
+type ImageVariant = typeof imageKeys.variant;
+type ImageSize = typeof imageKeys.size;
+type ImageFit = typeof imageKeys.fit;
+type ImagePosition = typeof imageKeys.position;
+type ImageAspect = typeof imageKeys.aspect;
 
 export type ImageProps = Omit<ImgHTMLAttributes<HTMLImageElement>, "className"> & {
   variant?: ImageVariant;
@@ -77,13 +79,13 @@ export const Image = forwardRef<HTMLImageElement, ImageProps>(function Image(
       decoding={imageDecoding(decoding)}
       fetchPriority={fetchPriority || undefined}
       className={composeRecipe(
-        imageRecipe as VariantRecipe,
+        imageRecipe,
         {
-          variant: variant ?? "",
-          size: size ?? "",
-          fit: fit ?? "",
-          position: position ?? "",
-          aspect: aspect ?? "",
+          variant,
+          size,
+          fit,
+          position,
+          aspect,
         },
         className
       )}

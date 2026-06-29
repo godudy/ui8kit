@@ -3,13 +3,15 @@ import {
   type ButtonHTMLAttributes,
   type ReactNode,
 } from "react";
-import buttonRecipe from "./button.variants.json";
-import { cn, composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
+import buttonRecipeJson from "./button.variants.json";
+import { cn, composeRecipe, defineRecipe } from "../../utils";
 import { defaultButtonType } from "../../utils/attrs";
 import { Slot } from "../slot/slot";
 
-type ButtonVariant = RecipeKey<typeof buttonRecipe, "variant">;
-type ButtonSize = RecipeKey<typeof buttonRecipe, "size">;
+const { recipe: buttonRecipe, keys: buttonKeys } = defineRecipe(buttonRecipeJson);
+
+type ButtonVariant = typeof buttonKeys.variant;
+type ButtonSize = typeof buttonKeys.size;
 
 export type { ButtonVariant, ButtonSize };
 
@@ -32,7 +34,7 @@ function buttonClasses(
     return cn(state, className);
   }
   return cn(
-    composeRecipe(buttonRecipe as VariantRecipe, { variant: variant ?? "", size: size ?? "" }),
+    composeRecipe(buttonRecipe, { variant, size }),
     state,
     className
   );

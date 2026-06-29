@@ -1,9 +1,11 @@
 import { forwardRef, type InputHTMLAttributes } from "react";
-import checkboxRecipe from "./checkbox.variants.json";
-import { composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
+import checkboxRecipeJson from "./checkbox.variants.json";
+import { composeRecipe, defineRecipe } from "../../utils";
 
-type CheckboxVariant = RecipeKey<typeof checkboxRecipe, "variant">;
-type CheckboxSize = RecipeKey<typeof checkboxRecipe, "size">;
+const { recipe: checkboxRecipe, keys: checkboxKeys } = defineRecipe(checkboxRecipeJson);
+
+type CheckboxVariant = typeof checkboxKeys.variant;
+type CheckboxSize = typeof checkboxKeys.size;
 
 export type CheckboxProps = Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "type" | "className"> & {
   variant?: CheckboxVariant;
@@ -20,8 +22,8 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Che
       ref={ref}
       type="checkbox"
       className={composeRecipe(
-        checkboxRecipe as VariantRecipe,
-        { variant: variant ?? "", size: size ?? "" },
+        checkboxRecipe,
+        { variant, size },
         className
       )}
       {...rest}

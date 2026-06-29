@@ -1,0 +1,24 @@
+/**
+ * Inline renders inline copy as a <span>. Use Text for paragraph blocks and
+ * Title (as={1..6}) for headings.
+ */
+
+// Copy: components/ui/inline/inline.templ
+
+package inline
+
+import "github.com/fastygo/templ/utils"
+
+// InlineProps configures inline span classes.
+type InlineProps struct {
+	Class string
+	Attrs templ.Attributes
+}
+
+func InlineClasses(p InlineProps) string {
+	return uiutils.Compose(InlineVariants, map[string]string{}, p.Class)
+}
+
+templ Inline(p InlineProps, value string) {
+	<span class={ InlineClasses(p) } { p.Attrs... }>{ value }</span>
+}

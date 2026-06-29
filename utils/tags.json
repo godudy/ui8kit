@@ -1,0 +1,78 @@
+{
+  "$schema": "../../schemas/tags.schema.json",
+  "groups": [
+    {
+      "name": "Layout",
+      "tags": ["div", "section", "article", "aside", "header", "footer", "main", "nav", "figure", "search", "hgroup"]
+    },
+    {
+      "name": "BlockText",
+      "tags": ["p", "blockquote", "figcaption", "address", "pre"]
+    },
+    {
+      "name": "Inline",
+      "tags": ["span", "em", "strong", "small", "abbr", "cite", "code", "kbd", "mark", "time", "data", "var", "samp", "sub", "sup", "b", "i", "u", "s", "q", "dfn", "bdo", "bdi", "ins", "del"]
+    },
+    {
+      "name": "Heading",
+      "tags": ["h1", "h2", "h3", "h4", "h5", "h6"]
+    },
+    {
+      "name": "List",
+      "tags": ["ul", "ol", "dl", "menu"]
+    },
+    {
+      "name": "ListItem",
+      "tags": ["li", "dt", "dd"]
+    },
+    {
+      "name": "Form",
+      "tags": ["form", "fieldset"]
+    },
+    {
+      "name": "FormControl",
+      "tags": ["input", "textarea", "select", "button", "option", "optgroup", "datalist", "output", "meter", "progress"]
+    },
+    {
+      "name": "FormLabel",
+      "tags": ["label", "legend"]
+    },
+    {
+      "name": "Table",
+      "tags": ["table"]
+    },
+    {
+      "name": "TableSection",
+      "tags": ["thead", "tbody", "tfoot"]
+    },
+    {
+      "name": "TableRow",
+      "tags": ["tr"]
+    },
+    {
+      "name": "TableCell",
+      "tags": ["th", "td"]
+    },
+    {
+      "name": "TableColumn",
+      "tags": ["colgroup", "col"]
+    },
+    {
+      "name": "Media",
+      "tags": ["img", "picture", "source"]
+    },
+    {
+      "name": "Disclosure",
+      "tags": ["details", "summary"]
+    },
+    {
+      "name": "Container",
+      "tags": ["div", "main", "section"]
+    }
+  ],
+  "aliases": [
+    { "name": "Stack", "of": ["Layout"], "tags": ["ul", "ol"] },
+    { "name": "Group", "of": ["Layout"], "tags": ["fieldset"] },
+    { "name": "Text", "of": ["BlockText", "Inline"] }
+  ]
+}

@@ -1,0 +1,31 @@
+/**
+ * HeadingTag renders an h1–h6 element from the As prop (1–6, default 2).
+ * Shared by ui/title and components/card to collapse the 6-case switch.
+ */
+
+package uiutils
+
+// HeadingTagProps configures the resolved heading element.
+type HeadingTagProps struct {
+	As    int
+	Class string
+	Attrs templ.Attributes
+}
+
+// HeadingTag renders the resolved heading with children.
+templ HeadingTag(p HeadingTagProps) {
+	switch TitleTag(p.As) {
+		case "h1":
+			<h1 class={ p.Class } { p.Attrs... }>{ children... }</h1>
+		case "h3":
+			<h3 class={ p.Class } { p.Attrs... }>{ children... }</h3>
+		case "h4":
+			<h4 class={ p.Class } { p.Attrs... }>{ children... }</h4>
+		case "h5":
+			<h5 class={ p.Class } { p.Attrs... }>{ children... }</h5>
+		case "h6":
+			<h6 class={ p.Class } { p.Attrs... }>{ children... }</h6>
+		default:
+			<h2 class={ p.Class } { p.Attrs... }>{ children... }</h2>
+	}
+}

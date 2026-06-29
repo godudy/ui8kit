@@ -23,36 +23,13 @@ func GroupClasses(p GroupProps) string {
 
 // Group renders a horizontal flex container.
 templ Group(p GroupProps) {
-	@groupTag(p) {
+	@uiutils.LayoutTag(uiutils.LayoutTagProps{
+		Tag:      p.Tag,
+		Fallback: "div",
+		Group:    uiutils.TagGroupGroup,
+		Class:    GroupClasses(p),
+		Attrs:    p.Attrs,
+	}) {
 		{ children... }
-	}
-}
-
-templ groupTag(p GroupProps) {
-	switch uiutils.ResolveTag(p.Tag, "div", uiutils.TagGroupGroup) {
-		case "section":
-			<section class={ GroupClasses(p) } { p.Attrs... }>{ children... }</section>
-		case "article":
-			<article class={ GroupClasses(p) } { p.Attrs... }>{ children... }</article>
-		case "aside":
-			<aside class={ GroupClasses(p) } { p.Attrs... }>{ children... }</aside>
-		case "header":
-			<header class={ GroupClasses(p) } { p.Attrs... }>{ children... }</header>
-		case "footer":
-			<footer class={ GroupClasses(p) } { p.Attrs... }>{ children... }</footer>
-		case "main":
-			<main class={ GroupClasses(p) } { p.Attrs... }>{ children... }</main>
-		case "nav":
-			<nav class={ GroupClasses(p) } { p.Attrs... }>{ children... }</nav>
-		case "figure":
-			<figure class={ GroupClasses(p) } { p.Attrs... }>{ children... }</figure>
-		case "search":
-			<search class={ GroupClasses(p) } { p.Attrs... }>{ children... }</search>
-		case "hgroup":
-			<hgroup class={ GroupClasses(p) } { p.Attrs... }>{ children... }</hgroup>
-		case "fieldset":
-			<fieldset class={ GroupClasses(p) } { p.Attrs... }>{ children... }</fieldset>
-		default:
-			<div class={ GroupClasses(p) } { p.Attrs... }>{ children... }</div>
 	}
 }

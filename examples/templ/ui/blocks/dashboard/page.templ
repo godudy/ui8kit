@@ -36,7 +36,7 @@ templ GallerySection() {
 	@ui.Stack(ui.StackProps{Class: "gap-4"}) {
 		@ui.Group(ui.GroupProps{Class: "items-end justify-between gap-4"}) {
 			@ui.Stack(ui.StackProps{Class: "gap-2"}) {
-				@ui.Title(ui.TitleProps{Order: 2, Class: "text-lg font-semibold tracking-tight"}, "Live component gallery")
+				@ui.Title(ui.TitleProps{As: 2, Class: "text-lg font-semibold tracking-tight"}, "Live component gallery")
 				@ui.Text(ui.TextProps{Class: "text-sm text-muted-foreground"}, "Interactive samples from ui/* and components/* — buttons, forms, alerts, sheets.")
 			}
 			@ui.Badge(ui.BadgeProps{Variant: "outline"}) {
@@ -88,7 +88,7 @@ templ DashboardPrimaryNav(items []NavItem, class string) {
 			for index, item := range items {
 				@cmp.NavItem(cmp.NavItemProps{}) {
 					@cmp.NavLink(cmp.NavLinkProps{Href: item.Href, Active: index == 0, AriaLabel: item.Label}) {
-						@cmp.IconBadge(cmp.IconBadgeProps{Text: navIconLetter(item.Icon), Size: "sm", Variant: navIconVariant(index == 0)})
+						@cmp.IconBadge(cmp.IconBadgeProps{Size: "sm", Variant: navIconVariant(index == 0)}) { navIconLetter(item.Icon) }
 						{ item.Label }
 					}
 				}
@@ -114,10 +114,10 @@ templ DashboardHeaderNav(items []NavItem, class string) {
 templ DashboardSidebar(props PageProps) {
 	@ui.Box(ui.BoxProps{Tag: "aside", Class: "hidden w-64 shrink-0 border-r border-border bg-card md:flex md:flex-col"}) {
 		@ui.Box(ui.BoxProps{Class: "flex h-16 items-center gap-4 border-b border-border px-4"}) {
-			@cmp.IconBadge(cmp.IconBadgeProps{Text: "U8", Size: "sm", Variant: "accent"})
+			@cmp.IconBadge(cmp.IconBadgeProps{Size: "sm", Variant: "accent"}) { U8 }
 			@ui.Stack(ui.StackProps{Class: "gap-0"}) {
-				@ui.Text(ui.TextProps{Tag: "span", Class: "text-sm font-semibold tracking-tight"}, props.Brand)
-				@ui.Text(ui.TextProps{Tag: "span", Class: "text-xs text-muted-foreground"}, "Templ registry")
+				@ui.Inline(ui.InlineProps{Class: "text-sm font-semibold tracking-tight"}, props.Brand)
+				@ui.Inline(ui.InlineProps{Class: "text-xs text-muted-foreground"}, "Templ registry")
 			}
 		}
 		@ui.Box(ui.BoxProps{Class: "flex-1 py-2"}) {
@@ -191,7 +191,7 @@ templ DashboardHero(props HeroProps) {
 			@ui.Grid(ui.GridProps{Class: "gap-8 md:grid-cols-[1fr_auto]"}) {
 				@ui.GridCol(ui.GridColProps{}) {
 					@ui.Stack(ui.StackProps{Class: "max-w-2xl gap-4"}) {
-						@ui.Title(ui.TitleProps{Order: 1, Class: "text-3xl font-bold tracking-tight md:text-4xl"}, props.Title)
+						@ui.Title(ui.TitleProps{As: 1, Class: "text-3xl font-bold tracking-tight md:text-4xl"}, props.Title)
 						@ui.Text(ui.TextProps{Class: "text-sm leading-relaxed text-muted-foreground md:text-base"}, props.Description)
 					}
 				}
@@ -219,7 +219,7 @@ templ StatusCards(items []StatusCard) {
 				@cmp.CardContent(cmp.CardContentProps{Class: "p-6"}) {
 					@ui.Stack(ui.StackProps{Class: "gap-4"}) {
 						@ui.Group(ui.GroupProps{Class: "items-start justify-between gap-4"}) {
-							@cmp.IconBadge(cmp.IconBadgeProps{Text: item.Icon, Size: "default", Variant: BlockVariant("statusTone", item.Tone)})
+							@cmp.IconBadge(cmp.IconBadgeProps{Size: "default", Variant: BlockVariant("statusTone", item.Tone)}) { item.Icon }
 							@ui.Badge(ui.BadgeProps{Variant: "outline", Size: "sm"}) {
 								{ item.Meta }
 							}
@@ -240,7 +240,7 @@ templ StatusCards(items []StatusCard) {
 templ LayerTable(items []LayerItem) {
 	<section class={ cmp.CardClasses(cmp.CardProps{Variant: "default"}) }>
 		@cmp.CardHeader(cmp.CardHeaderProps{}) {
-			@cmp.CardTitle(cmp.CardTitleProps{Order: 2}, "Registry inventory")
+			@cmp.CardTitle(cmp.CardTitleProps{As: 2}, "Registry inventory")
 			@cmp.CardDescription(cmp.CardDescriptionProps{}, "Public bricks included in this preview and how they layer together.")
 		}
 		@cmp.CardContent(cmp.CardContentProps{}) {

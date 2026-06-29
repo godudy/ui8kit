@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import dashboardVariants from "../../../../templ/ui/blocks/dashboard/dashboard.variants.json";
 import { defaultDashboardPage } from "../../data/dashboard";
 import { blockVariant } from "../../lib/block-variant";
@@ -32,6 +32,7 @@ import {
   Group,
   Grid,
   GridCol,
+  Inline,
   Progress,
   Stack,
   Text,
@@ -50,10 +51,11 @@ function DashboardPrimaryNav({ items, className }: { items: NavItemData[]; class
           <NavItem key={item.Label}>
             <NavLink href={item.Href} active={index === 0} aria-label={item.Label}>
               <IconBadge
-                text={navIconLetter(item.Icon)}
                 size="sm"
                 variant={navIconVariant(index === 0)}
-              />
+              >
+                {navIconLetter(item.Icon)}
+              </IconBadge>
               {item.Label}
             </NavLink>
           </NavItem>
@@ -77,20 +79,32 @@ function DashboardHeaderNav({ items, className }: { items: NavItemData[]; classN
   );
 }
 
-function DashboardMobileSheet({ props }: { props: DashboardPageProps }) {
+function DashboardMobileSheet({
+  props,
+  open,
+  onOpenChange,
+}: {
+  props: DashboardPageProps;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) {
   return (
     <Sheet
       id={dashboardSheetPanelID}
       side="left"
       size="default"
       variant="card"
+      open={open}
+      onOpenChange={onOpenChange}
       behavior="ui8kit"
       aria-label="Navigation menu"
       aria-labelledby={dashboardSheetTitleID}
       className="md:hidden max-h-dvh overflow-y-auto p-0"
     >
       <SheetOverlay
-        for={dashboardSheetPanelID}
+        target={dashboardSheetPanelID}
+        open={open}
+        onOpenChange={onOpenChange}
         behavior="ui8kit"
         className="cursor-pointer bg-background/80"
       />
@@ -100,7 +114,8 @@ function DashboardMobileSheet({ props }: { props: DashboardPageProps }) {
             {props.Brand}
           </SheetTitle>
           <SheetClose
-            for={dashboardSheetPanelID}
+            target={dashboardSheetPanelID}
+            onOpenChange={onOpenChange}
             behavior="ui8kit"
             variant="outline"
             size="icon"
@@ -123,10 +138,10 @@ function DashboardSidebar({ props }: { props: DashboardPageProps }) {
       className="hidden w-64 shrink-0 border-r border-border bg-card md:flex md:flex-col"
     >
       <Box className="flex h-16 items-center gap-4 border-b border-border px-4">
-        <IconBadge text="U8" size="sm" variant="accent" />
+        <IconBadge size="sm" variant="accent">U8</IconBadge>
         <Stack className="gap-0">
-          <Text tag="span" className="text-sm font-semibold tracking-tight">{props.Brand}</Text>
-          <Text tag="span" className="text-xs text-muted-foreground">Templ registry</Text>
+          <Inline className="text-sm font-semibold tracking-tight">{props.Brand}</Inline>
+          <Inline className="text-xs text-muted-foreground">Templ registry</Inline>
         </Stack>
       </Box>
       <Box className="flex-1 py-2">
@@ -141,7 +156,15 @@ function DashboardSidebar({ props }: { props: DashboardPageProps }) {
   );
 }
 
-function DashboardHeader({ props }: { props: DashboardPageProps }) {
+function DashboardHeader({
+  props,
+  open,
+  onOpenChange,
+}: {
+  props: DashboardPageProps;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}) {
   return (
     <Box
       tag="header"
@@ -150,7 +173,9 @@ function DashboardHeader({ props }: { props: DashboardPageProps }) {
       <Group className="col-start-1 items-center gap-2 justify-self-start">
         <SheetTrigger
           id={dashboardSheetTriggerID}
-          for={dashboardSheetPanelID}
+          target={dashboardSheetPanelID}
+          open={open}
+          onOpenChange={onOpenChange}
           behavior="ui8kit"
           variant="outline"
           size="icon"
@@ -201,7 +226,7 @@ function DashboardHero({ hero }: { hero: HeroProps }) {
         <Grid className="gap-8 md:grid-cols-[1fr_auto]">
           <GridCol>
             <Stack className="max-w-2xl gap-4">
-              <Title order={1} className="text-3xl font-bold tracking-tight md:text-4xl">
+              <Title as={1} className="text-3xl font-bold tracking-tight md:text-4xl">
                 {hero.Title}
               </Title>
               <Text className="text-sm leading-relaxed text-muted-foreground md:text-base">
@@ -237,10 +262,11 @@ function StatusCards({ items }: { items: StatusCard[] }) {
               <Stack className="gap-4">
                 <Group className="items-start justify-between gap-4">
                   <IconBadge
-                    text={item.Icon}
                     size="default"
                     className={blockVariant(dashboardVariants, "statusTone", item.Tone)}
-                  />
+                  >
+                    {item.Icon}
+                  </IconBadge>
                   <Badge variant="outline" size="sm">{item.Meta}</Badge>
                 </Group>
                 <Stack className="gap-2">
@@ -270,7 +296,7 @@ function LayerTable({ items }: { items: LayerItem[] }) {
     <Card asChild variant="default">
       <section>
       <CardHeader>
-        <CardTitle order={2}>Registry inventory</CardTitle>
+        <CardTitle as={2}>Registry inventory</CardTitle>
         <CardDescription>
           Public bricks included in this preview and how they layer together.
         </CardDescription>
@@ -301,7 +327,7 @@ function GallerySection({ children }: { children: ReactNode }) {
     <Stack className="gap-4">
       <Group className="items-end justify-between gap-4">
         <Stack className="gap-2">
-          <Title order={2} className="text-lg font-semibold tracking-tight">
+          <Title as={2} className="text-lg font-semibold tracking-tight">
             Live component gallery
           </Title>
           <Text className="text-sm text-muted-foreground">
@@ -328,14 +354,15 @@ function DashboardNotice({ notice }: { notice: NoticeProps }) {
 
 export function DashboardPage({ children }: { children?: ReactNode }) {
   const props = defaultDashboardPage;
+  const [sheetOpen, setSheetOpen] = useState(false);
 
   return (
     <Block tag="main" className="min-h-screen bg-muted/30 text-foreground">
-      <DashboardMobileSheet props={props} />
+      <DashboardMobileSheet props={props} open={sheetOpen} onOpenChange={setSheetOpen} />
       <Group className="min-h-screen w-full items-stretch">
         <DashboardSidebar props={props} />
         <Box className="flex min-w-0 flex-1 flex-col bg-background">
-          <DashboardHeader props={props} />
+          <DashboardHeader props={props} open={sheetOpen} onOpenChange={setSheetOpen} />
           <Box className="flex flex-1 flex-col gap-8 p-4 md:p-8">
             <DashboardHero hero={props.Hero} />
             <StatusCards items={props.Cards} />

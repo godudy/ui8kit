@@ -141,7 +141,42 @@ func validateSpec(doc *specDoc, allowLists map[string][]string) []validationErro
 
 	errs = append(errs, validateShowcaseExamples(doc, rel)...)
 	errs = append(errs, validateAllowLists(doc, rel, allowLists)...)
+	errs = append(errs, validateBehaviorHookEnums(doc, rel)...)
 	errs = append(errs, validateBlockContract(doc, rel, findRepoRootMust())...)
+	return errs
+}
+
+// validBehaviorModes is the single source of truth for behavior-hook enums.
+// Keep in sync with utils/behavior.go (BehaviorModeOff, BehaviorModeUI8Kit)
+// and utils/behavior.ts (BEHAVIOR_MODES).
+var validBehaviorModes = []string{"", "ui8kit"}
+
+// validateBehaviorHookEnums ensures every api field with role: behavior-hook
+// declares the canonical ["", "ui8kit"] enum from utils/behavior.*.
+func validateBehaviorHookEnums(doc *specDoc, rel string) []validationError {
+	api, _ := doc.fm["api"].(map[string]any)
+	if api == nil {
+		return nil
+	}
+	var errs []validationError
+	for field, raw := range api {
+		fm, _ := raw.(map[string]any)
+		if fm == nil {
+			continue
+		}
+		role, _ := fm["role"].(string)
+		if role != "behavior-hook" {
+			continue
+		}
+		specEnum := getStringSliceAny(fm["enum"])
+		missing, extra := diffEnum(specEnum, validBehaviorModes)
+		if len(missing) > 0 {
+			errs = append(errs, validationError{rel, field, fmt.Sprintf("behavior-hook enum must include %v (from utils/behavior.*); missing: %v", validBehaviorModes, missing)})
+		}
+		if len(extra) > 0 {
+			errs = append(errs, validationError{rel, field, fmt.Sprintf("behavior-hook enum must be exactly %v; extra: %v", validBehaviorModes, extra)})
+		}
+	}
 	return errs
 }
 

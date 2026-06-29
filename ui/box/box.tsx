@@ -1,6 +1,6 @@
 import { forwardRef, type ElementType, type HTMLAttributes, type ReactNode, type Ref } from "react";
 import boxRecipe from "./box.variants.json";
-import { composeRecipe, type VariantRecipe } from "../../utils";
+import { composeRecipe } from "../../utils";
 import { resolveTag, TagGroup } from "../../utils/tags";
 import { Slot } from "../slot/slot";
 
@@ -17,14 +17,14 @@ export const Box = forwardRef<HTMLElement, BoxProps>(function Box(
 ) {
   if (asChild) {
     return (
-      <Slot ref={ref} className={composeRecipe(boxRecipe as VariantRecipe, {}, className)} {...rest}>
+      <Slot ref={ref} className={composeRecipe(boxRecipe, {}, className)} {...rest}>
         {children}
       </Slot>
     );
   }
   const Tag = resolveTag(tag, "div", TagGroup.Layout) as ElementType;
   return (
-    <Tag ref={ref as Ref<HTMLElement>} className={composeRecipe(boxRecipe as VariantRecipe, {}, className)} {...rest}>
+    <Tag ref={ref as Ref<HTMLElement>} className={composeRecipe(boxRecipe, {}, className)} {...rest}>
       {children}
     </Tag>
   );

@@ -22,34 +22,13 @@ func BoxClasses(p BoxProps) string {
 }
 
 templ Box(p BoxProps) {
-	@boxTag(p) {
+	@uiutils.LayoutTag(uiutils.LayoutTagProps{
+		Tag:      p.Tag,
+		Fallback: "div",
+		Group:    uiutils.TagGroupLayout,
+		Class:    BoxClasses(p),
+		Attrs:    p.Attrs,
+	}) {
 		{ children... }
-	}
-}
-
-templ boxTag(p BoxProps) {
-	switch uiutils.ResolveTag(p.Tag, "div", uiutils.TagGroupLayout) {
-		case "section":
-			<section class={ BoxClasses(p) } { p.Attrs... }>{ children... }</section>
-		case "article":
-			<article class={ BoxClasses(p) } { p.Attrs... }>{ children... }</article>
-		case "aside":
-			<aside class={ BoxClasses(p) } { p.Attrs... }>{ children... }</aside>
-		case "header":
-			<header class={ BoxClasses(p) } { p.Attrs... }>{ children... }</header>
-		case "footer":
-			<footer class={ BoxClasses(p) } { p.Attrs... }>{ children... }</footer>
-		case "main":
-			<main class={ BoxClasses(p) } { p.Attrs... }>{ children... }</main>
-		case "nav":
-			<nav class={ BoxClasses(p) } { p.Attrs... }>{ children... }</nav>
-		case "figure":
-			<figure class={ BoxClasses(p) } { p.Attrs... }>{ children... }</figure>
-		case "search":
-			<search class={ BoxClasses(p) } { p.Attrs... }>{ children... }</search>
-		case "hgroup":
-			<hgroup class={ BoxClasses(p) } { p.Attrs... }>{ children... }</hgroup>
-		default:
-			<div class={ BoxClasses(p) } { p.Attrs... }>{ children... }</div>
 	}
 }

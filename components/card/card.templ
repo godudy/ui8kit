@@ -32,8 +32,8 @@ type CardHeaderProps struct {
 // CardTitleProps holds title text and heading level.
 type CardTitleProps struct {
 	Class string
-	// Order maps to h1-h6 (default h2)
-	Order int
+	// As maps to h1-h6 (default h2)
+	As int
 	Attrs templ.Attributes
 }
 
@@ -75,27 +75,14 @@ templ CardHeader(p CardHeaderProps) {
 	</div>
 }
 
-// CardTitle renders heading text at Order level.
+// CardTitle renders heading text at As level.
 templ CardTitle(p CardTitleProps, value string) {
-	@cardTitleTag(p) {
+	@uiutils.HeadingTag(uiutils.HeadingTagProps{
+		As:    p.As,
+		Class: uiutils.Cn("text-sm font-semibold", p.Class),
+		Attrs: p.Attrs,
+	}) {
 		{ value }
-	}
-}
-
-templ cardTitleTag(p CardTitleProps) {
-	switch uiutils.TitleTag(p.Order) {
-		case "h1":
-			<h1 class={ uiutils.Cn("text-sm font-semibold", p.Class) } { p.Attrs... }>{ children... }</h1>
-		case "h3":
-			<h3 class={ uiutils.Cn("text-sm font-semibold", p.Class) } { p.Attrs... }>{ children... }</h3>
-		case "h4":
-			<h4 class={ uiutils.Cn("text-sm font-semibold", p.Class) } { p.Attrs... }>{ children... }</h4>
-		case "h5":
-			<h5 class={ uiutils.Cn("text-sm font-semibold", p.Class) } { p.Attrs... }>{ children... }</h5>
-		case "h6":
-			<h6 class={ uiutils.Cn("text-sm font-semibold", p.Class) } { p.Attrs... }>{ children... }</h6>
-		default:
-			<h2 class={ uiutils.Cn("text-sm font-semibold", p.Class) } { p.Attrs... }>{ children... }</h2>
 	}
 }
 

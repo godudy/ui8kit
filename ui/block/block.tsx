@@ -1,6 +1,6 @@
 import { forwardRef, type ElementType, type HTMLAttributes, type ReactNode, type Ref } from "react";
 import blockRecipe from "./block.variants.json";
-import { composeRecipe, type VariantRecipe } from "../../utils";
+import { composeRecipe } from "../../utils";
 import { resolveTag, TagGroup } from "../../utils/tags";
 import { Slot } from "../slot/slot";
 
@@ -15,7 +15,7 @@ export const Block = forwardRef<HTMLElement, BlockProps>(function Block(
   { tag, id, className, children, asChild, ...rest },
   ref
 ) {
-  const cls = composeRecipe(blockRecipe as VariantRecipe, {}, className);
+  const cls = composeRecipe(blockRecipe, {}, className);
   if (asChild) {
     return (
       <Slot ref={ref} id={id || undefined} className={cls} {...rest}>

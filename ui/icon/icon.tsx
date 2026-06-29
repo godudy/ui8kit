@@ -1,9 +1,11 @@
 import { forwardRef, type HTMLAttributes, type Ref, type SVGProps } from "react";
-import iconRecipe from "./icon.variants.json";
-import { cn, composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
+import iconRecipeJson from "./icon.variants.json";
+import { cn, composeRecipe, defineRecipe } from "../../utils";
 
-type IconType = RecipeKey<typeof iconRecipe, "type">;
-type IconSize = RecipeKey<typeof iconRecipe, "size">;
+const { recipe: iconRecipe, keys: iconKeys } = defineRecipe(iconRecipeJson);
+
+type IconType = typeof iconKeys.type;
+type IconSize = typeof iconKeys.size;
 
 export type { IconType, IconSize };
 
@@ -63,8 +65,8 @@ function iconClasses(
   prefix?: string,
   className?: string
 ): string {
-  const resolved = iconType(type);
-  const base = composeRecipe(iconRecipe as VariantRecipe, { type: resolved, size: size ?? "" });
+  const resolved = iconType(type) as IconType;
+  const base = composeRecipe(iconRecipe, { type: resolved, size: size as IconSize | undefined });
   if (resolved === "class") {
     return cn(base, iconClassName(name, baseClass, prefix), className);
   }

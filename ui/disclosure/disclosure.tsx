@@ -1,12 +1,15 @@
 import { forwardRef, type DetailsHTMLAttributes, type HTMLAttributes, type Ref } from "react";
-import disclosureRecipe from "./disclosure.variants.json";
-import summaryRecipe from "./summary.variants.json";
-import { composeRecipe, type RecipeKey, type VariantRecipe } from "../../utils";
+import disclosureRecipeJson from "./disclosure.variants.json";
+import summaryRecipeJson from "./summary.variants.json";
+import { composeRecipe, defineRecipe } from "../../utils";
 
-type DisclosureVariant = RecipeKey<typeof disclosureRecipe, "variant">;
-type DisclosureSize = RecipeKey<typeof disclosureRecipe, "size">;
-type SummaryVariant = RecipeKey<typeof summaryRecipe, "variant">;
-type SummarySize = RecipeKey<typeof summaryRecipe, "size">;
+const { recipe: disclosureRecipe, keys: disclosureKeys } = defineRecipe(disclosureRecipeJson);
+const { recipe: summaryRecipe, keys: summaryKeys } = defineRecipe(summaryRecipeJson);
+
+type DisclosureVariant = typeof disclosureKeys.variant;
+type DisclosureSize = typeof disclosureKeys.size;
+type SummaryVariant = typeof summaryKeys.variant;
+type SummarySize = typeof summaryKeys.size;
 
 export type DisclosureProps = Omit<DetailsHTMLAttributes<HTMLDetailsElement>, "className"> & {
   variant?: DisclosureVariant;
@@ -29,8 +32,8 @@ export const Disclosure = forwardRef<HTMLDetailsElement, DisclosureProps>(functi
       ref={ref}
       open={open}
       className={composeRecipe(
-        disclosureRecipe as VariantRecipe,
-        { variant: variant ?? "", size: size ?? "" },
+        disclosureRecipe,
+        { variant, size },
         className
       )}
       {...rest}
@@ -48,7 +51,7 @@ export const Summary = forwardRef<HTMLElement, SummaryProps>(function Summary(
   return (
     <summary
       ref={ref as Ref<HTMLElement>}
-      className={composeRecipe(summaryRecipe as VariantRecipe, { variant: variant ?? "", size: size ?? "" }, className)}
+      className={composeRecipe(summaryRecipe, { variant, size }, className)}
       {...rest}
     >
       {children}
