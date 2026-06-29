@@ -22,6 +22,10 @@ func blockAttrs(p BlockProps) templ.Attributes {
 	return uiutils.DOMAttrs(p.ID, "", "", p.Attrs)
 }
 
+func BlockClasses(p BlockProps) string {
+	return uiutils.Compose(BlockVariants, map[string]string{}, p.Class)
+}
+
 // Block renders a resolved landmark element with children.
 templ Block(p BlockProps) {
 	@blockTag(p) {
@@ -32,26 +36,26 @@ templ Block(p BlockProps) {
 templ blockTag(p BlockProps) {
 	switch uiutils.ResolveTag(p.Tag, "div", uiutils.TagGroupLayout) {
 		case "section":
-			<section class={ p.Class } { blockAttrs(p)... }>{ children... }</section>
+			<section class={ BlockClasses(p) } { blockAttrs(p)... }>{ children... }</section>
 		case "article":
-			<article class={ p.Class } { blockAttrs(p)... }>{ children... }</article>
+			<article class={ BlockClasses(p) } { blockAttrs(p)... }>{ children... }</article>
 		case "aside":
-			<aside class={ p.Class } { blockAttrs(p)... }>{ children... }</aside>
+			<aside class={ BlockClasses(p) } { blockAttrs(p)... }>{ children... }</aside>
 		case "header":
-			<header class={ p.Class } { blockAttrs(p)... }>{ children... }</header>
+			<header class={ BlockClasses(p) } { blockAttrs(p)... }>{ children... }</header>
 		case "footer":
-			<footer class={ p.Class } { blockAttrs(p)... }>{ children... }</footer>
+			<footer class={ BlockClasses(p) } { blockAttrs(p)... }>{ children... }</footer>
 		case "main":
-			<main class={ p.Class } { blockAttrs(p)... }>{ children... }</main>
+			<main class={ BlockClasses(p) } { blockAttrs(p)... }>{ children... }</main>
 		case "nav":
-			<nav class={ p.Class } { blockAttrs(p)... }>{ children... }</nav>
+			<nav class={ BlockClasses(p) } { blockAttrs(p)... }>{ children... }</nav>
 		case "figure":
-			<figure class={ p.Class } { blockAttrs(p)... }>{ children... }</figure>
+			<figure class={ BlockClasses(p) } { blockAttrs(p)... }>{ children... }</figure>
 		case "search":
-			<search class={ p.Class } { blockAttrs(p)... }>{ children... }</search>
+			<search class={ BlockClasses(p) } { blockAttrs(p)... }>{ children... }</search>
 		case "hgroup":
-			<hgroup class={ p.Class } { blockAttrs(p)... }>{ children... }</hgroup>
+			<hgroup class={ BlockClasses(p) } { blockAttrs(p)... }>{ children... }</hgroup>
 		default:
-			<div class={ p.Class } { blockAttrs(p)... }>{ children... }</div>
+			<div class={ BlockClasses(p) } { blockAttrs(p)... }>{ children... }</div>
 	}
 }

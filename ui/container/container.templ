@@ -17,7 +17,10 @@ type ContainerProps struct {
 	Attrs templ.Attributes
 }
 
-// Container renders a width-constrained layout wrapper.
+func ContainerClasses(p ContainerProps) string {
+	return uiutils.Compose(ContainerVariants, map[string]string{}, p.Class)
+}
+
 templ Container(p ContainerProps) {
 	@containerTag(p) {
 		{ children... }
@@ -27,10 +30,10 @@ templ Container(p ContainerProps) {
 templ containerTag(p ContainerProps) {
 	switch uiutils.ResolveTag(p.Tag, "div", uiutils.TagGroupContainer) {
 		case "main":
-			<main class={ p.Class } { p.Attrs... }>{ children... }</main>
+			<main class={ ContainerClasses(p) } { p.Attrs... }>{ children... }</main>
 		case "section":
-			<section class={ p.Class } { p.Attrs... }>{ children... }</section>
+			<section class={ ContainerClasses(p) } { p.Attrs... }>{ children... }</section>
 		default:
-			<div class={ p.Class } { p.Attrs... }>{ children... }</div>
+			<div class={ ContainerClasses(p) } { p.Attrs... }>{ children... }</div>
 	}
 }

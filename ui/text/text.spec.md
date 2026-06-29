@@ -1,39 +1,92 @@
 ---
-id: ui.text
-layer: primitive
-kind: typography
-package: github.com/fastygo/templ/ui/text
-facade: github.com/fastygo/templ/ui
-templ: Text
 api:
-  Tag:
-    role: prose-tag
-    type: string
-    enum: [p, blockquote, figcaption, address, pre, span, em, strong, small, abbr, cite, code, kbd, mark, time, data, var, samp, sub, sup, b, i, u, s, q, dfn, bdo, bdi, ins, del]
-    allow-list-source: utils.tags.TagGroupText
-    default: p
-  Class:
-    role: style-extension
-    type: string
-  value:
-    role: copy
-    type: string
-    position: argument
-  Attrs:
-    role: html-attrs
-    type: templ.Attributes
-showcase:
-  - id: tag.p
-    props: { Tag: p }
-  - id: tag.small
-    props: { Tag: small, Class: "text-muted-foreground" }
-  - id: tag.code
-    props: { Tag: code, Class: "text-sm" }
+    Attrs:
+        cva: false
+        role: html-attrs
+        type: templ.Attributes
+    Class:
+        cva: false
+        role: style-extension
+        type: string
+    Tag:
+        allow-list-source: utils.tags.TagGroupText
+        cva: false
+        default: p
+        enum:
+            - p
+            - blockquote
+            - figcaption
+            - address
+            - pre
+            - span
+            - em
+            - strong
+            - small
+            - abbr
+            - cite
+            - code
+            - kbd
+            - mark
+            - time
+            - data
+            - var
+            - samp
+            - sub
+            - sup
+            - b
+            - i
+            - u
+            - s
+            - q
+            - dfn
+            - bdo
+            - bdi
+            - ins
+            - del
+        role: prose-tag
+        type: string
+    value:
+        cva: false
+        position: argument
+        role: copy
+        type: string
+data: text.data.json
+facade: github.com/fastygo/templ/ui
+id: ui.text
+kind: typography
+layer: primitive
+package: github.com/fastygo/templ/ui/text
 semantics:
-  root: resolved from Tag
-  role: none
-  behavior: static
-
+    behavior: static
+    data: text.data.json
+    role: none
+    root: resolved from Tag
+showcase:
+    - id: tag.p
+      props:
+        Tag: p
+      ref: tag.p
+    - id: tag.small
+      props:
+        Class: text-muted-foreground
+        Tag: small
+      ref: tag.small
+    - id: tag.code
+      props:
+        Class: text-sm
+        Tag: code
+      ref: tag.code
+targets:
+    react:
+        component: Text
+        facade: '@fastygo/templ-react'
+        package: '@fastygo/templ-react/ui/text'
+    templ:
+        component: Text
+        facade: github.com/fastygo/templ/ui
+        package: github.com/fastygo/templ/ui/text
+templ: Text
+variants: text.variants.json
 ---
 ## Summary
 

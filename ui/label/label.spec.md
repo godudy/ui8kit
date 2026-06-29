@@ -1,32 +1,48 @@
 ---
-id: ui.label
-layer: primitive
-kind: input
-package: github.com/fastygo/templ/ui/label
-facade: github.com/fastygo/templ/ui
-templ: Label
 api:
-  HTMLFor:
-    role: control-id
-    type: string
-  Class:
-    role: style-extension
-    type: string
-  Attrs:
-    role: html-attrs
-    type: templ.Attributes
-slots:
-  default:
-    required: true
-    accepts: text
-showcase:
-  - id: layout.with-control
-    props: { HTMLFor: demo-email }
+    Attrs:
+        cva: false
+        role: html-attrs
+        type: templ.Attributes
+    Class:
+        cva: false
+        role: style-extension
+        type: string
+    HTMLFor:
+        cva: false
+        role: control-id
+        type: string
+data: label.data.json
+facade: github.com/fastygo/templ/ui
+id: ui.label
+kind: input
+layer: primitive
+package: github.com/fastygo/templ/ui/label
 semantics:
-  root: label
-  role: none
-  behavior: static
-
+    behavior: static
+    data: label.data.json
+    role: none
+    root: label
+showcase:
+    - id: layout.with-control
+      props:
+        HTMLFor: demo-email
+      ref: layout.with-control
+slots:
+    default:
+        accepts: text
+        required: true
+targets:
+    react:
+        component: Label
+        facade: '@fastygo/templ-react'
+        package: '@fastygo/templ-react/ui/label'
+    templ:
+        component: Label
+        facade: github.com/fastygo/templ/ui
+        package: github.com/fastygo/templ/ui/label
+templ: Label
+variants: label.variants.json
 ---
 ## Summary
 

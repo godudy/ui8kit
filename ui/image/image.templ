@@ -13,61 +13,6 @@ import (
 	"github.com/fastygo/templ/utils"
 )
 
-var ImageVariants = uiutils.Variants{
-	Base: "block max-w-full",
-	Keys: []string{"variant", "size", "fit", "position", "aspect"},
-	Defaults: map[string]string{
-		"variant":  "default",
-		"size":     "auto",
-		"fit":      "cover",
-		"position": "center",
-		"aspect":   "auto",
-	},
-	ByKey: map[string]map[string]string{
-		"variant": {
-			"default":   "",
-			"rounded":   "rounded-md",
-			"avatar":    "rounded-full",
-			"thumbnail": "rounded-md border border-border",
-			"logo":      "object-contain",
-			"unstyled":  "",
-		},
-		"size": {
-			"auto":    "",
-			"default": "",
-			"xs":      "h-6 w-6",
-			"sm":      "h-8 w-8",
-			"md":      "h-12 w-12",
-			"lg":      "h-16 w-16",
-			"xl":      "h-24 w-24",
-			"full":    "h-full w-full",
-		},
-		"fit": {
-			"contain":    "object-contain",
-			"cover":      "object-cover",
-			"fill":       "object-fill",
-			"none":       "object-none",
-			"scale-down": "object-scale-down",
-		},
-		"position": {
-			"bottom":       "object-bottom",
-			"center":       "object-center",
-			"left":         "object-left",
-			"right":        "object-right",
-			"top":          "object-top",
-			"left-bottom":  "object-left-bottom",
-			"left-top":     "object-left-top",
-			"right-bottom": "object-right-bottom",
-			"right-top":    "object-right-top",
-		},
-		"aspect": {
-			"auto":   "aspect-auto",
-			"square": "aspect-square",
-			"video":  "aspect-video",
-		},
-	},
-}
-
 // ImageProps configures a native img element.
 type ImageProps struct {
 	Variant       string

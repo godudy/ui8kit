@@ -18,7 +18,11 @@ package linebreak
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "strings"
+import (
+	"strings"
+
+	"github.com/fastygo/templ/utils"
+)
 
 // BreakProps configures a line or word break.
 type BreakProps struct {
@@ -34,6 +38,10 @@ func breakType(value string) string {
 	default:
 		return "br"
 	}
+}
+
+func BreakClasses(p BreakProps) string {
+	return uiutils.Compose(LinebreakVariants, map[string]string{}, p.Class)
 }
 
 // Break renders br by default, or wbr when Type is wbr/word.
@@ -60,7 +68,7 @@ func Break(p BreakProps) templ.Component {
 		ctx = templ.ClearChildren(ctx)
 		switch breakType(p.Type) {
 		case "wbr":
-			var templ_7745c5c3_Var2 = []any{p.Class}
+			var templ_7745c5c3_Var2 = []any{BreakClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var2...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -91,7 +99,7 @@ func Break(p BreakProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		default:
-			var templ_7745c5c3_Var4 = []any{p.Class}
+			var templ_7745c5c3_Var4 = []any{BreakClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var4...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err

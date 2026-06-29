@@ -27,32 +27,6 @@ import (
 	"github.com/fastygo/templ/utils"
 )
 
-var ButtonVariants = uiutils.Variants{
-	Base: "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
-	Keys: []string{"variant", "size"},
-	ByKey: map[string]map[string]string{
-		"variant": {
-			"default":     "bg-primary text-primary-foreground hover:bg-primary/90",
-			"destructive": "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-			"outline":     "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
-			"secondary":   "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-			"ghost":       "hover:bg-accent hover:text-accent-foreground",
-			"link":        "text-primary underline-offset-4 hover:underline",
-			"unstyled":    "",
-		},
-		"size": {
-			"default": "h-10 px-4 py-2",
-			"sm":      "h-9 rounded-md px-3",
-			"lg":      "h-11 rounded-md px-8",
-			"icon":    "h-10 w-10",
-		},
-	},
-	Defaults: map[string]string{
-		"variant": "default",
-		"size":    "default",
-	},
-}
-
 // ButtonProps holds Button configuration.
 type ButtonProps struct {
 	// Variant sets appearance preset: default, secondary, destructive, outline, ghost, link, unstyled
@@ -143,7 +117,7 @@ func Button(p ButtonProps) templ.Component {
 				var templ_7745c5c3_Var3 templ.SafeURL
 				templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinURLErrs(templ.SafeURL(p.Href))
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/button/button.templ`, Line: 101, Col: 32}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/button/button.templ`, Line: 75, Col: 32}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 				if templ_7745c5c3_Err != nil {
@@ -174,7 +148,7 @@ func Button(p ButtonProps) templ.Component {
 					var templ_7745c5c3_Var5 string
 					templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(p.ID)
 					if templ_7745c5c3_Err != nil {
-						return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/button/button.templ`, Line: 105, Col: 14}
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/button/button.templ`, Line: 79, Col: 14}
 					}
 					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 					if templ_7745c5c3_Err != nil {
@@ -214,7 +188,7 @@ func Button(p ButtonProps) templ.Component {
 				var templ_7745c5c3_Var7 templ.SafeURL
 				templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinURLErrs(templ.SafeURL(p.Href))
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/button/button.templ`, Line: 113, Col: 32}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/button/button.templ`, Line: 87, Col: 32}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 				if templ_7745c5c3_Err != nil {
@@ -245,7 +219,7 @@ func Button(p ButtonProps) templ.Component {
 					var templ_7745c5c3_Var9 string
 					templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(p.ID)
 					if templ_7745c5c3_Err != nil {
-						return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/button/button.templ`, Line: 116, Col: 14}
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/button/button.templ`, Line: 90, Col: 14}
 					}
 					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
 					if templ_7745c5c3_Err != nil {
@@ -286,7 +260,7 @@ func Button(p ButtonProps) templ.Component {
 			var templ_7745c5c3_Var11 string
 			templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(uiutils.DefaultButtonType(p.Type))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/button/button.templ`, Line: 125, Col: 43}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/button/button.templ`, Line: 99, Col: 43}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
 			if templ_7745c5c3_Err != nil {
@@ -323,7 +297,7 @@ func Button(p ButtonProps) templ.Component {
 				var templ_7745c5c3_Var13 string
 				templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.JoinStringErrs(p.ID)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/button/button.templ`, Line: 129, Col: 13}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/button/button.templ`, Line: 103, Col: 13}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var13))
 				if templ_7745c5c3_Err != nil {
@@ -342,7 +316,7 @@ func Button(p ButtonProps) templ.Component {
 				var templ_7745c5c3_Var14 string
 				templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(p.Form)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/button/button.templ`, Line: 132, Col: 17}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/button/button.templ`, Line: 106, Col: 17}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var14))
 				if templ_7745c5c3_Err != nil {

@@ -10,7 +10,7 @@ api:
     role: appearance
     type: string
     enum: [default, accent, secondary, outline, destructive, unstyled]
-    allow-list-source: components.iconbadge.IconBadgeVariants
+    allow-list-source: iconbadge.variants.json#variant
     default: default
   Size:
     role: density

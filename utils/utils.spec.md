@@ -16,6 +16,12 @@ exports:
     - name: Variants
       role: cva-recipe
       type: struct
+    - name: ParseVariantRecipe
+      role: variant-json-parse
+      signature: ParseVariantRecipe(data []byte) (VariantRecipe, error)
+    - name: MustParseVariantRecipe
+      role: variant-json-parse
+      signature: MustParseVariantRecipe(data []byte) VariantRecipe
   attrs:
     - name: MergeAttrs
       role: attr-merge
@@ -47,21 +53,11 @@ exports:
     - name: ControlSize
       used-by: [ui.checkbox, ui.radio, ui.switch]
       keys: [size]
-    - name: CardVariants
-      used-by: [components.card]
-      keys: [variant]
-    - name: AlertVariants
-      used-by: [components.alert]
-      keys: [variant]
   helpers:
     - name: InputClasses
       role: input-surface-classes
     - name: ControlClasses
       role: toggle-surface-classes
-    - name: CardClasses
-      role: card-surface-classes
-    - name: AlertClasses
-      role: alert-surface-classes
     - name: AlertAttrs
       role: alert-static-aria
     - name: BreadcrumbRootAttrs
@@ -117,8 +113,6 @@ Brick `api.*.allow-list-source` values resolve here:
 | `utils.tags.TagGroupText` | `utils/tags.go` — Text |
 | `utils.recipes.InputChrome` | `utils/utils.go` — InputChrome.ByKey.variant |
 | `utils.recipes.ControlChrome` | `utils/utils.go` — ControlChrome.ByKey.variant |
-| `utils.recipes.CardVariants` | `utils/utils.go` — CardVariants.ByKey.variant |
-| `utils.recipes.AlertVariants` | `utils/utils.go` — AlertVariants.ByKey.variant |
 | `utils.helpers.TitleTag` | `utils/utils.go` — TitleTag function |
 | `ui.button.ButtonVariants` | `ui/button/button.templ` — brick-local Variants var |
 | `ui.badge.BadgeVariants` | `ui/badge/badge.templ` — brick-local Variants var |

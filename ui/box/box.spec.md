@@ -1,38 +1,68 @@
 ---
-id: ui.box
-layer: primitive
-kind: layout
-package: github.com/fastygo/templ/ui/box
-facade: github.com/fastygo/templ/ui
-templ: Box
 api:
-  Tag:
-    role: layout-tag
-    type: string
-    enum: [div, section, article, aside, header, footer, main, nav, figure, search, hgroup]
-    allow-list-source: utils.tags.TagGroupLayout
-    default: div
-  Class:
-    role: style-extension
-    type: string
-  Attrs:
-    role: html-attrs
-    type: templ.Attributes
-slots:
-  default:
-    required: true
-    accepts: any
-showcase:
-  - id: tag.default
-    props: { Tag: div }
-  - id: tag.section
-    props: { Tag: section, Class: "p-4" }
+    Attrs:
+        cva: false
+        role: html-attrs
+        type: templ.Attributes
+    Class:
+        cva: false
+        role: style-extension
+        type: string
+    Tag:
+        allow-list-source: utils.tags.TagGroupLayout
+        cva: false
+        default: div
+        enum:
+            - div
+            - section
+            - article
+            - aside
+            - header
+            - footer
+            - main
+            - nav
+            - figure
+            - search
+            - hgroup
+        role: layout-tag
+        type: string
+data: box.data.json
+facade: github.com/fastygo/templ/ui
+id: ui.box
+kind: layout
+layer: primitive
+package: github.com/fastygo/templ/ui/box
 semantics:
-  root: resolved from Tag
-  role: none
-  behavior: static
-  rule: internal-layout-only-not-landmark
-
+    behavior: static
+    data: box.data.json
+    role: none
+    root: resolved from Tag
+    rule: internal-layout-only-not-landmark
+showcase:
+    - id: tag.default
+      props:
+        Tag: div
+      ref: tag.default
+    - id: tag.section
+      props:
+        Class: p-4
+        Tag: section
+      ref: tag.section
+slots:
+    default:
+        accepts: any
+        required: true
+targets:
+    react:
+        component: Box
+        facade: '@fastygo/templ-react'
+        package: '@fastygo/templ-react/ui/box'
+    templ:
+        component: Box
+        facade: github.com/fastygo/templ/ui
+        package: github.com/fastygo/templ/ui/box
+templ: Box
+variants: box.variants.json
 ---
 ## Summary
 

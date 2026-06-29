@@ -27,30 +27,6 @@ import (
 	"github.com/fastygo/templ/utils"
 )
 
-var IconVariants = uiutils.Variants{
-	Base: "inline-block shrink-0",
-	Keys: []string{"type", "size"},
-	Defaults: map[string]string{
-		"type": "class",
-		"size": "default",
-	},
-	ByKey: map[string]map[string]string{
-		"type": {
-			"class": "",
-			"svg":   "",
-			"text":  "",
-		},
-		"size": {
-			"xs":      "h-3 w-3",
-			"sm":      "h-4 w-4",
-			"default": "h-4 w-4",
-			"md":      "h-5 w-5",
-			"lg":      "h-6 w-6",
-			"xl":      "h-8 w-8",
-		},
-	},
-}
-
 // IconProps configures a reusable icon host.
 type IconProps struct {
 	Name       string
@@ -173,7 +149,7 @@ func Icon(p IconProps) templ.Component {
 				var templ_7745c5c3_Var4 string
 				templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(p.Title)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/icon/icon.templ`, Line: 106, Col: 21}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/icon/icon.templ`, Line: 82, Col: 21}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 				if templ_7745c5c3_Err != nil {
@@ -192,7 +168,7 @@ func Icon(p IconProps) templ.Component {
 				var templ_7745c5c3_Var5 string
 				templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(p.Href)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/icon/icon.templ`, Line: 109, Col: 23}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `ui/icon/icon.templ`, Line: 85, Col: 23}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 				if templ_7745c5c3_Err != nil {

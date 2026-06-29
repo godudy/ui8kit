@@ -1,29 +1,49 @@
 ---
-id: ui.linebreak
-layer: primitive
-kind: typography
-package: github.com/fastygo/templ/ui/linebreak
-facade: github.com/fastygo/templ/ui
-templ: Break
 api:
-  Type:
-    role: break-type
-    type: string
-    enum: [br, wbr, word]
-    default: br
-  Class:
-    role: style-extension
-    type: string
-showcase:
-  - id: type.br
-    props: { Type: br }
-  - id: type.wbr
-    props: { Type: wbr }
+    Class:
+        cva: false
+        role: style-extension
+        type: string
+    Type:
+        cva: false
+        default: br
+        enum:
+            - br
+            - wbr
+            - word
+        role: break-type
+        type: string
+data: linebreak.data.json
+facade: github.com/fastygo/templ/ui
+id: ui.linebreak
+kind: typography
+layer: primitive
+package: github.com/fastygo/templ/ui/linebreak
 semantics:
-  root: br | wbr
-  behavior: static
+    behavior: static
+    data: linebreak.data.json
+    root: br | wbr
+showcase:
+    - id: type.br
+      props:
+        Type: br
+      ref: type.br
+    - id: type.wbr
+      props:
+        Type: wbr
+      ref: type.wbr
+targets:
+    react:
+        component: Break
+        facade: '@fastygo/templ-react'
+        package: '@fastygo/templ-react/ui/linebreak'
+    templ:
+        component: Break
+        facade: github.com/fastygo/templ/ui
+        package: github.com/fastygo/templ/ui/linebreak
+templ: Break
+variants: linebreak.variants.json
 ---
-
 ## Summary
 
 Break renders br or wbr for controlled inline wrapping.

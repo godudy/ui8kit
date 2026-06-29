@@ -1,47 +1,88 @@
 ---
-id: ui.block
-layer: primitive
-kind: layout
-package: github.com/fastygo/templ/ui/block
-facade: github.com/fastygo/templ/ui
-templ: Block
 api:
-  Tag:
-    role: landmark-tag
-    type: string
-    enum: [div, main, header, section, footer, nav, article, aside, figure, search, hgroup]
-    default: div
-    allow-list-source: utils.tags.TagGroupLayout
-  Class:
-    role: style-extension
-    type: string
-  ID:
-    role: identity
-    type: string
-  Attrs:
-    role: html-attrs
-    type: templ.Attributes
-slots:
-  default:
-    required: true
-    accepts: any
-showcase:
-  - id: tag.main
-    props: { Tag: main, Class: "min-h-screen" }
-  - id: tag.section
-    props: { Tag: section, Class: "py-8" }
-  - id: tag.header
-    props: { Tag: header, Class: "border-b border-border" }
-  - id: tag.footer
-    props: { Tag: footer, Class: "border-t border-border" }
-  - id: tag.nav
-    props: { Tag: nav, Class: "py-2" }
+    Attrs:
+        cva: false
+        role: html-attrs
+        type: templ.Attributes
+    Class:
+        cva: false
+        role: style-extension
+        type: string
+    ID:
+        cva: false
+        role: identity
+        type: string
+    Tag:
+        allow-list-source: utils.tags.TagGroupLayout
+        cva: false
+        default: div
+        enum:
+            - div
+            - main
+            - header
+            - section
+            - footer
+            - nav
+            - article
+            - aside
+            - figure
+            - search
+            - hgroup
+        role: landmark-tag
+        type: string
+data: block.data.json
+facade: github.com/fastygo/templ/ui
+id: ui.block
+kind: layout
+layer: primitive
+package: github.com/fastygo/templ/ui/block
 semantics:
-  root: resolved from Tag
-  role: none
-  behavior: static
-  rule: do-not-nest-block-in-block
-
+    behavior: static
+    data: block.data.json
+    role: none
+    root: resolved from Tag
+    rule: do-not-nest-block-in-block
+showcase:
+    - id: tag.main
+      props:
+        Class: min-h-screen
+        Tag: main
+      ref: tag.main
+    - id: tag.section
+      props:
+        Class: py-8
+        Tag: section
+      ref: tag.section
+    - id: tag.header
+      props:
+        Class: border-b border-border
+        Tag: header
+      ref: tag.header
+    - id: tag.footer
+      props:
+        Class: border-t border-border
+        Tag: footer
+      ref: tag.footer
+    - id: tag.nav
+      props:
+        Class: py-2
+        Tag: nav
+      ref: tag.nav
+slots:
+    default:
+        accepts: any
+        required: true
+targets:
+    react:
+        component: Block
+        facade: '@fastygo/templ-react'
+        package: '@fastygo/templ-react/ui/block'
+    templ:
+        component: Block
+        facade: github.com/fastygo/templ/ui
+        package: github.com/fastygo/templ/ui/block
+templ: Block
+variants: block.variants.json
 ---
 ## Summary
 

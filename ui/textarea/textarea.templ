@@ -32,7 +32,10 @@ type TextareaProps struct {
 }
 
 func TextareaClasses(p TextareaProps) string {
-	return uiutils.InputClasses(p.Variant, p.Size, p.Class)
+	return uiutils.Compose(TextareaVariants, map[string]string{
+		"variant": p.Variant,
+		"size":    p.Size,
+	}, p.Class)
 }
 
 // Textarea renders a styled multi-line form control.

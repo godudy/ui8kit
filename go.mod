@@ -2,7 +2,10 @@ module github.com/fastygo/templ
 
 go 1.25.0
 
-require github.com/a-h/templ v0.3.1001
+require (
+	github.com/a-h/templ v0.3.1001
+	gopkg.in/yaml.v3 v3.0.1
+)
 
 require (
 	github.com/a-h/parse v0.0.0-20250122154542-74294addb73e // indirect
@@ -19,7 +22,6 @@ require (
 	golang.org/x/sync v0.16.0 // indirect
 	golang.org/x/sys v0.34.0 // indirect
 	golang.org/x/tools v0.35.0 // indirect
-	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
 tool github.com/a-h/templ/cmd/templ

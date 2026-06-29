@@ -1,0 +1,23 @@
+{
+  "$schema": "../../schemas/data.schema.json",
+  "id": "ui.text",
+  "showcase": {
+    "tag.code": {
+      "props": {
+        "Class": "text-sm",
+        "Tag": "code"
+      }
+    },
+    "tag.p": {
+      "props": {
+        "Tag": "p"
+      }
+    },
+    "tag.small": {
+      "props": {
+        "Class": "text-muted-foreground",
+        "Tag": "small"
+      }
+    }
+  }
+}

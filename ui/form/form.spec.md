@@ -4,49 +4,91 @@ layer: composite
 kind: input
 package: github.com/fastygo/templ/ui/form
 facade: github.com/fastygo/templ/ui
+
+targets:
+  templ:
+    package: github.com/fastygo/templ/ui/form
+    facade: github.com/fastygo/templ/ui
+    component: Form
+  react:
+    package: "@fastygo/templ-react/ui/form"
+    facade: "@fastygo/templ-react"
+    component: Form
+
+variants: form.variants.json
+variant_recipes:
+  form-item: form-item.variants.json
+  form-description: form-description.variants.json
+  form-message: form-message.variants.json
+data: form.data.json
+
 parts:
   - templ: Form
     props: [ID, Class, Action, Method, Enctype, Autocomplete, Name, Target, NoValidate, Attrs]
     slot: root
+    recipe: form.variants.json
   - templ: FormItem
     props: [Class]
     slot: item
+    recipe: form-item.variants.json
   - templ: FormDescription
     props: [Class]
     slot: description
     value: string
+    recipe: form-description.variants.json
   - templ: FormMessage
     props: [Class]
     slot: message
     value: string
+    recipe: form-message.variants.json
+
 api:
   Action:
     role: submit-url
     type: string
+    cva: false
   Method:
     role: http-method
     type: string
     enum: [get, post]
+    cva: false
   NoValidate:
     role: validation
     type: bool
+    cva: false
+  Class:
+    role: style-extension
+    type: string
+    cva: false
+
 showcase:
   - id: layout.field-with-label
-    parts: [Form, FormItem, FormDescription]
-    props: { Method: post }
+    ref: layout.field-with-label
   - id: layout.with-message
-    parts: [Form, FormItem, FormMessage]
+    ref: layout.with-message
+
 semantics:
   root: form
   role: form
   behavior: interactive
   message-role: alert
-
+  data: form.data.json
 ---
+
 ## Summary
 
 Form wraps fields in a vertical grid container.
 FormItem groups label, control, and helper text.
+Each part has its own variant recipe file in this folder.
+
+## Variant recipes
+
+| Part | Recipe file | Keys |
+|------|-------------|------|
+| Form | form.variants.json | base only |
+| FormItem | form-item.variants.json | base only |
+| FormDescription | form-description.variants.json | base only |
+| FormMessage | form-message.variants.json | base only |
 
 ## Use Cases
 
@@ -56,7 +98,7 @@ FormItem groups label, control, and helper text.
 
 ## Semantics
 
-- Form root uses grid gap-4 layout
+- Form root uses grid gap-4 layout from form.variants.json
 - FormMessage renders role alert on p element
 
 ## Example layout.field-with-label

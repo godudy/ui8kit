@@ -29,38 +29,6 @@ import (
 	"github.com/fastygo/templ/utils"
 )
 
-var SheetVariants = uiutils.Variants{
-	Base: "fixed z-50 border-border bg-background text-foreground shadow-lg transition-transform",
-	Keys: []string{"side", "size", "variant"},
-	Defaults: map[string]string{
-		"side":    "right",
-		"size":    "default",
-		"variant": "default",
-	},
-	ByKey: map[string]map[string]string{
-		"side": {
-			"left":   "inset-y-0 left-0 border-r",
-			"right":  "inset-y-0 right-0 border-l",
-			"top":    "inset-x-0 top-0 border-b",
-			"bottom": "inset-x-0 bottom-0 border-t",
-		},
-		"size": {
-			"sm":      "w-64 max-w-full",
-			"default": "w-80 max-w-full",
-			"md":      "w-80 max-w-full",
-			"lg":      "w-96 max-w-full",
-			"xl":      "w-[28rem] max-w-full",
-			"full":    "h-full w-full max-w-none",
-		},
-		"variant": {
-			"default":  "",
-			"card":     "bg-card text-card-foreground",
-			"ghost":    "border-transparent shadow-none",
-			"unstyled": "",
-		},
-	},
-}
-
 // SheetProps configures the panel root.
 type SheetProps struct {
 	ID              string
@@ -435,7 +403,7 @@ func SheetContent(p SheetContentProps) templ.Component {
 			var templ_7745c5c3_Var11 string
 			templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(p.ID)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/sheet/sheet.templ`, Line: 232, Col: 12}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/sheet/sheet.templ`, Line: 200, Col: 12}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
 			if templ_7745c5c3_Err != nil {
@@ -586,7 +554,7 @@ func SheetTitle(p SheetTitleProps, value string) templ.Component {
 			var templ_7745c5c3_Var18 string
 			templ_7745c5c3_Var18, templ_7745c5c3_Err = templ.JoinStringErrs(p.ID)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/sheet/sheet.templ`, Line: 252, Col: 12}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/sheet/sheet.templ`, Line: 220, Col: 12}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var18))
 			if templ_7745c5c3_Err != nil {
@@ -625,7 +593,7 @@ func SheetTitle(p SheetTitleProps, value string) templ.Component {
 		var templ_7745c5c3_Var20 string
 		templ_7745c5c3_Var20, templ_7745c5c3_Err = templ.JoinStringErrs(value)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/sheet/sheet.templ`, Line: 256, Col: 9}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/sheet/sheet.templ`, Line: 224, Col: 9}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var20))
 		if templ_7745c5c3_Err != nil {
@@ -678,7 +646,7 @@ func SheetDescription(p SheetDescriptionProps, value string) templ.Component {
 			var templ_7745c5c3_Var23 string
 			templ_7745c5c3_Var23, templ_7745c5c3_Err = templ.JoinStringErrs(p.ID)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/sheet/sheet.templ`, Line: 263, Col: 12}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/sheet/sheet.templ`, Line: 231, Col: 12}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var23))
 			if templ_7745c5c3_Err != nil {
@@ -717,7 +685,7 @@ func SheetDescription(p SheetDescriptionProps, value string) templ.Component {
 		var templ_7745c5c3_Var25 string
 		templ_7745c5c3_Var25, templ_7745c5c3_Err = templ.JoinStringErrs(value)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/sheet/sheet.templ`, Line: 267, Col: 9}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/sheet/sheet.templ`, Line: 235, Col: 9}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var25))
 		if templ_7745c5c3_Err != nil {

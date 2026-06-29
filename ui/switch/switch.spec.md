@@ -1,49 +1,88 @@
 ---
-id: ui.switch
-layer: primitive
-kind: input
-package: github.com/fastygo/templ/ui/switch
-facade: github.com/fastygo/templ/ui
-templ: Switch
 api:
-  Variant:
-    role: appearance
-    type: string
-    enum: [default, outline, ghost, unstyled]
-    allow-list-source: utils.recipes.ControlChrome
-    default: default
-  Size:
-    role: density
-    type: string
-    enum: [default, sm, lg, xs]
-    allow-list-source: utils.recipes.ControlSize
-    default: default
-  Name:
-    role: form-name
-    type: string
-  Checked:
-    role: state
-    type: bool
-  Disabled:
-    role: state
-    type: bool
-  AriaLabel:
-    role: accessible-name
-    type: string
-showcase:
-  - id: state.off
-    props: { Name: notifications, ID: notifications, AriaLabel: "Notifications" }
-  - id: state.on
-    props: { Name: notifications, ID: notifications, Checked: true, AriaLabel: "Notifications" }
-  - id: state.disabled
-    props: { Name: locked, Disabled: true, Checked: true, AriaLabel: "Locked setting" }
+    AriaLabel:
+        cva: false
+        role: accessible-name
+        type: string
+    Checked:
+        cva: false
+        role: state
+        type: bool
+    Disabled:
+        cva: false
+        role: state
+        type: bool
+    Name:
+        cva: false
+        role: form-name
+        type: string
+    Size:
+        allow-list-source: switch.variants.json#size
+        cva: true
+        default: default
+        enum:
+            - default
+            - sm
+            - lg
+            - xs
+        role: density
+        type: string
+    Variant:
+        allow-list-source: switch.variants.json#variant
+        cva: true
+        default: default
+        enum:
+            - default
+            - outline
+            - ghost
+            - unstyled
+        role: appearance
+        type: string
+data: switch.data.json
+facade: github.com/fastygo/templ/ui
+id: ui.switch
+kind: input
+layer: primitive
+package: github.com/fastygo/templ/ui/switch
 semantics:
-  root: input
-  input-type: checkbox
-  role: switch
-  aria-checked: dynamic
-  behavior: interactive
-
+    aria-checked: dynamic
+    behavior: interactive
+    data: switch.data.json
+    input-type: checkbox
+    role: switch
+    root: input
+showcase:
+    - id: state.off
+      props:
+        AriaLabel: Notifications
+        ID: notifications
+        Name: notifications
+      ref: state.off
+    - id: state.on
+      props:
+        AriaLabel: Notifications
+        Checked: true
+        ID: notifications
+        Name: notifications
+      ref: state.on
+    - id: state.disabled
+      props:
+        AriaLabel: Locked setting
+        Checked: true
+        Disabled: true
+        Name: locked
+      ref: state.disabled
+targets:
+    react:
+        component: Switch
+        facade: '@fastygo/templ-react'
+        package: '@fastygo/templ-react/ui/switch'
+    templ:
+        component: Switch
+        facade: github.com/fastygo/templ/ui
+        package: github.com/fastygo/templ/ui/switch
+templ: Switch
+variants: switch.variants.json
 ---
 ## Summary
 

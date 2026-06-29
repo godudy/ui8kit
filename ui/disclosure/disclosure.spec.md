@@ -1,46 +1,107 @@
 ---
-id: ui.disclosure
-layer: primitive
-kind: interactive
-package: github.com/fastygo/templ/ui/disclosure
-facade: github.com/fastygo/templ/ui
-templ: Disclosure
-parts:
-  - templ: Disclosure
-    props: [Variant, Size, Class, Open, Attrs]
-  - templ: Summary
-    props: [Variant, Size, Class, Attrs]
-    slot: trigger
 api:
-  Variant:
-    role: appearance
-    type: string
-    enum: [default, ghost, card, unstyled]
-    allow-list-source: ui.disclosure.DisclosureVariants
-    default: default
-  Size:
-    role: density
-    type: string
-    enum: [sm, default, lg]
-    default: default
-  Open:
-    role: state
-    type: bool
-    default: false
-showcase:
-  - id: variant.default
-    props: { Variant: default }
-  - id: state.open
-    props: { Open: true }
+    Open:
+        cva: false
+        default: false
+        role: state
+        type: bool
+    Size:
+        allow-list-source: disclosure.variants.json#size
+        cva: true
+        default: default
+        enum:
+            - sm
+            - default
+            - lg
+        role: density
+        type: string
+    SummarySize:
+        allow-list-source: summary.variants.json#size
+        applies-to: Summary
+        cva: true
+        default: default
+        enum:
+            - sm
+            - default
+            - lg
+        role: density
+        type: string
+    SummaryVariant:
+        allow-list-source: summary.variants.json#variant
+        applies-to: Summary
+        cva: true
+        default: default
+        enum:
+            - default
+            - ghost
+            - card
+            - unstyled
+        role: appearance
+        type: string
+    Variant:
+        allow-list-source: disclosure.variants.json#variant
+        cva: true
+        default: default
+        enum:
+            - default
+            - ghost
+            - card
+            - unstyled
+        role: appearance
+        type: string
+data: disclosure.data.json
+facade: github.com/fastygo/templ/ui
+id: ui.disclosure
+kind: interactive
+layer: primitive
+package: github.com/fastygo/templ/ui/disclosure
+variant_recipes:
+    summary: summary.variants.json
+parts:
+    - props:
+        - Variant
+        - Size
+        - Class
+        - Open
+        - Attrs
+      templ: Disclosure
+    - props:
+        - Variant
+        - Size
+        - Class
+        - Attrs
+      slot: trigger
+      templ: Summary
 semantics:
-  root: details
-  trigger-root: summary
-  behavior: native-disclosure
+    behavior: native-disclosure
+    data: disclosure.data.json
+    root: details
+    trigger-root: summary
+showcase:
+    - id: variant.default
+      props:
+        Variant: default
+      ref: variant.default
+    - id: state.open
+      props:
+        Open: true
+      ref: state.open
+targets:
+    react:
+        component: Disclosure
+        facade: '@fastygo/templ-react'
+        package: '@fastygo/templ-react/ui/disclosure'
+    templ:
+        component: Disclosure
+        facade: github.com/fastygo/templ/ui
+        package: github.com/fastygo/templ/ui/disclosure
+templ: Disclosure
+variants: disclosure.variants.json
 ---
-
 ## Summary
 
 Disclosure renders native details and summary elements.
+Summary uses summary.variants.json; Disclosure uses disclosure.variants.json.
 
 ## Use Cases
 

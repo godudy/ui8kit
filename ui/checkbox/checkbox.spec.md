@@ -1,59 +1,97 @@
 ---
-id: ui.checkbox
-layer: primitive
-kind: input
-package: github.com/fastygo/templ/ui/checkbox
-facade: github.com/fastygo/templ/ui
-templ: Checkbox
 api:
-  Variant:
-    role: appearance
-    type: string
-    enum: [default, outline, ghost, unstyled]
-    allow-list-source: utils.recipes.ControlChrome
-    default: default
-  Size:
-    role: density
-    type: string
-    enum: [default, sm, lg, xs]
-    allow-list-source: utils.recipes.ControlSize
-    default: default
-  Name:
-    role: form-name
-    type: string
-  Value:
-    role: submit-value
-    type: string
-  Checked:
-    role: state
-    type: bool
-  Disabled:
-    role: state
-    type: bool
-  Required:
-    role: state
-    type: bool
-  AriaLabel:
-    role: accessible-name
-    type: string
-showcase:
-  - id: state.unchecked
-    props: { Name: terms, ID: terms }
-  - id: state.checked
-    props: { Name: terms, ID: terms, Checked: true }
-  - id: state.disabled
-    props: { Name: locked, Disabled: true, Checked: true }
+    AriaLabel:
+        cva: false
+        role: accessible-name
+        type: string
+    Checked:
+        cva: false
+        role: state
+        type: bool
+    Disabled:
+        cva: false
+        role: state
+        type: bool
+    Name:
+        cva: false
+        role: form-name
+        type: string
+    Required:
+        cva: false
+        role: state
+        type: bool
+    Size:
+        allow-list-source: checkbox.variants.json#size
+        cva: true
+        default: default
+        enum:
+            - default
+            - sm
+            - lg
+            - xs
+        role: density
+        type: string
+    Value:
+        cva: false
+        role: submit-value
+        type: string
+    Variant:
+        allow-list-source: checkbox.variants.json#variant
+        cva: true
+        default: default
+        enum:
+            - default
+            - outline
+            - ghost
+            - unstyled
+        role: appearance
+        type: string
+data: checkbox.data.json
+facade: github.com/fastygo/templ/ui
+id: ui.checkbox
+kind: input
+layer: primitive
+package: github.com/fastygo/templ/ui/checkbox
 semantics:
-  root: input
-  input-type: checkbox
-  role: checkbox
-  behavior: interactive
-
+    behavior: interactive
+    data: checkbox.data.json
+    input-type: checkbox
+    role: checkbox
+    root: input
+showcase:
+    - id: state.unchecked
+      props:
+        ID: terms
+        Name: terms
+      ref: state.unchecked
+    - id: state.checked
+      props:
+        Checked: true
+        ID: terms
+        Name: terms
+      ref: state.checked
+    - id: state.disabled
+      props:
+        Checked: true
+        Disabled: true
+        Name: locked
+      ref: state.disabled
+targets:
+    react:
+        component: Checkbox
+        facade: '@fastygo/templ-react'
+        package: '@fastygo/templ-react/ui/checkbox'
+    templ:
+        component: Checkbox
+        facade: github.com/fastygo/templ/ui
+        package: github.com/fastygo/templ/ui/checkbox
+templ: Checkbox
+variants: checkbox.variants.json
 ---
 ## Summary
 
 Checkbox renders a native boolean form control.
-Checkbox uses ControlClasses recipe from utils.
+Checkbox uses checkbox.variants.json via Compose.
 
 ## Use Cases
 

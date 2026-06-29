@@ -12,30 +12,6 @@ import (
 	"github.com/fastygo/templ/utils"
 )
 
-var DialogVariants = uiutils.Variants{
-	Base: "m-auto rounded-lg border border-border bg-background text-foreground shadow-lg backdrop:bg-background/80",
-	Keys: []string{"variant", "size"},
-	Defaults: map[string]string{
-		"variant": "default",
-		"size":    "default",
-	},
-	ByKey: map[string]map[string]string{
-		"variant": {
-			"default":  "",
-			"card":     "bg-card text-card-foreground",
-			"sheet":    "min-h-screen rounded-none",
-			"unstyled": "",
-		},
-		"size": {
-			"sm":      "w-full max-w-sm",
-			"default": "w-full max-w-lg",
-			"lg":      "w-full max-w-2xl",
-			"xl":      "w-full max-w-4xl",
-			"full":    "h-full w-full max-w-none",
-		},
-	},
-}
-
 // DialogProps configures native dialog.
 type DialogProps struct {
 	Variant          string

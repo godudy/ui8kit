@@ -71,7 +71,9 @@ type CardFooterProps struct {
 }
 
 func CardClasses(p CardProps) string {
-	return uiutils.CardClasses(p.Variant, strings.TrimSpace(p.Class))
+	return uiutils.Compose(CardVariants, map[string]string{
+		"variant": strings.TrimSpace(p.Variant),
+	}, strings.TrimSpace(p.Class))
 }
 
 // Card renders the bordered surface wrapper.
@@ -632,7 +634,7 @@ func CardTitle(p CardTitleProps, value string) templ.Component {
 			var templ_7745c5c3_Var29 string
 			templ_7745c5c3_Var29, templ_7745c5c3_Err = templ.JoinStringErrs(value)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/card/card.templ`, Line: 101, Col: 9}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/card/card.templ`, Line: 103, Col: 9}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var29))
 			if templ_7745c5c3_Err != nil {
@@ -847,7 +849,7 @@ func CardDescription(p CardDescriptionProps, value string) templ.Component {
 		var templ_7745c5c3_Var40 string
 		templ_7745c5c3_Var40, templ_7745c5c3_Err = templ.JoinStringErrs(value)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/card/card.templ`, Line: 118, Col: 89}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `components/card/card.templ`, Line: 120, Col: 89}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var40))
 		if templ_7745c5c3_Err != nil {

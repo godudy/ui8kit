@@ -31,7 +31,10 @@ type BoxProps struct {
 	Attrs templ.Attributes
 }
 
-// Box renders a flexible layout container.
+func BoxClasses(p BoxProps) string {
+	return uiutils.Compose(BoxVariants, map[string]string{}, p.Class)
+}
+
 func Box(p BoxProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -102,7 +105,7 @@ func boxTag(p BoxProps) templ.Component {
 		ctx = templ.ClearChildren(ctx)
 		switch uiutils.ResolveTag(p.Tag, "div", uiutils.TagGroupLayout) {
 		case "section":
-			var templ_7745c5c3_Var4 = []any{p.Class}
+			var templ_7745c5c3_Var4 = []any{BoxClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var4...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -141,7 +144,7 @@ func boxTag(p BoxProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		case "article":
-			var templ_7745c5c3_Var6 = []any{p.Class}
+			var templ_7745c5c3_Var6 = []any{BoxClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var6...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -180,7 +183,7 @@ func boxTag(p BoxProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		case "aside":
-			var templ_7745c5c3_Var8 = []any{p.Class}
+			var templ_7745c5c3_Var8 = []any{BoxClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var8...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -219,7 +222,7 @@ func boxTag(p BoxProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		case "header":
-			var templ_7745c5c3_Var10 = []any{p.Class}
+			var templ_7745c5c3_Var10 = []any{BoxClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var10...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -258,7 +261,7 @@ func boxTag(p BoxProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		case "footer":
-			var templ_7745c5c3_Var12 = []any{p.Class}
+			var templ_7745c5c3_Var12 = []any{BoxClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var12...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -297,7 +300,7 @@ func boxTag(p BoxProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		case "main":
-			var templ_7745c5c3_Var14 = []any{p.Class}
+			var templ_7745c5c3_Var14 = []any{BoxClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var14...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -336,7 +339,7 @@ func boxTag(p BoxProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		case "nav":
-			var templ_7745c5c3_Var16 = []any{p.Class}
+			var templ_7745c5c3_Var16 = []any{BoxClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var16...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -375,7 +378,7 @@ func boxTag(p BoxProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		case "figure":
-			var templ_7745c5c3_Var18 = []any{p.Class}
+			var templ_7745c5c3_Var18 = []any{BoxClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var18...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -414,7 +417,7 @@ func boxTag(p BoxProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		case "search":
-			var templ_7745c5c3_Var20 = []any{p.Class}
+			var templ_7745c5c3_Var20 = []any{BoxClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var20...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -453,7 +456,7 @@ func boxTag(p BoxProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		case "hgroup":
-			var templ_7745c5c3_Var22 = []any{p.Class}
+			var templ_7745c5c3_Var22 = []any{BoxClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var22...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -492,7 +495,7 @@ func boxTag(p BoxProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		default:
-			var templ_7745c5c3_Var24 = []any{p.Class}
+			var templ_7745c5c3_Var24 = []any{BoxClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var24...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err

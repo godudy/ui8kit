@@ -44,7 +44,7 @@ func List(p ListProps) templ.Component {
 		ctx = templ.ClearChildren(ctx)
 		switch listTag(p.Tag) {
 		case "ol":
-			var templ_7745c5c3_Var2 = []any{p.Class}
+			var templ_7745c5c3_Var2 = []any{ListClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var2...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -83,7 +83,7 @@ func List(p ListProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		case "dl":
-			var templ_7745c5c3_Var4 = []any{p.Class}
+			var templ_7745c5c3_Var4 = []any{ListClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var4...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -122,7 +122,7 @@ func List(p ListProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		case "menu":
-			var templ_7745c5c3_Var6 = []any{p.Class}
+			var templ_7745c5c3_Var6 = []any{ListClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var6...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -161,7 +161,7 @@ func List(p ListProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		default:
-			var templ_7745c5c3_Var8 = []any{p.Class}
+			var templ_7745c5c3_Var8 = []any{ListClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var8...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -228,7 +228,7 @@ func ListItem(p ListItemProps) templ.Component {
 		ctx = templ.ClearChildren(ctx)
 		switch uiutils.ResolveTag(p.Tag, "li", uiutils.TagGroupListItem) {
 		case "dt":
-			var templ_7745c5c3_Var11 = []any{p.Class}
+			var templ_7745c5c3_Var11 = []any{ListItemClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var11...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -267,7 +267,7 @@ func ListItem(p ListItemProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		case "dd":
-			var templ_7745c5c3_Var13 = []any{p.Class}
+			var templ_7745c5c3_Var13 = []any{ListItemClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var13...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -306,7 +306,7 @@ func ListItem(p ListItemProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		default:
-			var templ_7745c5c3_Var15 = []any{p.Class}
+			var templ_7745c5c3_Var15 = []any{ListItemClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var15...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err

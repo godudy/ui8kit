@@ -19,7 +19,7 @@ type LabelProps struct {
 // Label renders accessible text linked to a control.
 templ Label(p LabelProps) {
 	<label
-		class={ uiutils.Cn("text-sm font-medium leading-none", p.Class) }
+		class={ uiutils.Compose(LabelVariants, map[string]string{}, p.Class) }
 		if p.HTMLFor != "" {
 			for={ p.HTMLFor }
 		}

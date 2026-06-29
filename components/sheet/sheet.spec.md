@@ -29,7 +29,7 @@ api:
     role: appearance
     type: string
     enum: [default, card, ghost, unstyled]
-    allow-list-source: components.sheet.SheetVariants
+    allow-list-source: sheet.variants.json#variant
     default: default
   Side:
     role: placement

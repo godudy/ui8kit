@@ -1,61 +1,140 @@
 ---
-id: ui.image
-layer: primitive
-kind: media
-package: github.com/fastygo/templ/ui/image
-facade: github.com/fastygo/templ/ui
-templ: Image
-parts:
-  - templ: Image
-    props: [Variant, Size, Class, Src, SrcSet, Sizes, Alt, Width, Height, Fit, Position, Aspect, Loading, Decoding, FetchPriority, Decorative, ID, Attrs]
-  - templ: Picture
-    props: [Class, Attrs]
-    slot: responsive-wrapper
-  - templ: Source
-    props: [SrcSet, Src, Media, Type, Sizes, Attrs]
-    slot: source
 api:
-  Variant:
-    role: appearance
-    type: string
-    enum: [default, rounded, avatar, thumbnail, logo, unstyled]
-    allow-list-source: ui.image.ImageVariants
-    default: default
-  Size:
-    role: density
-    type: string
-    enum: [auto, default, xs, sm, lg, xl, full]
-    allow-list-source: ui.image.ImageVariants
-    default: auto
-  Fit:
-    role: object-fit
-    type: string
-    enum: [contain, cover, fill, none, scale-down]
-    default: cover
-  Position:
-    role: object-position
-    type: string
-    enum: [bottom, center, left, right, top, left-bottom, left-top, right-bottom, right-top]
-    default: center
-  Aspect:
-    role: aspect-ratio
-    type: string
-    enum: [auto, square, video]
-    default: auto
-  Decorative:
-    role: accessibility
-    type: bool
-    default: false
-showcase:
-  - id: variant.avatar
-    props: { Variant: avatar, Size: md, Src: "/avatar.png", Alt: "User avatar" }
-  - id: layout.picture
-    props: { Variant: rounded, Src: "/hero.jpg", Alt: "Hero image" }
+    Aspect:
+        cva: false
+        default: auto
+        enum:
+            - auto
+            - square
+            - video
+        role: aspect-ratio
+        type: string
+    Decorative:
+        cva: false
+        default: false
+        role: accessibility
+        type: bool
+    Fit:
+        cva: false
+        default: cover
+        enum:
+            - contain
+            - cover
+            - fill
+            - none
+            - scale-down
+        role: object-fit
+        type: string
+    Position:
+        cva: false
+        default: center
+        enum:
+            - bottom
+            - center
+            - left
+            - right
+            - top
+            - left-bottom
+            - left-top
+            - right-bottom
+            - right-top
+        role: object-position
+        type: string
+    Size:
+        allow-list-source: image.variants.json#size
+        cva: true
+        default: auto
+        enum:
+            - auto
+            - default
+            - xs
+            - sm
+            - md
+            - lg
+            - xl
+            - full
+        role: density
+        type: string
+    Variant:
+        allow-list-source: image.variants.json#variant
+        cva: true
+        default: default
+        enum:
+            - default
+            - rounded
+            - avatar
+            - thumbnail
+            - logo
+            - unstyled
+        role: appearance
+        type: string
+data: image.data.json
+facade: github.com/fastygo/templ/ui
+id: ui.image
+kind: media
+layer: primitive
+package: github.com/fastygo/templ/ui/image
+parts:
+    - props:
+        - Variant
+        - Size
+        - Class
+        - Src
+        - SrcSet
+        - Sizes
+        - Alt
+        - Width
+        - Height
+        - Fit
+        - Position
+        - Aspect
+        - Loading
+        - Decoding
+        - FetchPriority
+        - Decorative
+        - ID
+        - Attrs
+      templ: Image
+    - props:
+        - Class
+        - Attrs
+      slot: responsive-wrapper
+      templ: Picture
+    - props:
+        - SrcSet
+        - Src
+        - Media
+        - Type
+        - Sizes
+        - Attrs
+      slot: source
+      templ: Source
 semantics:
-  root: img | picture | source
-  behavior: static
+    behavior: static
+    data: image.data.json
+    root: img | picture | source
+showcase:
+    - id: variant.avatar
+      props:
+        Alt: User avatar
+        Size: md
+        Src: /avatar.png
+        Variant: avatar
+      ref: variant.avatar
+    - id: layout.picture
+      ref: layout.picture
+targets:
+    react:
+        component: Image
+        facade: '@fastygo/templ-react'
+        package: '@fastygo/templ-react/ui/image'
+    templ:
+        component: Image
+        facade: github.com/fastygo/templ/ui
+        package: github.com/fastygo/templ/ui/image
+templ: Image
+variants: image.variants.json
 ---
-
 ## Summary
 
 Image renders accessible img, picture, and source primitives.

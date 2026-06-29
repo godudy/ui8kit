@@ -1,54 +1,92 @@
 ---
-id: ui.textarea
-layer: primitive
-kind: input
-package: github.com/fastygo/templ/ui/textarea
-facade: github.com/fastygo/templ/ui
-templ: Textarea
 api:
-  Variant:
-    role: appearance
-    type: string
-    enum: [default, outline, ghost, unstyled]
-    allow-list-source: utils.recipes.InputChrome
-    default: default
-  Size:
-    role: density
-    type: string
-    enum: [default, sm, lg, xs]
-    allow-list-source: utils.recipes.InputSize
-    default: default
-  Rows:
-    role: visible-lines
-    type: int
-    default: 4
-  Name:
-    role: form-name
-    type: string
-  Value:
-    role: value
-    type: string
-  Placeholder:
-    role: placeholder
-    type: string
-  Disabled:
-    role: state
-    type: bool
-  Required:
-    role: state
-    type: bool
-showcase:
-  - id: variant.default
-    props: { Name: message, Placeholder: "Your message" }
-  - id: state.disabled
-    props: { Disabled: true, Name: locked, Value: "Fixed text" }
-  - id: rows.custom
-    props: { Rows: 6, Name: bio, Placeholder: "Bio" }
+    Disabled:
+        cva: false
+        role: state
+        type: bool
+    Name:
+        cva: false
+        role: form-name
+        type: string
+    Placeholder:
+        cva: false
+        role: placeholder
+        type: string
+    Required:
+        cva: false
+        role: state
+        type: bool
+    Rows:
+        cva: false
+        default: 4
+        role: visible-lines
+        type: int
+    Size:
+        allow-list-source: textarea.variants.json#size
+        cva: true
+        default: default
+        enum:
+            - default
+            - sm
+            - lg
+            - xs
+        role: density
+        type: string
+    Value:
+        cva: false
+        role: value
+        type: string
+    Variant:
+        allow-list-source: textarea.variants.json#variant
+        cva: true
+        default: default
+        enum:
+            - default
+            - outline
+            - ghost
+            - unstyled
+        role: appearance
+        type: string
+data: textarea.data.json
+facade: github.com/fastygo/templ/ui
+id: ui.textarea
+kind: input
+layer: primitive
+package: github.com/fastygo/templ/ui/textarea
 semantics:
-  root: textarea
-  role: textbox
-  behavior: interactive
-
+    behavior: interactive
+    data: textarea.data.json
+    role: textbox
+    root: textarea
+showcase:
+    - id: variant.default
+      props:
+        Name: message
+        Placeholder: Your message
+      ref: variant.default
+    - id: state.disabled
+      props:
+        Disabled: true
+        Name: locked
+        Value: Fixed text
+      ref: state.disabled
+    - id: rows.custom
+      props:
+        Name: bio
+        Placeholder: Bio
+        Rows: 6
+      ref: rows.custom
+targets:
+    react:
+        component: Textarea
+        facade: '@fastygo/templ-react'
+        package: '@fastygo/templ-react/ui/textarea'
+    templ:
+        component: Textarea
+        facade: github.com/fastygo/templ/ui
+        package: github.com/fastygo/templ/ui/textarea
+templ: Textarea
+variants: textarea.variants.json
 ---
 ## Summary
 
@@ -62,7 +100,7 @@ TextareaRows defaults Rows to four when zero.
 
 ## Semantics
 
-- InputClasses recipe from utils styles the surface
+- TextareaVariants from textarea.variants.json styles the surface
 - Value renders as textarea body content
 
 ## Example variant.default

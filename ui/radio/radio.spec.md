@@ -1,50 +1,82 @@
 ---
-id: ui.radio
-layer: primitive
-kind: input
-package: github.com/fastygo/templ/ui/radio
-facade: github.com/fastygo/templ/ui
-templ: Radio
 api:
-  Variant:
-    role: appearance
-    type: string
-    enum: [default, outline, ghost, unstyled]
-    allow-list-source: utils.recipes.ControlChrome
-    default: default
-  Size:
-    role: density
-    type: string
-    enum: [default, sm, lg, xs]
-    allow-list-source: utils.recipes.ControlSize
-    default: default
-  Name:
-    role: group-name
-    type: string
-  Value:
-    role: option-value
-    type: string
-  Checked:
-    role: state
-    type: bool
-  Disabled:
-    role: state
-    type: bool
-  AriaLabel:
-    role: accessible-name
-    type: string
-showcase:
-  - id: layout.group
-    props: { Name: plan }
-  - id: state.disabled
-    props: { Name: plan, Value: pro, Disabled: true }
+    AriaLabel:
+        cva: false
+        role: accessible-name
+        type: string
+    Checked:
+        cva: false
+        role: state
+        type: bool
+    Disabled:
+        cva: false
+        role: state
+        type: bool
+    Name:
+        cva: false
+        role: group-name
+        type: string
+    Size:
+        allow-list-source: radio.variants.json#size
+        cva: true
+        default: default
+        enum:
+            - default
+            - sm
+            - lg
+            - xs
+        role: density
+        type: string
+    Value:
+        cva: false
+        role: option-value
+        type: string
+    Variant:
+        allow-list-source: radio.variants.json#variant
+        cva: true
+        default: default
+        enum:
+            - default
+            - outline
+            - ghost
+            - unstyled
+        role: appearance
+        type: string
+data: radio.data.json
+facade: github.com/fastygo/templ/ui
+id: ui.radio
+kind: input
+layer: primitive
+package: github.com/fastygo/templ/ui/radio
 semantics:
-  root: input
-  input-type: radio
-  role: radio
-  behavior: interactive
-  rule: same-name-groups-options
-
+    behavior: interactive
+    data: radio.data.json
+    input-type: radio
+    role: radio
+    root: input
+    rule: same-name-groups-options
+showcase:
+    - id: layout.group
+      props:
+        Name: plan
+      ref: layout.group
+    - id: state.disabled
+      props:
+        Disabled: true
+        Name: plan
+        Value: pro
+      ref: state.disabled
+targets:
+    react:
+        component: Radio
+        facade: '@fastygo/templ-react'
+        package: '@fastygo/templ-react/ui/radio'
+    templ:
+        component: Radio
+        facade: github.com/fastygo/templ/ui
+        package: github.com/fastygo/templ/ui/radio
+templ: Radio
+variants: radio.variants.json
 ---
 ## Summary
 

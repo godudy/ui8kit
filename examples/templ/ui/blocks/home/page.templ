@@ -1,0 +1,306 @@
+package home
+
+import (
+	cmp "github.com/fastygo/templ/components"
+	"github.com/fastygo/templ/ui"
+)
+
+const (
+	homeSheetTriggerID = "home-mobile-sheet-trigger"
+	homeSheetPanelID   = "home-mobile-sheet-panel"
+	homeSheetTitleID   = "home-mobile-sheet-title"
+)
+
+templ Page(props PageProps) {
+	@ui.Block(ui.BlockProps{Tag: "main", Class: "min-h-screen bg-muted/30 text-foreground"}) {
+		@CatalogMobileSheet(props)
+		@ui.Group(ui.GroupProps{Class: "min-h-screen w-full items-stretch"}) {
+			@CatalogSidebar(props)
+			@ui.Box(ui.BoxProps{Class: "flex min-w-0 flex-1 flex-col bg-background"}) {
+				@CatalogHeader(props)
+				@ui.Box(ui.BoxProps{Class: "flex flex-1 flex-col gap-8 p-4 md:p-8"}) {
+					@HeroChat(props.Hero)
+					@ToolCards(props.Tools)
+					@ShowcaseGrid(props.Showcase)
+					@PrototypeNotice(props.Notice)
+				}
+			}
+		}
+	}
+}
+
+templ CatalogMobileSheet(props PageProps) {
+	@cmp.Sheet(cmp.SheetProps{
+		ID:             homeSheetPanelID,
+		Side:           "left",
+		Size:           "default",
+		Variant:        "card",
+		Behavior:       "ui8kit",
+		AriaLabel:      "Navigation menu",
+		AriaLabelledBy: homeSheetTitleID,
+		Class:          "md:hidden max-h-dvh overflow-y-auto p-0",
+	}) {
+		@cmp.SheetOverlay(cmp.SheetOverlayProps{
+			For:      homeSheetPanelID,
+			Behavior: "ui8kit",
+			Class:    "cursor-pointer bg-background/80",
+		})
+		@cmp.SheetContent(cmp.SheetContentProps{Class: "p-4"}) {
+			@cmp.SheetHeader(cmp.SheetHeaderProps{}) {
+				@cmp.SheetTitle(cmp.SheetTitleProps{ID: homeSheetTitleID, Class: "text-sm font-medium"}, props.Brand)
+				@cmp.SheetClose(cmp.SheetCloseProps{
+					For:       homeSheetPanelID,
+					Behavior:  "ui8kit",
+					Variant:   "outline",
+					Size:      "icon",
+					AriaLabel: "Close navigation menu",
+				}) {
+					×
+				}
+			}
+			@CatalogPrimaryNav(props.Sidebar, "mt-4")
+			@CatalogHeaderNav(props.HeaderNav, "mt-4 border-t border-border pt-4")
+		}
+	}
+}
+
+templ CatalogPrimaryNav(items []NavItem, class string) {
+	@cmp.Nav(cmp.NavProps{AriaLabel: "Primary navigation", Class: class}) {
+		@cmp.NavList(cmp.NavListProps{Gap: "sm", Class: "px-2"}) {
+			for index, item := range items {
+				@cmp.NavItem(cmp.NavItemProps{}) {
+					@cmp.NavLink(cmp.NavLinkProps{Href: item.Href, Active: index == 0, AriaLabel: item.Label}) {
+						@cmp.IconBadge(cmp.IconBadgeProps{Text: navIconLetter(item.Icon), Size: "sm", Variant: navIconVariant(index == 0)})
+						{ item.Label }
+					}
+				}
+			}
+		}
+	}
+}
+
+templ CatalogHeaderNav(items []NavItem, class string) {
+	@cmp.Nav(cmp.NavProps{AriaLabel: "Header navigation", Class: class}) {
+		@cmp.NavList(cmp.NavListProps{Gap: "sm", Class: "px-2"}) {
+			for _, item := range items {
+				@cmp.NavItem(cmp.NavItemProps{}) {
+					@cmp.NavLink(cmp.NavLinkProps{Href: item.Href, Variant: "ghost", Size: "sm"}) {
+						{ item.Label }
+					}
+				}
+			}
+		}
+	}
+}
+
+templ CatalogSidebar(props PageProps) {
+	@ui.Box(ui.BoxProps{Tag: "aside", Class: "hidden w-64 shrink-0 border-r border-border bg-card md:flex md:flex-col"}) {
+		@ui.Box(ui.BoxProps{Class: "flex h-16 items-center gap-4 border-b border-border px-4"}) {
+			@cmp.IconBadge(cmp.IconBadgeProps{Text: "BY", Size: "sm", Variant: "accent"})
+			@ui.Stack(ui.StackProps{Class: "gap-0"}) {
+				@ui.Text(ui.TextProps{Tag: "span", Class: "text-sm font-semibold tracking-tight"}, props.Brand)
+				@ui.Text(ui.TextProps{Tag: "span", Class: "text-xs text-muted-foreground"}, "Workspace catalog")
+			}
+		}
+		@ui.Box(ui.BoxProps{Class: "flex-1 py-2"}) {
+			@CatalogPrimaryNav(props.Sidebar, "")
+		}
+		@ui.Box(ui.BoxProps{Class: "border-t border-border p-4"}) {
+			@ui.Button(ui.ButtonProps{Href: "/", Variant: "outline", Size: "sm", Class: "w-full"}) {
+				Dashboard block
+			}
+		}
+	}
+}
+
+templ CatalogHeader(props PageProps) {
+	@ui.Box(ui.BoxProps{Tag: "header", Class: "grid h-16 shrink-0 grid-cols-[1fr_auto_1fr] items-center gap-4 border-b border-border bg-card/80 px-4 backdrop-blur-sm"}) {
+		@ui.Group(ui.GroupProps{Class: "col-start-1 items-center gap-2 justify-self-start"}) {
+			@cmp.SheetTrigger(cmp.SheetTriggerProps{
+				ID:        homeSheetTriggerID,
+				For:       homeSheetPanelID,
+				Behavior:  "ui8kit",
+				Variant:   "outline",
+				Size:      "icon",
+				AriaLabel: "Open menu",
+			}) {
+				☰
+			}
+			@ui.Button(ui.ButtonProps{Href: "#workspace", Variant: "outline", Size: "sm"}) {
+				{ props.Workspace }
+			}
+		}
+		@cmp.Nav(cmp.NavProps{Class: "col-start-2 hidden justify-self-center md:block"}) {
+			@cmp.NavList(cmp.NavListProps{Orientation: "horizontal", Gap: "sm"}) {
+				for _, item := range props.HeaderNav {
+					@cmp.NavItem(cmp.NavItemProps{}) {
+						@cmp.NavLink(cmp.NavLinkProps{Href: item.Href, Variant: "ghost", Size: "sm"}) {
+							{ item.Label }
+						}
+					}
+				}
+			}
+		}
+		@ui.Group(ui.GroupProps{Class: "col-start-3 items-center justify-end gap-2 justify-self-end"}) {
+			@ui.Badge(ui.BadgeProps{Variant: "secondary"}) {
+				{ props.Prototype }
+			}
+			@ui.Button(ui.ButtonProps{Href: "#profile", Variant: "ghost", Size: "sm"}) {
+				{ props.ProfileName }
+			}
+		}
+	}
+}
+
+templ HeroChat(props HeroProps) {
+	@ui.Box(ui.BoxProps{Tag: "section", Class: "overflow-hidden rounded-lg border border-border bg-card shadow-sm"}) {
+		@ui.Grid(ui.GridProps{Class: "gap-0 md:grid-cols-2"}) {
+			@ui.GridCol(ui.GridColProps{}) {
+				@ui.Box(ui.BoxProps{Class: "border-b border-border p-6 md:border-b-0 md:border-r"}) {
+					@ui.Stack(ui.StackProps{Class: "gap-6"}) {
+						@ui.Stack(ui.StackProps{Class: "gap-2"}) {
+							@ui.Badge(ui.BadgeProps{Variant: "outline"}) { AI workspace }
+							@ui.Title(ui.TitleProps{Order: 1, Class: "text-3xl font-bold tracking-tight md:text-4xl"}, props.Title)
+							@ui.Text(ui.TextProps{Class: "text-sm leading-relaxed text-muted-foreground md:text-base"}, props.Subtitle)
+						}
+						@ui.Box(ui.BoxProps{Class: "rounded-lg border border-border bg-background p-4 shadow-sm"}) {
+							@ui.Textarea(ui.TextareaProps{
+								Name:        "prompt",
+								Placeholder: props.Prompt,
+								Rows:        4,
+								Class:       "min-h-[7rem] border-0 bg-transparent shadow-none focus-visible:ring-0",
+							})
+							@ui.Group(ui.GroupProps{Class: "mt-4 items-center justify-between gap-2"}) {
+								@ui.Group(ui.GroupProps{Class: "items-center gap-2"}) {
+									@ui.Button(ui.ButtonProps{Variant: "outline", Size: "sm", AriaLabel: props.AttachmentLabel}) { + }
+									@ui.Button(ui.ButtonProps{Variant: "outline", Size: "sm", AriaLabel: props.AssistantLabel}) { AI }
+									@ui.Button(ui.ButtonProps{Variant: "ghost", Size: "sm", AriaLabel: props.ShortcutLabel}) {
+										/
+									}
+								}
+								@ui.Button(ui.ButtonProps{Variant: "default", Size: "sm"}) {
+									{ props.PrimaryAction }
+								}
+							}
+						}
+						@ui.Stack(ui.StackProps{Class: "gap-2"}) {
+							@ui.Text(ui.TextProps{Class: "text-xs font-medium text-muted-foreground"}, props.SuggestionsLabel)
+							@ui.Group(ui.GroupProps{Class: "flex flex-wrap gap-2"}) {
+								for _, suggestion := range props.Suggestions {
+									@ui.Badge(ui.BadgeProps{Variant: "secondary"}) {
+										{ suggestion }
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			@ui.GridCol(ui.GridColProps{}) {
+				@ui.Box(ui.BoxProps{Class: "bg-muted/30 p-6"}) {
+					@ui.Stack(ui.StackProps{Class: "gap-4"}) {
+						@ui.Text(ui.TextProps{Class: "text-xs font-semibold uppercase tracking-wide text-muted-foreground"}, "Workflow")
+						for index, step := range props.Workflow {
+							@ui.Group(ui.GroupProps{Class: "items-center gap-4 rounded-md border border-border bg-card px-4 py-4 shadow-sm"}) {
+								@cmp.IconBadge(cmp.IconBadgeProps{Text: workflowStepLabel(index), Size: "sm", Variant: workflowStepVariant(index)})
+								@ui.Text(ui.TextProps{Class: "text-sm font-medium"}, step.Label)
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+templ ToolCards(items []ToolCard) {
+	@ui.Grid(ui.GridProps{Class: "gap-4 md:grid-cols-2 xl:grid-cols-3"}) {
+		for _, item := range items {
+			@ui.GridCol(ui.GridColProps{}) {
+				@cmp.Card(cmp.CardProps{Tag: "article", Variant: "default", Class: "h-full hover:bg-muted/20"}) {
+					@cmp.CardContent(cmp.CardContentProps{Class: "p-6"}) {
+						@ui.Group(ui.GroupProps{Class: "items-start gap-4"}) {
+							@cmp.IconBadge(cmp.IconBadgeProps{Text: toolIconLetter(item.Icon), Size: "default", Variant: BlockVariant("toolTone", item.Tone)})
+							@ui.Stack(ui.StackProps{Class: "gap-2"}) {
+								@ui.Text(ui.TextProps{Class: "text-sm font-semibold"}, item.Title)
+								@ui.Text(ui.TextProps{Class: "text-xs leading-relaxed text-muted-foreground"}, item.Description)
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+templ ShowcaseGrid(props ShowcaseProps) {
+	@ui.Stack(ui.StackProps{Class: "gap-6"}) {
+		@ui.Group(ui.GroupProps{Class: "items-end justify-between gap-4"}) {
+			@ui.Stack(ui.StackProps{Class: "gap-2"}) {
+				@ui.Title(ui.TitleProps{Order: 2, Class: "text-xl font-semibold tracking-tight"}, props.Title)
+				@ui.Text(ui.TextProps{Class: "text-sm text-muted-foreground"}, props.Description)
+			}
+			@ui.Button(ui.ButtonProps{Variant: "outline", Size: "sm", Href: "#templates"}) {
+				{ props.ActionLabel }
+			}
+		}
+		@ui.Grid(ui.GridProps{Class: "gap-4 md:grid-cols-2 xl:grid-cols-3"}) {
+			for _, item := range props.Items {
+				@ui.GridCol(ui.GridColProps{}) {
+					@ShowcaseCardView(item)
+				}
+			}
+		}
+	}
+}
+
+templ ShowcaseCardView(item ShowcaseItem) {
+	@cmp.Card(cmp.CardProps{Tag: "article", Variant: "raised", Class: "h-full"}) {
+		@cmp.CardContent(cmp.CardContentProps{Class: "p-6"}) {
+			@ui.Stack(ui.StackProps{Class: "gap-4"}) {
+				@ui.Box(ui.BoxProps{Class: "flex h-28 items-center justify-center rounded-md border border-dashed border-border bg-muted/50"}) {
+					@cmp.IconBadge(cmp.IconBadgeProps{Text: showcaseIconLetter(item.Name), Size: "lg", Variant: "accent"})
+				}
+				@ui.Group(ui.GroupProps{Class: "items-start justify-between gap-4"}) {
+					@ui.Stack(ui.StackProps{Class: "gap-2"}) {
+						@ui.Title(ui.TitleProps{Order: 3, Class: "text-base font-semibold"}, item.Name)
+						@ui.Text(ui.TextProps{Class: "text-sm leading-relaxed text-muted-foreground"}, item.Description)
+					}
+					@ui.Badge(ui.BadgeProps{Variant: "outline"}) {
+						{ item.Category }
+					}
+				}
+				@ui.Stack(ui.StackProps{Class: "gap-2"}) {
+					for _, capability := range item.Capabilities {
+						@ui.Group(ui.GroupProps{Class: "items-center gap-2"}) {
+							@cmp.IconBadge(cmp.IconBadgeProps{Text: "✓", Size: "xs", Variant: "secondary"})
+							@ui.Text(ui.TextProps{Class: "text-xs text-muted-foreground"}, capability)
+						}
+					}
+				}
+				@ui.Group(ui.GroupProps{Class: "gap-2"}) {
+					@ui.Button(ui.ButtonProps{Variant: "default", Size: "sm", Href: "#use"}) {
+						{ item.UseLabel }
+					}
+					@ui.Button(ui.ButtonProps{Variant: "outline", Size: "sm", Href: "#preview"}) {
+						{ item.PreviewLabel }
+					}
+				}
+			}
+		}
+	}
+}
+
+templ PrototypeNotice(props NoticeProps) {
+	@cmp.Alert(cmp.AlertProps{Variant: "default", Role: "status", AriaLive: "polite"}) {
+		@ui.Group(ui.GroupProps{Class: "items-center justify-between gap-4 flex-wrap"}) {
+			@ui.Stack(ui.StackProps{Class: "gap-2"}) {
+				@ui.Text(ui.TextProps{Class: "text-sm font-semibold"}, props.Title)
+				@ui.Text(ui.TextProps{Class: "text-sm text-muted-foreground"}, props.Description)
+			}
+			@ui.Button(ui.ButtonProps{Variant: "outline", Size: "sm", Href: "#prototype-mode"}) {
+				{ props.ActionLabel }
+			}
+		}
+	}
+}

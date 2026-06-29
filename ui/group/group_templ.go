@@ -32,7 +32,7 @@ type GroupProps struct {
 }
 
 func GroupClasses(p GroupProps) string {
-	return uiutils.Cn("flex min-w-0", p.Class)
+	return uiutils.Compose(GroupVariants, map[string]string{}, p.Class)
 }
 
 // Group renders a horizontal flex container.

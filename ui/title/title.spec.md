@@ -1,36 +1,63 @@
 ---
-id: ui.title
-layer: primitive
-kind: typography
-package: github.com/fastygo/templ/ui/title
-facade: github.com/fastygo/templ/ui
-templ: Title
 api:
-  Order:
-    role: heading-level
-    type: int
-    enum: [1, 2, 3, 4, 5, 6]
-    allow-list-source: utils.helpers.TitleTag
-    default: 2
-  Class:
-    role: style-extension
-    type: string
-  value:
-    role: copy
-    type: string
-    position: argument
-showcase:
-  - id: order.h1
-    props: { Order: 1 }
-  - id: order.h2
-    props: { Order: 2 }
-  - id: order.h3
-    props: { Order: 3, Class: "text-lg" }
+    Class:
+        cva: false
+        role: style-extension
+        type: string
+    Order:
+        allow-list-source: utils.helpers.TitleTag
+        cva: false
+        default: 2
+        enum:
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+        role: heading-level
+        type: int
+    value:
+        cva: false
+        position: argument
+        role: copy
+        type: string
+data: title.data.json
+facade: github.com/fastygo/templ/ui
+id: ui.title
+kind: typography
+layer: primitive
+package: github.com/fastygo/templ/ui/title
 semantics:
-  root: h1 | h2 | h3 | h4 | h5 | h6
-  role: heading
-  behavior: static
-
+    behavior: static
+    data: title.data.json
+    role: heading
+    root: h1 | h2 | h3 | h4 | h5 | h6
+showcase:
+    - id: order.h1
+      props:
+        Order: 1
+      ref: order.h1
+    - id: order.h2
+      props:
+        Order: 2
+      ref: order.h2
+    - id: order.h3
+      props:
+        Class: text-lg
+        Order: 3
+      ref: order.h3
+targets:
+    react:
+        component: Title
+        facade: '@fastygo/templ-react'
+        package: '@fastygo/templ-react/ui/title'
+    templ:
+        component: Title
+        facade: github.com/fastygo/templ/ui
+        package: github.com/fastygo/templ/ui/title
+templ: Title
+variants: title.variants.json
 ---
 ## Summary
 

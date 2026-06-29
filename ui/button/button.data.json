@@ -1,0 +1,92 @@
+{
+  "$schema": "../../schemas/data.schema.json",
+  "id": "ui.button",
+  "showcase": {
+    "size.icon": {
+      "props": {
+        "AriaLabel": "Settings",
+        "Size": "icon",
+        "Variant": "default"
+      }
+    },
+    "size.lg": {
+      "props": {
+        "Size": "lg",
+        "Variant": "default"
+      }
+    },
+    "size.sm": {
+      "props": {
+        "Size": "sm",
+        "Variant": "default"
+      }
+    },
+    "state.disabled": {
+      "props": {
+        "Disabled": true,
+        "Variant": "default"
+      }
+    },
+    "state.disabled-link": {
+      "props": {
+        "Disabled": true,
+        "Href": "/locked",
+        "Variant": "link"
+      }
+    },
+    "state.reset": {
+      "props": {
+        "Type": "reset",
+        "Variant": "outline"
+      }
+    },
+    "state.submit": {
+      "props": {
+        "Type": "submit",
+        "Variant": "default"
+      }
+    },
+    "variant.default": {
+      "props": {
+        "Size": "default",
+        "Variant": "default"
+      }
+    },
+    "variant.destructive": {
+      "props": {
+        "Size": "default",
+        "Variant": "destructive"
+      }
+    },
+    "variant.ghost": {
+      "props": {
+        "Size": "sm",
+        "Variant": "ghost"
+      }
+    },
+    "variant.link": {
+      "props": {
+        "Href": "/docs",
+        "Variant": "link"
+      }
+    },
+    "variant.outline": {
+      "props": {
+        "Size": "sm",
+        "Variant": "outline"
+      }
+    },
+    "variant.secondary": {
+      "props": {
+        "Size": "default",
+        "Variant": "secondary"
+      }
+    },
+    "variant.unstyled": {
+      "props": {
+        "Class": "underline",
+        "Variant": "unstyled"
+      }
+    }
+  }
+}

@@ -3,19 +3,33 @@
   "private": true,
   "packageManager": "bun@1.3.3",
   "dependencies": {
-    "@ui8kit/aria": "^0.1.0"
+    "@ui8kit/aria": "^0.1.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.2"
   },
   "scripts": {
     "build:css": "tailwindcss -i ./web/static/css/input.css -o ./web/static/css/app.css --minify",
     "build:js": "bun build scripts/ui8kit-entry.mjs --outfile web/static/js/ui8kit.js --minify",
     "watch:css": "tailwindcss -i ./web/static/css/input.css -o ./web/static/css/app.css --watch",
-    "templ": "cd .. && go tool templ generate ./examples",
-    "dev": "bun run templ && bun run build:css && bun run build:js && go run -mod=mod ./cmd/server",
-    "start": "bun run build:css && bun run build:js && go run -mod=mod ./cmd/server"
+    "templ": "cd .. && go tool templ generate ./examples/templ",
+    "dev:templ": "bun run templ && bun run build:css && bun run build:js && go run -mod=mod ./templ/cmd/server",
+    "start:templ": "bun run build:css && bun run build:js && go run -mod=mod ./templ/cmd/server",
+    "dev": "bun run dev:templ",
+    "dev:vite": "bun run build:css && bun run build:js && vite --config vite/vite.config.ts",
+    "build:vite": "bun run build:css && bun run build:js && vite build --config vite/vite.config.ts",
+    "preview:vite": "vite preview --config vite/vite.config.ts",
+    "typecheck:vite": "cd .. && bun run typecheck:react"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.2.1",
+    "@types/react": "^19.1.8",
+    "@types/node": "^22.15.29",
+    "@vitejs/plugin-react": "^4.5.2",
     "tailwindcss": "^4.2.1",
-    "ui8px": "0.2.4"
+    "typescript": "^5.8.3",
+    "ui8px": "0.2.4",
+    "vite": "^6.3.5",
+    "sirv": "^3.0.1"
   }
 }

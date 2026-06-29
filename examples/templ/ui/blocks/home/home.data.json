@@ -1,0 +1,148 @@
+{
+  "$schema": "../../../../../schemas/data.schema.json",
+  "id": "blocks.home",
+  "showcase": {
+    "default": {
+      "props": {
+        "Brand": "BuildY",
+        "Workspace": "My workspace",
+        "Prototype": "Prototype mode",
+        "ProfileName": "Alex",
+        "Sidebar": [
+          { "Label": "Home", "Href": "#home", "Icon": "home" },
+          { "Label": "Models", "Href": "#models", "Icon": "box" },
+          { "Label": "Files", "Href": "#files", "Icon": "file" },
+          { "Label": "Data", "Href": "#data", "Icon": "data" },
+          { "Label": "Source", "Href": "#source", "Icon": "code" },
+          { "Label": "Dashboard", "Href": "/", "Icon": "grid" }
+        ],
+        "HeaderNav": [
+          { "Label": "Documentation", "Href": "#documentation" },
+          { "Label": "Templates", "Href": "#templates" },
+          { "Label": "Settings", "Href": "#settings" }
+        ],
+        "Hero": {
+          "Title": "What do you want to create?",
+          "Subtitle": "Describe your idea in natural language. BuildY turns prompts into structured plans, models, and FastyGo prototypes.",
+          "Prompt": "Describe an application, landing page, CRM, CMS, or portal…",
+          "PrimaryAction": "Generate prototype",
+          "AttachmentLabel": "Attach files",
+          "AssistantLabel": "Refine with AI",
+          "ShortcutLabel": "Slash commands",
+          "SuggestionsLabel": "Try a suggestion",
+          "Suggestions": [
+            "SaaS landing with CMS",
+            "Admin dashboard",
+            "CRM workspace",
+            "Content portal"
+          ],
+          "Workflow": [
+            { "Label": "Plan", "Icon": "plan" },
+            { "Label": "Model", "Icon": "model" },
+            { "Label": "Preview", "Icon": "preview" },
+            { "Label": "Source", "Icon": "source" },
+            { "Label": "Export", "Icon": "export" }
+          ]
+        },
+        "Tools": [
+          {
+            "Title": "Request plan",
+            "Description": "Turn a prompt into a structured product brief.",
+            "Icon": "plan",
+            "Tone": "blue"
+          },
+          {
+            "Title": "CMS model",
+            "Description": "Define content types, fields, and relations.",
+            "Icon": "data",
+            "Tone": "green"
+          },
+          {
+            "Title": "Live preview",
+            "Description": "Open an interactive behavior-aware preview.",
+            "Icon": "eye",
+            "Tone": "blue"
+          },
+          {
+            "Title": "Source code",
+            "Description": "Generate Go and Templ source files.",
+            "Icon": "code",
+            "Tone": "muted"
+          },
+          {
+            "Title": "Change review",
+            "Description": "Review diffs across code, content, and schema.",
+            "Icon": "diff",
+            "Tone": "amber"
+          },
+          {
+            "Title": "Export pack",
+            "Description": "Download a demo package or source bundle.",
+            "Icon": "export",
+            "Tone": "blue"
+          }
+        ],
+        "Showcase": {
+          "Title": "Powerful starting points",
+          "Description": "Starter applications you can clone into a workspace and customize with tokens.",
+          "ActionLabel": "All templates",
+          "Items": [
+            {
+              "Name": "AppCMS",
+              "Category": "CMS",
+              "Description": "Sites, pages, media library, and taxonomies.",
+              "Capabilities": ["Content model", "Pages & navigation", "Media library"],
+              "UseLabel": "Use template",
+              "PreviewLabel": "Preview"
+            },
+            {
+              "Name": "AppCRM",
+              "Category": "CRM",
+              "Description": "Leads, contacts, deals, and activity timeline.",
+              "Capabilities": ["People & contacts", "Pipelines & stages", "Activity feed"],
+              "UseLabel": "Use template",
+              "PreviewLabel": "Preview"
+            },
+            {
+              "Name": "AppSuite",
+              "Category": "Suite",
+              "Description": "Launcher and shared workspace tools.",
+              "Capabilities": ["Workspace switcher", "Product hub", "Role access"],
+              "UseLabel": "Use template",
+              "PreviewLabel": "Preview"
+            },
+            {
+              "Name": "Director",
+              "Category": "Ops",
+              "Description": "Operations dashboard with approvals.",
+              "Capabilities": ["Review queue", "Approval flows", "Status reports"],
+              "UseLabel": "Use template",
+              "PreviewLabel": "Preview"
+            },
+            {
+              "Name": "Contentor",
+              "Category": "Editorial",
+              "Description": "Planning, editing, and publishing workflow.",
+              "Capabilities": ["Editorial calendar", "Draft review", "Publish pipeline"],
+              "UseLabel": "Use template",
+              "PreviewLabel": "Preview"
+            },
+            {
+              "Name": "Webmaster",
+              "Category": "SEO",
+              "Description": "SEO health, redirects, and monitoring.",
+              "Capabilities": ["Site monitoring", "Redirect rules", "SEO checks"],
+              "UseLabel": "Use template",
+              "PreviewLabel": "Preview"
+            }
+          ]
+        },
+        "Notice": {
+          "Title": "You are in prototype mode",
+          "Description": "Mock data only — no external services, billing, or production backends. Ideal for design and registry research.",
+          "ActionLabel": "About prototype mode"
+        }
+      }
+    }
+  }
+}

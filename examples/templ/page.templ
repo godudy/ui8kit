@@ -1,0 +1,40 @@
+package templ
+
+import (
+	"github.com/fastygo/templ/examples/templ/ui/blocks/dashboard"
+	"github.com/fastygo/templ/examples/templ/ui/blocks/home"
+)
+
+templ Page() {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1"/>
+			<title>UI8Kit · Dashboard preview</title>
+			<link rel="stylesheet" href="/static/css/app.css"/>
+			<script defer src="/static/js/ui8kit.js"></script>
+		</head>
+		<body class="bg-background text-foreground antialiased">
+			@dashboard.Page(dashboard.DefaultPage()) {
+				@ComponentExamples()
+			}
+		</body>
+	</html>
+}
+
+templ HomePage() {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1"/>
+			<title>BuildY · Home catalog</title>
+			<link rel="stylesheet" href="/static/css/app.css"/>
+			<script defer src="/static/js/ui8kit.js"></script>
+		</head>
+		<body class="bg-background text-foreground antialiased">
+			@home.Page(home.DefaultPage())
+		</body>
+	</html>
+}

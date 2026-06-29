@@ -36,6 +36,10 @@ func blockAttrs(p BlockProps) templ.Attributes {
 	return uiutils.DOMAttrs(p.ID, "", "", p.Attrs)
 }
 
+func BlockClasses(p BlockProps) string {
+	return uiutils.Compose(BlockVariants, map[string]string{}, p.Class)
+}
+
 // Block renders a resolved landmark element with children.
 func Block(p BlockProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -107,7 +111,7 @@ func blockTag(p BlockProps) templ.Component {
 		ctx = templ.ClearChildren(ctx)
 		switch uiutils.ResolveTag(p.Tag, "div", uiutils.TagGroupLayout) {
 		case "section":
-			var templ_7745c5c3_Var4 = []any{p.Class}
+			var templ_7745c5c3_Var4 = []any{BlockClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var4...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -146,7 +150,7 @@ func blockTag(p BlockProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		case "article":
-			var templ_7745c5c3_Var6 = []any{p.Class}
+			var templ_7745c5c3_Var6 = []any{BlockClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var6...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -185,7 +189,7 @@ func blockTag(p BlockProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		case "aside":
-			var templ_7745c5c3_Var8 = []any{p.Class}
+			var templ_7745c5c3_Var8 = []any{BlockClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var8...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -224,7 +228,7 @@ func blockTag(p BlockProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		case "header":
-			var templ_7745c5c3_Var10 = []any{p.Class}
+			var templ_7745c5c3_Var10 = []any{BlockClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var10...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -263,7 +267,7 @@ func blockTag(p BlockProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		case "footer":
-			var templ_7745c5c3_Var12 = []any{p.Class}
+			var templ_7745c5c3_Var12 = []any{BlockClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var12...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -302,7 +306,7 @@ func blockTag(p BlockProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		case "main":
-			var templ_7745c5c3_Var14 = []any{p.Class}
+			var templ_7745c5c3_Var14 = []any{BlockClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var14...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -341,7 +345,7 @@ func blockTag(p BlockProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		case "nav":
-			var templ_7745c5c3_Var16 = []any{p.Class}
+			var templ_7745c5c3_Var16 = []any{BlockClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var16...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -380,7 +384,7 @@ func blockTag(p BlockProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		case "figure":
-			var templ_7745c5c3_Var18 = []any{p.Class}
+			var templ_7745c5c3_Var18 = []any{BlockClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var18...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -419,7 +423,7 @@ func blockTag(p BlockProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		case "search":
-			var templ_7745c5c3_Var20 = []any{p.Class}
+			var templ_7745c5c3_Var20 = []any{BlockClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var20...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -458,7 +462,7 @@ func blockTag(p BlockProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		case "hgroup":
-			var templ_7745c5c3_Var22 = []any{p.Class}
+			var templ_7745c5c3_Var22 = []any{BlockClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var22...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -497,7 +501,7 @@ func blockTag(p BlockProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		default:
-			var templ_7745c5c3_Var24 = []any{p.Class}
+			var templ_7745c5c3_Var24 = []any{BlockClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var24...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err

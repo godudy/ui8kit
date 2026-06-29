@@ -15,7 +15,10 @@ type TitleProps struct {
 	Order int
 }
 
-// Title renders one heading element with the resolved level.
+func TitleClasses(p TitleProps) string {
+	return uiutils.Compose(TitleVariants, map[string]string{}, p.Class)
+}
+
 templ Title(p TitleProps, value string) {
 	@titleTag(p) {
 		{ value }
@@ -25,16 +28,16 @@ templ Title(p TitleProps, value string) {
 templ titleTag(p TitleProps) {
 	switch uiutils.TitleTag(p.Order) {
 		case "h1":
-			<h1 class={ p.Class }>{ children... }</h1>
+			<h1 class={ TitleClasses(p) }>{ children... }</h1>
 		case "h3":
-			<h3 class={ p.Class }>{ children... }</h3>
+			<h3 class={ TitleClasses(p) }>{ children... }</h3>
 		case "h4":
-			<h4 class={ p.Class }>{ children... }</h4>
+			<h4 class={ TitleClasses(p) }>{ children... }</h4>
 		case "h5":
-			<h5 class={ p.Class }>{ children... }</h5>
+			<h5 class={ TitleClasses(p) }>{ children... }</h5>
 		case "h6":
-			<h6 class={ p.Class }>{ children... }</h6>
+			<h6 class={ TitleClasses(p) }>{ children... }</h6>
 		default:
-			<h2 class={ p.Class }>{ children... }</h2>
+			<h2 class={ TitleClasses(p) }>{ children... }</h2>
 	}
 }

@@ -7,6 +7,38 @@
     "text-red-500": {
       "reason": "Use semantic shadcn-style color tokens instead of raw palette colors.",
       "suggest": ["text-destructive"]
+    },
+    "p-2.5": {
+      "reason": "Half-step spacing (10px) is not on the 8px/4px grid.",
+      "suggest": ["p-2", "p-3"]
+    },
+    "px-2.5": {
+      "reason": "Half-step spacing (10px) is not on the 8px/4px grid.",
+      "suggest": ["px-2", "px-3"]
+    },
+    "py-2.5": {
+      "reason": "Half-step spacing (10px) is not on the 8px/4px grid.",
+      "suggest": ["py-2", "py-3"]
+    },
+    "py-0.5": {
+      "reason": "Half-step spacing (2px) is not on the 8px/4px grid.",
+      "suggest": ["py-1"]
+    },
+    "gap-1.5": {
+      "reason": "Half-step spacing (6px) is not on the 8px/4px grid.",
+      "suggest": ["gap-2"]
+    },
+    "gap-2.5": {
+      "reason": "Half-step spacing (10px) is not on the 8px/4px grid.",
+      "suggest": ["gap-2", "gap-4"]
+    },
+    "h-3.5": {
+      "reason": "Half-step sizing (14px) is not on the 8px/4px grid.",
+      "suggest": ["h-3", "h-4"]
+    },
+    "w-3.5": {
+      "reason": "Half-step sizing (14px) is not on the 8px/4px grid.",
+      "suggest": ["w-3", "w-4"]
     }
   }
 }

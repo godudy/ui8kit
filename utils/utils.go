@@ -180,8 +180,8 @@ var InputSize = Variants{
 			"default": "h-10 px-3 py-2 text-sm",
 			"md":      "h-10 px-3 py-2 text-sm",
 			"xs":      "h-8 px-2 text-xs",
-			"sm":      "h-9 px-3 text-sm",
-			"lg":      "h-11 px-4 text-base",
+			"sm":      "h-8 px-3 text-sm",
+			"lg":      "h-12 px-4 text-base",
 		},
 	},
 }
@@ -210,7 +210,7 @@ var ControlSize = Variants{
 			"default": "h-4 w-4",
 			"md":      "h-4 w-4",
 			"xs":      "h-3 w-3",
-			"sm":      "h-3.5 w-3.5",
+			"sm":      "h-4 w-4",
 			"lg":      "h-5 w-5",
 		},
 	},
@@ -228,52 +228,6 @@ func ControlClasses(variant, size string, extra ...string) string {
 	chrome := Compose(ControlChrome, map[string]string{"variant": strings.TrimSpace(variant)})
 	sz := Compose(ControlSize, map[string]string{"size": strings.TrimSpace(size)})
 	return Cn(append([]string{chrome, sz}, extra...)...)
-}
-
-// CardVariants is the card surface recipe.
-var CardVariants = Variants{
-	Base:     "rounded-md border border-border bg-card text-card-foreground shadow-sm",
-	Keys:     []string{"variant"},
-	Defaults: map[string]string{"variant": ""},
-	ByKey: map[string]map[string]string{
-		"variant": {
-			"":        "",
-			"default": "",
-			"raised":  "",
-			"kpi":     "bg-card/50",
-			"muted":   "bg-muted/40",
-			"ghost":   "border-dashed bg-background shadow-none",
-			"compact": "p-3",
-			"flat":    "shadow-none",
-			"accent":  "border-transparent bg-accent/30",
-		},
-	},
-}
-
-// CardClasses merges card variant presets.
-func CardClasses(variant, extra string) string {
-	return Compose(CardVariants, map[string]string{"variant": strings.TrimSpace(variant)}, extra)
-}
-
-// AlertVariants is the alert surface recipe.
-var AlertVariants = Variants{
-	Base:     "rounded-lg border px-4 py-3 shadow-sm outline-none ring-offset-background gap-6",
-	Keys:     []string{"variant"},
-	Defaults: map[string]string{"variant": ""},
-	ByKey: map[string]map[string]string{
-		"variant": {
-			"":            "bg-card text-card-foreground",
-			"default":     "bg-card text-card-foreground",
-			"destructive": "border-destructive bg-destructive/10 text-destructive",
-			"success":     "border-primary bg-primary/10 text-primary",
-			"warning":     "border-border bg-accent text-accent-foreground",
-		},
-	},
-}
-
-// AlertClasses merges alert variant presets.
-func AlertClasses(variant, extra string) string {
-	return Compose(AlertVariants, map[string]string{"variant": strings.TrimSpace(variant)}, extra)
 }
 
 // AlertAttrs returns static alert semantics.

@@ -15,7 +15,7 @@ The registry keeps the ergonomics React developers expect — props, variants, c
 | [`ui/`](ui/) | Primitives: button, badge, input, form controls, layout, media, links, dialog, disclosure |
 | [`components/`](components/) | Composites: card, alert, breadcrumb, sheet, nav, icon badge |
 | [`components.json`](components.json) | Registry manifest (shadcn-style) |
-| [`examples/`](examples/) | Optional local preview (server, Tailwind, dialog-only `@ui8kit/aria` for Sheet demos) |
+| [`examples/`](examples/) | Optional local preview — [`templ/`](examples/templ/) (Go) and [`vite/`](examples/vite/) (React) share [`web/static/`](examples/web/static/) |
 | [`.validate/docs/component.spec.template.md`](.validate/docs/component.spec.template.md) | Spec template: `api` + `showcase` per brick |
 | [`.validate/docs/README.md`](.validate/docs/README.md) | Local `validate-spec` command and registry checks |
 | [`.cursor/rules/templ-component-spec.mdc`](.cursor/rules/templ-component-spec.mdc) | Authoring rule for specs and STE comments |
@@ -23,6 +23,7 @@ The registry keeps the ergonomics React developers expect — props, variants, c
 | [`.ui8px/policy/`](.ui8px/policy/) | Tailwind class policy (`ui/`, `components/`, `utils/`, `examples/`) |
 | [`.project/go-module-publishing.md`](.project/go-module-publishing.md) | `go get` vs npm, `export-ignore`, release |
 | [`.project/dual-stack-component-library.md`](.project/dual-stack-component-library.md) | Dual-stack brick contract |
+| [`.project/react-tsx-mental-model.md`](.project/react-tsx-mental-model.md) | Templ to React prop/tag mapping and examples |
 | [`.project/ui8kit-aria-boundary.md`](.project/ui8kit-aria-boundary.md) | `@ui8kit/aria` vs registry — APG subset |
 | [`.project/behavior-hooks-and-aria.md`](.project/behavior-hooks-and-aria.md) | Opt-in behavior hooks, static ARIA |
 | [`utils/utils.spec.md`](utils/utils.spec.md) | Helper module export catalog (classes, attrs, recipes) |

@@ -1,0 +1,100 @@
+{
+  "$schema": "../../../../../schemas/data.schema.json",
+  "id": "blocks.dashboard",
+  "showcase": {
+    "default": {
+      "props": {
+        "Brand": "UI8Kit",
+        "Workspace": "Templ registry",
+        "Status": "Preview",
+        "ProfileName": "Developer",
+        "Sidebar": [
+          { "Label": "Overview", "Href": "#overview", "Icon": "grid" },
+          { "Label": "Primitives", "Href": "#primitives", "Icon": "box" },
+          { "Label": "Composites", "Href": "#composites", "Icon": "layers" },
+          { "Label": "Blocks", "Href": "#blocks", "Icon": "layout" },
+          { "Label": "Home demo", "Href": "/home/", "Icon": "spark" }
+        ],
+        "HeaderNav": [
+          { "Label": "Documentation", "Href": "#docs" },
+          { "Label": "Components", "Href": "#gallery" },
+          { "Label": "Home block", "Href": "/home/" }
+        ],
+        "Hero": {
+          "Eyebrow": "FastyGo · Templ stack",
+          "Title": "Component registry preview",
+          "Description": "A polished app shell built from ui primitives and composites. Copy bricks, wire tokens in your app, and ship SSR pages without guessing class recipes.",
+          "PrimaryCTA": "Browse gallery",
+          "SecondaryCTA": "View home block",
+          "Progress": "72",
+          "ProgressLabel": "Registry coverage"
+        },
+        "Cards": [
+          {
+            "Value": "27",
+            "Title": "UI primitives",
+            "Description": "Button, input, dialog, layout bricks with JSON variants.",
+            "Meta": "ui/*",
+            "Icon": "UI",
+            "Tone": "default"
+          },
+          {
+            "Value": "6",
+            "Title": "Composites",
+            "Description": "Card, nav, sheet, alert — composed from primitives.",
+            "Meta": "components",
+            "Icon": "CP",
+            "Tone": "default"
+          },
+          {
+            "Value": "2",
+            "Title": "Catalog blocks",
+            "Description": "Dashboard and home page scaffolds for examples.",
+            "Meta": "blocks",
+            "Icon": "BL",
+            "Tone": "muted"
+          },
+          {
+            "Value": "100%",
+            "Title": "Token ready",
+            "Description": "Semantic colors from app-layer tokens.css.",
+            "Meta": "theme",
+            "Icon": "TK",
+            "Tone": "muted"
+          }
+        ],
+        "Layers": [
+          {
+            "Name": "ui.button",
+            "Description": "CVA variants from button.variants.json via Compose.",
+            "Status": "primitive"
+          },
+          {
+            "Name": "components.card",
+            "Description": "Surface recipe from components/card/card.variants.json.",
+            "Status": "composite"
+          },
+          {
+            "Name": "components.sheet",
+            "Description": "Mobile nav with ui8kit behavior hooks.",
+            "Status": "composite"
+          },
+          {
+            "Name": "components.nav",
+            "Description": "Primary navigation with active states.",
+            "Status": "composite"
+          },
+          {
+            "Name": "blocks.dashboard",
+            "Description": "This shell — sidebar, header, KPI row, inventory.",
+            "Status": "block"
+          }
+        ],
+        "Notice": {
+          "Title": "Catalog snapshot",
+          "Description": "Examples mirror the public registry contract: spec, variants JSON, data JSON, and thin templ runtime. Not wired to product runtime."
+        }
+      }
+    }
+  }
+}

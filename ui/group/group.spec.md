@@ -1,38 +1,70 @@
 ---
-id: ui.group
-layer: primitive
-kind: layout
-package: github.com/fastygo/templ/ui/group
-facade: github.com/fastygo/templ/ui
-templ: Group
 api:
-  Tag:
-    role: group-tag
-    type: string
-    enum: [div, section, article, aside, header, footer, main, nav, figure, search, hgroup, fieldset]
-    allow-list-source: utils.tags.TagGroupGroup
-    default: div
-  Class:
-    role: style-extension
-    type: string
-  Attrs:
-    role: html-attrs
-    type: templ.Attributes
-slots:
-  default:
-    required: true
-    accepts: any
-showcase:
-  - id: tag.default
-    props: { Tag: div, Class: "gap-2" }
-  - id: tag.fieldset
-    props: { Tag: fieldset, Class: "gap-2" }
+    Attrs:
+        cva: false
+        role: html-attrs
+        type: templ.Attributes
+    Class:
+        cva: false
+        role: style-extension
+        type: string
+    Tag:
+        allow-list-source: utils.tags.TagGroupGroup
+        cva: false
+        default: div
+        enum:
+            - div
+            - section
+            - article
+            - aside
+            - header
+            - footer
+            - main
+            - nav
+            - figure
+            - search
+            - hgroup
+            - fieldset
+        role: group-tag
+        type: string
+data: group.data.json
+facade: github.com/fastygo/templ/ui
+id: ui.group
+kind: layout
+layer: primitive
+package: github.com/fastygo/templ/ui/group
 semantics:
-  root: resolved from Tag
-  role: none
-  behavior: static
-  layout: flex-row
-
+    behavior: static
+    data: group.data.json
+    layout: flex-row
+    role: none
+    root: resolved from Tag
+showcase:
+    - id: tag.default
+      props:
+        Class: gap-2
+        Tag: div
+      ref: tag.default
+    - id: tag.fieldset
+      props:
+        Class: gap-2
+        Tag: fieldset
+      ref: tag.fieldset
+slots:
+    default:
+        accepts: any
+        required: true
+targets:
+    react:
+        component: Group
+        facade: '@fastygo/templ-react'
+        package: '@fastygo/templ-react/ui/group'
+    templ:
+        component: Group
+        facade: github.com/fastygo/templ/ui
+        package: github.com/fastygo/templ/ui/group
+templ: Group
+variants: group.variants.json
 ---
 ## Summary
 
@@ -68,7 +100,7 @@ templ Example() {
 import "github.com/fastygo/templ/ui"
 
 templ Example() {
-	@ui.Group(ui.GroupProps{Tag: "fieldset", Class: "gap-4"}) {
+	@ui.Group(ui.GroupProps{Tag: "fieldset", Class: "gap-2"}) {
 		@ui.Radio(ui.RadioProps{Name: "plan", Value: "free", ID: "plan-free"})
 		@ui.Radio(ui.RadioProps{Name: "plan", Value: "pro", ID: "plan-pro"})
 	}

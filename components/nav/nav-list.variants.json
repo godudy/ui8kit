@@ -1,0 +1,22 @@
+{
+  "$schema": "../../schemas/variant.schema.json",
+  "id": "components.nav.list",
+  "base": "flex",
+  "keys": ["orientation", "gap"],
+  "defaults": {
+    "orientation": "vertical",
+    "gap": "default"
+  },
+  "byKey": {
+    "orientation": {
+      "vertical": "flex-col",
+      "horizontal": "flex-row flex-wrap items-center"
+    },
+    "gap": {
+      "none": "gap-0",
+      "sm": "gap-1",
+      "default": "gap-2",
+      "lg": "gap-3"
+    }
+  }
+}

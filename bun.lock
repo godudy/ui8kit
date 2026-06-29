@@ -5,11 +5,22 @@
     "": {
       "name": "fastygo-templ-registry",
       "devDependencies": {
+        "@types/react": "^19.1.8",
+        "react": "^19.1.0",
+        "typescript": "^5.8.3",
         "ui8px": "0.2.4",
       },
     },
   },
   "packages": {
+    "@types/react": ["@types/react@19.2.17", "", { "dependencies": { "csstype": "^3.2.2" } }, "sha512-MXfmqaVPEVgkBT/aY0aGCkRWWtByiYQXo3xdQ8r5RzuFrPiRn8Gar2tQdXSUQ2GKV3bkXckek89V8wQBY2Q/Aw=="],
+
+    "csstype": ["csstype@3.2.3", "", {}, "sha512-z1HGKcYy2xA8AGQfwrn0PAy+PB7X/GSj3UVJW9qKyn43xWa+gl5nXmU4qqLMRzWVLFC8KusUX8T/0kCiOYpAIQ=="],
+
+    "react": ["react@19.2.7", "", {}, "sha512-HNe9WslTbXmFK8o8cmwgAeJFSBvt1bPdHCVKtaaV+WlAN36mpT4hcRpwbf3fY56ar2oIXzsBpOAiIRHAdY0OlQ=="],
+
+    "typescript": ["typescript@5.9.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw=="],
+
     "ui8px": ["ui8px@0.2.4", "", { "bin": { "ui8px": "dist/index.js" } }, "sha512-4Zfq7n1V8z3SRupbXYapbiUWn3Ikk5ziH5WLglZew2NSLWicjoqsvimKD1/LibjLWJ1wu0Q0+26zDpZ2yfYtEg=="],
   }
 }

@@ -1,0 +1,24 @@
+{
+  "$schema": "../../schemas/variant.schema.json",
+  "id": "components.nav.link",
+  "base": "inline-flex min-w-0 items-center gap-2 rounded-md text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+  "keys": ["variant", "size"],
+  "defaults": {
+    "variant": "default",
+    "size": "default"
+  },
+  "byKey": {
+    "variant": {
+      "default": "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+      "active": "bg-accent text-accent-foreground",
+      "ghost": "text-foreground hover:bg-accent hover:text-accent-foreground",
+      "muted": "text-muted-foreground hover:text-foreground",
+      "unstyled": ""
+    },
+    "size": {
+      "sm": "px-2 py-1 text-xs",
+      "default": "px-3 py-2 text-sm",
+      "lg": "px-4 py-2 text-base"
+    }
+  }
+}

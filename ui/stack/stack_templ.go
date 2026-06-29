@@ -32,7 +32,7 @@ type StackProps struct {
 }
 
 func StackClasses(p StackProps) string {
-	return uiutils.Cn("flex flex-col items-start justify-start", p.Class)
+	return uiutils.Compose(StackVariants, map[string]string{}, p.Class)
 }
 
 // Stack renders a vertical flex container.

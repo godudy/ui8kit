@@ -10,7 +10,7 @@ api:
     role: appearance
     type: string
     enum: [default, destructive, success, warning]
-    allow-list-source: utils.recipes.AlertVariants
+    allow-list-source: alert.variants.json#variant
     default: default
   Class:
     role: style-extension

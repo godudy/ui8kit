@@ -27,7 +27,10 @@ type SwitchProps struct {
 }
 
 func SwitchClasses(p SwitchProps) string {
-	return uiutils.ControlClasses(p.Variant, p.Size, p.Class)
+	return uiutils.Compose(SwitchVariants, map[string]string{
+		"variant": p.Variant,
+		"size":    p.Size,
+	}, p.Class)
 }
 
 // Switch renders input[type=checkbox] with switch role attrs.

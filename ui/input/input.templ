@@ -32,7 +32,10 @@ type InputProps struct {
 }
 
 func InputClasses(p InputProps) string {
-	return uiutils.InputClasses(p.Variant, p.Size, p.Class)
+	return uiutils.Compose(InputVariants, map[string]string{
+		"variant": p.Variant,
+		"size":    p.Size,
+	}, p.Class)
 }
 
 // Input renders a styled single-line form control.

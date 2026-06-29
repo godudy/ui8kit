@@ -31,7 +31,10 @@ type ContainerProps struct {
 	Attrs templ.Attributes
 }
 
-// Container renders a width-constrained layout wrapper.
+func ContainerClasses(p ContainerProps) string {
+	return uiutils.Compose(ContainerVariants, map[string]string{}, p.Class)
+}
+
 func Container(p ContainerProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -102,7 +105,7 @@ func containerTag(p ContainerProps) templ.Component {
 		ctx = templ.ClearChildren(ctx)
 		switch uiutils.ResolveTag(p.Tag, "div", uiutils.TagGroupContainer) {
 		case "main":
-			var templ_7745c5c3_Var4 = []any{p.Class}
+			var templ_7745c5c3_Var4 = []any{ContainerClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var4...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -141,7 +144,7 @@ func containerTag(p ContainerProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		case "section":
-			var templ_7745c5c3_Var6 = []any{p.Class}
+			var templ_7745c5c3_Var6 = []any{ContainerClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var6...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
@@ -180,7 +183,7 @@ func containerTag(p ContainerProps) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		default:
-			var templ_7745c5c3_Var8 = []any{p.Class}
+			var templ_7745c5c3_Var8 = []any{ContainerClasses(p)}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var8...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
