@@ -8,11 +8,6 @@ api:
         cva: false
         role: style-extension
         type: string
-    value:
-        cva: false
-        position: argument
-        role: copy
-        type: string
 data: text.data.json
 facade: github.com/fastygo/templ/ui
 id: ui.text

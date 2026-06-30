@@ -8,11 +8,6 @@ api:
         cva: false
         role: style-extension
         type: string
-    value:
-        cva: false
-        position: argument
-        role: copy
-        type: string
 data: inline.data.json
 facade: github.com/fastygo/templ/ui
 id: ui.inline
@@ -43,8 +38,8 @@ variants: inline.variants.json
 ---
 ## Summary
 
-Inline renders inline copy as a span.
-Pass copy as the second value argument.
+Inline renders inline copy as a `<span>`.
+Pass content as children. Use `Text` for paragraph blocks and `Title` (or `H1`–`H6`) for headings.
 
 ## Use Cases
 

@@ -17,11 +17,6 @@ api:
         cva: false
         role: style-extension
         type: string
-    value:
-        cva: false
-        position: argument
-        role: copy
-        type: string
 data: title.data.json
 facade: github.com/fastygo/templ/ui
 id: ui.title

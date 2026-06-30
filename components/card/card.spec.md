@@ -43,6 +43,7 @@ api:
     role: heading-level
     type: int
     enum: [1, 2, 3, 4, 5, 6]
+    allow-list-source: utils.helpers.TitleTag
     applies-to: CardTitle
     default: 2
 showcase:

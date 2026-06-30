@@ -28,15 +28,15 @@ parts:
     slot: root
     recipe: form.variants.json
   - templ: FormItem
-    props: [Class]
+    props: [Class, Attrs]
     slot: item
     recipe: form-item.variants.json
   - templ: FormDescription
-    props: [Class]
+    props: [Class, Attrs]
     slot: description
     recipe: form-description.variants.json
   - templ: FormMessage
-    props: [Class]
+    props: [Class, Attrs]
     slot: message
     recipe: form-message.variants.json
 
@@ -57,6 +57,10 @@ api:
   Class:
     role: style-extension
     type: string
+    cva: false
+  Attrs:
+    role: html-attrs
+    type: templ.Attributes
     cva: false
 
 showcase:
