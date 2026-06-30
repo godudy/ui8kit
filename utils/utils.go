@@ -3,6 +3,7 @@
 package uiutils
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 
@@ -33,6 +34,9 @@ func Compose(v Variants, selection map[string]string, extra ...string) string {
 			choice = strings.TrimSpace(v.Defaults[key])
 		}
 		if choice == "" {
+			if len(choices) > 0 {
+				panic(fmt.Sprintf("[Compose] missing default for key %q", key))
+			}
 			continue
 		}
 		if cls, ok2 := choices[choice]; ok2 {

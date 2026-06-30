@@ -11,6 +11,7 @@ type TagGroup int
 
 const (
 	TagGroupLayout TagGroup = iota
+	TagGroupBoxAllowed
 	TagGroupBlockText
 	TagGroupInline
 	TagGroupHeading
@@ -50,6 +51,8 @@ func IsAllowedTag(tag string, group TagGroup) bool {
 	switch group {
 	case TagGroupLayout:
 		return oneOf(t, "div", "section", "article", "aside", "header", "footer", "main", "nav", "figure", "search", "hgroup")
+	case TagGroupBoxAllowed:
+		return oneOf(t, "div")
 	case TagGroupBlockText:
 		return oneOf(t, "p", "blockquote", "figcaption", "address", "pre")
 	case TagGroupInline:

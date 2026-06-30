@@ -17,7 +17,9 @@
       "@registry/ui": ["../../ui/index.ts"],
       "@registry/ui/*": ["../../ui/*"],
       "@registry/components": ["../../components/index.ts"],
-      "@registry/components/*": ["../../components/*"]
+      "@registry/components/*": ["../../components/*"],
+      "@blocks/home-variants": ["../templ/ui/blocks/home/home.variants.json"],
+      "@blocks/dashboard-variants": ["../templ/ui/blocks/dashboard/dashboard.variants.json"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "vite.config.ts"]

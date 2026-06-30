@@ -24,6 +24,9 @@ they are not "the same thing with different names". Use them correctly in
 1. **`Block` is the entry point of a block.** Each file or composite block
    begins with exactly one `Block`. Do not nest `Block` inside `Block` in the
    same file.
+   - Exception: a child composite may own its own landmark `Block`
+     (`Sidebar`, `Header`, etc.). The parent file must not re-wrap it with a
+     duplicate landmark wrapper.
 2. **`Box` is strictly inside `Block`.** `Box` never carries a landmark
    `tag` (`aside`, `header`, `main`, `section`, `nav`). Use `Block` for that.
 3. **No raw markup in bricks or blocks.** Inside `ui/`, `components/`, and
@@ -32,6 +35,8 @@ they are not "the same thing with different names". Use them correctly in
    primitive/composite that wraps them).
    - Exception: brick root elements required by semantics (`<dialog>`,
      `<button>`, `<details>`, `<table>` family, `<form>`, `<fieldset>`).
+  - Exception: `asChild` roots that intentionally delegate the semantic root to
+    child markup (`<Card asChild><article>…</article></Card>`).
    - Exception: `examples/page.templ` and document shells (`<!DOCTYPE>`,
      `<html>`, `<head>`, `<body>`, asset tags).
 4. **`Stack` is vertical.** Use it for top-to-bottom rhythm. Do not add

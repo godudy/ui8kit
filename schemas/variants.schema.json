@@ -3,14 +3,25 @@
   "type": "object",
   "required": ["id", "base", "keys", "defaults", "byKey"],
   "properties": {
+    "$schema": { "type": "string" },
     "id": { "type": "string" },
     "base": { "type": "string" },
-    "keys": { "type": "array", "items": { "type": "string" } },
-    "defaults": { "type": "object", "additionalProperties": { "type": "string" } },
+    "keys": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "defaults": {
+      "type": "object",
+      "propertyNames": { "minLength": 1 },
+      "additionalProperties": { "type": "string", "minLength": 1 }
+    },
     "byKey": {
       "type": "object",
+      "propertyNames": { "minLength": 1 },
       "additionalProperties": {
         "type": "object",
+        "propertyNames": { "minLength": 1 },
         "additionalProperties": { "type": "string" }
       }
     },
@@ -18,5 +29,32 @@
       "type": "object",
       "additionalProperties": { "type": "string" }
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "keys": { "maxItems": 0 }
+        }
+      },
+      "then": {
+        "properties": {
+          "defaults": { "maxProperties": 0 },
+          "byKey": { "maxProperties": 0 }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "keys": { "minItems": 1 }
+        }
+      },
+      "then": {
+        "properties": {
+          "byKey": { "minProperties": 1 }
+        }
+      }
+    }
+  ]
 }

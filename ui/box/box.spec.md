@@ -9,21 +9,11 @@ api:
         role: style-extension
         type: string
     Tag:
-        allow-list-source: utils.tags.TagGroupLayout
+        allow-list-source: utils.tags.TagGroupBoxAllowed
         cva: false
         default: div
         enum:
             - div
-            - section
-            - article
-            - aside
-            - header
-            - footer
-            - main
-            - nav
-            - figure
-            - search
-            - hgroup
         role: layout-tag
         type: string
 data: box.data.json
@@ -43,11 +33,10 @@ showcase:
       props:
         Tag: div
       ref: tag.default
-    - id: tag.section
+    - id: class.padded
       props:
-        Class: p-4
-        Tag: section
-      ref: tag.section
+        Class: p-4 rounded-md border border-border
+      ref: class.padded
 slots:
     default:
         accepts: any
@@ -76,7 +65,7 @@ Box is not for top-level page landmarks.
 
 ## Semantics
 
-- ResolveTag uses TagGroupLayout from utils
+- ResolveTag uses TagGroupBoxAllowed from utils
 - Attrs spread directly on the root element
 - Prefer Block for main, header, and footer regions
 
@@ -92,13 +81,13 @@ templ Example() {
 }
 ```
 
-## Example tag.section
+## Example class.padded
 
 ```templ
 import "github.com/fastygo/templ/ui"
 
 templ Example() {
-	@ui.Box(ui.BoxProps{Tag: "section", Class: "p-4"}) {
+	@ui.Box(ui.BoxProps{Class: "p-4 rounded-md border border-border"}) {
 		Section body
 	}
 }

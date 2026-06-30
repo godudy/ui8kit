@@ -1,6 +1,6 @@
 import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
 import iconBadgeRecipeJson from "./iconbadge.variants.json";
-import { composeRecipe, defineRecipe } from "../../utils";
+import { composeRecipe, defineRecipe, isDevEnv } from "../../utils";
 
 const { recipe: iconBadgeRecipe, keys: iconBadgeKeys } = defineRecipe(iconBadgeRecipeJson);
 
@@ -28,6 +28,16 @@ export type IconBadgeProps = Omit<HTMLAttributes<HTMLSpanElement>, "className" |
   title?: string;
 };
 
+const warnedDeprecatedProps = new Set<string>();
+
+function warnIconBadgeDeprecation(prop: string, hint: string): void {
+  if (!isDevEnv()) return;
+  const key = `IconBadge.${prop}`;
+  if (warnedDeprecatedProps.has(key)) return;
+  warnedDeprecatedProps.add(key);
+  console.warn(`[IconBadge] "${prop}" is deprecated. ${hint}`);
+}
+
 export const IconBadge = forwardRef<HTMLSpanElement, IconBadgeProps>(function IconBadge(
   {
     variant,
@@ -44,11 +54,40 @@ export const IconBadge = forwardRef<HTMLSpanElement, IconBadgeProps>(function Ic
   },
   ref
 ) {
-  void _name; void _iconType; void _baseClass; void _prefix; void _text; void _title;
+  if (_name?.trim()) {
+    warnIconBadgeDeprecation("name", "Pass the glyph/letter as children.");
+  }
+  if (_iconType?.trim()) {
+    warnIconBadgeDeprecation("iconType", "Pass an <Icon /> as children.");
+  }
+  if (_baseClass?.trim()) {
+    warnIconBadgeDeprecation("baseClass", "Move icon classes to <Icon />.");
+  }
+  if (_prefix?.trim()) {
+    warnIconBadgeDeprecation("prefix", "Pass prefixed content directly as children.");
+  }
+  if (_text?.trim()) {
+    warnIconBadgeDeprecation("text", "Pass text as children.");
+  }
+  if (_title?.trim()) {
+    warnIconBadgeDeprecation("title", "Set title/aria-label directly on IconBadge.");
+  }
+
+  let resolvedChildren = children;
+  if (resolvedChildren === undefined || resolvedChildren === null || resolvedChildren === false) {
+    if (_text?.trim()) {
+      resolvedChildren = _text.trim();
+    } else if (_name?.trim()) {
+      resolvedChildren = _name.trim();
+    } else if (_prefix?.trim()) {
+      resolvedChildren = _prefix.trim();
+    }
+  }
+
   const cls = composeRecipe(iconBadgeRecipe, { variant, size }, className);
   return (
     <span ref={ref} className={cls} {...rest}>
-      {children}
+      {resolvedChildren}
     </span>
   );
 });

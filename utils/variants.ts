@@ -1,4 +1,5 @@
 import { cn } from "./cn";
+import { isDevEnv } from "./env";
 import type { RecipeKey, VariantRecipe } from "./recipe-types";
 
 export type { RecipeKey, VariantRecipe };
@@ -10,16 +11,6 @@ export type Variants = {
   defaults: Record<string, string>;
   byKey: Record<string, Record<string, string>>;
 };
-
-function isDevEnv(): boolean {
-  try {
-    const env = (import.meta as unknown as { env?: { DEV?: boolean } }).env;
-    if (env && typeof env.DEV === "boolean") return env.DEV;
-  } catch {
-    // import.meta may be unavailable in some contexts
-  }
-  return false;
-}
 
 export function recipeToVariants<R extends VariantRecipe>(recipe: R): Variants {
   return {
@@ -48,11 +39,17 @@ export function compose(
   for (const key of v.keys) {
     const choices = v.byKey[key];
     if (!choices) continue;
-    let choice = (selection[key] ?? "").trim();
+    const selected = (selection[key] ?? "").trim();
+    const fallback = (v.defaults[key] ?? "").trim();
+    let choice = selected || fallback;
     if (!choice) {
-      choice = (v.defaults[key] ?? "").trim();
+      if (isDevEnv() && Object.keys(choices).length > 0) {
+        throw new Error(
+          `[compose] missing default for key "${key}" (recipe id: ${String(v.id ?? "?")})`
+        );
+      }
+      continue;
     }
-    if (!choice) continue;
     const cls = choices[choice];
     if (cls !== undefined) {
       if (cls.trim() !== "") parts.push(cls.trim());
@@ -96,6 +93,14 @@ export type RecipeKeys<R extends VariantRecipe> = {
   [K in keyof R["byKey"] & string]: RecipeKey<R, K>;
 };
 
+const recipeKeysRuntimeTrap: ProxyHandler<Record<string, never>> = {
+  get(_target, prop: string | symbol): never {
+    throw new Error(
+      `[defineRecipe] keys.${String(prop)} is type-only and must not be read at runtime.`
+    );
+  },
+};
+
 /**
  * Identity helper that narrows a JSON-imported recipe to `VariantRecipe` and
  * exposes the derived literal-union types via `keys`. Use it to drop the
@@ -105,12 +110,17 @@ export type RecipeKeys<R extends VariantRecipe> = {
  *   type ButtonVariant = typeof keys.variant;
  *   type ButtonSize = typeof keys.size;
  *
- * `keys` is a phantom object — its runtime value is empty; only its type
- * (derived from `R`) is meaningful.
+ * `keys` is type-only. Runtime property reads throw:
+ *
+ *   // Anti-pattern:
+ *   // console.log(keys.variant) // throws
+ *
+ * Use it only in type positions (`typeof keys.variant`).
  */
 export function defineRecipe<R extends VariantRecipe>(recipe: R): {
   recipe: R;
   keys: RecipeKeys<R>;
 } {
-  return { recipe, keys: {} as RecipeKeys<R> };
+  const keys = new Proxy(Object.create(null) as Record<string, never>, recipeKeysRuntimeTrap);
+  return { recipe, keys: keys as unknown as RecipeKeys<R> };
 }

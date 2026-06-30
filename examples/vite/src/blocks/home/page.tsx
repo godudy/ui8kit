@@ -1,5 +1,4 @@
-import homeVariants from "../../../../templ/ui/blocks/home/home.variants.json";
-import { useState } from "react";
+import homeVariants from "@blocks/home-variants";
 import { defaultHomePage } from "../../data/home";
 import { blockVariant } from "../../lib/block-variant";
 import {
@@ -36,11 +35,13 @@ import {
   Group,
   Grid,
   GridCol,
+  H1,
+  H2,
+  H3,
   Inline,
   Stack,
   Text,
   Textarea,
-  Title,
 } from "@registry/ui";
 
 const homeSheetTriggerID = "home-mobile-sheet-trigger";
@@ -50,7 +51,7 @@ const homeSheetTitleID = "home-mobile-sheet-title";
 function CatalogPrimaryNav({ items, className }: { items: NavItemData[]; className?: string }) {
   return (
     <Nav aria-label="Primary navigation" className={className}>
-      <NavList gap="sm" className="px-2">
+      <NavList className="px-2">
         {items.map((item, index) => (
           <NavItem key={item.Label}>
             <NavLink href={item.Href} active={index === 0} aria-label={item.Label}>
@@ -67,7 +68,7 @@ function CatalogPrimaryNav({ items, className }: { items: NavItemData[]; classNa
 function CatalogHeaderNav({ items, className }: { items: NavItemData[]; className?: string }) {
   return (
     <Nav aria-label="Header navigation" className={className}>
-      <NavList gap="sm" className="px-2">
+      <NavList className="px-2">
         {items.map((item) => (
           <NavItem key={item.Label}>
             <NavLink href={item.Href} variant="ghost" size="sm">{item.Label}</NavLink>
@@ -78,23 +79,13 @@ function CatalogHeaderNav({ items, className }: { items: NavItemData[]; classNam
   );
 }
 
-function CatalogMobileSheet({
-  props,
-  open,
-  onOpenChange,
-}: {
-  props: HomePageProps;
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-}) {
+function CatalogMobileSheet({ props }: { props: HomePageProps }) {
   return (
     <Sheet
       id={homeSheetPanelID}
       side="left"
       size="default"
       variant="card"
-      open={open}
-      onOpenChange={onOpenChange}
       behavior="ui8kit"
       aria-label="Navigation menu"
       aria-labelledby={homeSheetTitleID}
@@ -102,8 +93,6 @@ function CatalogMobileSheet({
     >
       <SheetOverlay
         target={homeSheetPanelID}
-        open={open}
-        onOpenChange={onOpenChange}
         behavior="ui8kit"
         className="cursor-pointer bg-background/80"
       />
@@ -112,7 +101,6 @@ function CatalogMobileSheet({
           <SheetTitle id={homeSheetTitleID} className="text-sm font-medium">{props.Brand}</SheetTitle>
           <SheetClose
             target={homeSheetPanelID}
-            onOpenChange={onOpenChange}
             behavior="ui8kit"
             variant="outline"
             size="icon"
@@ -130,7 +118,7 @@ function CatalogMobileSheet({
 
 function CatalogSidebar({ props }: { props: HomePageProps }) {
   return (
-    <Box tag="aside" className="hidden w-64 shrink-0 border-r border-border bg-card md:flex md:flex-col">
+    <Block tag="aside" className="hidden w-64 shrink-0 border-r border-border bg-card md:flex md:flex-col">
       <Box className="flex h-16 items-center gap-4 border-b border-border px-4">
         <IconBadge size="sm" variant="accent">BY</IconBadge>
         <Stack className="gap-0">
@@ -146,21 +134,13 @@ function CatalogSidebar({ props }: { props: HomePageProps }) {
           <a href="/">Dashboard block</a>
         </Button>
       </Box>
-    </Box>
+    </Block>
   );
 }
 
-function CatalogHeader({
-  props,
-  open,
-  onOpenChange,
-}: {
-  props: HomePageProps;
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-}) {
+function CatalogHeader({ props }: { props: HomePageProps }) {
   return (
-    <Box
+    <Block
       tag="header"
       className="grid h-16 shrink-0 grid-cols-[1fr_auto_1fr] items-center gap-4 border-b border-border bg-card/80 px-4 backdrop-blur-sm"
     >
@@ -168,8 +148,6 @@ function CatalogHeader({
         <SheetTrigger
           id={homeSheetTriggerID}
           target={homeSheetPanelID}
-          open={open}
-          onOpenChange={onOpenChange}
           behavior="ui8kit"
           variant="outline"
           size="icon"
@@ -182,7 +160,7 @@ function CatalogHeader({
         </Button>
       </Group>
       <Nav className="col-start-2 hidden justify-self-center md:block">
-        <NavList orientation="horizontal" gap="sm">
+        <NavList orientation="horizontal">
           {props.HeaderNav.map((item) => (
             <NavItem key={item.Label}>
               <NavLink href={item.Href} variant="ghost" size="sm">{item.Label}</NavLink>
@@ -196,20 +174,20 @@ function CatalogHeader({
           <a href="#profile">{props.ProfileName}</a>
         </Button>
       </Group>
-    </Box>
+    </Block>
   );
 }
 
 function HeroChat({ hero }: { hero: HeroProps }) {
   return (
-    <Box tag="section" className="overflow-hidden rounded-lg border border-border bg-card shadow-sm">
+    <Block tag="section" className="overflow-hidden rounded-lg border border-border bg-card shadow-sm">
       <Grid className="gap-0 md:grid-cols-2">
         <GridCol>
           <Box className="border-b border-border p-6 md:border-b-0 md:border-r">
             <Stack className="gap-6">
               <Stack className="gap-2">
                 <Badge variant="outline">AI workspace</Badge>
-                <Title as={1} className="text-3xl font-bold tracking-tight md:text-4xl">{hero.Title}</Title>
+                <H1 className="text-3xl font-bold tracking-tight md:text-4xl">{hero.Title}</H1>
                 <Text className="text-sm leading-relaxed text-muted-foreground md:text-base">{hero.Subtitle}</Text>
               </Stack>
               <Box className="rounded-lg border border-border bg-background p-4 shadow-sm">
@@ -261,7 +239,7 @@ function HeroChat({ hero }: { hero: HeroProps }) {
           </Box>
         </GridCol>
       </Grid>
-    </Box>
+    </Block>
   );
 }
 
@@ -305,7 +283,7 @@ function ShowcaseCardView({ item }: { item: ShowcaseItem }) {
           </Box>
           <Group className="items-start justify-between gap-4">
             <Stack className="gap-2">
-              <Title as={3} className="text-base font-semibold">{item.Name}</Title>
+              <H3 className="text-base font-semibold">{item.Name}</H3>
               <Text className="text-sm leading-relaxed text-muted-foreground">{item.Description}</Text>
             </Stack>
             <Badge variant="outline">{item.Category}</Badge>
@@ -338,7 +316,7 @@ function ShowcaseGrid({ showcase }: { showcase: ShowcaseProps }) {
     <Stack className="gap-6">
       <Group className="items-end justify-between gap-4">
         <Stack className="gap-2">
-          <Title as={2} className="text-xl font-semibold tracking-tight">{showcase.Title}</Title>
+          <H2 className="text-xl font-semibold tracking-tight">{showcase.Title}</H2>
           <Text className="text-sm text-muted-foreground">{showcase.Description}</Text>
         </Stack>
         <Button asChild variant="outline" size="sm">
@@ -372,17 +350,18 @@ function PrototypeNotice({ notice }: { notice: NoticeProps }) {
   );
 }
 
-export function HomePage() {
-  const props = defaultHomePage;
-  const [sheetOpen, setSheetOpen] = useState(false);
+export type HomePageViewProps = {
+  props: HomePageProps;
+};
 
+export function HomePageView({ props }: HomePageViewProps) {
   return (
     <Block tag="main" className="min-h-screen bg-muted/30 text-foreground">
-      <CatalogMobileSheet props={props} open={sheetOpen} onOpenChange={setSheetOpen} />
+      <CatalogMobileSheet props={props} />
       <Group className="min-h-screen w-full items-stretch">
         <CatalogSidebar props={props} />
         <Box className="flex min-w-0 flex-1 flex-col bg-background">
-          <CatalogHeader props={props} open={sheetOpen} onOpenChange={setSheetOpen} />
+          <CatalogHeader props={props} />
           <Box className="flex flex-1 flex-col gap-8 p-4 md:p-8">
             <HeroChat hero={props.Hero} />
             <ToolCards items={props.Tools} />
@@ -393,4 +372,9 @@ export function HomePage() {
       </Group>
     </Block>
   );
+}
+
+export function HomePage() {
+  const props = defaultHomePage;
+  return <HomePageView props={props} />;
 }

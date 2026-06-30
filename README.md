@@ -32,71 +32,16 @@ Default bricks avoid app-specific runtime dependencies. Behavior hooks such as `
 
 ## Coming from shadcn?
 
-The registry keeps the shadcn mental model: props, variants, children,
-composition, `cn`, and `asChild`. The differences are intentional and small.
+The migration guide is now documented in
+[`.project/coming-from-shadcn.md`](.project/coming-from-shadcn.md).
 
-### Layout grammar
+Quick mapping:
 
-Every block opens with `Block`. `Box` lives only inside `Block`. `Stack` is
-vertical flex; `Group` is horizontal flex (or `fieldset`). No raw `<div>` /
-`<aside>` / `<section>` in `ui/`, `components/`, or example blocks — use the
-primitives. See [`.cursor/rules/templ-layout-grammar.mdc`](.cursor/rules/templ-layout-grammar.mdc).
-
-```tsx
-<Block tag="aside" className="hidden w-64 md:flex md:flex-col">
-  <Box className="flex h-16 items-center gap-4 border-b">
-    <IconBadge size="sm" variant="accent">BY</IconBadge>
-    <Stack className="gap-0">
-      <Text className="text-sm font-semibold">Brand</Text>
-      <Text className="text-xs text-muted-foreground">Workspace catalog</Text>
-    </Stack>
-  </Box>
-</Block>
-```
-
-### Variants and `cn`
-
-Variant and size class strings live in colocated `*.variants.json` files, one
-per brick. Both the Templ and React runtimes consume the same JSON, so the
-two stacks always agree. The React side derives literal-union types from the
-JSON via `RecipeKey<typeof recipe, "variant">`; autocompletion works.
-
-`cn` is `clsx + tailwind-merge` — same as shadcn. Caller `className` wins over
-recipe classes.
-
-### `asChild`
-
-Every clickable brick supports `asChild` via a Radix-style `Slot`. Use it to
-render an anchor styled as a button:
-
-```tsx
-<Button asChild variant="outline" size="sm">
-  <a href="/docs">Learn more</a>
-</Button>
-```
-
-### Behavior hooks
-
-`Sheet` and `Dialog` accept `open` / `onOpenChange`. Set
-`behavior="ui8kit"` to opt into `@ui8kit/aria` DOM hooks (`data-ui8kit-*`) for
-SSR parity with `.templ`; React keeps the controlled `open` state. Custom JS
-pattern implementations are forbidden — see
-[`.project/ui8kit-aria-boundary.md`](.project/ui8kit-aria-boundary.md).
-
-```tsx
-const [open, setOpen] = useState(false);
-<Sheet open={open} onOpenChange={setOpen} behavior="ui8kit">
-  <SheetTrigger>Open</SheetTrigger>
-  <SheetContent>…</SheetContent>
-</Sheet>
-```
-
-### Two runtimes, one design
-
-- Go (`examples/templ`) covers SSR.
-- React (`examples/vite`) covers SPA.
-- Both consume the same `*.spec.md`, `*.variants.json`, and shadcn-compatible
-  tokens (`examples/web/static/css/tokens.css`).
+- `cva` recipes -> colocated `*.variants.json` shared by Go + React.
+- `cn` -> same `clsx + tailwind-merge` behavior.
+- `asChild` -> Radix-style `Slot` for clickable bricks.
+- `Title as={n}` -> prefer `H1`...`H6` when heading level is static.
+- `Card.Header` / `Card.Title` compound API is available alongside named exports.
 
 ## Copy into your app
 
@@ -104,7 +49,8 @@ const [open, setOpen] = useState(false);
 2. Copy folders from `ui/button/`, `ui/input/`, `components/card/`, etc.
 3. Update the `uiutils` import path in each `.templ` file to match your module.
 4. Run `templ generate` and include `ui/**/*.templ` in your Tailwind `@source`.
-5. Define **your own** shadcn-compatible CSS variables (`--background`, `--primary`, …) in the consuming app — the library does not ship tokens.
+5. Install peer deps in your app runtime: `react`, `react-dom`, `clsx`, and `tailwind-merge`.
+6. Define **your own** shadcn-compatible CSS variables (`--background`, `--primary`, …) in the consuming app — the library does not ship tokens.
 
 ## Local preview
 

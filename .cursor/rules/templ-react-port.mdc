@@ -43,15 +43,16 @@ The Templ layout grammar is binding on the React side as well. See
 - TSX uses `htmlFor`/`target` (or other neutral names), not `for`. The Go
   `For string` field stays unchanged.
 
-## Controlled behavior bricks
+## Behavior bricks
 
-- `Sheet` and `Dialog` expose `open?: boolean` and
-  `onOpenChange?: (open: boolean) => void`.
-- `behavior?: "ui8kit"` is **opt-in**. When set, the brick still emits
-  `data-ui8kit-*` hook attributes so SSR parity with `.templ` holds, while
-  React keeps the controlled `open` state for visibility.
-- When `behavior` is unset, React manages `aria-expanded`, `hidden`, and focus
-  handoff locally. Custom JS pattern implementations are forbidden — see
+- **`Sheet`** (side panel): declarative markup only. Set `behavior="ui8kit"`
+  and wire `target` / `For` ids. `@ui8kit/aria` owns open/close on both stacks.
+  Root is `<div role="dialog">`, not native `<dialog>`.
+- **`Dialog`** (center modal): exposes `open?: boolean` and
+  `onOpenChange?: (open: boolean) => void` for native `<dialog>` control.
+- `behavior?: "ui8kit"` is **opt-in** on Sheet parts. When set, bricks emit
+  `data-ui8kit-*` hooks matching `.templ` markup exactly.
+- Custom JS pattern implementations are forbidden — see
   [`ui8kit-aria-boundary.md`](../../.project/ui8kit-aria-boundary.md).
 
 ## Dependencies

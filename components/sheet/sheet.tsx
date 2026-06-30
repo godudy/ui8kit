@@ -1,12 +1,16 @@
 import {
   forwardRef,
-  useCallback,
   type ButtonHTMLAttributes,
   type HTMLAttributes,
-  type MouseEvent,
 } from "react";
 import sheetRecipeJson from "./sheet.variants.json";
-import { cn, composeRecipe, defineRecipe, type BehaviorMode, normalizeBehaviorMode } from "../../utils";
+import {
+  cn,
+  composeRecipe,
+  defineRecipe,
+  type BehaviorMode,
+  normalizeBehaviorMode,
+} from "../../utils";
 import { Button, type ButtonVariant, type ButtonSize } from "../../ui/button/button";
 
 const { recipe: sheetRecipe, keys: sheetKeys } = defineRecipe(sheetRecipeJson);
@@ -15,12 +19,11 @@ type SheetVariant = typeof sheetKeys.variant;
 type SheetSide = typeof sheetKeys.side;
 type SheetSize = typeof sheetKeys.size;
 
-export type SheetProps = Omit<HTMLAttributes<HTMLDivElement>, "className"> & {
+export type SheetProps = Omit<HTMLAttributes<HTMLDivElement>, "className" | "role"> & {
   variant?: SheetVariant;
   side?: SheetSide;
   size?: SheetSize;
   open?: boolean;
-  onOpenChange?: (open: boolean) => void;
   className?: string;
   "aria-labelledby"?: string;
   "aria-describedby"?: string;
@@ -33,7 +36,6 @@ export type SheetTriggerProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: ButtonVariant;
   size?: ButtonSize;
   open?: boolean;
-  onOpenChange?: (open: boolean) => void;
   behavior?: BehaviorMode;
   "aria-label"?: string;
 };
@@ -41,7 +43,6 @@ export type SheetTriggerProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 export type SheetOverlayProps = HTMLAttributes<HTMLDivElement> & {
   target?: string;
   open?: boolean;
-  onOpenChange?: (open: boolean) => void;
   behavior?: BehaviorMode;
 };
 
@@ -54,7 +55,6 @@ export type SheetCloseProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   target?: string;
   variant?: ButtonVariant;
   size?: ButtonSize;
-  onOpenChange?: (open: boolean) => void;
   behavior?: BehaviorMode;
   "aria-label"?: string;
 };
@@ -69,7 +69,7 @@ function sheetBehavior(value?: BehaviorMode): BehaviorMode {
 
 function sheetRootAttrs(
   id: string | undefined,
-  open: boolean | undefined,
+  open: boolean,
   ariaLabel: string | undefined,
   ariaLabelledBy: string | undefined,
   ariaDescribedBy: string | undefined,
@@ -127,8 +127,7 @@ export const Sheet = forwardRef<HTMLDivElement, SheetProps>(function Sheet(
     variant,
     side,
     size,
-    open,
-    onOpenChange,
+    open = false,
     "aria-label": ariaLabel,
     "aria-labelledby": ariaLabelledBy,
     "aria-describedby": ariaDescribedBy,
@@ -140,17 +139,17 @@ export const Sheet = forwardRef<HTMLDivElement, SheetProps>(function Sheet(
   },
   ref
 ) {
-  void onOpenChange;
   const isHidden = hidden ?? !open;
+
   return (
     <div
       ref={ref}
-      hidden={isHidden}
       className={composeRecipe(
         sheetRecipe,
         { side, size, variant },
         className
       )}
+      hidden={isHidden ? true : undefined}
       {...sheetRootAttrs(
         id,
         open,
@@ -175,32 +174,24 @@ export const SheetTrigger = forwardRef<HTMLButtonElement, SheetTriggerProps>(
       variant,
       size,
       open,
-      onOpenChange,
       behavior,
       "aria-label": ariaLabel,
       className,
       children,
-      onClick,
+      type,
       ...rest
     },
     ref
   ) {
-    const handleClick = useCallback(
-      (event: MouseEvent<HTMLButtonElement>) => {
-        onOpenChange?.(true);
-        onClick?.(event);
-      },
-      [onOpenChange, onClick]
-    );
     return (
       <Button
         ref={ref}
         id={id}
+        type={type ?? "button"}
         variant={variant}
         size={size}
         className={className}
         aria-label={ariaLabel}
-        onClick={handleClick}
         {...sheetTriggerAttrs(target, open, behavior, rest)}
       >
         {children}
@@ -211,23 +202,16 @@ export const SheetTrigger = forwardRef<HTMLButtonElement, SheetTriggerProps>(
 SheetTrigger.displayName = "SheetTrigger";
 
 export const SheetOverlay = forwardRef<HTMLDivElement, SheetOverlayProps>(function SheetOverlay(
-  { target, open, onOpenChange, behavior, className, hidden, onClick, ...rest },
+  { target, open = false, behavior, className, hidden, ...rest },
   ref
 ) {
   const isHidden = hidden ?? !open;
-  const handleClick = useCallback(
-    (event: MouseEvent<HTMLDivElement>) => {
-      onOpenChange?.(false);
-      onClick?.(event);
-    },
-    [onOpenChange, onClick]
-  );
+
   return (
     <div
       ref={ref}
-      hidden={isHidden}
       className={cn("fixed inset-0 z-40 bg-background/80", className)}
-      onClick={handleClick}
+      hidden={isHidden ? true : undefined}
       {...sheetCloseAttrs(target, behavior, rest)}
     />
   );
@@ -292,24 +276,17 @@ export const SheetDescription = forwardRef<HTMLParagraphElement, SheetDescriptio
 SheetDescription.displayName = "SheetDescription";
 
 export const SheetClose = forwardRef<HTMLButtonElement, SheetCloseProps>(function SheetClose(
-  { target, variant, size, onOpenChange, behavior, "aria-label": ariaLabel, className, children, onClick, ...rest },
+  { target, variant, size, behavior, "aria-label": ariaLabel, className, children, type, ...rest },
   ref
 ) {
-  const handleClick = useCallback(
-    (event: MouseEvent<HTMLButtonElement>) => {
-      onOpenChange?.(false);
-      onClick?.(event);
-    },
-    [onOpenChange, onClick]
-  );
   return (
     <Button
       ref={ref}
+      type={type ?? "button"}
       variant={variant}
       size={size}
       className={className}
       aria-label={ariaLabel}
-      onClick={handleClick}
       {...sheetCloseAttrs(target, behavior, rest)}
     >
       {children}

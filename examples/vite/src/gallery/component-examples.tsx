@@ -1,5 +1,5 @@
-import { useState, type ReactNode } from "react";
-import { Box, Group, Grid, GridCol, Stack, Text } from "@registry/ui";
+import { type ReactNode } from "react";
+import { Block, Box, Group, Grid, GridCol, Stack, Text } from "@registry/ui";
 import {
   Alert,
   Breadcrumb,
@@ -47,9 +47,8 @@ function GalleryPanel({ title, description, children }: { title: string; descrip
 }
 
 export function ComponentExamples() {
-  const [demoSheetOpen, setDemoSheetOpen] = useState(false);
   return (
-    <Box id="component-examples" tag="section" className="rounded-lg border border-border bg-card shadow-sm">
+    <Block id="component-examples" tag="section" className="rounded-lg border border-border bg-card shadow-sm">
       <Grid className="gap-0 lg:grid-cols-2">
         <GridCol>
           <GalleryPanel title="Actions" description="Button variants from button.variants.json">
@@ -104,7 +103,7 @@ export function ComponentExamples() {
           <GalleryPanel title="Surfaces" description="Nav, icons, sheet, cards">
             <Stack className="gap-4">
               <Nav aria-label="Gallery navigation">
-                <NavList gap="sm" orientation="horizontal">
+                <NavList orientation="horizontal">
                   <NavItem>
                     <NavLink href="/" active>
                       <IconBadge size="sm" variant="accent">H</IconBadge>
@@ -125,8 +124,6 @@ export function ComponentExamples() {
                 <SheetTrigger
                   id={demoSheetTriggerID}
                   target={demoSheetID}
-                  open={demoSheetOpen}
-                  onOpenChange={setDemoSheetOpen}
                   behavior="ui8kit"
                   variant="outline"
                   size="sm"
@@ -138,27 +135,15 @@ export function ComponentExamples() {
               <Sheet
                 id={demoSheetID}
                 side="right"
-                open={demoSheetOpen}
-                onOpenChange={setDemoSheetOpen}
                 behavior="ui8kit"
                 aria-label="Demo sheet"
                 aria-labelledby={demoSheetTitleID}
               >
-                <SheetOverlay
-                  target={demoSheetID}
-                  open={demoSheetOpen}
-                  onOpenChange={setDemoSheetOpen}
-                  behavior="ui8kit"
-                />
+                <SheetOverlay target={demoSheetID} behavior="ui8kit" />
                 <SheetContent>
                   <SheetHeader>
                     <SheetTitle id={demoSheetTitleID}>Sheet panel</SheetTitle>
-                    <SheetClose
-                      target={demoSheetID}
-                      onOpenChange={setDemoSheetOpen}
-                      behavior="ui8kit"
-                      aria-label="Close demo sheet"
-                    >
+                    <SheetClose target={demoSheetID} behavior="ui8kit" aria-label="Close demo sheet">
                       Close
                     </SheetClose>
                   </SheetHeader>
@@ -176,6 +161,6 @@ export function ComponentExamples() {
           </GalleryPanel>
         </GridCol>
       </Grid>
-    </Box>
+    </Block>
   );
 }

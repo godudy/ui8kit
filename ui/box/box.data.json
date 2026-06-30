@@ -7,10 +7,9 @@
         "Tag": "div"
       }
     },
-    "tag.section": {
+    "class.padded": {
       "props": {
-        "Class": "p-4",
-        "Tag": "section"
+        "Class": "p-4 rounded-md border border-border"
       }
     }
   }

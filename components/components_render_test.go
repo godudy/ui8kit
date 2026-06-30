@@ -23,8 +23,31 @@ func TestSheetBehaviorHooksAreOptIn(t *testing.T) {
 	if strings.Contains(html, "data-ui8kit") {
 		t.Fatalf("sheet should not render behavior hooks by default: %s", html)
 	}
+	if strings.Contains(html, "<dialog") {
+		t.Fatalf("sheet root should be div, not dialog: %s", html)
+	}
 	if !strings.Contains(html, `role="dialog"`) || !strings.Contains(html, `aria-modal="true"`) {
 		t.Fatalf("sheet should render dialog semantics: %s", html)
+	}
+	if !strings.Contains(html, "hidden") {
+		t.Fatalf("closed sheet should render hidden: %s", html)
+	}
+}
+
+func TestSheetUI8KitRoot(t *testing.T) {
+	html := renderComponent(t, Sheet(SheetProps{ID: "demo-sheet", Behavior: "ui8kit", AriaLabel: "Navigation"}))
+	for _, want := range []string{
+		`data-ui8kit="sheet"`,
+		`data-ui8kit-dialog`,
+		`data-state="closed"`,
+		`hidden`,
+	} {
+		if !strings.Contains(html, want) {
+			t.Fatalf("expected %q in %s", want, html)
+		}
+	}
+	if strings.Contains(html, "<dialog") {
+		t.Fatalf("sheet root should be div, not dialog: %s", html)
 	}
 }
 

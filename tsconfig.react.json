@@ -16,7 +16,9 @@
       "@registry/ui": ["ui/index.ts"],
       "@registry/ui/*": ["ui/*"],
       "@registry/components": ["components/index.ts"],
-      "@registry/components/*": ["components/*"]
+      "@registry/components/*": ["components/*"],
+      "@blocks/home-variants": ["examples/templ/ui/blocks/home/home.variants.json"],
+      "@blocks/dashboard-variants": ["examples/templ/ui/blocks/dashboard/dashboard.variants.json"]
     }
   },
   "include": [

@@ -35,7 +35,7 @@ api:
   Gap:
     role: layout-spacing
     type: string
-    enum: [none, sm, default, lg]
+    enum: [none, default, lg]
     allow-list-source: nav-list.variants.json#gap
     default: default
     applies-to: NavList

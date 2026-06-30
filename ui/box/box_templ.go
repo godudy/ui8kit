@@ -77,7 +77,7 @@ func Box(p BoxProps) templ.Component {
 		templ_7745c5c3_Err = uiutils.LayoutTag(uiutils.LayoutTagProps{
 			Tag:      p.Tag,
 			Fallback: "div",
-			Group:    uiutils.TagGroupLayout,
+			Group:    uiutils.TagGroupBoxAllowed,
 			Class:    BoxClasses(p),
 			Attrs:    p.Attrs,
 		}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)

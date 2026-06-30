@@ -142,6 +142,7 @@ func validateSpec(doc *specDoc, allowLists map[string][]string) []validationErro
 	errs = append(errs, validateShowcaseExamples(doc, rel)...)
 	errs = append(errs, validateAllowLists(doc, rel, allowLists)...)
 	errs = append(errs, validateBehaviorHookEnums(doc, rel)...)
+	errs = append(errs, validateRuntimeScopedAPIFields(doc, rel)...)
 	errs = append(errs, validateBlockContract(doc, rel, findRepoRootMust())...)
 	return errs
 }
@@ -178,6 +179,70 @@ func validateBehaviorHookEnums(doc *specDoc, rel string) []validationError {
 		}
 	}
 	return errs
+}
+
+// validateRuntimeScopedAPIFields validates api fields marked as react-only.
+// Contract:
+// - react-only must be a boolean true
+// - spec must declare targets.react
+// - react-only fields must not appear in templ parts[].props
+func validateRuntimeScopedAPIFields(doc *specDoc, rel string) []validationError {
+	api, _ := doc.fm["api"].(map[string]any)
+	if api == nil {
+		return nil
+	}
+	targets, _ := doc.fm["targets"].(map[string]any)
+	_, hasReactTarget := targets["react"].(map[string]any)
+	templProps := collectTemplPartProps(doc.fm)
+
+	var errs []validationError
+	for field, raw := range api {
+		fm, _ := raw.(map[string]any)
+		if fm == nil {
+			continue
+		}
+		rawReactOnly, hasReactOnly := fm["react-only"]
+		if !hasReactOnly {
+			continue
+		}
+		flag, ok := rawReactOnly.(bool)
+		if !ok {
+			errs = append(errs, validationError{rel, field, "react-only must be boolean true"})
+			continue
+		}
+		if !flag {
+			errs = append(errs, validationError{rel, field, "react-only=false is unsupported; omit the key instead"})
+			continue
+		}
+		if !hasReactTarget {
+			errs = append(errs, validationError{rel, field, "react-only field requires targets.react metadata"})
+		}
+		if templProps[field] {
+			errs = append(errs, validationError{rel, field, "react-only field must not appear in parts[].props (templ runtime)"})
+		}
+	}
+	return errs
+}
+
+func collectTemplPartProps(fm map[string]any) map[string]bool {
+	out := map[string]bool{}
+	parts, _ := fm["parts"].([]any)
+	for _, rawPart := range parts {
+		part, _ := rawPart.(map[string]any)
+		if part == nil {
+			continue
+		}
+		props, _ := part["props"].([]any)
+		for _, rawProp := range props {
+			prop, _ := rawProp.(string)
+			prop = strings.TrimSpace(prop)
+			if prop == "" {
+				continue
+			}
+			out[prop] = true
+		}
+	}
+	return out
 }
 
 func validateHelperExamples(doc *specDoc, rel string) []validationError {

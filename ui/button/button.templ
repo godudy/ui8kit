@@ -8,8 +8,6 @@
 package button
 
 import (
-	"strings"
-
 	"github.com/fastygo/templ/utils"
 )
 
@@ -39,9 +37,6 @@ func ButtonClasses(p ButtonProps) string {
 	state := ""
 	if p.Disabled {
 		state = "pointer-events-none opacity-50"
-	}
-	if strings.TrimSpace(p.Variant) == "unstyled" {
-		return uiutils.Cn(state, p.Class)
 	}
 	return uiutils.Cn(
 		uiutils.Compose(ButtonVariants, map[string]string{

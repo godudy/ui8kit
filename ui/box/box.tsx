@@ -22,7 +22,7 @@ export const Box = forwardRef<HTMLElement, BoxProps>(function Box(
       </Slot>
     );
   }
-  const Tag = resolveTag(tag, "div", TagGroup.Layout) as ElementType;
+  const Tag = resolveTag(tag, "div", TagGroup.BoxAllowed) as ElementType;
   return (
     <Tag ref={ref as Ref<HTMLElement>} className={composeRecipe(boxRecipe, {}, className)} {...rest}>
       {children}

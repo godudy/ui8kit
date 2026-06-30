@@ -40,6 +40,13 @@ Mark props in `api:`:
 - `cva: false` — `Class`, identity, a11y, state (raw Tailwind via `Class` only)
 - `role: behavior-hook` — `Behavior`, `DataUI8Kit` (opt-in, default off)
 
+Runtime-scoped fields:
+
+- `react-only: true` means the field exists only in the TSX runtime contract.
+- Every spec that uses `react-only: true` MUST declare `targets.react`.
+- `react-only` fields MUST NOT appear in `parts[].props` (templ runtime props).
+- Do not set `react-only: false`; omit the key when a field is shared.
+
 ## Validation contract
 
 1. File: `{name}.spec.md` next to `{name}.templ` (or block folder under `examples/`).
@@ -50,8 +57,9 @@ Mark props in `api:`:
 6. `*.variants.json` MUST NOT use empty-string (`""`) keys in `byKey`. Every
    `defaults[k]` MUST reference a non-empty key present in `byKey[k]`. The
    validator fails the spec when this contract is broken.
-7. STE prose only: `Summary`, `Use Cases`, `Semantics` — short sentences, active voice.
-8. `/** */` in `.templ` MUST match `## Summary`. `//` prop comments MUST match `api` enums.
+7. `react-only` fields must be boolean `true`, require `targets.react`, and must not leak into templ `parts[].props`.
+8. STE prose only: `Summary`, `Use Cases`, `Semantics` — short sentences, active voice.
+9. `/** */` in `.templ` MUST match `## Summary`. `//` prop comments MUST match `api` enums.
 
 Run: `bash .validate/scripts/validate-spec.sh --with-tests`
 

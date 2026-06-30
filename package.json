@@ -6,16 +6,20 @@
     "generate": "go run ./.validate/cmd/variantgen && go run ./.validate/cmd/blockgen && go run ./.validate/cmd/tagsgen && go tool templ generate ./...",
     "lint:ui8px": "ui8px lint ui components utils examples examples/web/static/css/input.css examples/vite/dist/static/css/input.css",
     "lint:ui8px:vite": "cd examples/vite && bun run build && cd ../.. && ui8px lint examples/vite/dist/static/css/app.css",
+    "test:home-snapshot": "bun test examples/vite/tests/home-page.snapshot.test.tsx",
+    "test:sheet-contract": "bun test examples/vite/tests/sheet-ui8kit-contract.test.tsx",
     "validate:aria": "ui8px validate aria examples --manifest examples/web/static/js/manifest.json",
-    "verify": "bash .validate/scripts/validate-spec.sh --with-tests && bun run typecheck:react && bun run lint:ui8px && bun run validate:aria && go test ./...",
+    "verify": "bash .validate/scripts/validate-spec.sh --with-tests && bun run typecheck:react && bun run lint:ui8px && bun run validate:aria && bun run test:home-snapshot && bun run test:sheet-contract && go test ./...",
     "typecheck:react": "tsc -p tsconfig.react.json"
   },
   "devDependencies": {
     "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.2.3",
     "clsx": "^2.1.1",
     "playwright": "^1.61.1",
     "puppeteer-core": "^25.2.1",
     "react": "^19.1.0",
+    "react-dom": "^19.2.7",
     "tailwind-merge": "^3.6.0",
     "typescript": "^5.8.3",
     "ui8px": "0.2.4"

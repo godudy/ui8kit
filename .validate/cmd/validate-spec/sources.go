@@ -27,6 +27,7 @@ func loadTagGroups(repoRoot string) (map[string][]string, error) {
 		key  string
 	}{
 		{"TagGroupLayout", "utils.tags.TagGroupLayout"},
+		{"TagGroupBoxAllowed", "utils.tags.TagGroupBoxAllowed"},
 		{"TagGroupBlockText", "utils.tags.TagGroupBlockText"},
 		{"TagGroupInline", "utils.tags.TagGroupInline"},
 		{"TagGroupStack", "utils.tags.TagGroupStack"},

@@ -6,6 +6,10 @@
       "tags": ["div", "section", "article", "aside", "header", "footer", "main", "nav", "figure", "search", "hgroup"]
     },
     {
+      "name": "BoxAllowed",
+      "tags": ["div"]
+    },
+    {
       "name": "BlockText",
       "tags": ["p", "blockquote", "figcaption", "address", "pre"]
     },

@@ -50,12 +50,7 @@ api:
     role: state
     type: bool
     default: false
-    react-only: true
-    notes: 'React controlled open state; onOpenChange fires on trigger / overlay / close / Esc.'
-  OnOpenChange:
-    role: state-callback
-    type: '(open: boolean) => void'
-    react-only: true
+    notes: 'Initial SSR open state. Runtime toggling uses @ui8kit/aria when Behavior is ui8kit.'
   Target:
     role: id-reference
     type: string
@@ -67,7 +62,7 @@ showcase:
   - id: behavior.ui8kit
     props: { ID: demo-sheet, Behavior: ui8kit }
 semantics:
-  root: div
+  root: div[role=dialog]
   role: dialog
   behavior: optional
 targets:
@@ -76,9 +71,9 @@ targets:
     facade: '@fastygo/templ-react'
     package: '@fastygo/templ-react/components/sheet'
     notes:
-      - 'Controlled open state via open?: boolean and onOpenChange?: (open: boolean) => void.'
+      - 'Declarative open?: boolean sets initial hidden/data-state only; runtime uses @ui8kit/aria when behavior="ui8kit".'
       - 'SheetTrigger, SheetOverlay, SheetClose use target (id reference) instead of Go For string.'
-      - 'behavior="ui8kit" stays opt-in and emits data-ui8kit-* hooks for SSR parity.'
+      - 'behavior="ui8kit" emits data-ui8kit-* hooks matching Templ markup.'
   templ:
     component: Sheet
     facade: github.com/fastygo/templ/components
@@ -97,9 +92,10 @@ Behavior hooks are opt-in through Behavior.
 
 ## Semantics
 
-- Sheet root uses role dialog and aria-modal true
+- Sheet root is a div with role dialog and aria-modal true (side panel semantics, not native dialog element)
+- For center modals use ui/dialog with native dialog element and showModal()
 - Trigger wires aria-haspopup, aria-controls, and aria-expanded
-- Behavior ui8kit adds data-ui8kit dialog hooks
+- Behavior ui8kit adds data-ui8kit dialog hooks; @ui8kit/aria owns open/close runtime on both stacks
 
 ## Example side.left
 

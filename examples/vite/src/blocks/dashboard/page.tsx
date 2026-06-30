@@ -1,5 +1,5 @@
-import { useState, type ReactNode } from "react";
-import dashboardVariants from "../../../../templ/ui/blocks/dashboard/dashboard.variants.json";
+import { type ReactNode } from "react";
+import dashboardVariants from "@blocks/dashboard-variants";
 import { defaultDashboardPage } from "../../data/dashboard";
 import { blockVariant } from "../../lib/block-variant";
 import { navIconLetter, navIconVariant } from "../../lib/helpers";
@@ -46,7 +46,7 @@ const dashboardSheetTitleID = "dashboard-mobile-sheet-title";
 function DashboardPrimaryNav({ items, className }: { items: NavItemData[]; className?: string }) {
   return (
     <Nav aria-label="Primary navigation" className={className}>
-      <NavList gap="sm" className="px-2">
+      <NavList className="px-2">
         {items.map((item, index) => (
           <NavItem key={item.Label}>
             <NavLink href={item.Href} active={index === 0} aria-label={item.Label}>
@@ -68,7 +68,7 @@ function DashboardPrimaryNav({ items, className }: { items: NavItemData[]; class
 function DashboardHeaderNav({ items, className }: { items: NavItemData[]; className?: string }) {
   return (
     <Nav aria-label="Header navigation" className={className}>
-      <NavList gap="sm" className="px-2">
+      <NavList className="px-2">
         {items.map((item) => (
           <NavItem key={item.Label}>
             <NavLink href={item.Href} variant="ghost" size="sm">{item.Label}</NavLink>
@@ -79,23 +79,13 @@ function DashboardHeaderNav({ items, className }: { items: NavItemData[]; classN
   );
 }
 
-function DashboardMobileSheet({
-  props,
-  open,
-  onOpenChange,
-}: {
-  props: DashboardPageProps;
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-}) {
+function DashboardMobileSheet({ props }: { props: DashboardPageProps }) {
   return (
     <Sheet
       id={dashboardSheetPanelID}
       side="left"
       size="default"
       variant="card"
-      open={open}
-      onOpenChange={onOpenChange}
       behavior="ui8kit"
       aria-label="Navigation menu"
       aria-labelledby={dashboardSheetTitleID}
@@ -103,8 +93,6 @@ function DashboardMobileSheet({
     >
       <SheetOverlay
         target={dashboardSheetPanelID}
-        open={open}
-        onOpenChange={onOpenChange}
         behavior="ui8kit"
         className="cursor-pointer bg-background/80"
       />
@@ -115,7 +103,6 @@ function DashboardMobileSheet({
           </SheetTitle>
           <SheetClose
             target={dashboardSheetPanelID}
-            onOpenChange={onOpenChange}
             behavior="ui8kit"
             variant="outline"
             size="icon"
@@ -133,7 +120,7 @@ function DashboardMobileSheet({
 
 function DashboardSidebar({ props }: { props: DashboardPageProps }) {
   return (
-    <Box
+    <Block
       tag="aside"
       className="hidden w-64 shrink-0 border-r border-border bg-card md:flex md:flex-col"
     >
@@ -152,21 +139,13 @@ function DashboardSidebar({ props }: { props: DashboardPageProps }) {
           <a href="/home/">Open home block</a>
         </Button>
       </Box>
-    </Box>
+    </Block>
   );
 }
 
-function DashboardHeader({
-  props,
-  open,
-  onOpenChange,
-}: {
-  props: DashboardPageProps;
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-}) {
+function DashboardHeader({ props }: { props: DashboardPageProps }) {
   return (
-    <Box
+    <Block
       tag="header"
       className="grid h-16 shrink-0 grid-cols-[1fr_auto_1fr] items-center gap-4 border-b border-border bg-card/80 px-4 backdrop-blur-sm"
     >
@@ -174,8 +153,6 @@ function DashboardHeader({
         <SheetTrigger
           id={dashboardSheetTriggerID}
           target={dashboardSheetPanelID}
-          open={open}
-          onOpenChange={onOpenChange}
           behavior="ui8kit"
           variant="outline"
           size="icon"
@@ -188,7 +165,7 @@ function DashboardHeader({
         </Button>
       </Group>
       <Nav className="col-start-2 hidden justify-self-center md:block">
-        <NavList orientation="horizontal" gap="sm">
+        <NavList orientation="horizontal">
           {props.HeaderNav.map((item) => (
             <NavItem key={item.Label}>
               <NavLink href={item.Href} variant="ghost" size="sm">{item.Label}</NavLink>
@@ -202,13 +179,13 @@ function DashboardHeader({
           <a href="#profile">{props.ProfileName}</a>
         </Button>
       </Group>
-    </Box>
+    </Block>
   );
 }
 
 function DashboardHero({ hero }: { hero: HeroProps }) {
   return (
-    <Box tag="section" className="overflow-hidden rounded-lg border border-border bg-card shadow-sm">
+    <Block tag="section" className="overflow-hidden rounded-lg border border-border bg-card shadow-sm">
       <Box className="border-b border-border bg-muted/40 px-6 py-4">
         <Group className="items-center justify-between gap-4">
           <Badge variant="outline">{hero.Eyebrow}</Badge>
@@ -247,7 +224,7 @@ function DashboardHero({ hero }: { hero: HeroProps }) {
           </GridCol>
         </Grid>
       </Box>
-    </Box>
+    </Block>
   );
 }
 
@@ -354,15 +331,14 @@ function DashboardNotice({ notice }: { notice: NoticeProps }) {
 
 export function DashboardPage({ children }: { children?: ReactNode }) {
   const props = defaultDashboardPage;
-  const [sheetOpen, setSheetOpen] = useState(false);
 
   return (
     <Block tag="main" className="min-h-screen bg-muted/30 text-foreground">
-      <DashboardMobileSheet props={props} open={sheetOpen} onOpenChange={setSheetOpen} />
+      <DashboardMobileSheet props={props} />
       <Group className="min-h-screen w-full items-stretch">
         <DashboardSidebar props={props} />
         <Box className="flex min-w-0 flex-1 flex-col bg-background">
-          <DashboardHeader props={props} open={sheetOpen} onOpenChange={setSheetOpen} />
+          <DashboardHeader props={props} />
           <Box className="flex flex-1 flex-col gap-8 p-4 md:p-8">
             <DashboardHero hero={props.Hero} />
             <StatusCards items={props.Cards} />

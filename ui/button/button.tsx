@@ -30,9 +30,6 @@ function buttonClasses(
   className: string | undefined
 ): string {
   const state = disabled ? "pointer-events-none opacity-50" : "";
-  if ((variant ?? "").trim() === "unstyled") {
-    return cn(state, className);
-  }
   return cn(
     composeRecipe(buttonRecipe, { variant, size }),
     state,
