@@ -4,6 +4,10 @@ import { composeRecipe } from "../../utils";
 import { resolveTag, TagGroup } from "../../utils/tags";
 import { Slot } from "../slot/slot";
 
+/**
+ * Vertical flex layout. Landmarks (`aside`, `section`, `header`, `nav`) belong on
+ * `Block`. `Stack` allows only `div`, `ul`, or `ol` as `tag`.
+ */
 export type StackProps = Omit<HTMLAttributes<HTMLElement>, "className"> & {
   tag?: string;
   className?: string;

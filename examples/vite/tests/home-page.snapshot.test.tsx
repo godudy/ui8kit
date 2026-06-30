@@ -20,5 +20,7 @@ describe("HomePage snapshot", () => {
     expect(markup).not.toContain("tag=\"aside\"");
     expect(markup).not.toContain("tag=\"header\"");
     expect(markup).not.toContain("tag=\"section\"");
+
+    expect(markup).toMatchSnapshot();
   });
 });

@@ -46,6 +46,7 @@ The validator checks:
 - 1:1 mapping between `showcase[].id` (or helper `examples[].id`) and `## Example {id}` sections with one fenced block (`templ` or `go`)
 - `allow-list-source` matches `utils/tags.go`, recipe vars in `utils/utils.go`, and brick-local `*Variants` maps
 - [`components.json`](../../components.json) aliases: `components` → `@/components`, `ui` → `@/components/ui`, `utils` → `@/utils`
+- `*.variants.json` cross-key invariants via `go run ./.validate/cmd/variantcheck` (also run from `bun run generate`)
 
 Exit code is non-zero on any mismatch; errors print file path and field name.
 

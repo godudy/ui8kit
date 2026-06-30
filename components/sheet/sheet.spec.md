@@ -50,7 +50,7 @@ api:
     role: state
     type: bool
     default: false
-    notes: 'Initial SSR open state. Runtime toggling uses @ui8kit/aria when Behavior is ui8kit.'
+    notes: 'Initial state for SSR + first React commit. With Behavior=ui8kit runtime is owned by @ui8kit/aria.'
   Target:
     role: id-reference
     type: string
@@ -74,6 +74,7 @@ targets:
       - 'Declarative open?: boolean sets initial hidden/data-state only; runtime uses @ui8kit/aria when behavior="ui8kit".'
       - 'SheetTrigger, SheetOverlay, SheetClose use target (id reference) instead of Go For string.'
       - 'behavior="ui8kit" emits data-ui8kit-* hooks matching Templ markup.'
+      - 'SheetTrigger and SheetClose support asChild (Radix-style Slot) for anchor triggers.'
   templ:
     component: Sheet
     facade: github.com/fastygo/templ/components
@@ -96,6 +97,7 @@ Behavior hooks are opt-in through Behavior.
 - For center modals use ui/dialog with native dialog element and showModal()
 - Trigger wires aria-haspopup, aria-controls, and aria-expanded
 - Behavior ui8kit adds data-ui8kit dialog hooks; @ui8kit/aria owns open/close runtime on both stacks
+- Open sets initial hidden/data-state/aria-expanded only. With Behavior=ui8kit, do not bind Open to React state — parent re-renders must not overwrite attributes that @ui8kit/aria toggles at runtime
 
 ## Example side.left
 

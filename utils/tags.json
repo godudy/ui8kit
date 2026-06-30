@@ -75,8 +75,8 @@
     }
   ],
   "aliases": [
-    { "name": "Stack", "of": ["Layout"], "tags": ["ul", "ol"] },
-    { "name": "Group", "of": ["Layout"], "tags": ["fieldset"] },
+    { "name": "Stack", "tags": ["div", "ul", "ol"] },
+    { "name": "Group", "tags": ["div", "fieldset", "dl"] },
     { "name": "Text", "of": ["BlockText", "Inline"] }
   ]
 }

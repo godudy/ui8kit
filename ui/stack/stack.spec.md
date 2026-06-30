@@ -14,16 +14,6 @@ api:
         default: div
         enum:
             - div
-            - nav
-            - section
-            - article
-            - aside
-            - header
-            - footer
-            - main
-            - figure
-            - search
-            - hgroup
             - ul
             - ol
         role: stack-tag

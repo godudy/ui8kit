@@ -23,10 +23,10 @@ tag-groups:
     allows: [div, section, article, aside, header, footer, main, nav, figure, search, hgroup]
     used-by: [ui.block, ui.box]
   - name: TagGroupStack
-    allows: [layout tags, ul, ol]
+    allows: [div, ul, ol]
     used-by: [ui.stack]
   - name: TagGroupGroup
-    allows: [layout tags, fieldset]
+    allows: [div, fieldset, dl]
     used-by: [ui.group]
   - name: TagGroupList
     allows: [ul, ol, dl, menu]

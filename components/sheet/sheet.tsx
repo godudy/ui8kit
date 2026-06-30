@@ -1,5 +1,6 @@
 import {
   forwardRef,
+  useRef,
   type ButtonHTMLAttributes,
   type HTMLAttributes,
 } from "react";
@@ -23,6 +24,10 @@ export type SheetProps = Omit<HTMLAttributes<HTMLDivElement>, "className" | "rol
   variant?: SheetVariant;
   side?: SheetSide;
   size?: SheetSize;
+  /**
+   * Initial open state only. When `behavior="ui8kit"`, runtime toggling is owned
+   * by `@ui8kit/aria`; React must not rebind this to changing state.
+   */
   open?: boolean;
   className?: string;
   "aria-labelledby"?: string;
@@ -35,13 +40,22 @@ export type SheetTriggerProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   target?: string;
   variant?: ButtonVariant;
   size?: ButtonSize;
+  /**
+   * Initial expanded state only. When `behavior="ui8kit"`, `@ui8kit/aria` owns
+   * `aria-expanded` after the first commit; do not bind to React state.
+   */
   open?: boolean;
   behavior?: BehaviorMode;
   "aria-label"?: string;
+  asChild?: boolean;
 };
 
 export type SheetOverlayProps = HTMLAttributes<HTMLDivElement> & {
   target?: string;
+  /**
+   * Initial visibility only. When `behavior="ui8kit"`, `@ui8kit/aria` owns
+   * `hidden` after the first commit; do not bind to React state.
+   */
   open?: boolean;
   behavior?: BehaviorMode;
 };
@@ -57,6 +71,7 @@ export type SheetCloseProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   size?: ButtonSize;
   behavior?: BehaviorMode;
   "aria-label"?: string;
+  asChild?: boolean;
 };
 
 function sheetState(open?: boolean): string {
@@ -65,6 +80,15 @@ function sheetState(open?: boolean): string {
 
 function sheetBehavior(value?: BehaviorMode): BehaviorMode {
   return normalizeBehaviorMode(value);
+}
+
+/** Freeze open to first commit when ui8kit owns runtime attribute toggling. */
+function useFrozenOpen(open: boolean | undefined, behavior: BehaviorMode | undefined): boolean {
+  const initialOpenRef = useRef(open ?? false);
+  if (sheetBehavior(behavior) === "ui8kit") {
+    return initialOpenRef.current;
+  }
+  return open ?? false;
 }
 
 function sheetRootAttrs(
@@ -139,7 +163,8 @@ export const Sheet = forwardRef<HTMLDivElement, SheetProps>(function Sheet(
   },
   ref
 ) {
-  const isHidden = hidden ?? !open;
+  const resolvedOpen = useFrozenOpen(open, behavior);
+  const isHidden = hidden ?? !resolvedOpen;
 
   return (
     <div
@@ -152,7 +177,7 @@ export const Sheet = forwardRef<HTMLDivElement, SheetProps>(function Sheet(
       hidden={isHidden ? true : undefined}
       {...sheetRootAttrs(
         id,
-        open,
+        resolvedOpen,
         ariaLabel,
         ariaLabelledBy,
         ariaDescribedBy,
@@ -179,10 +204,12 @@ export const SheetTrigger = forwardRef<HTMLButtonElement, SheetTriggerProps>(
       className,
       children,
       type,
+      asChild,
       ...rest
     },
     ref
   ) {
+    const resolvedOpen = useFrozenOpen(open, behavior);
     return (
       <Button
         ref={ref}
@@ -192,7 +219,8 @@ export const SheetTrigger = forwardRef<HTMLButtonElement, SheetTriggerProps>(
         size={size}
         className={className}
         aria-label={ariaLabel}
-        {...sheetTriggerAttrs(target, open, behavior, rest)}
+        asChild={asChild}
+        {...sheetTriggerAttrs(target, resolvedOpen, behavior, rest)}
       >
         {children}
       </Button>
@@ -205,7 +233,8 @@ export const SheetOverlay = forwardRef<HTMLDivElement, SheetOverlayProps>(functi
   { target, open = false, behavior, className, hidden, ...rest },
   ref
 ) {
-  const isHidden = hidden ?? !open;
+  const resolvedOpen = useFrozenOpen(open, behavior);
+  const isHidden = hidden ?? !resolvedOpen;
 
   return (
     <div
@@ -276,7 +305,18 @@ export const SheetDescription = forwardRef<HTMLParagraphElement, SheetDescriptio
 SheetDescription.displayName = "SheetDescription";
 
 export const SheetClose = forwardRef<HTMLButtonElement, SheetCloseProps>(function SheetClose(
-  { target, variant, size, behavior, "aria-label": ariaLabel, className, children, type, ...rest },
+  {
+    target,
+    variant,
+    size,
+    behavior,
+    "aria-label": ariaLabel,
+    className,
+    children,
+    type,
+    asChild,
+    ...rest
+  },
   ref
 ) {
   return (
@@ -287,6 +327,7 @@ export const SheetClose = forwardRef<HTMLButtonElement, SheetCloseProps>(functio
       size={size}
       className={className}
       aria-label={ariaLabel}
+      asChild={asChild}
       {...sheetCloseAttrs(target, behavior, rest)}
     >
       {children}

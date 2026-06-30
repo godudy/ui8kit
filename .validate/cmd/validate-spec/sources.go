@@ -53,18 +53,6 @@ func loadTagGroups(repoRoot string) (map[string][]string, error) {
 				tags[lit] = true
 			}
 		}
-		if c.name == "TagGroupStack" || c.name == "TagGroupGroup" {
-			for _, t := range out["utils.tags.TagGroupLayout"] {
-				tags[t] = true
-			}
-			if c.name == "TagGroupStack" {
-				tags["ul"] = true
-				tags["ol"] = true
-			}
-			if c.name == "TagGroupGroup" {
-				tags["fieldset"] = true
-			}
-		}
 		if c.name == "TagGroupText" {
 			for _, t := range out["utils.tags.TagGroupBlockText"] {
 				tags[t] = true

@@ -46,8 +46,8 @@ const tableColumnTags = new Set(["colgroup", "col"]);
 const mediaTags = new Set(["img", "picture", "source"]);
 const disclosureTags = new Set(["details", "summary"]);
 const containerTags = new Set(["div", "main", "section"]);
-const stackTags = new Set(["ul", "ol"]);
-const groupTags = new Set(["fieldset"]);
+const stackTags = new Set(["div", "ul", "ol"]);
+const groupTags = new Set(["div", "fieldset", "dl"]);
 
 function oneOf(tag: string, options: Set<string>): boolean {
   return options.has(tag);
@@ -103,9 +103,9 @@ export function isAllowedTag(tag: string, group: TagGroup): boolean {
     case TagGroup.Container:
       return oneOf(t, containerTags);
     case TagGroup.Stack:
-      return layoutTags.has(t) || oneOf(t, stackTags);
+      return oneOf(t, stackTags);
     case TagGroup.Group:
-      return layoutTags.has(t) || oneOf(t, groupTags);
+      return oneOf(t, groupTags);
     case TagGroup.Text:
       return blockTextTags.has(t) || inlineTags.has(t);
     default:

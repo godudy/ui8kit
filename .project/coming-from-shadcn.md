@@ -17,18 +17,50 @@ See [`.cursor/rules/templ-layout-grammar.mdc`](../.cursor/rules/templ-layout-gra
   <Box className="flex h-16 items-center gap-4 border-b">
     <IconBadge size="sm" variant="accent">BY</IconBadge>
     <Stack className="gap-0">
-      <Text className="text-sm font-semibold">Brand</Text>
-      <Text className="text-xs text-muted-foreground">Workspace catalog</Text>
+      <Inline className="text-sm font-semibold">Brand</Inline>
+      <Inline className="text-xs text-muted-foreground">Workspace catalog</Inline>
     </Stack>
   </Box>
 </Block>
 ```
+
+## Layout primitive tag policy
+
+| Primitive | Default tag | Allowed `tag` values | Notes |
+|-----------|-------------|----------------------|-------|
+| `Block` | `div` | Any layout landmark (`aside`, `section`, `header`, `nav`, …) | Opens a block; flexible because widget files may use any container |
+| `Box` | `div` | `div` only | Inner container; no landmarks |
+| `Stack` | `div` | `div`, `ul`, `ol` | Vertical flex; landmarks belong on `Block` |
+| `Group` | `div` | `div`, `fieldset`, `dl` | Horizontal flex; use `fieldset` for related form controls |
+
+`Block` and `Box` stay flexible on purpose — a sidebar widget in its own file
+may need any container tag. `Stack` and `Group` are stricter so landmarks are
+not duplicated through the wrong primitive.
+
+## Inline vs Text
+
+- `<Text>` renders `<p>` (block). Use for paragraphs and field labels.
+- `<Inline>` renders `<span>` (inline). Use inside `Stack` / `Group` when the
+  wrapper is already a block.
+- `<Text tag="span">` no longer exists — use `<Inline>` instead.
 
 ## Variants and `cn`
 
 - Variant and size classes live in colocated `*.variants.json` files.
 - Both Templ and React consume the same recipe source.
 - `cn` is `clsx + tailwind-merge`, and caller `className` still wins.
+
+### Skipping variants
+
+Pass `variant="unstyled"` to skip recipe variant classes entirely (the recipe
+`base` string still applies). Use it when you want to supply all visual classes
+through `className` alone:
+
+```tsx
+<Button variant="unstyled" className="rounded-full p-2">
+  Custom
+</Button>
+```
 
 ## `asChild`
 
@@ -39,6 +71,8 @@ Clickable bricks support `asChild` through a shared `Slot`:
   <a href="/docs">Learn more</a>
 </Button>
 ```
+
+`SheetTrigger` and `SheetClose` also support `asChild` for anchor triggers.
 
 ## Headings
 
@@ -72,6 +106,13 @@ Named exports (`CardHeader`, `CardTitle`, `CardContent`, etc.) remain available.
 `Sheet` with `behavior="ui8kit"` emits `data-ui8kit-*` hook attributes.
 Open/close runtime is owned by `@ui8kit/aria` on **both** Templ and React —
 no `useState` / `onOpenChange` on Sheet parts.
+
+### Sheet open contract
+
+`open` on `Sheet`, `SheetTrigger`, and `SheetOverlay` sets **initial** SSR
+state only (`hidden`, `data-state`, `aria-expanded`). When `behavior="ui8kit"`,
+React freezes those attributes on the first commit; `@ui8kit/aria` owns all
+runtime toggling. Do not bind `open` to changing React state.
 
 `Dialog` (center modal) still accepts `open` / `onOpenChange` for native
 `<dialog>` control. See [`ui8kit-aria-boundary.md`](./ui8kit-aria-boundary.md).

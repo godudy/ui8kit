@@ -14,17 +14,8 @@ api:
         default: div
         enum:
             - div
-            - section
-            - article
-            - aside
-            - header
-            - footer
-            - main
-            - nav
-            - figure
-            - search
-            - hgroup
             - fieldset
+            - dl
         role: group-tag
         type: string
 data: group.data.json

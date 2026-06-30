@@ -3,13 +3,15 @@
   "private": true,
   "packageManager": "bun@1.3.3",
   "scripts": {
-    "generate": "go run ./.validate/cmd/variantgen && go run ./.validate/cmd/blockgen && go run ./.validate/cmd/tagsgen && go tool templ generate ./...",
+    "generate": "go run ./.validate/cmd/variantcheck && go run ./.validate/cmd/variantgen && go run ./.validate/cmd/blockgen && go run ./.validate/cmd/tagsgen && go tool templ generate ./...",
     "lint:ui8px": "ui8px lint ui components utils examples examples/web/static/css/input.css examples/vite/dist/static/css/input.css",
     "lint:ui8px:vite": "cd examples/vite && bun run build && cd ../.. && ui8px lint examples/vite/dist/static/css/app.css",
     "test:home-snapshot": "bun test examples/vite/tests/home-page.snapshot.test.tsx",
     "test:sheet-contract": "bun test examples/vite/tests/sheet-ui8kit-contract.test.tsx",
+    "test:compose": "bun test examples/vite/tests/compose-invariants.test.ts",
+    "test:layout-primitives": "bun test examples/vite/tests/layout-primitives.test.tsx",
     "validate:aria": "ui8px validate aria examples --manifest examples/web/static/js/manifest.json",
-    "verify": "bash .validate/scripts/validate-spec.sh --with-tests && bun run typecheck:react && bun run lint:ui8px && bun run validate:aria && bun run test:home-snapshot && bun run test:sheet-contract && go test ./...",
+    "verify": "bash .validate/scripts/validate-spec.sh --with-tests && bun run typecheck:react && bun run lint:ui8px && bun run validate:aria && bun run test:home-snapshot && bun run test:sheet-contract && bun run test:compose && bun run test:layout-primitives && go test ./...",
     "typecheck:react": "tsc -p tsconfig.react.json"
   },
   "devDependencies": {

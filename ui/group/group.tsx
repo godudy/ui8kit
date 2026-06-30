@@ -4,6 +4,10 @@ import { composeRecipe } from "../../utils";
 import { resolveTag, TagGroup } from "../../utils/tags";
 import { Slot } from "../slot/slot";
 
+/**
+ * Horizontal flex grouping. Landmarks (`aside`, `section`, `header`, `nav`) belong
+ * on `Block`. `Group` allows only `div`, `fieldset`, or `dl` as `tag`.
+ */
 export type GroupProps = Omit<HTMLAttributes<HTMLElement>, "className"> & {
   tag?: string;
   className?: string;

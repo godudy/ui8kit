@@ -86,9 +86,9 @@ func IsAllowedTag(tag string, group TagGroup) bool {
 	case TagGroupContainer:
 		return oneOf(t, "div", "main", "section")
 	case TagGroupStack:
-		return IsAllowedTag(t, TagGroupLayout) || oneOf(t, "ul", "ol")
+		return oneOf(t, "div", "ul", "ol")
 	case TagGroupGroup:
-		return IsAllowedTag(t, TagGroupLayout) || oneOf(t, "fieldset")
+		return oneOf(t, "div", "fieldset", "dl")
 	case TagGroupText:
 		return IsAllowedTag(t, TagGroupBlockText) || IsAllowedTag(t, TagGroupInline)
 	default:

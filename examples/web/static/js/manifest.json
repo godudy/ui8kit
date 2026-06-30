@@ -6,6 +6,22 @@
   "ariaVersion": "0.1.0",
   "patterns": [
     "alert",
-    "dialog"
-  ]
+    "dialog",
+    "sheet"
+  ],
+  "hooks": {
+    "dialog": [
+      "data-ui8kit-dialog",
+      "data-ui8kit-dialog-open",
+      "data-ui8kit-dialog-close",
+      "data-ui8kit-dialog-target"
+    ],
+    "sheet": [
+      "data-ui8kit",
+      "data-ui8kit-dialog",
+      "data-ui8kit-dialog-open",
+      "data-ui8kit-dialog-close",
+      "data-ui8kit-dialog-target"
+    ]
+  }
 }
