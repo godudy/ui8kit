@@ -89,7 +89,7 @@ import "github.com/fastygo/templ/ui"
 
 templ Example() {
 	@ui.Dialog(ui.DialogProps{AriaLabel: "Dialog"}) {
-		@ui.Text(ui.TextProps{}, "Dialog body.")
+		@ui.Text(ui.TextProps{}) { { "Dialog body." } }
 	}
 }
 ```
@@ -101,7 +101,7 @@ import "github.com/fastygo/templ/ui"
 
 templ Example() {
 	@ui.Dialog(ui.DialogProps{Variant: "sheet", Size: "full", AriaLabel: "Panel"}) {
-		@ui.Text(ui.TextProps{}, "Panel body.")
+		@ui.Text(ui.TextProps{}) { { "Panel body." } }
 	}
 }
 ```

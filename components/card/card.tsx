@@ -1,7 +1,7 @@
 import { forwardRef, type ElementType, type HTMLAttributes, type ReactNode } from "react";
 import cardRecipeJson from "./card.variants.json";
 import { cn, composeRecipe, defineRecipe } from "../../utils";
-import { titleTag } from "../../utils/attrs";
+import { titleTag, type HeadingLevel } from "../../utils/attrs";
 import { Slot } from "../../ui/slot/slot";
 
 const { recipe: cardRecipe, keys: cardKeys } = defineRecipe(cardRecipeJson);
@@ -31,7 +31,7 @@ export type CardFooterProps = Omit<HTMLAttributes<HTMLDivElement>, "className"> 
 };
 
 export type CardTitleProps = Omit<HTMLAttributes<HTMLHeadingElement>, "className"> & {
-  as?: 1 | 2 | 3 | 4 | 5 | 6;
+  as?: HeadingLevel;
   className?: string;
   children?: ReactNode;
 };

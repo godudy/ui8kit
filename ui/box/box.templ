@@ -12,7 +12,7 @@ import "github.com/fastygo/templ/utils"
 // BoxProps configures tag override and layout classes.
 type BoxProps struct {
 	Class string
-	// Tag — optional element name; defaults to div
+	// Tag — div only. Use Block for landmarks (aside, section, header, nav).
 	Tag   string
 	Attrs templ.Attributes
 }

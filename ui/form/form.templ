@@ -67,11 +67,11 @@ templ FormItem(p FormItemProps) {
 
 
 // FormDescription renders muted helper copy below a control.
-templ FormDescription(p FormDescriptionProps, value string) {
-	<p class={ uiutils.Compose(FormDescriptionVariants, map[string]string{}, p.Class) }>{ value }</p>
+templ FormDescription(p FormDescriptionProps) {
+	<p class={ uiutils.Compose(FormDescriptionVariants, map[string]string{}, p.Class) }>{ children... }</p>
 }
 
 // FormMessage renders destructive validation feedback.
-templ FormMessage(p FormMessageProps, value string) {
-	<p class={ uiutils.Compose(FormMessageVariants, map[string]string{}, p.Class) } role="alert">{ value }</p>
+templ FormMessage(p FormMessageProps) {
+	<p class={ uiutils.Compose(FormMessageVariants, map[string]string{}, p.Class) } role="alert">{ children... }</p>
 }

@@ -50,7 +50,7 @@ templ ComponentExamples() {
 							Type:        "email",
 							Placeholder: "name@example.com",
 						})
-						@ui.FormDescription(ui.FormDescriptionProps{}, "We never share your email.")
+						@ui.FormDescription(ui.FormDescriptionProps{}) { { "We never share your email." } }
 					}
 					@ui.Group(ui.GroupProps{Class: "mt-4 flex flex-wrap gap-2"}) {
 						@ui.Button(ui.ButtonProps{Variant: "default"}) { Save }
@@ -62,13 +62,13 @@ templ ComponentExamples() {
 				@GalleryPanel("Feedback", "Alerts and progress") {
 					@ui.Stack(ui.StackProps{Class: "gap-2"}) {
 						@cmp.Alert(cmp.AlertProps{Variant: "success", Role: "status", AriaLive: "polite"}) {
-							@ui.Text(ui.TextProps{Class: "text-sm"}, "Success — deployment ready.")
+							@ui.Text(ui.TextProps{Class: "text-sm"}) { { "Success — deployment ready." } }
 						}
 						@cmp.Alert(cmp.AlertProps{Variant: "warning", Role: "status", AriaLive: "polite"}) {
-							@ui.Text(ui.TextProps{Class: "text-sm"}, "Warning — review token mapping.")
+							@ui.Text(ui.TextProps{Class: "text-sm"}) { { "Warning — review token mapping." } }
 						}
 						@cmp.Alert(cmp.AlertProps{Variant: "destructive", Role: "alert", AriaLive: "assertive"}) {
-							@ui.Text(ui.TextProps{Class: "text-sm"}, "Error — validation failed.")
+							@ui.Text(ui.TextProps{Class: "text-sm"}) { { "Error — validation failed." } }
 						}
 						@ui.Progress(ui.ProgressProps{Value: "68", Max: "100", Variant: "default"})
 					}
@@ -117,12 +117,12 @@ templ ComponentExamples() {
 							@cmp.SheetOverlay(cmp.SheetOverlayProps{For: demoSheetID, Behavior: "ui8kit"})
 							@cmp.SheetContent(cmp.SheetContentProps{}) {
 								@cmp.SheetHeader(cmp.SheetHeaderProps{}) {
-									@cmp.SheetTitle(cmp.SheetTitleProps{ID: demoSheetTitleID}, "Sheet panel")
+									@cmp.SheetTitle(cmp.SheetTitleProps{ID: demoSheetTitleID}) { { "Sheet panel" } }
 									@cmp.SheetClose(cmp.SheetCloseProps{For: demoSheetID, Behavior: "ui8kit", AriaLabel: "Close demo sheet"}) {
 										Close
 									}
 								}
-								@cmp.SheetDescription(cmp.SheetDescriptionProps{}, "Sheet with ui8kit open/close hooks.")
+								@cmp.SheetDescription(cmp.SheetDescriptionProps{}) { { "Sheet with ui8kit open/close hooks." } }
 							}
 						}
 						@cmp.Breadcrumb(cmp.BreadcrumbProps{
@@ -143,8 +143,8 @@ templ GalleryPanel(title, description string) {
 	@ui.Box(ui.BoxProps{Class: "border-b border-border p-6 last:border-b-0 lg:border-b-0 lg:border-r lg:last:border-r-0"}) {
 		@ui.Stack(ui.StackProps{Class: "gap-4"}) {
 			@ui.Stack(ui.StackProps{Class: "gap-2"}) {
-				@ui.Text(ui.TextProps{Class: "text-sm font-semibold"}, title)
-				@ui.Text(ui.TextProps{Class: "text-xs text-muted-foreground"}, description)
+				@ui.Text(ui.TextProps{Class: "text-sm font-semibold"}) { { title } }
+				@ui.Text(ui.TextProps{Class: "text-xs text-muted-foreground"}) { { description } }
 			}
 			{ children... }
 		}

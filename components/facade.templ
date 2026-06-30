@@ -26,12 +26,16 @@ templ CardHeader(p CardHeaderProps) {
 	}
 }
 
-templ CardTitle(p CardTitleProps, value string) {
-	@card.CardTitle(p, value)
+templ CardTitle(p CardTitleProps) {
+	@card.CardTitle(p) {
+		{ children... }
+	}
 }
 
-templ CardDescription(p CardDescriptionProps, value string) {
-	@card.CardDescription(p, value)
+templ CardDescription(p CardDescriptionProps) {
+	@card.CardDescription(p) {
+		{ children... }
+	}
 }
 
 templ CardContent(p CardContentProps) {
@@ -84,12 +88,16 @@ templ SheetHeader(p SheetHeaderProps) {
 	}
 }
 
-templ SheetTitle(p SheetTitleProps, value string) {
-	@sheet.SheetTitle(p, value)
+templ SheetTitle(p SheetTitleProps) {
+	@sheet.SheetTitle(p) {
+		{ children... }
+	}
 }
 
-templ SheetDescription(p SheetDescriptionProps, value string) {
-	@sheet.SheetDescription(p, value)
+templ SheetDescription(p SheetDescriptionProps) {
+	@sheet.SheetDescription(p) {
+		{ children... }
+	}
 }
 
 templ SheetClose(p SheetCloseProps) {

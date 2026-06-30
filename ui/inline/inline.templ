@@ -19,6 +19,6 @@ func InlineClasses(p InlineProps) string {
 	return uiutils.Compose(InlineVariants, map[string]string{}, p.Class)
 }
 
-templ Inline(p InlineProps, value string) {
-	<span class={ InlineClasses(p) } { p.Attrs... }>{ value }</span>
+templ Inline(p InlineProps) {
+	<span class={ InlineClasses(p) } { p.Attrs... }>{ children... }</span>
 }

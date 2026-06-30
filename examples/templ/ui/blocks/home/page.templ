@@ -47,7 +47,7 @@ templ CatalogMobileSheet(props PageProps) {
 		})
 		@cmp.SheetContent(cmp.SheetContentProps{Class: "p-4"}) {
 			@cmp.SheetHeader(cmp.SheetHeaderProps{}) {
-				@cmp.SheetTitle(cmp.SheetTitleProps{ID: homeSheetTitleID, Class: "text-sm font-medium"}, props.Brand)
+				@cmp.SheetTitle(cmp.SheetTitleProps{ID: homeSheetTitleID, Class: "text-sm font-medium"}) { { props.Brand } }
 				@cmp.SheetClose(cmp.SheetCloseProps{
 					For:       homeSheetPanelID,
 					Behavior:  "ui8kit",
@@ -98,8 +98,8 @@ templ CatalogSidebar(props PageProps) {
 		@ui.Box(ui.BoxProps{Class: "flex h-16 items-center gap-4 border-b border-border px-4"}) {
 			@cmp.IconBadge(cmp.IconBadgeProps{Size: "sm", Variant: "accent"}) { BY }
 			@ui.Stack(ui.StackProps{Class: "gap-0"}) {
-				@ui.Inline(ui.InlineProps{Class: "text-sm font-semibold tracking-tight"}, props.Brand)
-				@ui.Inline(ui.InlineProps{Class: "text-xs text-muted-foreground"}, "Workspace catalog")
+				@ui.Inline(ui.InlineProps{Class: "text-sm font-semibold tracking-tight"}) { { props.Brand } }
+				@ui.Inline(ui.InlineProps{Class: "text-xs text-muted-foreground"}) { { "Workspace catalog" } }
 			}
 		}
 		@ui.Box(ui.BoxProps{Class: "flex-1 py-2"}) {
@@ -160,8 +160,8 @@ templ HeroChat(props HeroProps) {
 					@ui.Stack(ui.StackProps{Class: "gap-6"}) {
 						@ui.Stack(ui.StackProps{Class: "gap-2"}) {
 							@ui.Badge(ui.BadgeProps{Variant: "outline"}) { AI workspace }
-							@ui.Title(ui.TitleProps{As: 1, Class: "text-3xl font-bold tracking-tight md:text-4xl"}, props.Title)
-							@ui.Text(ui.TextProps{Class: "text-sm leading-relaxed text-muted-foreground md:text-base"}, props.Subtitle)
+							@ui.Title(ui.TitleProps{As: 1, Class: "text-3xl font-bold tracking-tight md:text-4xl"}) { { props.Title } }
+							@ui.Text(ui.TextProps{Class: "text-sm leading-relaxed text-muted-foreground md:text-base"}) { { props.Subtitle } }
 						}
 						@ui.Box(ui.BoxProps{Class: "rounded-lg border border-border bg-background p-4 shadow-sm"}) {
 							@ui.Textarea(ui.TextareaProps{
@@ -184,7 +184,7 @@ templ HeroChat(props HeroProps) {
 							}
 						}
 						@ui.Stack(ui.StackProps{Class: "gap-2"}) {
-							@ui.Text(ui.TextProps{Class: "text-xs font-medium text-muted-foreground"}, props.SuggestionsLabel)
+							@ui.Text(ui.TextProps{Class: "text-xs font-medium text-muted-foreground"}) { { props.SuggestionsLabel } }
 							@ui.Group(ui.GroupProps{Class: "flex flex-wrap gap-2"}) {
 								for _, suggestion := range props.Suggestions {
 									@ui.Badge(ui.BadgeProps{Variant: "secondary"}) {
@@ -199,11 +199,11 @@ templ HeroChat(props HeroProps) {
 			@ui.GridCol(ui.GridColProps{}) {
 				@ui.Box(ui.BoxProps{Class: "bg-muted/30 p-6"}) {
 					@ui.Stack(ui.StackProps{Class: "gap-4"}) {
-						@ui.Text(ui.TextProps{Class: "text-xs font-semibold uppercase tracking-wide text-muted-foreground"}, "Workflow")
+						@ui.Text(ui.TextProps{Class: "text-xs font-semibold uppercase tracking-wide text-muted-foreground"}) { { "Workflow" } }
 						for index, step := range props.Workflow {
 							@ui.Group(ui.GroupProps{Class: "items-center gap-4 rounded-md border border-border bg-card px-4 py-4 shadow-sm"}) {
 								@cmp.IconBadge(cmp.IconBadgeProps{Size: "sm", Variant: workflowStepVariant(index)}) { workflowStepLabel(index) }
-								@ui.Text(ui.TextProps{Class: "text-sm font-medium"}, step.Label)
+								@ui.Text(ui.TextProps{Class: "text-sm font-medium"}) { { step.Label } }
 							}
 						}
 					}
@@ -222,8 +222,8 @@ templ ToolCards(items []ToolCard) {
 						@ui.Group(ui.GroupProps{Class: "items-start gap-4"}) {
 							@cmp.IconBadge(cmp.IconBadgeProps{Size: "default", Variant: BlockVariant("toolTone", item.Tone)}) { toolIconLetter(item.Icon) }
 							@ui.Stack(ui.StackProps{Class: "gap-2"}) {
-								@ui.Text(ui.TextProps{Class: "text-sm font-semibold"}, item.Title)
-								@ui.Text(ui.TextProps{Class: "text-xs leading-relaxed text-muted-foreground"}, item.Description)
+								@ui.Text(ui.TextProps{Class: "text-sm font-semibold"}) { { item.Title } }
+								@ui.Text(ui.TextProps{Class: "text-xs leading-relaxed text-muted-foreground"}) { { item.Description } }
 							}
 						}
 					}
@@ -237,8 +237,8 @@ templ ShowcaseGrid(props ShowcaseProps) {
 	@ui.Stack(ui.StackProps{Class: "gap-6"}) {
 		@ui.Group(ui.GroupProps{Class: "items-end justify-between gap-4"}) {
 			@ui.Stack(ui.StackProps{Class: "gap-2"}) {
-				@ui.Title(ui.TitleProps{As: 2, Class: "text-xl font-semibold tracking-tight"}, props.Title)
-				@ui.Text(ui.TextProps{Class: "text-sm text-muted-foreground"}, props.Description)
+				@ui.Title(ui.TitleProps{As: 2, Class: "text-xl font-semibold tracking-tight"}) { { props.Title } }
+				@ui.Text(ui.TextProps{Class: "text-sm text-muted-foreground"}) { { props.Description } }
 			}
 			<a href="#templates" class={ ui.ButtonClasses(ui.ButtonProps{Variant: "outline", Size: "sm"}) }>
 				{ props.ActionLabel }
@@ -263,8 +263,8 @@ templ ShowcaseCardView(item ShowcaseItem) {
 				}
 				@ui.Group(ui.GroupProps{Class: "items-start justify-between gap-4"}) {
 					@ui.Stack(ui.StackProps{Class: "gap-2"}) {
-						@ui.Title(ui.TitleProps{As: 3, Class: "text-base font-semibold"}, item.Name)
-						@ui.Text(ui.TextProps{Class: "text-sm leading-relaxed text-muted-foreground"}, item.Description)
+						@ui.Title(ui.TitleProps{As: 3, Class: "text-base font-semibold"}) { { item.Name } }
+						@ui.Text(ui.TextProps{Class: "text-sm leading-relaxed text-muted-foreground"}) { { item.Description } }
 					}
 					@ui.Badge(ui.BadgeProps{Variant: "outline"}) {
 						{ item.Category }
@@ -274,7 +274,7 @@ templ ShowcaseCardView(item ShowcaseItem) {
 					for _, capability := range item.Capabilities {
 						@ui.Group(ui.GroupProps{Class: "items-center gap-2"}) {
 							@cmp.IconBadge(cmp.IconBadgeProps{Size: "xs", Variant: "secondary"}) { ✓ }
-							@ui.Text(ui.TextProps{Class: "text-xs text-muted-foreground"}, capability)
+							@ui.Text(ui.TextProps{Class: "text-xs text-muted-foreground"}) { { capability } }
 						}
 					}
 				}
@@ -295,8 +295,8 @@ templ PrototypeNotice(props NoticeProps) {
 	@cmp.Alert(cmp.AlertProps{Variant: "default", Role: "status", AriaLive: "polite"}) {
 		@ui.Group(ui.GroupProps{Class: "items-center justify-between gap-4 flex-wrap"}) {
 			@ui.Stack(ui.StackProps{Class: "gap-2"}) {
-				@ui.Text(ui.TextProps{Class: "text-sm font-semibold"}, props.Title)
-				@ui.Text(ui.TextProps{Class: "text-sm text-muted-foreground"}, props.Description)
+				@ui.Text(ui.TextProps{Class: "text-sm font-semibold"}) { { props.Title } }
+				@ui.Text(ui.TextProps{Class: "text-sm text-muted-foreground"}) { { props.Description } }
 			}
 			<a href="#prototype-mode" class={ ui.ButtonClasses(ui.ButtonProps{Variant: "outline", Size: "sm"}) }>
 				{ props.ActionLabel }

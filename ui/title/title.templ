@@ -13,7 +13,7 @@ import "github.com/fastygo/templ/utils"
 type TitleProps struct {
 	Class string
 	// As — maps to h1–h6; 0 and 2 default to h2
-	As int
+	As    uiutils.HeadingLevel
 	Attrs templ.Attributes
 }
 
@@ -21,12 +21,12 @@ func TitleClasses(p TitleProps) string {
 	return uiutils.Compose(TitleVariants, map[string]string{}, p.Class)
 }
 
-templ Title(p TitleProps, value string) {
+templ Title(p TitleProps) {
 	@uiutils.HeadingTag(uiutils.HeadingTagProps{
 		As:    p.As,
 		Class: TitleClasses(p),
 		Attrs: p.Attrs,
 	}) {
-		{ value }
+		{ children... }
 	}
 }

@@ -119,7 +119,7 @@ import "github.com/fastygo/templ/ui"
 templ Example() {
 	@ui.Disclosure(ui.DisclosureProps{}) {
 		@ui.Summary(ui.SummaryProps{}) { More options }
-		@ui.Text(ui.TextProps{}, "Hidden content.")
+		@ui.Text(ui.TextProps{}) { { "Hidden content." } }
 	}
 }
 ```
@@ -132,7 +132,7 @@ import "github.com/fastygo/templ/ui"
 templ Example() {
 	@ui.Disclosure(ui.DisclosureProps{Open: true}) {
 		@ui.Summary(ui.SummaryProps{}) { Details }
-		@ui.Text(ui.TextProps{}, "Visible content.")
+		@ui.Text(ui.TextProps{}) { { "Visible content." } }
 	}
 }
 ```

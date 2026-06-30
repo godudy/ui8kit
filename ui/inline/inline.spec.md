@@ -62,6 +62,6 @@ Pass copy as the second value argument.
 import "github.com/fastygo/templ/ui"
 
 templ Example() {
-	@ui.Inline(ui.InlineProps{Class: "text-muted-foreground"}, "Workspace catalog")
+	@ui.Inline(ui.InlineProps{Class: "text-muted-foreground"}) { { "Workspace catalog" } }
 }
 ```

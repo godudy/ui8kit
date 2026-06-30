@@ -34,12 +34,10 @@ parts:
   - templ: FormDescription
     props: [Class]
     slot: description
-    value: string
     recipe: form-description.variants.json
   - templ: FormMessage
     props: [Class]
     slot: message
-    value: string
     recipe: form-message.variants.json
 
 api:
@@ -111,7 +109,7 @@ templ Example() {
 		@ui.FormItem(ui.FormItemProps{}) {
 			@ui.Label(ui.LabelProps{HTMLFor: "email"}) { Email }
 			@ui.Input(ui.InputProps{ID: "email", Name: "email", Type: "email"})
-			@ui.FormDescription(ui.FormDescriptionProps{}, "We never share your email.")
+			@ui.FormDescription(ui.FormDescriptionProps{}) { { "We never share your email." } }
 		}
 	}
 }
@@ -127,7 +125,7 @@ templ Example() {
 		@ui.FormItem(ui.FormItemProps{}) {
 			@ui.Label(ui.LabelProps{HTMLFor: "name"}) { Name }
 			@ui.Input(ui.InputProps{ID: "name", Name: "name", Required: true})
-			@ui.FormMessage(ui.FormMessageProps{}, "Name is required.")
+			@ui.FormMessage(ui.FormMessageProps{}) { { "Name is required." } }
 		}
 	}
 }

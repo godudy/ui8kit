@@ -83,3 +83,17 @@ The Templ layout grammar is binding on the React side as well. See
   `@ui8kit/aria` manifest.
 - Specs may declare `targets.react.test`; when present, `validate-spec` requires
   the referenced `.test.tsx` or `.test.ts` file to exist.
+
+## Templ children API
+
+Bricks in `ui/` and `components/` must accept content via `{ children... }`,
+never through a positional `value string` parameter. This keeps split-screen
+parity with the React-TSX runtime.
+
+```templ
+@ui.Text(ui.TextProps{Class: "text-sm"}) {
+  { props.Label }
+}
+```
+
+Do not use `@ui.Text(p, "literal")` or `@cmp.CardTitle(p, "Title")`.

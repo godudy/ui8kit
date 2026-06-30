@@ -70,7 +70,7 @@ Use `Inline` for inline `<span>` copy and `Title` (or `H1`–`H6`) for headings.
 import "github.com/fastygo/templ/ui"
 
 templ Example() {
-	@ui.Text(ui.TextProps{}, "Body paragraph text.")
+	@ui.Text(ui.TextProps{}) { { "Body paragraph text." } }
 }
 ```
 
@@ -80,7 +80,7 @@ templ Example() {
 import "github.com/fastygo/templ/ui"
 
 templ Example() {
-	@ui.Text(ui.TextProps{Class: "text-muted-foreground"}, "Helper line.")
+	@ui.Text(ui.TextProps{Class: "text-muted-foreground"}) { { "Helper line." } }
 }
 ```
 
@@ -90,6 +90,6 @@ templ Example() {
 import "github.com/fastygo/templ/ui"
 
 templ Example() {
-	@ui.Text(ui.TextProps{Class: "text-sm font-mono"}, "npm install")
+	@ui.Text(ui.TextProps{Class: "text-sm font-mono"}) { { "npm install" } }
 }
 ```

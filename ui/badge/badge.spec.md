@@ -1,5 +1,9 @@
 ---
 api:
+    Attrs:
+        cva: false
+        role: html-attrs
+        type: templ.Attributes
     Class:
         cva: false
         role: style-extension

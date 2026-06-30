@@ -1,5 +1,9 @@
 ---
 api:
+    Attrs:
+        cva: false
+        role: html-attrs
+        type: templ.Attributes
     Class:
         cva: false
         role: style-extension
@@ -32,28 +36,34 @@ parts:
       templ: Table
     - props:
         - Class
+        - Attrs
       slot: caption
       templ: TableCaption
     - props:
         - Class
+        - Attrs
       slot: head
       templ: TableHead
     - props:
         - Class
+        - Attrs
       slot: body
       templ: TableBody
     - props:
         - Class
+        - Attrs
       slot: foot
       templ: TableFoot
     - props:
         - Class
+        - Attrs
       slot: row
       templ: TableRow
     - props:
         - Class
         - Scope
         - Abbr
+        - Attrs
       slot: head-cell
       templ: TableHeadCell
     - props:
@@ -61,16 +71,19 @@ parts:
         - ColSpan
         - RowSpan
         - Headers
+        - Attrs
       slot: cell
       templ: TableCell
     - props:
         - Class
         - Span
+        - Attrs
       slot: colgroup
       templ: TableColGroup
     - props:
         - Class
         - Span
+        - Attrs
       slot: col
       templ: TableCol
 semantics:

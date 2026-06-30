@@ -12,7 +12,7 @@ import "github.com/fastygo/templ/utils"
 // StackProps configures vertical flex layout.
 type StackProps struct {
 	Class string
-	// Tag — div, ul, ol, nav, section, etc.
+	// Tag — div, ul, or ol. Use Block for landmarks (aside, section, header, nav).
 	Tag   string
 	Attrs templ.Attributes
 }

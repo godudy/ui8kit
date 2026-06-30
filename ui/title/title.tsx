@@ -6,15 +6,15 @@ import {
 } from "react";
 import titleRecipeJson from "./title.variants.json";
 import { composeRecipe, defineRecipe } from "../../utils";
-import { titleTag } from "../../utils/attrs";
+import { titleTag, type HeadingLevel } from "../../utils/attrs";
 import { Slot } from "../slot/slot";
 
 const { recipe: titleRecipe } = defineRecipe(titleRecipeJson);
 
-export type TitleAs = 1 | 2 | 3 | 4 | 5 | 6;
+export type TitleAs = HeadingLevel;
 
 export type TitleProps = Omit<HTMLAttributes<HTMLHeadingElement>, "className"> & {
-  as?: TitleAs;
+  as?: HeadingLevel;
   className?: string;
   children?: ReactNode;
   asChild?: boolean;

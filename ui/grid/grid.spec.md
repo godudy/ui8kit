@@ -1,5 +1,9 @@
 ---
 api:
+    Attrs:
+        cva: false
+        role: html-attrs
+        type: templ.Attributes
     Class:
         cva: false
         role: style-extension
@@ -35,6 +39,7 @@ parts:
     - props:
         - Class
         - Cols
+        - Attrs
       templ: Grid
     - props:
         - Class
@@ -42,6 +47,7 @@ parts:
         - Start
         - End
         - Order
+        - Attrs
       slot: column
       templ: GridCol
 semantics:
@@ -97,10 +103,10 @@ import "github.com/fastygo/templ/ui"
 templ Example() {
 	@ui.Grid(ui.GridProps{Cols: "2", Class: "gap-4"}) {
 		@ui.GridCol(ui.GridColProps{}) {
-			@ui.Text(ui.TextProps{}, "Column A")
+			@ui.Text(ui.TextProps{}) { { "Column A" } }
 		}
 		@ui.GridCol(ui.GridColProps{}) {
-			@ui.Text(ui.TextProps{}, "Column B")
+			@ui.Text(ui.TextProps{}) { { "Column B" } }
 		}
 	}
 }

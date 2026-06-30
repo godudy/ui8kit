@@ -18,10 +18,8 @@ parts:
     props: [Class, Attrs]
   - templ: SheetTitle
     props: [ID, Class, Attrs]
-    value: string
   - templ: SheetDescription
     props: [ID, Class, Attrs]
-    value: string
   - templ: SheetClose
     props: [For, Class, Variant, Size, Behavior, AriaLabel, Attrs]
 api:

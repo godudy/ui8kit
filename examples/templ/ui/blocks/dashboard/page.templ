@@ -36,8 +36,8 @@ templ GallerySection() {
 	@ui.Stack(ui.StackProps{Class: "gap-4"}) {
 		@ui.Group(ui.GroupProps{Class: "items-end justify-between gap-4"}) {
 			@ui.Stack(ui.StackProps{Class: "gap-2"}) {
-				@ui.Title(ui.TitleProps{As: 2, Class: "text-lg font-semibold tracking-tight"}, "Live component gallery")
-				@ui.Text(ui.TextProps{Class: "text-sm text-muted-foreground"}, "Interactive samples from ui/* and components/* — buttons, forms, alerts, sheets.")
+				@ui.Title(ui.TitleProps{As: 2, Class: "text-lg font-semibold tracking-tight"}) { { "Live component gallery" } }
+				@ui.Text(ui.TextProps{Class: "text-sm text-muted-foreground"}) { { "Interactive samples from ui/* and components/* — buttons, forms, alerts, sheets." } }
 			}
 			@ui.Badge(ui.BadgeProps{Variant: "outline"}) {
 				Scroll to explore
@@ -65,7 +65,7 @@ templ DashboardMobileSheet(props PageProps) {
 		})
 		@cmp.SheetContent(cmp.SheetContentProps{Class: "p-4"}) {
 			@cmp.SheetHeader(cmp.SheetHeaderProps{}) {
-				@cmp.SheetTitle(cmp.SheetTitleProps{ID: dashboardSheetTitleID, Class: "text-sm font-medium"}, props.Brand)
+				@cmp.SheetTitle(cmp.SheetTitleProps{ID: dashboardSheetTitleID, Class: "text-sm font-medium"}) { { props.Brand } }
 				@cmp.SheetClose(cmp.SheetCloseProps{
 					For:       dashboardSheetPanelID,
 					Behavior:  "ui8kit",
@@ -116,8 +116,8 @@ templ DashboardSidebar(props PageProps) {
 		@ui.Box(ui.BoxProps{Class: "flex h-16 items-center gap-4 border-b border-border px-4"}) {
 			@cmp.IconBadge(cmp.IconBadgeProps{Size: "sm", Variant: "accent"}) { U8 }
 			@ui.Stack(ui.StackProps{Class: "gap-0"}) {
-				@ui.Inline(ui.InlineProps{Class: "text-sm font-semibold tracking-tight"}, props.Brand)
-				@ui.Inline(ui.InlineProps{Class: "text-xs text-muted-foreground"}, "Templ registry")
+				@ui.Inline(ui.InlineProps{Class: "text-sm font-semibold tracking-tight"}) { { props.Brand } }
+				@ui.Inline(ui.InlineProps{Class: "text-xs text-muted-foreground"}) { { "Templ registry" } }
 			}
 		}
 		@ui.Box(ui.BoxProps{Class: "flex-1 py-2"}) {
@@ -191,16 +191,16 @@ templ DashboardHero(props HeroProps) {
 			@ui.Grid(ui.GridProps{Class: "gap-8 md:grid-cols-[1fr_auto]"}) {
 				@ui.GridCol(ui.GridColProps{}) {
 					@ui.Stack(ui.StackProps{Class: "max-w-2xl gap-4"}) {
-						@ui.Title(ui.TitleProps{As: 1, Class: "text-3xl font-bold tracking-tight md:text-4xl"}, props.Title)
-						@ui.Text(ui.TextProps{Class: "text-sm leading-relaxed text-muted-foreground md:text-base"}, props.Description)
+						@ui.Title(ui.TitleProps{As: 1, Class: "text-3xl font-bold tracking-tight md:text-4xl"}) { { props.Title } }
+						@ui.Text(ui.TextProps{Class: "text-sm leading-relaxed text-muted-foreground md:text-base"}) { { props.Description } }
 					}
 				}
 				@ui.GridCol(ui.GridColProps{}) {
 					@ui.Box(ui.BoxProps{Class: "rounded-md border border-border bg-background p-4 md:w-64"}) {
 						@ui.Stack(ui.StackProps{Class: "gap-2"}) {
 							@ui.Group(ui.GroupProps{Class: "items-center justify-between gap-2"}) {
-								@ui.Text(ui.TextProps{Class: "text-xs font-medium text-muted-foreground"}, props.ProgressLabel)
-								@ui.Text(ui.TextProps{Class: "text-xs font-semibold"}, props.Progress+"%")
+								@ui.Text(ui.TextProps{Class: "text-xs font-medium text-muted-foreground"}) { { props.ProgressLabel } }
+								@ui.Text(ui.TextProps{Class: "text-xs font-semibold"}) { { props.Progress+"%" } }
 							}
 							@ui.Progress(ui.ProgressProps{Value: props.Progress, Max: "100", Variant: "default"})
 						}
@@ -225,9 +225,9 @@ templ StatusCards(items []StatusCard) {
 							}
 						}
 						@ui.Stack(ui.StackProps{Class: "gap-2"}) {
-							@ui.Text(ui.TextProps{Class: "text-2xl font-bold tracking-tight"}, item.Value)
-							@ui.Text(ui.TextProps{Class: "text-sm font-semibold"}, item.Title)
-							@ui.Text(ui.TextProps{Class: "text-xs leading-relaxed text-muted-foreground"}, item.Description)
+							@ui.Text(ui.TextProps{Class: "text-2xl font-bold tracking-tight"}) { { item.Value } }
+							@ui.Text(ui.TextProps{Class: "text-sm font-semibold"}) { { item.Title } }
+							@ui.Text(ui.TextProps{Class: "text-xs leading-relaxed text-muted-foreground"}) { { item.Description } }
 						}
 					}
 				}
@@ -240,16 +240,16 @@ templ StatusCards(items []StatusCard) {
 templ LayerTable(items []LayerItem) {
 	<section class={ cmp.CardClasses(cmp.CardProps{Variant: "default"}) }>
 		@cmp.CardHeader(cmp.CardHeaderProps{}) {
-			@cmp.CardTitle(cmp.CardTitleProps{As: 2}, "Registry inventory")
-			@cmp.CardDescription(cmp.CardDescriptionProps{}, "Public bricks included in this preview and how they layer together.")
+			@cmp.CardTitle(cmp.CardTitleProps{As: 2}) { { "Registry inventory" } }
+			@cmp.CardDescription(cmp.CardDescriptionProps{}) { { "Public bricks included in this preview and how they layer together." } }
 		}
 		@cmp.CardContent(cmp.CardContentProps{}) {
 			@ui.Stack(ui.StackProps{Class: "gap-2"}) {
 				for _, item := range items {
 					@ui.Group(ui.GroupProps{Class: "items-center justify-between gap-4 rounded-md border border-border bg-muted/20 px-4 py-4"}) {
 						@ui.Stack(ui.StackProps{Class: "gap-2 min-w-0"}) {
-							@ui.Text(ui.TextProps{Class: "text-sm font-medium font-mono"}, item.Name)
-							@ui.Text(ui.TextProps{Class: "text-xs text-muted-foreground"}, item.Description)
+							@ui.Text(ui.TextProps{Class: "text-sm font-medium font-mono"}) { { item.Name } }
+							@ui.Text(ui.TextProps{Class: "text-xs text-muted-foreground"}) { { item.Description } }
 						}
 						@layerStatusBadge(item.Status)
 					}
@@ -277,8 +277,8 @@ templ layerStatusBadge(status string) {
 templ DashboardNotice(props NoticeProps) {
 	@cmp.Alert(cmp.AlertProps{Variant: "warning", Role: "status", AriaLive: "polite"}) {
 		@ui.Stack(ui.StackProps{Class: "gap-2"}) {
-			@ui.Text(ui.TextProps{Class: "text-sm font-semibold"}, props.Title)
-			@ui.Text(ui.TextProps{Class: "text-sm"}, props.Description)
+			@ui.Text(ui.TextProps{Class: "text-sm font-semibold"}) { { props.Title } }
+			@ui.Text(ui.TextProps{Class: "text-sm"}) { { props.Description } }
 		}
 	}
 }

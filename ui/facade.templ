@@ -130,16 +130,22 @@ templ Break(p BreakProps) {
 	@linebreak.Break(p)
 }
 
-templ Text(p TextProps, value string) {
-	@text.Text(p, value)
+templ Text(p TextProps) {
+	@text.Text(p) {
+		{ children... }
+	}
 }
 
-templ Inline(p InlineProps, value string) {
-	@inline.Inline(p, value)
+templ Inline(p InlineProps) {
+	@inline.Inline(p) {
+		{ children... }
+	}
 }
 
-templ Title(p TitleProps, value string) {
-	@title.Title(p, value)
+templ Title(p TitleProps) {
+	@title.Title(p) {
+		{ children... }
+	}
 }
 
 templ Button(p ButtonProps) {
@@ -210,12 +216,16 @@ templ FormItem(p FormItemProps) {
 	}
 }
 
-templ FormDescription(p FormDescriptionProps, value string) {
-	@form.FormDescription(p, value)
+templ FormDescription(p FormDescriptionProps) {
+	@form.FormDescription(p) {
+		{ children... }
+	}
 }
 
-templ FormMessage(p FormMessageProps, value string) {
-	@form.FormMessage(p, value)
+templ FormMessage(p FormMessageProps) {
+	@form.FormMessage(p) {
+		{ children... }
+	}
 }
 
 templ Fieldset(p FieldsetProps) {

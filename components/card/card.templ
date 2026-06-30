@@ -33,7 +33,7 @@ type CardHeaderProps struct {
 type CardTitleProps struct {
 	Class string
 	// As maps to h1-h6 (default h2)
-	As int
+	As uiutils.HeadingLevel
 	Attrs templ.Attributes
 }
 
@@ -76,19 +76,19 @@ templ CardHeader(p CardHeaderProps) {
 }
 
 // CardTitle renders heading text at As level.
-templ CardTitle(p CardTitleProps, value string) {
+templ CardTitle(p CardTitleProps) {
 	@uiutils.HeadingTag(uiutils.HeadingTagProps{
 		As:    p.As,
 		Class: uiutils.Cn("text-sm font-semibold", p.Class),
 		Attrs: p.Attrs,
 	}) {
-		{ value }
+		{ children... }
 	}
 }
 
 // CardDescription renders muted subtitle in a p element.
-templ CardDescription(p CardDescriptionProps, value string) {
-	<p class={ uiutils.Cn("text-sm text-muted-foreground", p.Class) } { p.Attrs... }>{ value }</p>
+templ CardDescription(p CardDescriptionProps) {
+	<p class={ uiutils.Cn("text-sm text-muted-foreground", p.Class) } { p.Attrs... }>{ children... }</p>
 }
 
 // CardContent renders the padded main body slot.

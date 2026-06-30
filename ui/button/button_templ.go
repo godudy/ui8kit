@@ -27,7 +27,7 @@ import (
 
 // ButtonProps holds Button configuration.
 type ButtonProps struct {
-	// Variant sets appearance preset: default, secondary, destructive, outline, ghost, link, unstyled
+	// Variant sets appearance preset: default, secondary, destructive, outline, ghost, link
 	Variant string
 	// Size sets density preset: default, sm, lg, icon
 	Size string

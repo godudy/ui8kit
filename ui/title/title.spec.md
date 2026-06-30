@@ -81,7 +81,7 @@ Title renders a heading from the `As` prop (1–6). React additionally exports `
 import "github.com/fastygo/templ/ui"
 
 templ Example() {
-	@ui.Title(ui.TitleProps{As: 1}, "Page title")
+	@ui.Title(ui.TitleProps{As: 1}) { { "Page title" } }
 }
 ```
 
@@ -91,7 +91,7 @@ templ Example() {
 import "github.com/fastygo/templ/ui"
 
 templ Example() {
-	@ui.Title(ui.TitleProps{As: 2}, "Section title")
+	@ui.Title(ui.TitleProps{As: 2}) { { "Section title" } }
 }
 ```
 
@@ -101,6 +101,6 @@ templ Example() {
 import "github.com/fastygo/templ/ui"
 
 templ Example() {
-	@ui.Title(ui.TitleProps{As: 3, Class: "text-lg"}, "Subsection title")
+	@ui.Title(ui.TitleProps{As: 3, Class: "text-lg"}) { { "Subsection title" } }
 }
 ```

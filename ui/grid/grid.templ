@@ -16,6 +16,7 @@ import (
 type GridProps struct {
 	Class string
 	Cols  string
+	Attrs templ.Attributes
 }
 
 // GridColProps configures a single grid cell or track child.
@@ -25,6 +26,7 @@ type GridColProps struct {
 	Start int
 	End   int
 	Order int
+	Attrs templ.Attributes
 }
 
 var gridColsClassMap = map[string]string{
@@ -135,14 +137,14 @@ func gridColClass(span, start, end, order int) string {
 
 // Grid renders a display:grid container.
 templ Grid(p GridProps) {
-	<div class={ GridClasses(p) }>
+	<div class={ GridClasses(p) } { p.Attrs... }>
 		{ children... }
 	</div>
 }
 
 // GridCol renders one grid column child.
 templ GridCol(p GridColProps) {
-	<div class={ GridColClasses(p) }>
+	<div class={ GridColClasses(p) } { p.Attrs... }>
 		{ children... }
 	</div>
 }

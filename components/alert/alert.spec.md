@@ -74,7 +74,7 @@ import cmp "github.com/fastygo/templ/components"
 
 templ Example() {
 	@cmp.Alert(cmp.AlertProps{Variant: "default"}) {
-		@ui.Text(ui.TextProps{Class: "text-sm"}, "Static alert with role status.")
+		@ui.Text(ui.TextProps{Class: "text-sm"}) { { "Static alert with role status." } }
 	}
 }
 ```

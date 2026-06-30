@@ -106,6 +106,25 @@ style is easier for junior developers, reviewers, and LLMs.
 Do not write custom React state logic for runtime open/close. `open` is only
 initial SSR state when `behavior="ui8kit"` is active.
 
+## Feature Parity TSX <-> Templ
+
+| Feature | TSX | Templ | Workaround |
+|---------|-----|-------|------------|
+| `asChild` / `Slot` | yes | no | use `XClasses(p)` on a manual semantic wrapper |
+| `forwardRef` | yes | n/a | SSR has no refs |
+| `onClick` / events | yes | n/a | SSR is event-free; use `ui8kit` ARIA hooks for behavior |
+| children API | `{children}` | `{ children... }` | same model |
+
+## Naming Conversion
+
+| TSX prop | Templ field | Rule |
+|----------|-------------|------|
+| `className` | `Class` | special case (drop "Name", PascalCase) |
+| `tag` | `Tag` | PascalCase |
+| `htmlFor` | `HTMLFor` | acronym uppercased |
+| `aria-label` | `AriaLabel` | kebab -> PascalCase |
+| `data-ui8kit` | `DataUI8Kit` | kebab + acronym uppercased |
+
 ## Test Contract
 
 New React-capable bricks should declare their test target in the spec:

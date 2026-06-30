@@ -16,35 +16,35 @@ templ Table(p TableProps) {
 
 // TableCaption renders the table caption.
 templ TableCaption(p TableCaptionProps) {
-	<caption class={ p.Class }>
+	<caption class={ p.Class } { p.Attrs... }>
 		{ children... }
 	</caption>
 }
 
 // TableHead renders thead section.
 templ TableHead(p TableSectionProps) {
-	<thead class={ p.Class }>
+	<thead class={ p.Class } { p.Attrs... }>
 		{ children... }
 	</thead>
 }
 
 // TableBody renders tbody section.
 templ TableBody(p TableSectionProps) {
-	<tbody class={ p.Class }>
+	<tbody class={ p.Class } { p.Attrs... }>
 		{ children... }
 	</tbody>
 }
 
 // TableFoot renders tfoot section.
 templ TableFoot(p TableSectionProps) {
-	<tfoot class={ p.Class }>
+	<tfoot class={ p.Class } { p.Attrs... }>
 		{ children... }
 	</tfoot>
 }
 
 // TableRow renders one tr row.
 templ TableRow(p TableRowProps) {
-	<tr class={ p.Class }>
+	<tr class={ p.Class } { p.Attrs... }>
 		{ children... }
 	</tr>
 }
@@ -65,12 +65,12 @@ templ TableCell(p TableCellProps) {
 
 // TableColGroup renders colgroup with optional span.
 templ TableColGroup(p TableColGroupProps) {
-	<colgroup class={ p.Class } { spanAttrs(p.Span)... }>
+	<colgroup class={ p.Class } { spanAttrs(p.Span, p.Attrs)... }>
 		{ children... }
 	</colgroup>
 }
 
 // TableCol renders a single col definition.
 templ TableCol(p TableColProps) {
-	<col class={ p.Class } { spanAttrs(p.Span)... }/>
+	<col class={ p.Class } { spanAttrs(p.Span, p.Attrs)... }/>
 }

@@ -79,8 +79,8 @@ import "github.com/fastygo/templ/ui"
 
 templ Example() {
 	@ui.Stack(ui.StackProps{Class: "gap-4"}) {
-		@ui.Text(ui.TextProps{}, "First line")
-		@ui.Text(ui.TextProps{}, "Second line")
+		@ui.Text(ui.TextProps{}) { { "First line" } }
+		@ui.Text(ui.TextProps{}) { { "Second line" } }
 	}
 }
 ```
@@ -92,7 +92,7 @@ import "github.com/fastygo/templ/ui"
 
 templ Example() {
 	@ui.Stack(ui.StackProps{Tag: "ul", Class: "gap-2"}) {
-		@ui.Text(ui.TextProps{Tag: "span"}, "Item one")
+		@ui.Text(ui.TextProps{Tag: "span"}) { { "Item one" } }
 	}
 }
 ```

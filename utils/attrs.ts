@@ -8,7 +8,9 @@ export function defaultButtonType(t?: string): "button" | "submit" | "reset" {
   return "button";
 }
 
-export function titleTag(order?: 1 | 2 | 3 | 4 | 5 | 6): string {
+export type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
+
+export function titleTag(order?: HeadingLevel): string {
   switch (order) {
     case 1:
       return "h1";

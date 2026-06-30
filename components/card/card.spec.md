@@ -13,11 +13,9 @@ parts:
   - templ: CardTitle
     props: [Class, As, Attrs]
     slot: title
-    value: string
   - templ: CardDescription
     props: [Class, Attrs]
     slot: description
-    value: string
   - templ: CardContent
     props: [Class, Attrs]
     slot: content
@@ -107,11 +105,11 @@ import cmp "github.com/fastygo/templ/components"
 templ Example() {
 	@cmp.Card(cmp.CardProps{Variant: "default"}) {
 		@cmp.CardHeader(cmp.CardHeaderProps{}) {
-			@cmp.CardTitle(cmp.CardTitleProps{As: 2}, "Card title")
-			@cmp.CardDescription(cmp.CardDescriptionProps{}, "Short supporting text.")
+			@cmp.CardTitle(cmp.CardTitleProps{As: 2}) { { "Card title" } }
+			@cmp.CardDescription(cmp.CardDescriptionProps{}) { { "Short supporting text." } }
 		}
 		@cmp.CardContent(cmp.CardContentProps{}) {
-			@ui.Text(ui.TextProps{}, "Main card body.")
+			@ui.Text(ui.TextProps{}) { { "Main card body." } }
 		}
 		@cmp.CardFooter(cmp.CardFooterProps{}) {
 			@ui.Button(ui.ButtonProps{Variant: "outline", Size: "sm"}) {
@@ -144,7 +142,7 @@ import cmp "github.com/fastygo/templ/components"
 templ Example() {
 	@cmp.Card(cmp.CardProps{Variant: "kpi"}) {
 		@cmp.CardHeader(cmp.CardHeaderProps{}) {
-			@cmp.CardTitle(cmp.CardTitleProps{As: 2}, "Revenue")
+			@cmp.CardTitle(cmp.CardTitleProps{As: 2}) { { "Revenue" } }
 		}
 		@cmp.CardContent(cmp.CardContentProps{}) {
 			$12,450
@@ -231,7 +229,7 @@ import cmp "github.com/fastygo/templ/components"
 templ Example() {
 	@cmp.Card(cmp.CardProps{}) {
 		@cmp.CardHeader(cmp.CardHeaderProps{}) {
-			@cmp.CardTitle(cmp.CardTitleProps{As: 2}, "Title only")
+			@cmp.CardTitle(cmp.CardTitleProps{As: 2}) { { "Title only" } }
 		}
 	}
 }
@@ -245,7 +243,7 @@ import cmp "github.com/fastygo/templ/components"
 templ Example() {
 	@cmp.Card(cmp.CardProps{}) {
 		@cmp.CardHeader(cmp.CardHeaderProps{}) {
-			@cmp.CardTitle(cmp.CardTitleProps{As: 3}, "Nested section title")
+			@cmp.CardTitle(cmp.CardTitleProps{As: 3}) { { "Nested section title" } }
 		}
 	}
 }
@@ -281,7 +279,7 @@ import cmp "github.com/fastygo/templ/components"
 templ Example() {
 	<section class={ cmp.CardClasses(cmp.CardProps{Variant: "default"}) }>
 		@cmp.CardHeader(cmp.CardHeaderProps{}) {
-			@cmp.CardTitle(cmp.CardTitleProps{As: 2}, "Section card")
+			@cmp.CardTitle(cmp.CardTitleProps{As: 2}) { { "Section card" } }
 		}
 		@cmp.CardContent(cmp.CardContentProps{}) {
 			Body

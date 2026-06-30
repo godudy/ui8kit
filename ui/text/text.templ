@@ -19,6 +19,6 @@ func TextClasses(p TextProps) string {
 	return uiutils.Compose(TextVariants, map[string]string{}, p.Class)
 }
 
-templ Text(p TextProps, value string) {
-	<p class={ TextClasses(p) } { p.Attrs... }>{ value }</p>
+templ Text(p TextProps) {
+	<p class={ TextClasses(p) } { p.Attrs... }>{ children... }</p>
 }

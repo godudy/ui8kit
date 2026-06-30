@@ -17,6 +17,7 @@ type BadgeProps struct {
 	Size    string
 	// Class adds Tailwind utilities
 	Class   string
+	Attrs   templ.Attributes
 }
 
 func BadgeClasses(p BadgeProps) string {
@@ -28,7 +29,7 @@ func BadgeClasses(p BadgeProps) string {
 
 // Badge renders label text in a div wrapper.
 templ Badge(p BadgeProps) {
-	<div class={ BadgeClasses(p) }>
+	<div class={ BadgeClasses(p) } { p.Attrs... }>
 		{ children... }
 	</div>
 }

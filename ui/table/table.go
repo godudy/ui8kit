@@ -25,16 +25,19 @@ type TableProps struct {
 // TableCaptionProps configures caption styling.
 type TableCaptionProps struct {
 	Class string
+	Attrs templ.Attributes
 }
 
 // TableSectionProps configures thead, tbody, or tfoot.
 type TableSectionProps struct {
 	Class string
+	Attrs templ.Attributes
 }
 
 // TableRowProps configures one table row.
 type TableRowProps struct {
 	Class string
+	Attrs templ.Attributes
 }
 
 // TableCellProps configures th or td cells.
@@ -48,18 +51,21 @@ type TableCellProps struct {
 	Headers string
 	// Abbr — abbreviated header text for th
 	Abbr    string
+	Attrs   templ.Attributes
 }
 
 // TableColGroupProps configures colgroup span.
 type TableColGroupProps struct {
 	Class string
 	Span  int
+	Attrs templ.Attributes
 }
 
 // TableColProps configures a single col element.
 type TableColProps struct {
 	Class string
 	Span  int
+	Attrs templ.Attributes
 }
 
 func tableAttrs(p TableProps) templ.Attributes {
@@ -98,12 +104,13 @@ func tableCellAttrs(p TableCellProps, heading bool) templ.Attributes {
 	if strings.TrimSpace(p.Headers) != "" {
 		attrs["headers"] = p.Headers
 	}
-	return attrs
+	return uiutils.MergeAttrs(attrs, p.Attrs)
 }
 
-func spanAttrs(span int) templ.Attributes {
-	if span <= 0 {
-		return templ.Attributes{}
+func spanAttrs(span int, extra templ.Attributes) templ.Attributes {
+	attrs := templ.Attributes{}
+	if span > 0 {
+		attrs["span"] = strconv.Itoa(span)
 	}
-	return templ.Attributes{"span": strconv.Itoa(span)}
+	return uiutils.MergeAttrs(attrs, extra)
 }

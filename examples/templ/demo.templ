@@ -15,8 +15,8 @@ templ RegistryDemo() {
 		@ui.Box(ui.BoxProps{Class: "mx-auto max-w-5xl px-6 py-8"}) {
 			@ui.Stack(ui.StackProps{Class: "gap-8"}) {
 				@ui.Stack(ui.StackProps{Class: "gap-2"}) {
-					@ui.Title(ui.TitleProps{As: 1}, "Templ component registry")
-					@ui.Text(ui.TextProps{Class: "text-sm text-muted-foreground"}, "Copy-paste bricks with Block/Box semantics and JSON-backed variants.")
+					@ui.Title(ui.TitleProps{As: 1}) { { "Templ component registry" } }
+					@ui.Text(ui.TextProps{Class: "text-sm text-muted-foreground"}) { { "Copy-paste bricks with Block/Box semantics and JSON-backed variants." } }
 				}
 				@ComponentExamples()
 			}
