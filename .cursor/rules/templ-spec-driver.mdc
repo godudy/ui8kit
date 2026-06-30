@@ -17,7 +17,8 @@ For substantial work, proceed as:
 
 1. Gather local context from existing files and active rules.
 2. Draft a bounded spec from the user's intent.
-3. Validate the spec against registry contracts (`.project/`, `*.spec.md`, variants).
+3. Validate the spec against registry contracts (`docs/`, `.cursor/rules`,
+   `*.spec.md`, variants).
 4. Implement only what the spec requires.
 5. Run the relevant verification and report the result.
 
@@ -28,7 +29,7 @@ For tiny mechanical edits, an inline one-sentence spec is enough.
 Build the spec from:
 
 - the user's plain-language request;
-- rules in `.cursor/rules` and docs in `.project/`;
+- rules in `.cursor/rules` and docs in `docs/`;
 - existing `*.spec.md`, `*.variants.json`, `*.data.json` when present;
 - brick implementation patterns under `ui/`, `components/`, `utils/`;
 - `examples/` preview patterns when the change affects demos or block scaffolds.
@@ -45,16 +46,16 @@ For non-trivial brick or API changes, the spec should name:
 
 ## Persistent Specs
 
-For non-trivial feature work, save the agent-authored spec under
-`.project/specs/` so future chats can recover the decision context.
+For non-trivial feature work, keep the implementation plan in the chat or the
+IDE plan system. Only promote stable decisions to:
 
-- Use `.project/specs/active.md` for the current active implementation spec.
-- Use `.project/specs/<feature-slug>.md` for durable feature specs.
-- Use `.project/specs/archive/` for superseded or completed spec snapshots.
-- Create `.project/specs/` when the first persistent spec is needed.
-- Do not create persistent specs for tiny mechanical edits.
+- `docs/` when humans should read the decision later;
+- `.cursor/rules/` when agents must follow it operationally;
+- colocated `*.spec.md` when it is part of a brick contract.
 
-See also [`.project/dual-stack-component-library.md`](../../.project/dual-stack-component-library.md).
+Do not create `.project/specs/` or other durable `.project` planning files.
+
+See also [`docs/architecture.md`](../../docs/architecture.md).
 
 ## Validation Checks
 
@@ -63,7 +64,7 @@ Before implementation, check whether the spec requires:
 - `*.spec.md` updates (full `api` enums, `semantics`, showcase);
 - `*.variants.json` sync with `allow-list-source` and Go/React class maps;
 - `*.data.json` showcase payloads when adding examples;
-- typed `Aria*` props vs `Attrs` escape hatch — see [`behavior-hooks-and-aria.md`](../../.project/behavior-hooks-and-aria.md);
+- typed `Aria*` props vs `Attrs` escape hatch — see [`docs/aria.md`](../../docs/aria.md);
 - `go tool templ generate` for touched packages;
 - ui8px on `ui/`, `components/`, `utils/`, and `examples/`;
 - render tests under `examples/` or brick `*_test.go`.

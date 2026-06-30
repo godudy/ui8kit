@@ -8,7 +8,7 @@ alwaysApply: false
 
 Copy-paste **component library** (`github.com/fastygo/templ`). Not an application shell — consuming apps (e.g. Blank) own routes, fixtures, and chrome.
 
-On-disk index: [`README.md`](../../README.md), [`.project/dual-stack-component-library.md`](../../.project/dual-stack-component-library.md).
+On-disk index: [`README.md`](../../README.md), [`docs/README.md`](../../docs/README.md).
 
 ```
 utils/              # shared Go helpers — Cn, Compose, ARIA, tags, form recipes
@@ -30,7 +30,7 @@ examples/           # optional local preview — NOT copy-pasted with bricks
   web/static/       # preview tokens, CSS, ui8kit bundle
 .validate/          # spec validator, blockgen
 .ui8px/policy/      # Tailwind class policy for registry + examples
-.project/           # dual-stack contract, behavior/ARIA docs
+docs/               # long-lived architecture, ARIA, onboarding, publishing docs
 ```
 
 | Path | Role |
@@ -86,3 +86,6 @@ Granular imports (`ui/button`) remain valid for copy-paste consumers. **Inside t
 4. Add showcase to spec + optional `*.data.json`.
 5. Extend `examples/demo.templ` or a block under `examples/ui/blocks/` when a visual preview is needed.
 6. Run validation — see **`templ-validation-testing.mdc`**.
+
+Do not add durable docs or planning notes under `.project`; use `docs/` for
+human documentation and `.cursor/rules/` for agent-facing operating rules.

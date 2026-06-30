@@ -9,8 +9,8 @@ alwaysApply: false
 `*.tsx` files are the React runtime beside `*.templ`. Both are thin
 implementations of the same `*.spec.md` + `*.variants.json` contract.
 
-See [`dual-stack-component-library.md`](../../.project/dual-stack-component-library.md)
-and [`react-tsx-mental-model.md`](../../.project/react-tsx-mental-model.md).
+See [`docs/architecture.md`](../../docs/architecture.md) and
+[`docs/coming-from-shadcn.md`](../../docs/coming-from-shadcn.md).
 
 ## Layout grammar (applies to TSX too)
 
@@ -36,24 +36,29 @@ The Templ layout grammar is binding on the React side as well. See
 
 ## Composition primitives
 
-- Every clickable brick supports `asChild` via the shared `Slot`:
-  `Button`, `NavLink`, `SheetTrigger`, `SheetClose`, and any future trigger.
+- Clickable bricks that delegate their semantic root support `asChild` via the
+  shared `Slot`: `Button`, `SheetTrigger`, `SheetClose`, and future triggers
+  when the spec documents it.
 - `asChild` merges `className` and event handlers onto the single child
   (Radix-style). Use it for `<a>` wrapped as a button.
 - TSX uses `htmlFor`/`target` (or other neutral names), not `for`. The Go
   `For string` field stays unchanged.
+- Card uses named exports only (`CardHeader`, `CardTitle`, ...). Do not add
+  compound dot APIs such as `Card.Header`.
 
 ## Behavior bricks
 
 - **`Sheet`** (side panel): declarative markup only. Set `behavior="ui8kit"`
   and wire `target` / `For` ids. `@ui8kit/aria` owns open/close on both stacks.
   Root is `<div role="dialog">`, not native `<dialog>`.
+- When `Sheet behavior="ui8kit"` is active, `open` is initial SSR state only.
+  React must not use controlled state to own runtime visibility.
 - **`Dialog`** (center modal): exposes `open?: boolean` and
   `onOpenChange?: (open: boolean) => void` for native `<dialog>` control.
 - `behavior?: "ui8kit"` is **opt-in** on Sheet parts. When set, bricks emit
   `data-ui8kit-*` hooks matching `.templ` markup exactly.
 - Custom JS pattern implementations are forbidden — see
-  [`ui8kit-aria-boundary.md`](../../.project/ui8kit-aria-boundary.md).
+  [`docs/aria.md`](../../docs/aria.md).
 
 ## Dependencies
 
@@ -76,3 +81,5 @@ The Templ layout grammar is binding on the React side as well. See
   including `examples/vite/src/**/*.tsx`.
 - `bun run validate:aria` covers `examples/` markup against the registered
   `@ui8kit/aria` manifest.
+- Specs may declare `targets.react.test`; when present, `validate-spec` requires
+  the referenced `.test.tsx` or `.test.ts` file to exist.

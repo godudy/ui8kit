@@ -30,10 +30,13 @@ bun run verify
 
 | Step | Command | Scope |
 |------|---------|--------|
+| Variant invariants | `variantcheck` (in `verify`) | every `*.variants.json` |
+| Block grammar | `blockonce` (in `verify`) | one `<Block>` per TSX/Templ file |
 | Codegen | `bun run generate` | `examples/ui/blocks/*/page_gen.go`, `*_templ.go` |
 | Spec contract | `validate-spec.sh` | `ui/**/*.spec.md`, `components/**/*.spec.md`, `utils/*.spec.md`, `examples/**/*.spec.md` |
 | Blockgen freshness | `blockgen --check` (in validate-spec.sh) | generated `page_gen.go` matches spec/data/variants |
 | Variant maps | `validate-spec` | `*Variants` / `*.variants.json` ↔ `api.enum` |
+| React test target | `validate-spec` | `targets.react.test` file must exist when declared |
 | ui8px | `bun run lint:ui8px` | `ui/`, `components/`, `utils/`, `examples/` |
 | ARIA manifest | `bun run validate:aria` | `examples/` markup vs `examples/web/static/js/manifest.json` |
 | Go tests | `go test ./...` | brick tests, `examples/*_render_test.go` |
@@ -63,6 +66,8 @@ Checks include:
 - required front matter on brick specs;
 - `showcase[].id` ↔ `## Example {id}` fences;
 - `allow-list-source` ↔ `utils/tags.go`, `utils/utils.go`, or `*.variants.json`;
+- no empty-string variant keys and valid defaults;
+- `targets.react.test` existence when declared;
 - `components.json` alias expectations.
 
 Example block specs: `examples/ui/blocks/home/home.spec.md`, `examples/ui/blocks/dashboard/dashboard.spec.md`.

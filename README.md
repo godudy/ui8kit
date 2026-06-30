@@ -21,11 +21,10 @@ The registry keeps the ergonomics React developers expect — props, variants, c
 | [`.cursor/rules/templ-component-spec.mdc`](.cursor/rules/templ-component-spec.mdc) | Authoring rule for specs and STE comments |
 | [`.cursor/rules/`](.cursor/rules/) | Agent rules — registry structure, ui8px, ARIA, examples, validation |
 | [`.ui8px/policy/`](.ui8px/policy/) | Tailwind class policy (`ui/`, `components/`, `utils/`, `examples/`) |
-| [`.project/go-module-publishing.md`](.project/go-module-publishing.md) | `go get` vs npm, `export-ignore`, release |
-| [`.project/dual-stack-component-library.md`](.project/dual-stack-component-library.md) | Dual-stack brick contract |
-| [`.project/react-tsx-mental-model.md`](.project/react-tsx-mental-model.md) | Templ to React prop/tag mapping and examples |
-| [`.project/ui8kit-aria-boundary.md`](.project/ui8kit-aria-boundary.md) | `@ui8kit/aria` vs registry — APG subset |
-| [`.project/behavior-hooks-and-aria.md`](.project/behavior-hooks-and-aria.md) | Opt-in behavior hooks, static ARIA |
+| [`docs/`](docs/) | Long-lived architecture, ARIA, shadcn onboarding, publishing docs |
+| [`docs/publishing.md`](docs/publishing.md) | `go get` vs npm, `export-ignore`, release |
+| [`docs/architecture.md`](docs/architecture.md) | Dual-stack brick contract |
+| [`docs/aria.md`](docs/aria.md) | `@ui8kit/aria`, opt-in behavior hooks, Sheet contract |
 | [`utils/utils.spec.md`](utils/utils.spec.md) | Helper module export catalog (classes, attrs, recipes) |
 
 Default bricks avoid app-specific runtime dependencies. Behavior hooks such as `data-ui8kit` are opt-in per component, so each consuming app can choose its own client layer.
@@ -33,7 +32,7 @@ Default bricks avoid app-specific runtime dependencies. Behavior hooks such as `
 ## Coming from shadcn?
 
 The migration guide is now documented in
-[`.project/coming-from-shadcn.md`](.project/coming-from-shadcn.md).
+[`docs/coming-from-shadcn.md`](docs/coming-from-shadcn.md).
 
 Quick mapping:
 
@@ -41,7 +40,7 @@ Quick mapping:
 - `cn` -> same `clsx + tailwind-merge` behavior.
 - `asChild` -> Radix-style `Slot` for clickable bricks.
 - `Title as={n}` -> prefer `H1`...`H6` when heading level is static.
-- `Card.Header` / `Card.Title` compound API is available alongside named exports.
+- Card uses named exports only (`CardHeader`, `CardTitle`, ...).
 
 ## Copy into your app
 

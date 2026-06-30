@@ -178,6 +178,7 @@ func idPathMismatch(rel, id string) string {
 	}
 	// ui/button/button.variants.json -> ui.button
 	// components/alert/alert.variants.json -> components.alert
+	// ui/form/legend.variants.json -> ui.form.legend (multi-recipe folder)
 	dir := parts[len(parts)-2]
 	expected := strings.Join(parts[:len(parts)-1], ".")
 	if strings.HasPrefix(expected, "examples/templ/ui/blocks/") {
@@ -190,7 +191,8 @@ func idPathMismatch(rel, id string) string {
 	} else if strings.HasPrefix(normalized, "components/") {
 		simple = "components." + dir
 	}
-	if id != expected && id != simple && !strings.HasSuffix(id, "."+dir) {
+	multiRecipe := simple != "" && strings.HasPrefix(id, simple+".")
+	if id != expected && id != simple && !strings.HasSuffix(id, "."+dir) && !multiRecipe {
 		return fmt.Sprintf("%s: id %q may not match path (expected ~%q or %q)", rel, id, expected, simple)
 	}
 	return ""

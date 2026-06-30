@@ -1,6 +1,6 @@
 ---
 description: Templ registry — machine-readable component specs (api vs showcase)
-globs: "**/*.spec.md,**/*.templ,**/*.variants.json,**/*.data.json,.validate/docs/**,.project/**"
+globs: "**/*.spec.md,**/*.templ,**/*.variants.json,**/*.data.json,.validate/docs/**,docs/**"
 alwaysApply: false
 ---
 
@@ -8,9 +8,9 @@ alwaysApply: false
 
 Machine-readable source of truth for docgen, LLM, dual-stack codegen, and parsers. Human docs are generated **from** specs, not the reverse.
 
-Dual-stack contract: [`.project/dual-stack-component-library.md`](../../.project/dual-stack-component-library.md).  
-Publishing (Go module vs npm): [`.project/go-module-publishing.md`](../../.project/go-module-publishing.md).  
-ARIA and behavior: [`.project/behavior-hooks-and-aria.md`](../../.project/behavior-hooks-and-aria.md).
+Dual-stack contract: [`docs/architecture.md`](../../docs/architecture.md).  
+Publishing (Go module vs npm): [`docs/publishing.md`](../../docs/publishing.md).  
+ARIA and behavior: [`docs/aria.md`](../../docs/aria.md).
 
 ## Colocated files
 
@@ -58,8 +58,10 @@ Runtime-scoped fields:
    `defaults[k]` MUST reference a non-empty key present in `byKey[k]`. The
    validator fails the spec when this contract is broken.
 7. `react-only` fields must be boolean `true`, require `targets.react`, and must not leak into templ `parts[].props`.
-8. STE prose only: `Summary`, `Use Cases`, `Semantics` — short sentences, active voice.
-9. `/** */` in `.templ` MUST match `## Summary`. `//` prop comments MUST match `api` enums.
+8. If `targets.react.test` is set, the referenced `.test.tsx` or `.test.ts`
+   file MUST exist. Add it for new React-capable bricks.
+9. STE prose only: `Summary`, `Use Cases`, `Semantics` — short sentences, active voice.
+10. `/** */` in `.templ` MUST match `## Summary`. `//` prop comments MUST match `api` enums.
 
 Run: `bash .validate/scripts/validate-spec.sh --with-tests`
 

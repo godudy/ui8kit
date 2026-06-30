@@ -6,8 +6,20 @@ alwaysApply: false
 
 # ARIA & behavior (Templ registry)
 
-See [`.project/behavior-hooks-and-aria.md`](../../.project/behavior-hooks-and-aria.md) for the full three-layer model.  
-For **`@ui8kit/aria`** vs registry (APG patterns, subset bundles): [`.project/ui8kit-aria-boundary.md`](../../.project/ui8kit-aria-boundary.md).
+See [`docs/aria.md`](../../docs/aria.md) for the long-form contract.
+
+## Three layers
+
+Do not collapse these layers:
+
+| Layer | Owner | Rule |
+|-------|-------|------|
+| Static semantics | registry | valid SSR HTML without JS |
+| Explicit ARIA props | brick API | typed `Aria*` props in `*.spec.md` |
+| Behavior hooks | app runtime | opt-in `Behavior` / `DataUI8Kit` only |
+
+The registry emits markup contracts. `@ui8kit/aria` owns focus management,
+keyboard routing, open/close state sync, and APG-style client behavior.
 
 ## Static markup (library)
 
@@ -29,6 +41,23 @@ Default bricks emit **SSR-safe** HTML without a client runtime.
 | `Behavior: "ui8kit"` | `Sheet` family | emits `data-ui8kit-dialog*` hooks |
 
 When empty / default: **no** behavior attributes. Library stays framework-neutral.
+
+Do not implement custom widget JavaScript in `ui/` or `components/`. Add or
+register the needed APG pattern in the consuming app through `@ui8kit/aria`.
+
+## Sheet contract
+
+`Sheet` is a side panel using the `@ui8kit/aria` dialog pattern:
+
+- root is `<div role="dialog">`, not native `<dialog>`;
+- root uses `hidden` and `data-state` for visibility state;
+- `behavior="ui8kit"` emits `data-ui8kit="sheet"` and
+  `data-ui8kit-dialog`;
+- trigger / close / overlay parts use `data-ui8kit-dialog-open`,
+  `data-ui8kit-dialog-close`, and `data-ui8kit-dialog-target`;
+- React `open` is initial SSR state only when `behavior="ui8kit"` is active.
+
+Native centered `Dialog` remains separate and may use native `<dialog>`.
 
 ## Examples preview only
 
@@ -58,4 +87,6 @@ bun run validate:aria
 
 ## Dual-stack note
 
-React `*.tsx` ports match **semantics** (name, role, state), not necessarily identical `data-ui8kit` attributes — CSR may use Radix or local state instead.
+Templ and React ports must match static semantics and documented behavior-hook
+attributes. For Sheet, the `ui8kit` DOM contract is intentionally identical
+across both runtimes.

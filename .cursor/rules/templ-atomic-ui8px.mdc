@@ -19,7 +19,7 @@ Import shape: `import "github.com/fastygo/templ/ui"` — do **not** deep-import 
 
 | Kind | Mechanism | Where defined |
 |------|-----------|---------------|
-| `Variant`, `Size`, … | CVA | `*.variants.json` (target) or `*Variants` in `.templ` |
+| `Variant`, `Size`, … | CVA | `*.variants.json` |
 | Layout, spacing, responsive | raw Tailwind | `Class` prop only |
 | Design tokens | CSS variables | consumer app or `examples/web/static/css/tokens.css` |
 
@@ -46,9 +46,16 @@ bun run lint:ui8px
 
 ## Variants file
 
-Migrate inline `var XVariants = uiutils.Variants{...}` to colocated `*.variants.json` per [`.project/dual-stack-component-library.md`](../../.project/dual-stack-component-library.md).
+Use colocated `*.variants.json` per [`docs/architecture.md`](../../docs/architecture.md).
 
 Validator must keep `api.enum` ↔ JSON keys in sync.
+
+Rules:
+
+- Empty-string keys in `byKey` are forbidden.
+- `defaults[k]` must point to a non-empty key that exists in `byKey[k]`.
+- There is no `unstyled` escape hatch. Add a named variant when a visual state
+  belongs to the design system.
 
 ## Dependencies
 
