@@ -1,0 +1,34 @@
+import { Nav, NavItem, NavLink, NavList, IconBadge } from "@registry/components";
+import { navIconLetter, navIconVariant } from "../../lib/helpers";
+import type { NavItem as NavItemData } from "../../types/home";
+
+export function CatalogPrimaryNav({ items, className }: { items: NavItemData[]; className?: string }) {
+  return (
+    <Nav aria-label="Primary navigation" className={className}>
+      <NavList className="px-2">
+        {items.map((item, index) => (
+          <NavItem key={item.Label}>
+            <NavLink href={item.Href} active={index === 0} aria-label={item.Label}>
+              <IconBadge size="sm" variant={navIconVariant(index === 0)}>{navIconLetter(item.Icon)}</IconBadge>
+              {item.Label}
+            </NavLink>
+          </NavItem>
+        ))}
+      </NavList>
+    </Nav>
+  );
+}
+
+export function CatalogHeaderNav({ items, className }: { items: NavItemData[]; className?: string }) {
+  return (
+    <Nav aria-label="Header navigation" className={className}>
+      <NavList className="px-2">
+        {items.map((item) => (
+          <NavItem key={item.Label}>
+            <NavLink href={item.Href} variant="ghost" size="sm">{item.Label}</NavLink>
+          </NavItem>
+        ))}
+      </NavList>
+    </Nav>
+  );
+}

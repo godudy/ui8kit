@@ -9,7 +9,7 @@ api:
   Variant:
     role: appearance
     type: string
-    enum: [default, accent, secondary, outline, destructive, unstyled]
+    enum: [default, accent, secondary, outline, destructive]
     allow-list-source: iconbadge.variants.json#variant
     default: default
   Size:

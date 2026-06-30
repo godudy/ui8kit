@@ -9,6 +9,7 @@ import {
   cn,
   composeRecipe,
   defineRecipe,
+  isDevEnv,
   type BehaviorMode,
   normalizeBehaviorMode,
 } from "../../utils";
@@ -82,12 +83,32 @@ function sheetBehavior(value?: BehaviorMode): BehaviorMode {
   return normalizeBehaviorMode(value);
 }
 
-/** Freeze open to first commit when ui8kit owns runtime attribute toggling. */
+/**
+ * Freeze `open` to first commit when ui8kit owns runtime attribute toggling.
+ * In dev, log once if a parent re-renders with a different `open` value while
+ * `behavior="ui8kit"` is active — the new value is discarded and `@ui8kit/aria`
+ * keeps owning visibility.
+ */
 function useFrozenOpen(open: boolean | undefined, behavior: BehaviorMode | undefined): boolean {
   const initialOpenRef = useRef(open ?? false);
-  if (sheetBehavior(behavior) === "ui8kit") {
-    return initialOpenRef.current;
+  const warnedRef = useRef(false);
+  const isUi8kit = sheetBehavior(behavior) === "ui8kit";
+
+  if (
+    isDevEnv() &&
+    isUi8kit &&
+    !warnedRef.current &&
+    (open ?? false) !== initialOpenRef.current
+  ) {
+    warnedRef.current = true;
+    // eslint-disable-next-line no-console
+    console.warn(
+      "[Sheet] `open` changed after mount with behavior=\"ui8kit\" — ignored. " +
+        "`@ui8kit/aria` owns runtime visibility. Pass `open` only as initial SSR state."
+    );
   }
+
+  if (isUi8kit) return initialOpenRef.current;
   return open ?? false;
 }
 

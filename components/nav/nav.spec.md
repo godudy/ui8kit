@@ -24,7 +24,7 @@ api:
   LinkVariant:
     role: appearance
     type: string
-    enum: [default, active, ghost, muted, unstyled]
+    enum: [default, active, ghost, muted]
     allow-list-source: nav-link.variants.json#variant
     default: default
   Size:

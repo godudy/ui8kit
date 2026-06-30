@@ -61,7 +61,6 @@ api:
             - outline
             - ghost
             - link
-            - unstyled
         role: appearance
         type: string
 data: button.data.json
@@ -105,11 +104,6 @@ showcase:
       props:
         Variant: link
       ref: variant.link
-    - id: variant.unstyled
-      props:
-        Class: underline
-        Variant: unstyled
-      ref: variant.unstyled
     - id: size.sm
       props:
         Size: sm
@@ -250,18 +244,6 @@ templ Example() {
 	<a href="/docs" class={ ui.ButtonClasses(ui.ButtonProps{Variant: "link"}) }>
 		Learn more
 	</a>
-}
-```
-
-## Example variant.unstyled
-
-```templ
-import "github.com/fastygo/templ/ui"
-
-templ Example() {
-	@ui.Button(ui.ButtonProps{Variant: "unstyled", Class: "underline"}) {
-		Custom
-	}
 }
 ```
 

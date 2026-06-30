@@ -19,6 +19,29 @@ they are not "the same thing with different names". Use them correctly in
 | `Stack`   | `<div>` (vertical flex) | column | Vertical rhythm: sections, form fields, list rows. Base: `flex flex-col items-start justify-start`. |
 | `Group`   | `<div>` or `<fieldset>` | row | Horizontal flex grouping. Base: `flex min-w-0`. Use `tag="fieldset"` for related form controls. |
 
+## When to choose which
+
+| Need | Use |
+|------|-----|
+| Top of a file / start of any block | `Block` |
+| Independent widget root that may live in its own file | `Block` (even when not a landmark — default `<div>` is fine) |
+| Inner container with no flex direction | `Box` |
+| Stack rows top-to-bottom with consistent gap | `Stack` |
+| Lay items in a row, wrap on small screens | `Group` |
+| Group related form controls (`<fieldset>` semantics) | `Group tag="fieldset"` |
+| Ordered/unordered list rendered as a stack | `Stack tag="ul"` (or `"ol"`) |
+| Definition list rendered as a row | `Group tag="dl"` |
+
+Rules of thumb:
+
+- If you reach for `<div>`, ask first: would `Stack` or `Group` express intent?
+  If neither rhythm nor row applies, use `Box`.
+- A widget file does not need a landmark. `<Block>` (default `<div>`) is the
+  correct root because every file has exactly one entry point — that is what
+  `Block` documents.
+- Two `Box` in a row inside one `Block` is a smell — usually `Stack` or `Group`
+  was meant.
+
 ## Rules
 
 1. **`Block` is the entry point of a block.** Each file or composite block
@@ -43,6 +66,9 @@ they are not "the same thing with different names". Use them correctly in
    `flex-row` overrides; if you need horizontal, switch to `Group`.
 5. **`Group` is horizontal.** Use `tag="fieldset"` only when grouping related
    form controls; otherwise default `<div>`.
+6. **`Block` appears at most once per file, and as the first JSX/templ node
+   the file returns.** Subsequent containers inside that root use `Box`,
+   `Stack`, or `Group`.
 
 ## Examples
 
@@ -78,6 +104,9 @@ Incorrect (raw markup, nested `Block`, wrong direction):
 - `bun run lint:ui8px` scans `ui/`, `components/`, `utils/`, and `examples/`.
 - `bash .validate/scripts/validate-spec.sh --with-tests` enforces spec contracts.
 - `bun run typecheck:react` keeps the TSX side aligned.
+- `go run ./.validate/cmd/blockonce` enforces rule 6 (one `<Block>` per file).
+- A spec may declare `targets.react.test: <path>` (relative to the spec) — the
+  referenced TSX test file must exist on disk.
 
 See [`templ-atomic-ui8px.mdc`](templ-atomic-ui8px.mdc) for the styling model
 and [`templ-react-port.mdc`](templ-react-port.mdc) for the React port rules.

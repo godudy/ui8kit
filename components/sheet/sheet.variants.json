@@ -26,8 +26,7 @@
     "variant": {
       "default": "",
       "card": "bg-card text-card-foreground",
-      "ghost": "border-transparent shadow-none",
-      "unstyled": ""
+      "ghost": "border-transparent shadow-none"
     }
   }
 }

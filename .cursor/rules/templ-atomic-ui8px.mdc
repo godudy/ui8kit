@@ -24,7 +24,7 @@ Import shape: `import "github.com/fastygo/templ/ui"` — do **not** deep-import 
 | Design tokens | CSS variables | consumer app or `examples/web/static/css/tokens.css` |
 
 **Forbidden:** semantic layout props (`gap=`, `flex=`, `items=` as component API).  
-**Prefer:** `Variant` / `Size` presets over `Variant: "unstyled"` + long manual chains unless spec documents an escape hatch.
+**Prefer:** `Variant` / `Size` presets over long manual `Class` chains. There is no `unstyled` escape hatch — add a new named variant to the `*.variants.json` when needed.
 
 ## Tailwind / ui8px
 

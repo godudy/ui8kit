@@ -65,7 +65,6 @@ api:
             - avatar
             - thumbnail
             - logo
-            - unstyled
         role: appearance
         type: string
 data: image.data.json

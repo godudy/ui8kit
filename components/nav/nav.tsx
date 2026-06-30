@@ -9,7 +9,6 @@ import {
 import navLinkRecipeJson from "./nav-link.variants.json";
 import navListRecipeJson from "./nav-list.variants.json";
 import { composeRecipe, defineRecipe, type BehaviorMode } from "../../utils";
-import { Link } from "../../ui/link/link";
 
 const { recipe: navLinkRecipe, keys: navLinkKeys } = defineRecipe(navLinkRecipeJson);
 const { recipe: navListRecipe, keys: navListKeys } = defineRecipe(navListRecipeJson);
@@ -150,10 +149,9 @@ export const NavLink = forwardRef<HTMLElement, NavLinkProps>(function NavLink(
   }
 
   return (
-    <Link
+    <a
       ref={ref as Ref<HTMLAnchorElement>}
       href={href}
-      variant="unstyled"
       className={cls}
       aria-label={ariaLabel}
       aria-current={resolvedCurrent}
@@ -162,7 +160,7 @@ export const NavLink = forwardRef<HTMLElement, NavLinkProps>(function NavLink(
       {...rest}
     >
       {children}
-    </Link>
+    </a>
   );
 });
 NavLink.displayName = "NavLink";

@@ -28,7 +28,7 @@ api:
   Variant:
     role: appearance
     type: string
-    enum: [default, card, ghost, unstyled]
+    enum: [default, card, ghost]
     allow-list-source: sheet.variants.json#variant
     default: default
   Side:
@@ -69,6 +69,7 @@ targets:
   react:
     component: Sheet
     facade: '@fastygo/templ-react'
+    test: ../../examples/vite/tests/sheet-ui8kit-contract.test.tsx
     package: '@fastygo/templ-react/components/sheet'
     notes:
       - 'Declarative open?: boolean sets initial hidden/data-state only; runtime uses @ui8kit/aria when behavior="ui8kit".'

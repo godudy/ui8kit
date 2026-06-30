@@ -39,7 +39,6 @@ api:
             - default
             - outline
             - ghost
-            - unstyled
         role: appearance
         type: string
 data: radio.data.json

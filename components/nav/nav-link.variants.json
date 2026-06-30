@@ -12,8 +12,7 @@
       "default": "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
       "active": "bg-accent text-accent-foreground",
       "ghost": "text-foreground hover:bg-accent hover:text-accent-foreground",
-      "muted": "text-muted-foreground hover:text-foreground",
-      "unstyled": ""
+      "muted": "text-muted-foreground hover:text-foreground"
     },
     "size": {
       "sm": "px-2 py-1 text-xs",

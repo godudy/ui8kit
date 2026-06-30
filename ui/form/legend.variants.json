@@ -9,8 +9,7 @@
     },
     "variant": {
       "default": "",
-      "muted": "text-muted-foreground",
-      "unstyled": ""
+      "muted": "text-muted-foreground"
     }
   },
   "defaults": {

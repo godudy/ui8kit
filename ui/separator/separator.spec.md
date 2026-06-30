@@ -22,7 +22,6 @@ api:
             - muted
             - strong
             - spaced
-            - unstyled
         role: appearance
         type: string
 data: separator.data.json

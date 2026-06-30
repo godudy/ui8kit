@@ -9,7 +9,6 @@ package nav
 import (
 	"strings"
 
-	"github.com/fastygo/templ/ui"
 	"github.com/fastygo/templ/utils"
 )
 
@@ -125,14 +124,15 @@ templ NavLink(p NavLinkProps) {
 			{ children... }
 		</span>
 	} else {
-		@ui.Link(ui.LinkProps{
-			Href:      p.Href,
-			Variant:   "unstyled",
-			Class:     NavLinkClasses(p),
-			AriaLabel: p.AriaLabel,
-			Attrs:     navLinkAttrs(p),
-		}) {
+		<a
+			href={ templ.SafeURL(p.Href) }
+			class={ NavLinkClasses(p) }
+			if strings.TrimSpace(p.AriaLabel) != "" {
+				aria-label={ p.AriaLabel }
+			}
+			{ navLinkAttrs(p)... }
+		>
 			{ children... }
-		}
+		</a>
 	}
 }

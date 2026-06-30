@@ -95,7 +95,7 @@ api:
     role: appearance
     type: string
     cva: true
-    enum: [default, card, sheet, unstyled]
+    enum: [default, card, sheet]
     allow-list-source: dialog.variants.json#variant
     default: default
   Size:
@@ -199,8 +199,7 @@ Single recipe consumed by Go (`uiutils.Variants`) and React (`class-variance-aut
     "variant": {
       "default": "",
       "card": "bg-card text-card-foreground",
-      "sheet": "min-h-screen rounded-none",
-      "unstyled": ""
+      "sheet": "min-h-screen rounded-none"
     },
     "size": {
       "sm": "w-full max-w-sm",
@@ -302,7 +301,7 @@ Spec authors always use **PascalCase** in `api` and `*.data.json`.
 
 - Props struct fields mirror `api:` (PascalCase)
 - `*Classes(props)` = `Compose(variants, selection, props.Class)` only
-- No inline Tailwind outside `*.variants.json` except empty/unstyled escape hatches documented in spec
+- No inline Tailwind outside `*.variants.json`. There is no `unstyled` escape hatch — add a new named variant when needed
 - Behavior hooks (`DataUI8Kit`, `Behavior`) are **opt-in** — default bricks stay framework-neutral (see [`behavior-hooks-and-aria.md`](./behavior-hooks-and-aria.md))
 - Children via `{ children... }`
 

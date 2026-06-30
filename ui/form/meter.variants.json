@@ -9,8 +9,7 @@
     },
     "variant": {
       "default": "accent-primary",
-      "muted": "accent-muted-foreground",
-      "unstyled": ""
+      "muted": "accent-muted-foreground"
     }
   },
   "defaults": {

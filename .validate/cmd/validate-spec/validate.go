@@ -144,7 +144,46 @@ func validateSpec(doc *specDoc, allowLists map[string][]string) []validationErro
 	errs = append(errs, validateBehaviorHookEnums(doc, rel)...)
 	errs = append(errs, validateRuntimeScopedAPIFields(doc, rel)...)
 	errs = append(errs, validateBlockContract(doc, rel, findRepoRootMust())...)
+	errs = append(errs, validateReactTestTarget(doc, rel, findRepoRootMust())...)
 	return errs
+}
+
+// validateReactTestTarget enforces the spec-driven React test coverage contract.
+//
+// When a brick spec declares `targets.react.test: <path>` (relative to the spec
+// file), the referenced TSX test file MUST exist on disk. This lets each spec
+// own its own test coverage without requiring every brick to ship one today.
+//
+// Rationale: the design contract is authoritative. If a spec promises a test,
+// CI must hold the brick to that promise. Specs without `targets.react.test`
+// are skipped (back-compat). Add `test: <path>.test.tsx` to a spec to opt in.
+func validateReactTestTarget(doc *specDoc, rel, repoRoot string) []validationError {
+	targets, _ := doc.fm["targets"].(map[string]any)
+	if targets == nil {
+		return nil
+	}
+	react, _ := targets["react"].(map[string]any)
+	if react == nil {
+		return nil
+	}
+	testPath, _ := react["test"].(string)
+	testPath = strings.TrimSpace(testPath)
+	if testPath == "" {
+		return nil
+	}
+	if !strings.HasSuffix(testPath, ".test.tsx") && !strings.HasSuffix(testPath, ".test.ts") {
+		return []validationError{{rel, "targets.react.test", fmt.Sprintf("must end in .test.tsx or .test.ts, got %q", testPath)}}
+	}
+	specDir := filepath.Dir(doc.path)
+	abs := filepath.Join(specDir, filepath.FromSlash(testPath))
+	if !filepath.IsAbs(abs) {
+		abs = filepath.Clean(abs)
+	}
+	if _, err := os.Stat(abs); err != nil {
+		relTest, _ := filepath.Rel(repoRoot, abs)
+		return []validationError{{rel, "targets.react.test", fmt.Sprintf("declared test file not found: %s", filepath.ToSlash(relTest))}}
+	}
+	return nil
 }
 
 // validBehaviorModes is the single source of truth for behavior-hook enums.

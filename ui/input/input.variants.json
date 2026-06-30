@@ -11,8 +11,7 @@
     "variant": {
       "default": "border-border bg-background",
       "ghost": "border-transparent bg-muted",
-      "outline": "border-border bg-background",
-      "unstyled": ""
+      "outline": "border-border bg-background"
     }
   },
   "defaults": {

@@ -34,7 +34,6 @@ api:
             - nav
             - block
             - external
-            - unstyled
         role: appearance
         type: string
 data: link.data.json

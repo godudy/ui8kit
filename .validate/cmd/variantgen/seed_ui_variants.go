@@ -53,7 +53,6 @@ func main() {
 				"secondary":   "bg-secondary text-secondary-foreground hover:bg-secondary/80",
 				"ghost":       "hover:bg-accent hover:text-accent-foreground",
 				"link":        "text-primary underline-offset-4 hover:underline",
-				"unstyled":    "",
 			},
 			"size": {
 				"default": "h-10 px-4 py-2",
@@ -74,7 +73,7 @@ func main() {
 		Keys:     []string{"variant", "size"},
 		Defaults: map[string]string{"variant": "default", "size": "default"},
 		ByKey: map[string]map[string]string{
-			"variant": {"default": "", "card": "bg-card text-card-foreground", "sheet": "min-h-screen rounded-none", "unstyled": ""},
+			"variant": {"default": "", "card": "bg-card text-card-foreground", "sheet": "min-h-screen rounded-none"},
 			"size":    {"sm": "w-full max-w-sm", "default": "w-full max-w-lg", "lg": "w-full max-w-2xl", "xl": "w-full max-w-4xl", "full": "h-full w-full max-w-none"},
 		},
 	})
@@ -96,7 +95,7 @@ func main() {
 		Keys:     []string{"variant", "size"},
 		Defaults: map[string]string{"variant": "default", "size": "default"},
 		ByKey: map[string]map[string]string{
-			"variant": {"default": "text-primary hover:underline", "muted": "text-muted-foreground hover:text-foreground hover:underline", "nav": "text-foreground hover:text-primary", "block": "flex w-full text-foreground hover:text-primary", "external": "text-primary hover:underline", "unstyled": ""},
+			"variant": {"default": "text-primary hover:underline", "muted": "text-muted-foreground hover:text-foreground hover:underline", "nav": "text-foreground hover:text-primary", "block": "flex w-full text-foreground hover:text-primary", "external": "text-primary hover:underline"},
 			"size":    {"sm": "text-sm", "default": "text-sm", "md": "text-base", "lg": "text-lg"},
 		},
 	})
@@ -108,7 +107,7 @@ func main() {
 		Defaults: map[string]string{"orientation": "horizontal", "variant": "default"},
 		ByKey: map[string]map[string]string{
 			"orientation": {"horizontal": "h-px w-full", "vertical": "h-full w-px"},
-			"variant":     {"default": "", "muted": "bg-muted", "strong": "bg-foreground", "spaced": "my-4", "unstyled": ""},
+			"variant":     {"default": "", "muted": "bg-muted", "strong": "bg-foreground", "spaced": "my-4"},
 		},
 	})
 
@@ -129,7 +128,7 @@ func main() {
 		Keys:     []string{"variant", "size", "fit", "position", "aspect"},
 		Defaults: map[string]string{"variant": "default", "size": "auto", "fit": "cover", "position": "center", "aspect": "auto"},
 		ByKey: map[string]map[string]string{
-			"variant":  {"default": "", "rounded": "rounded-md", "avatar": "rounded-full", "thumbnail": "rounded-md border border-border", "logo": "object-contain", "unstyled": ""},
+			"variant":  {"default": "", "rounded": "rounded-md", "avatar": "rounded-full", "thumbnail": "rounded-md border border-border", "logo": "object-contain"},
 			"size":     {"auto": "", "default": "", "xs": "h-6 w-6", "sm": "h-8 w-8", "md": "h-12 w-12", "lg": "h-16 w-16", "xl": "h-24 w-24", "full": "h-full w-full"},
 			"fit":      {"contain": "object-contain", "cover": "object-cover", "fill": "object-fill", "none": "object-none", "scale-down": "object-scale-down"},
 			"position": {"bottom": "object-bottom", "center": "object-center", "left": "object-left", "right": "object-right", "top": "object-top", "left-bottom": "object-left-bottom", "left-top": "object-left-top", "right-bottom": "object-right-bottom", "right-top": "object-right-top"},
@@ -143,7 +142,7 @@ func main() {
 		Keys:     []string{"variant", "size"},
 		Defaults: map[string]string{"variant": "default", "size": "default"},
 		ByKey: map[string]map[string]string{
-			"variant": {"default": "rounded-md border border-border", "ghost": "", "card": "rounded-md border border-border bg-card text-card-foreground", "unstyled": ""},
+			"variant": {"default": "rounded-md border border-border", "ghost": "", "card": "rounded-md border border-border bg-card text-card-foreground"},
 			"size":    {"sm": "text-sm", "default": "text-sm", "lg": "text-base"},
 		},
 	})
@@ -154,7 +153,7 @@ func main() {
 		Keys:     []string{"variant", "size"},
 		Defaults: map[string]string{"variant": "default", "size": "default"},
 		ByKey: map[string]map[string]string{
-			"variant": {"default": "px-4 py-3 font-medium", "ghost": "py-2 font-medium", "card": "px-4 py-3 font-medium", "unstyled": ""},
+			"variant": {"default": "px-4 py-3 font-medium", "ghost": "py-2 font-medium", "card": "px-4 py-3 font-medium"},
 			"size":    {"sm": "text-sm", "default": "text-sm", "lg": "text-base"},
 		},
 	})
@@ -170,28 +169,28 @@ func main() {
 	write("ui/form/fieldset.variants.json", recipe{
 		ID: "ui.form.fieldset", Base: "grid gap-4", Keys: []string{"variant", "size"}, Defaults: map[string]string{"variant": "default", "size": "default"},
 		ByKey: map[string]map[string]string{
-			"variant": {"default": "", "card": "rounded-md border border-border p-4", "inline": "flex flex-wrap items-start gap-3", "unstyled": ""},
+			"variant": {"default": "", "card": "rounded-md border border-border p-4", "inline": "flex flex-wrap items-start gap-3"},
 			"size":    {"sm": "gap-2", "default": "gap-4", "lg": "gap-6"},
 		},
 	})
 	write("ui/form/legend.variants.json", recipe{
 		ID: "ui.form.legend", Base: "text-sm font-medium", Keys: []string{"variant", "size"}, Defaults: map[string]string{"variant": "default", "size": "default"},
 		ByKey: map[string]map[string]string{
-			"variant": {"default": "", "muted": "text-muted-foreground", "unstyled": ""},
+			"variant": {"default": "", "muted": "text-muted-foreground"},
 			"size":    {"sm": "text-xs", "default": "text-sm", "lg": "text-base"},
 		},
 	})
 	write("ui/form/meter.variants.json", recipe{
 		ID: "ui.form.meter", Base: "h-2 w-full", Keys: []string{"variant", "size"}, Defaults: map[string]string{"variant": "default", "size": "default"},
 		ByKey: map[string]map[string]string{
-			"variant": {"default": "accent-primary", "muted": "accent-muted-foreground", "unstyled": ""},
+			"variant": {"default": "accent-primary", "muted": "accent-muted-foreground"},
 			"size":    {"sm": "h-1", "default": "h-2", "lg": "h-3"},
 		},
 	})
 	write("ui/form/progress.variants.json", recipe{
 		ID: "ui.form.progress", Base: "h-2 w-full", Keys: []string{"variant", "size"}, Defaults: map[string]string{"variant": "default", "size": "default"},
 		ByKey: map[string]map[string]string{
-			"variant": {"default": "accent-primary", "muted": "accent-muted-foreground", "unstyled": ""},
+			"variant": {"default": "accent-primary", "muted": "accent-muted-foreground"},
 			"size":    {"sm": "h-1", "default": "h-2", "lg": "h-3"},
 		},
 	})
@@ -202,8 +201,8 @@ func main() {
 		Keys:     []string{"variant", "size"},
 		Defaults: map[string]string{"variant": "default", "size": "default"},
 		ByKey: map[string]map[string]string{
-			"variant": {"unstyled": "", "": "border-border bg-background", "default": "border-border bg-background", "outline": "border-border bg-background", "ghost": "border-transparent bg-muted"},
-			"size":    {"": "h-10 px-3 py-2 text-sm", "default": "h-10 px-3 py-2 text-sm", "xs": "h-8 px-2 text-xs", "sm": "h-8 px-3 text-sm", "lg": "h-12 px-4 text-base"},
+			"variant": {"default": "border-border bg-background", "outline": "border-border bg-background", "ghost": "border-transparent bg-muted"},
+			"size":    {"default": "h-10 px-3 py-2 text-sm", "xs": "h-8 px-2 text-xs", "sm": "h-8 px-3 text-sm", "lg": "h-12 px-4 text-base"},
 		},
 	}
 	write("ui/input/input.variants.json", inputRecipe)
@@ -216,8 +215,8 @@ func main() {
 		Keys:     []string{"variant", "size"},
 		Defaults: map[string]string{"variant": "default", "size": "default"},
 		ByKey: map[string]map[string]string{
-			"variant": {"unstyled": "", "": "border-primary", "default": "border-primary", "outline": "border-primary", "ghost": "border-primary bg-muted/30"},
-			"size":    {"": "h-4 w-4", "default": "h-4 w-4", "xs": "h-3 w-3", "sm": "h-4 w-4", "lg": "h-5 w-5"},
+			"variant": {"default": "border-primary", "outline": "border-primary", "ghost": "border-primary bg-muted/30"},
+			"size":    {"default": "h-4 w-4", "xs": "h-3 w-3", "sm": "h-4 w-4", "lg": "h-5 w-5"},
 		},
 	}
 	write("ui/checkbox/checkbox.variants.json", recipe{ID: "ui.checkbox", Base: controlRecipe.Base, Keys: controlRecipe.Keys, Defaults: controlRecipe.Defaults, ByKey: controlRecipe.ByKey})

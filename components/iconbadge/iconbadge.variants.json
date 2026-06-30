@@ -13,8 +13,7 @@
       "accent": "bg-accent text-accent-foreground",
       "secondary": "bg-secondary text-secondary-foreground",
       "outline": "border border-border text-foreground",
-      "destructive": "bg-destructive text-destructive-foreground",
-      "unstyled": ""
+      "destructive": "bg-destructive text-destructive-foreground"
     },
     "size": {
       "xs": "h-6 w-6 text-xs",

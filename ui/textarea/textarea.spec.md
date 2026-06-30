@@ -44,7 +44,6 @@ api:
             - default
             - outline
             - ghost
-            - unstyled
         role: appearance
         type: string
 data: textarea.data.json

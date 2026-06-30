@@ -48,7 +48,7 @@ api:
     role: appearance
     type: string
     cva: true
-    enum: [default, card, inline, unstyled]
+    enum: [default, card, inline]
     allow-list-source: fieldset.variants.json#variant
     applies-to: Fieldset
     default: default
@@ -64,7 +64,7 @@ api:
     role: appearance
     type: string
     cva: true
-    enum: [default, muted, unstyled]
+    enum: [default, muted]
     allow-list-source: legend.variants.json#variant
     applies-to: Legend
     default: default
@@ -80,7 +80,7 @@ api:
     role: appearance
     type: string
     cva: true
-    enum: [default, muted, unstyled]
+    enum: [default, muted]
     allow-list-source: meter.variants.json#variant
     applies-to: Meter
     default: default
@@ -96,7 +96,7 @@ api:
     role: appearance
     type: string
     cva: true
-    enum: [default, muted, unstyled]
+    enum: [default, muted]
     allow-list-source: progress.variants.json#variant
     applies-to: Progress
     default: default
@@ -134,10 +134,10 @@ Fieldset, Legend, Meter, and Progress each have distinct variant recipe files.
 
 | Part | Recipe file | Variant keys | Size keys |
 |------|-------------|--------------|-----------|
-| Fieldset | fieldset.variants.json | default, card, inline, unstyled | sm, default, lg |
-| Legend | legend.variants.json | default, muted, unstyled | sm, default, lg |
-| Meter | meter.variants.json | default, muted, unstyled | sm, default, lg |
-| Progress | progress.variants.json | default, muted, unstyled | sm, default, lg |
+| Fieldset | fieldset.variants.json | default, card, inline | sm, default, lg |
+| Legend | legend.variants.json | default, muted | sm, default, lg |
+| Meter | meter.variants.json | default, muted | sm, default, lg |
+| Progress | progress.variants.json | default, muted | sm, default, lg |
 
 DataList, DataOption, and Output are base-class only (no variant recipe).
 

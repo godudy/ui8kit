@@ -74,12 +74,6 @@
         "Variant": "secondary"
       }
     },
-    "variant.unstyled": {
-      "props": {
-        "Class": "underline",
-        "Variant": "unstyled"
-      }
-    },
     "composition.aschild-link": {
       "props": {
         "AsChild": true,

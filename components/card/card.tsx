@@ -47,7 +47,7 @@ const cardDescriptionBase = "text-sm text-muted-foreground";
 const cardContentBase = "p-4";
 const cardFooterBase = "border-t border-border px-4 py-3";
 
-const CardBase = forwardRef<HTMLDivElement, CardProps>(function Card(
+export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
   { variant, className, children, asChild, ...rest },
   ref
 ) {
@@ -65,7 +65,7 @@ const CardBase = forwardRef<HTMLDivElement, CardProps>(function Card(
     </div>
   );
 });
-CardBase.displayName = "Card";
+Card.displayName = "Card";
 
 export const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(function CardHeader(
   { className, children, ...rest },
@@ -126,19 +126,3 @@ export const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(function C
   );
 });
 CardFooter.displayName = "CardFooter";
-
-type CardCompound = typeof CardBase & {
-  Header: typeof CardHeader;
-  Title: typeof CardTitle;
-  Description: typeof CardDescription;
-  Content: typeof CardContent;
-  Footer: typeof CardFooter;
-};
-
-export const Card = Object.assign(CardBase, {
-  Header: CardHeader,
-  Title: CardTitle,
-  Description: CardDescription,
-  Content: CardContent,
-  Footer: CardFooter,
-}) as CardCompound;

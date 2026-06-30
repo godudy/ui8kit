@@ -10,8 +10,7 @@
       "default": "",
       "muted": "bg-muted",
       "spaced": "my-4",
-      "strong": "bg-foreground",
-      "unstyled": ""
+      "strong": "bg-foreground"
     }
   },
   "defaults": {

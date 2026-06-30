@@ -164,14 +164,12 @@ func AriaHasPopup(kind string) templ.Attributes {
 var InputChrome = Variants{
 	Base:     "w-full rounded-md border px-3 py-2 text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
 	Keys:     []string{"variant"},
-	Defaults: map[string]string{"variant": ""},
+	Defaults: map[string]string{"variant": "default"},
 	ByKey: map[string]map[string]string{
 		"variant": {
-			"unstyled": "",
-			"":         "border-border bg-background",
-			"default":  "border-border bg-background",
-			"outline":  "border-border bg-background",
-			"ghost":    "border-transparent bg-muted",
+			"default": "border-border bg-background",
+			"outline": "border-border bg-background",
+			"ghost":   "border-transparent bg-muted",
 		},
 	},
 }
@@ -181,7 +179,6 @@ var InputSize = Variants{
 	Defaults: map[string]string{"size": "default"},
 	ByKey: map[string]map[string]string{
 		"size": {
-			"":        "h-10 px-3 py-2 text-sm",
 			"default": "h-10 px-3 py-2 text-sm",
 			"md":      "h-10 px-3 py-2 text-sm",
 			"xs":      "h-8 px-2 text-xs",
@@ -194,14 +191,12 @@ var InputSize = Variants{
 var ControlChrome = Variants{
 	Base:     "rounded border border-primary text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
 	Keys:     []string{"variant"},
-	Defaults: map[string]string{"variant": ""},
+	Defaults: map[string]string{"variant": "default"},
 	ByKey: map[string]map[string]string{
 		"variant": {
-			"unstyled": "",
-			"":         "border-primary",
-			"default":  "border-primary",
-			"outline":  "border-primary",
-			"ghost":    "border-primary bg-muted/30",
+			"default": "border-primary",
+			"outline": "border-primary",
+			"ghost":   "border-primary bg-muted/30",
 		},
 	},
 }
@@ -211,7 +206,6 @@ var ControlSize = Variants{
 	Defaults: map[string]string{"size": "default"},
 	ByKey: map[string]map[string]string{
 		"size": {
-			"":        "h-4 w-4",
 			"default": "h-4 w-4",
 			"md":      "h-4 w-4",
 			"xs":      "h-3 w-3",

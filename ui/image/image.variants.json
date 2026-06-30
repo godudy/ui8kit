@@ -40,8 +40,7 @@
       "default": "",
       "logo": "object-contain",
       "rounded": "rounded-md",
-      "thumbnail": "rounded-md border border-border",
-      "unstyled": ""
+      "thumbnail": "rounded-md border border-border"
     }
   },
   "defaults": {

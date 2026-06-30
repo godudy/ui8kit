@@ -50,17 +50,36 @@ not duplicated through the wrong primitive.
 - Both Templ and React consume the same recipe source.
 - `cn` is `clsx + tailwind-merge`, and caller `className` still wins.
 
-### Skipping variants
+### No `unstyled` escape hatch
 
-Pass `variant="unstyled"` to skip recipe variant classes entirely (the recipe
-`base` string still applies). Use it when you want to supply all visual classes
-through `className` alone:
+There is no `unstyled` variant. If a brick's appearance does not fit your case:
 
-```tsx
-<Button variant="unstyled" className="rounded-full p-2">
-  Custom
-</Button>
+1. Add a new named variant to its `*.variants.json` (preferred — keeps design
+   tokens centralized).
+2. Or compose with `asChild` and provide your own element, taking responsibility
+   for all visual classes.
+
+Reaching past the recipe with a "no-op" variant is a code smell: it usually
+means the design system needs the new variant, not a per-call workaround.
+
+## Test contract per brick
+
+A brick's spec can declare its React test file with
+`targets.react.test: <path>` (relative to the spec file). When set,
+`validate-spec` requires that file to exist on disk — adding a brick without
+landing the test alongside it fails CI.
+
+```yaml
+targets:
+  react:
+    component: Sheet
+    facade: '@fastygo/templ-react'
+    test: ../../examples/vite/tests/sheet-ui8kit-contract.test.tsx
 ```
+
+For new bricks, prefer adding the line up-front. Bricks without
+`targets.react.test` are exempt for backwards compatibility, but adding
+coverage is encouraged.
 
 ## `asChild`
 
@@ -86,20 +105,21 @@ Use `H1`...`H6` when heading level is static:
 
 Use `Title as={n}` only when heading level is dynamic at runtime.
 
-## Card compound API
+## Card composition
 
-`Card` supports both named exports and compound members:
+`Card` uses named exports — one obvious way to compose:
 
 ```tsx
 <Card variant="default">
-  <Card.Header>
-    <Card.Title>Revenue</Card.Title>
-  </Card.Header>
-  <Card.Content>...</Card.Content>
+  <CardHeader>
+    <CardTitle>Revenue</CardTitle>
+  </CardHeader>
+  <CardContent>...</CardContent>
 </Card>
 ```
 
-Named exports (`CardHeader`, `CardTitle`, `CardContent`, etc.) remain available.
+Dot-notation (`Card.Header`) is intentionally not supported. Mixing both styles
+in the same file is harder to read and review.
 
 ## Behavior hooks (`ui8kit`)
 

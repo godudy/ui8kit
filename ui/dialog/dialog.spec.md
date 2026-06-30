@@ -31,7 +31,6 @@ api:
             - default
             - card
             - sheet
-            - unstyled
         role: appearance
         type: string
 data: dialog.data.json

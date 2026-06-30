@@ -12,8 +12,7 @@
     "variant": {
       "card": "bg-card text-card-foreground",
       "default": "",
-      "sheet": "min-h-screen rounded-none",
-      "unstyled": ""
+      "sheet": "min-h-screen rounded-none"
     }
   },
   "defaults": {

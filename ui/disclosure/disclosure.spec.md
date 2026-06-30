@@ -35,7 +35,6 @@ api:
             - default
             - ghost
             - card
-            - unstyled
         role: appearance
         type: string
     Variant:
@@ -46,7 +45,6 @@ api:
             - default
             - ghost
             - card
-            - unstyled
         role: appearance
         type: string
 data: disclosure.data.json

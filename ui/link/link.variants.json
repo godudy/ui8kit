@@ -13,8 +13,7 @@
       "default": "text-primary hover:underline",
       "external": "text-primary hover:underline",
       "muted": "text-muted-foreground hover:text-foreground hover:underline",
-      "nav": "text-foreground hover:text-primary",
-      "unstyled": ""
+      "nav": "text-foreground hover:text-primary"
     }
   },
   "defaults": {
