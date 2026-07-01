@@ -13,7 +13,9 @@ targets:
     component: Page
 
 variants: home.variants.json
-data: home.data.json
+data: ../../../../data/home.data.json
+data-package: github.com/fastygo/templ/examples/data
+data-var: HomeDataJSON
 
 codegen:
   output: page_gen.go
@@ -58,7 +60,7 @@ showcase:
 semantics:
   root: main
   behavior: static
-  data: home.data.json
+  data: examples/data/home.data.json
 ---
 
 ## Summary

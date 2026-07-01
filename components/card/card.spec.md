@@ -4,6 +4,16 @@ layer: composite
 kind: surface
 package: github.com/fastygo/templ/components/card
 facade: github.com/fastygo/templ/components
+targets:
+  templ:
+    package: github.com/fastygo/templ/components/card
+    facade: github.com/fastygo/templ/components
+    component: Card
+  react:
+    package: '@fastygo/templ-react/components/card'
+    facade: '@fastygo/templ-react'
+    component: Card
+    test: ../../examples/vite/tests/components.smoke.test.tsx
 parts:
   - templ: Card
     props: [Class, Variant, Attrs]

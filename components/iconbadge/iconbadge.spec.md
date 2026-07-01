@@ -5,6 +5,16 @@ kind: media
 package: github.com/fastygo/templ/components/iconbadge
 facade: github.com/fastygo/templ/components
 templ: IconBadge
+targets:
+  templ:
+    package: github.com/fastygo/templ/components/iconbadge
+    facade: github.com/fastygo/templ/components
+    component: IconBadge
+  react:
+    package: '@fastygo/templ-react/components/iconbadge'
+    facade: '@fastygo/templ-react'
+    component: IconBadge
+    test: ../../examples/vite/tests/components.smoke.test.tsx
 api:
   Variant:
     role: appearance

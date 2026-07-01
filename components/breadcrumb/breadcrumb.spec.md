@@ -5,6 +5,16 @@ kind: navigation
 package: github.com/fastygo/templ/components/breadcrumb
 facade: github.com/fastygo/templ/components
 templ: Breadcrumb
+targets:
+  templ:
+    package: github.com/fastygo/templ/components/breadcrumb
+    facade: github.com/fastygo/templ/components
+    component: Breadcrumb
+  react:
+    package: '@fastygo/templ-react/components/breadcrumb'
+    facade: '@fastygo/templ-react'
+    component: Breadcrumb
+    test: ../../examples/vite/tests/components.smoke.test.tsx
 api:
   Items:
     role: trail

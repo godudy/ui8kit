@@ -14,6 +14,7 @@ targets:
     package: "@fastygo/templ-react/ui/form"
     facade: "@fastygo/templ-react"
     component: Form
+    test: ../../examples/vite/tests/primitives.smoke.test.tsx
 
 variants: form.variants.json
 variant_recipes:

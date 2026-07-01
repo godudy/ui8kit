@@ -76,6 +76,7 @@ showcase:
 targets:
     react:
         component: Icon
+        test: ../../examples/vite/tests/primitives.smoke.test.tsx
         facade: '@fastygo/templ-react'
         package: '@fastygo/templ-react/ui/icon'
     templ:

@@ -78,7 +78,7 @@ templ ComponentExamples() {
 				@GalleryPanel("Surfaces", "Nav, icons, sheet, cards") {
 					@ui.Stack(ui.StackProps{Class: "gap-4"}) {
 						@cmp.Nav(cmp.NavProps{AriaLabel: "Gallery navigation"}) {
-							@cmp.NavList(cmp.NavListProps{Gap: "sm", Orientation: "horizontal"}) {
+							@cmp.NavList(cmp.NavListProps{Orientation: "horizontal"}) {
 								@cmp.NavItem(cmp.NavItemProps{}) {
 									@cmp.NavLink(cmp.NavLinkProps{Href: "/", Active: true}) {
 										@cmp.IconBadge(cmp.IconBadgeProps{Size: "sm", Variant: "accent"}) { H }

@@ -1,0 +1,64 @@
+package home
+
+import (
+	cmp "github.com/fastygo/templ/components"
+	"github.com/fastygo/templ/ui"
+)
+
+templ ShowcaseGrid(props ShowcaseProps) {
+	@ui.Stack(ui.StackProps{Class: "gap-6"}) {
+		@ui.Group(ui.GroupProps{Class: "items-end justify-between gap-4"}) {
+			@ui.Stack(ui.StackProps{Class: "gap-2"}) {
+				@ui.Title(ui.TitleProps{As: 2, Class: "text-xl font-semibold tracking-tight"}) { { props.Title } }
+				@ui.Text(ui.TextProps{Class: "text-sm text-muted-foreground"}) { { props.Description } }
+			}
+			<a href="#templates" class={ ui.ButtonClasses(ui.ButtonProps{Variant: "outline", Size: "sm"}) }>
+				{ props.ActionLabel }
+			</a>
+		}
+		@ui.Grid(ui.GridProps{Class: "gap-4 md:grid-cols-2 xl:grid-cols-3"}) {
+			for _, item := range props.Items {
+				@ui.GridCol(ui.GridColProps{}) {
+					@ShowcaseCardView(item)
+				}
+			}
+		}
+	}
+}
+
+templ ShowcaseCardView(item ShowcaseItem) {
+	<article class={ cmp.CardClasses(cmp.CardProps{Variant: "raised", Class: "h-full"}) }>
+		@cmp.CardContent(cmp.CardContentProps{Class: "p-6"}) {
+			@ui.Stack(ui.StackProps{Class: "gap-4"}) {
+				@ui.Box(ui.BoxProps{Class: "flex h-28 items-center justify-center rounded-md border border-dashed border-border bg-muted/50"}) {
+					@cmp.IconBadge(cmp.IconBadgeProps{Size: "lg", Variant: "accent"}) { showcaseIconLetter(item.Name) }
+				}
+				@ui.Group(ui.GroupProps{Class: "items-start justify-between gap-4"}) {
+					@ui.Stack(ui.StackProps{Class: "gap-2"}) {
+						@ui.Title(ui.TitleProps{As: 3, Class: "text-base font-semibold"}) { { item.Name } }
+						@ui.Text(ui.TextProps{Class: "text-sm leading-relaxed text-muted-foreground"}) { { item.Description } }
+					}
+					@ui.Badge(ui.BadgeProps{Variant: "outline"}) {
+						{ item.Category }
+					}
+				}
+				@ui.Stack(ui.StackProps{Class: "gap-2"}) {
+					for _, capability := range item.Capabilities {
+						@ui.Group(ui.GroupProps{Class: "items-center gap-2"}) {
+							@cmp.IconBadge(cmp.IconBadgeProps{Size: "xs", Variant: "secondary"}) { ✓ }
+							@ui.Text(ui.TextProps{Class: "text-xs text-muted-foreground"}) { { capability } }
+						}
+					}
+				}
+				@ui.Group(ui.GroupProps{Class: "gap-2"}) {
+					<a href="#use" class={ ui.ButtonClasses(ui.ButtonProps{Variant: "default", Size: "sm"}) }>
+						{ item.UseLabel }
+					</a>
+					<a href="#preview" class={ ui.ButtonClasses(ui.ButtonProps{Variant: "outline", Size: "sm"}) }>
+						{ item.PreviewLabel }
+					</a>
+				}
+			}
+		}
+	</article>
+}

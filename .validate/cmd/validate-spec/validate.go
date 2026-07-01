@@ -148,15 +148,30 @@ func validateSpec(doc *specDoc, allowLists map[string][]string) []validationErro
 	return errs
 }
 
+// reactTestRequiredLayers lists spec layers where a React test target is
+// mandatory whenever `targets.react` is declared. Bricks (primitive/composite)
+// ship both stacks and must carry a smoke or contract test on the React side.
+//
+// Other layers (helper, catalog-block, …) opt in via `targets.react.test:`;
+// they are covered by different validators or bespoke page-render tests.
+var reactTestRequiredLayers = map[string]bool{
+	"primitive": true,
+	"composite": true,
+}
+
 // validateReactTestTarget enforces the spec-driven React test coverage contract.
 //
-// When a brick spec declares `targets.react.test: <path>` (relative to the spec
-// file), the referenced TSX test file MUST exist on disk. This lets each spec
-// own its own test coverage without requiring every brick to ship one today.
+// Contract:
+//  1. When a spec declares `targets.react.test: <path>` (relative to the spec
+//     file), the referenced TSX test file MUST exist on disk.
+//  2. When a spec has `layer` in reactTestRequiredLayers AND declares a
+//     `targets.react` block, the `test` field is REQUIRED.
+//     This closes the gap where a brick could ship a React target without any
+//     coverage promise, which used to slip through CI unnoticed.
 //
-// Rationale: the design contract is authoritative. If a spec promises a test,
-// CI must hold the brick to that promise. Specs without `targets.react.test`
-// are skipped (back-compat). Add `test: <path>.test.tsx` to a spec to opt in.
+// Specs whose layer is not in reactTestRequiredLayers (helpers, catalog blocks)
+// remain opt-in for back-compat; they either have no React target or use their
+// own render tests (see examples/templ/ui/blocks/*/page_render_test.go).
 func validateReactTestTarget(doc *specDoc, rel, repoRoot string) []validationError {
 	targets, _ := doc.fm["targets"].(map[string]any)
 	if targets == nil {
@@ -168,7 +183,12 @@ func validateReactTestTarget(doc *specDoc, rel, repoRoot string) []validationErr
 	}
 	testPath, _ := react["test"].(string)
 	testPath = strings.TrimSpace(testPath)
+
+	layer := stringField(doc.fm, "layer")
 	if testPath == "" {
+		if reactTestRequiredLayers[layer] {
+			return []validationError{{rel, "targets.react.test", fmt.Sprintf("required for layer %q when targets.react is declared", layer)}}
+		}
 		return nil
 	}
 	if !strings.HasSuffix(testPath, ".test.tsx") && !strings.HasSuffix(testPath, ".test.ts") {

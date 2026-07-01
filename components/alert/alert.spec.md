@@ -46,6 +46,16 @@ semantics:
   role: status
   aria-live: polite
   behavior: static
+targets:
+  templ:
+    package: github.com/fastygo/templ/components/alert
+    facade: github.com/fastygo/templ/components
+    component: Alert
+  react:
+    package: '@fastygo/templ-react/components/alert'
+    facade: '@fastygo/templ-react'
+    component: Alert
+    test: ../../examples/vite/tests/components.smoke.test.tsx
 ---
 
 ## Summary

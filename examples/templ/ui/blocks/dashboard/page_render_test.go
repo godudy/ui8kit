@@ -21,6 +21,8 @@ func TestPageRendersDefaultDashboardBlock(t *testing.T) {
 		"Catalog snapshot",
 		"Registry coverage",
 		`<progress`,
+		`<aside `,
+		`<header `,
 		`data-ui8kit="sheet"`,
 		`id="dashboard-mobile-sheet-trigger"`,
 		`id="dashboard-mobile-sheet-panel"`,

@@ -1,0 +1,40 @@
+package home
+
+import (
+	cmp "github.com/fastygo/templ/components"
+)
+
+templ CatalogMobileSheet(props PageProps) {
+	@cmp.Sheet(cmp.SheetProps{
+		ID:             homeSheetPanelID,
+		Side:           "left",
+		Size:           "default",
+		Variant:        "card",
+		Behavior:       "ui8kit",
+		AriaLabel:      "Navigation menu",
+		AriaLabelledBy: homeSheetTitleID,
+		Class:          "md:hidden max-h-dvh overflow-y-auto p-0",
+	}) {
+		@cmp.SheetOverlay(cmp.SheetOverlayProps{
+			For:      homeSheetPanelID,
+			Behavior: "ui8kit",
+			Class:    "cursor-pointer bg-background/80",
+		})
+		@cmp.SheetContent(cmp.SheetContentProps{Class: "p-4"}) {
+			@cmp.SheetHeader(cmp.SheetHeaderProps{}) {
+				@cmp.SheetTitle(cmp.SheetTitleProps{ID: homeSheetTitleID, Class: "text-sm font-medium"}) { { props.Brand } }
+				@cmp.SheetClose(cmp.SheetCloseProps{
+					For:       homeSheetPanelID,
+					Behavior:  "ui8kit",
+					Variant:   "outline",
+					Size:      "icon",
+					AriaLabel: "Close navigation menu",
+				}) {
+					×
+				}
+			}
+			@CatalogPrimaryNav(props.Sidebar, "mt-4")
+			@CatalogHeaderNav(props.HeaderNav, "mt-4 border-t border-border pt-4")
+		}
+	}
+}

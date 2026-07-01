@@ -5,6 +5,16 @@ kind: navigation
 package: github.com/fastygo/templ/components/nav
 facade: github.com/fastygo/templ/components
 templ: Nav
+targets:
+  templ:
+    package: github.com/fastygo/templ/components/nav
+    facade: github.com/fastygo/templ/components
+    component: Nav
+  react:
+    package: '@fastygo/templ-react/components/nav'
+    facade: '@fastygo/templ-react'
+    component: Nav
+    test: ../../examples/vite/tests/components.smoke.test.tsx
 parts:
   - templ: Nav
     props: [Class, AriaLabel, DataUI8Kit, Attrs]

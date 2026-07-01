@@ -47,6 +47,7 @@ showcase:
 targets:
     react:
         component: Separator
+        test: ../../examples/vite/tests/primitives.smoke.test.tsx
         facade: '@fastygo/templ-react'
         package: '@fastygo/templ-react/ui/separator'
     templ:

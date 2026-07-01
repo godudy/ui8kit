@@ -1,0 +1,46 @@
+package dashboard
+
+import (
+	"github.com/fastygo/templ/ui"
+)
+
+templ DashboardHero(props HeroProps) {
+	@ui.Block(ui.BlockProps{Tag: "section", Class: "overflow-hidden rounded-lg border border-border bg-card shadow-sm"}) {
+		@ui.Box(ui.BoxProps{Class: "border-b border-border bg-muted/40 px-6 py-4"}) {
+			@ui.Group(ui.GroupProps{Class: "items-center justify-between gap-4"}) {
+				@ui.Badge(ui.BadgeProps{Variant: "outline"}) {
+					{ props.Eyebrow }
+				}
+				@ui.Group(ui.GroupProps{Class: "items-center gap-2"}) {
+					<a href="/home/" class={ ui.ButtonClasses(ui.ButtonProps{Variant: "outline", Size: "sm"}) }>
+						{ props.SecondaryCTA }
+					</a>
+					<a href="#gallery" class={ ui.ButtonClasses(ui.ButtonProps{Variant: "default", Size: "sm"}) }>
+						{ props.PrimaryCTA }
+					</a>
+				}
+			}
+		}
+		@ui.Box(ui.BoxProps{Class: "px-6 py-6"}) {
+			@ui.Grid(ui.GridProps{Class: "gap-8 md:grid-cols-[1fr_auto]"}) {
+				@ui.GridCol(ui.GridColProps{}) {
+					@ui.Stack(ui.StackProps{Class: "max-w-2xl gap-4"}) {
+						@ui.Title(ui.TitleProps{As: 1, Class: "text-3xl font-bold tracking-tight md:text-4xl"}) { { props.Title } }
+						@ui.Text(ui.TextProps{Class: "text-sm leading-relaxed text-muted-foreground md:text-base"}) { { props.Description } }
+					}
+				}
+				@ui.GridCol(ui.GridColProps{}) {
+					@ui.Box(ui.BoxProps{Class: "rounded-md border border-border bg-background p-4 md:w-64"}) {
+						@ui.Stack(ui.StackProps{Class: "gap-2"}) {
+							@ui.Group(ui.GroupProps{Class: "items-center justify-between gap-2"}) {
+								@ui.Text(ui.TextProps{Class: "text-xs font-medium text-muted-foreground"}) { { props.ProgressLabel } }
+								@ui.Text(ui.TextProps{Class: "text-xs font-semibold"}) { { props.Progress+"%" } }
+							}
+							@ui.Progress(ui.ProgressProps{Value: props.Progress, Max: "100", Variant: "default"})
+						}
+					}
+				}
+			}
+		}
+	}
+}

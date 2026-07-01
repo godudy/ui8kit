@@ -74,6 +74,7 @@ showcase:
 targets:
     react:
         component: Switch
+        test: ../../examples/vite/tests/primitives.smoke.test.tsx
         facade: '@fastygo/templ-react'
         package: '@fastygo/templ-react/ui/switch'
     templ:

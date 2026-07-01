@@ -1,0 +1,20 @@
+package dashboard
+
+import (
+	"github.com/fastygo/templ/ui"
+)
+
+templ GallerySection() {
+	@ui.Stack(ui.StackProps{Class: "gap-4"}) {
+		@ui.Group(ui.GroupProps{Class: "items-end justify-between gap-4"}) {
+			@ui.Stack(ui.StackProps{Class: "gap-2"}) {
+				@ui.Title(ui.TitleProps{As: 2, Class: "text-lg font-semibold tracking-tight"}) { { "Live component gallery" } }
+				@ui.Text(ui.TextProps{Class: "text-sm text-muted-foreground"}) { { "Interactive samples from ui/* and components/* — buttons, forms, alerts, sheets." } }
+			}
+			@ui.Badge(ui.BadgeProps{Variant: "outline"}) {
+				Scroll to explore
+			}
+		}
+		{ children... }
+	}
+}

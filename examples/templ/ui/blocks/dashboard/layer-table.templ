@@ -1,0 +1,43 @@
+package dashboard
+
+import (
+	cmp "github.com/fastygo/templ/components"
+	"github.com/fastygo/templ/ui"
+)
+
+templ LayerTable(items []LayerItem) {
+	<section class={ cmp.CardClasses(cmp.CardProps{Variant: "default"}) }>
+		@cmp.CardHeader(cmp.CardHeaderProps{}) {
+			@cmp.CardTitle(cmp.CardTitleProps{As: 2}) { { "Registry inventory" } }
+			@cmp.CardDescription(cmp.CardDescriptionProps{}) { { "Public bricks included in this preview and how they layer together." } }
+		}
+		@cmp.CardContent(cmp.CardContentProps{}) {
+			@ui.Stack(ui.StackProps{Class: "gap-2"}) {
+				for _, item := range items {
+					@ui.Group(ui.GroupProps{Class: "items-center justify-between gap-4 rounded-md border border-border bg-muted/20 px-4 py-4"}) {
+						@ui.Stack(ui.StackProps{Class: "gap-2 min-w-0"}) {
+							@ui.Text(ui.TextProps{Class: "text-sm font-medium font-mono"}) { { item.Name } }
+							@ui.Text(ui.TextProps{Class: "text-xs text-muted-foreground"}) { { item.Description } }
+						}
+						@layerStatusBadge(item.Status)
+					}
+				}
+			}
+		}
+	</section>
+}
+
+templ layerStatusBadge(status string) {
+	switch status {
+		case "primitive":
+			@ui.Badge(ui.BadgeProps{Variant: "default"}) { primitive }
+		case "composite":
+			@ui.Badge(ui.BadgeProps{Variant: "secondary"}) { composite }
+		case "block":
+			@ui.Badge(ui.BadgeProps{Variant: "outline"}) { block }
+		default:
+			@ui.Badge(ui.BadgeProps{Variant: "outline"}) {
+				{ status }
+			}
+	}
+}

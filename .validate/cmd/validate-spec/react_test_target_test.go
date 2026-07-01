@@ -6,10 +6,11 @@ import (
 	"testing"
 )
 
-func TestValidateReactTestTarget_SkipsWhenAbsent(t *testing.T) {
+func TestValidateReactTestTarget_SkipsWhenLayerNotEnforced(t *testing.T) {
 	doc := &specDoc{
 		path: filepath.Join(t.TempDir(), "x.spec.md"),
 		fm: map[string]any{
+			"layer": "helper",
 			"targets": map[string]any{
 				"react": map[string]any{
 					"component": "Foo",
@@ -18,7 +19,43 @@ func TestValidateReactTestTarget_SkipsWhenAbsent(t *testing.T) {
 		},
 	}
 	if errs := validateReactTestTarget(doc, "x.spec.md", t.TempDir()); len(errs) != 0 {
-		t.Fatalf("expected no errors when targets.react.test is absent, got %v", errs)
+		t.Fatalf("expected no errors for non-enforced layer when test is absent, got %v", errs)
+	}
+}
+
+func TestValidateReactTestTarget_RequiresTestForPrimitive(t *testing.T) {
+	doc := &specDoc{
+		path: filepath.Join(t.TempDir(), "x.spec.md"),
+		fm: map[string]any{
+			"layer": "primitive",
+			"targets": map[string]any{
+				"react": map[string]any{
+					"component": "Foo",
+				},
+			},
+		},
+	}
+	errs := validateReactTestTarget(doc, "x.spec.md", t.TempDir())
+	if len(errs) != 1 {
+		t.Fatalf("expected 1 error for missing test on primitive brick, got %d (%v)", len(errs), errs)
+	}
+}
+
+func TestValidateReactTestTarget_RequiresTestForComposite(t *testing.T) {
+	doc := &specDoc{
+		path: filepath.Join(t.TempDir(), "x.spec.md"),
+		fm: map[string]any{
+			"layer": "composite",
+			"targets": map[string]any{
+				"react": map[string]any{
+					"component": "Foo",
+				},
+			},
+		},
+	}
+	errs := validateReactTestTarget(doc, "x.spec.md", t.TempDir())
+	if len(errs) != 1 {
+		t.Fatalf("expected 1 error for missing test on composite brick, got %d (%v)", len(errs), errs)
 	}
 }
 

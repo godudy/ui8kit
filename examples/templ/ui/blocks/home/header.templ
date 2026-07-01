@@ -1,0 +1,45 @@
+package home
+
+import (
+	cmp "github.com/fastygo/templ/components"
+	"github.com/fastygo/templ/ui"
+)
+
+templ CatalogHeader(props PageProps) {
+	@ui.Block(ui.BlockProps{Tag: "header", Class: "grid h-16 shrink-0 grid-cols-[1fr_auto_1fr] items-center gap-4 border-b border-border bg-card/80 px-4 backdrop-blur-sm"}) {
+		@ui.Group(ui.GroupProps{Class: "col-start-1 items-center gap-2 justify-self-start"}) {
+			@cmp.SheetTrigger(cmp.SheetTriggerProps{
+				ID:        homeSheetTriggerID,
+				For:       homeSheetPanelID,
+				Behavior:  "ui8kit",
+				Variant:   "outline",
+				Size:      "icon",
+				AriaLabel: "Open menu",
+			}) {
+				☰
+			}
+			<a href="#workspace" class={ ui.ButtonClasses(ui.ButtonProps{Variant: "outline", Size: "sm"}) }>
+				{ props.Workspace }
+			</a>
+		}
+		@cmp.Nav(cmp.NavProps{Class: "col-start-2 hidden justify-self-center md:block"}) {
+			@cmp.NavList(cmp.NavListProps{Orientation: "horizontal"}) {
+				for _, item := range props.HeaderNav {
+					@cmp.NavItem(cmp.NavItemProps{}) {
+						@cmp.NavLink(cmp.NavLinkProps{Href: item.Href, Variant: "ghost", Size: "sm"}) {
+							{ item.Label }
+						}
+					}
+				}
+			}
+		}
+		@ui.Group(ui.GroupProps{Class: "col-start-3 items-center justify-end gap-2 justify-self-end"}) {
+			@ui.Badge(ui.BadgeProps{Variant: "secondary"}) {
+				{ props.Prototype }
+			}
+			<a href="#profile" class={ ui.ButtonClasses(ui.ButtonProps{Variant: "ghost", Size: "sm"}) }>
+				{ props.ProfileName }
+			</a>
+		}
+	}
+}

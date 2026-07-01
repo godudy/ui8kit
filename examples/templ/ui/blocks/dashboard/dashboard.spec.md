@@ -13,7 +13,9 @@ targets:
     component: Page
 
 variants: dashboard.variants.json
-data: dashboard.data.json
+data: ../../../../data/dashboard.data.json
+data-package: github.com/fastygo/templ/examples/data
+data-var: DashboardDataJSON
 
 codegen:
   output: page_gen.go
@@ -58,7 +60,7 @@ showcase:
 semantics:
   root: main
   behavior: static
-  data: dashboard.data.json
+  data: examples/data/dashboard.data.json
 ---
 
 ## Summary

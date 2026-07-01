@@ -1,0 +1,32 @@
+package dashboard
+
+import (
+	cmp "github.com/fastygo/templ/components"
+	"github.com/fastygo/templ/ui"
+)
+
+templ StatusCards(items []StatusCard) {
+	@ui.Grid(ui.GridProps{Class: "gap-4 md:grid-cols-2 xl:grid-cols-4"}) {
+		for _, item := range items {
+			@ui.GridCol(ui.GridColProps{}) {
+			<article class={ cmp.CardClasses(cmp.CardProps{Variant: "default", Class: "h-full transition-colors hover:bg-muted/20"}) }>
+				@cmp.CardContent(cmp.CardContentProps{Class: "p-6"}) {
+					@ui.Stack(ui.StackProps{Class: "gap-4"}) {
+						@ui.Group(ui.GroupProps{Class: "items-start justify-between gap-4"}) {
+							@cmp.IconBadge(cmp.IconBadgeProps{Size: "default", Variant: BlockVariant("statusTone", item.Tone)}) { item.Icon }
+							@ui.Badge(ui.BadgeProps{Variant: "outline", Size: "sm"}) {
+								{ item.Meta }
+							}
+						}
+						@ui.Stack(ui.StackProps{Class: "gap-2"}) {
+							@ui.Text(ui.TextProps{Class: "text-2xl font-bold tracking-tight"}) { { item.Value } }
+							@ui.Text(ui.TextProps{Class: "text-sm font-semibold"}) { { item.Title } }
+							@ui.Text(ui.TextProps{Class: "text-xs leading-relaxed text-muted-foreground"}) { { item.Description } }
+						}
+					}
+				}
+			</article>
+			}
+		}
+	}
+}

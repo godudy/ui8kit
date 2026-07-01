@@ -1,11 +1,49 @@
 # Templ component registry
 
+shadcn-style **copy-paste** bricks for building Go interfaces and React SPAs from
+the same design contract. Props, variants, children, and composition work the
+way you expect — on both runtimes.
+
+## One recipe, two runtimes
+
+| React (Vite) | Go Templ (SSR) |
+|--------------|----------------|
+| ```tsx | ```templ |
+| import { Button } from "@registry/ui"; | import "github.com/fastygo/templ/ui" |
+| | |
+| <Button variant="outline" size="sm"> | @ui.Button(ui.ButtonProps{ |
+|   Save |   Variant: "outline", |
+| </Button> |   Size: "sm", |
+| | }) { |
+| |   Save |
+| | } |
+| ``` | ``` |
+
+New here? Read [`docs/mental-model.md`](docs/mental-model.md) first — five ideas
+that explain the whole registry. Coming from shadcn? See
+[`docs/coming-from-shadcn.md`](docs/coming-from-shadcn.md). For a guided
+split-view lesson, start at [`docs/learn/`](docs/learn/).
+
+### Three files, one contract
+
+Every brick colocates its design contract:
+
+```text
+ui/button/
+  button.spec.md         # API, semantics, showcase
+  button.variants.json   # shared variant recipe (both runtimes read this)
+  button.templ           # Go Templ runtime
+  button.tsx             # React runtime
+```
+
+`button.variants.json` is the single source of variant class strings. Both
+`button.templ` and `button.tsx` compose classes from the same JSON.
+
+## About the name
+
 > **Not [a-h/templ](https://github.com/a-h/templ).** This repository is a separate **component library** for Go UI: copy-paste `.templ` bricks, helpers, and specs. It is built **on top of** Adrian Hacker's excellent [templ](https://github.com/a-h/templ) project and uses the official code generator [`github.com/a-h/templ/cmd/templ`](https://github.com/a-h/templ) (via `go tool templ` in `go.mod`). We are grateful for that foundation — templ's design and tooling make a typed, server-rendered component workflow practical.
 >
 > The module path is **`github.com/fastygo/templ`** so imports read naturally in application code — for example `import "github.com/fastygo/templ/ui"` and `import cmp "github.com/fastygo/templ/components"`. That name reflects **where these components live**, not a claim to be the templ language or compiler. When you need templ itself, depend on **`github.com/a-h/templ`**; when you need this registry, depend on **`github.com/fastygo/templ`**.
-
-shadcn-style **copy-paste** Templ bricks for building Go interfaces with a familiar component workflow.
-The registry keeps the ergonomics React developers expect — props, variants, children, composition, and small colocated examples — while staying server-rendered, Go-native, and easy to copy into an app. The goal is not to recreate React in Go, but to bring its useful component discipline to Templ: predictable APIs, composable primitives, and application-owned styling.
 
 ## Layout
 

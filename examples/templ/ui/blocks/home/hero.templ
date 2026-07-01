@@ -1,0 +1,67 @@
+package home
+
+import (
+	cmp "github.com/fastygo/templ/components"
+	"github.com/fastygo/templ/ui"
+)
+
+templ HeroChat(props HeroProps) {
+	@ui.Block(ui.BlockProps{Tag: "section", Class: "overflow-hidden rounded-lg border border-border bg-card shadow-sm"}) {
+		@ui.Grid(ui.GridProps{Class: "gap-0 md:grid-cols-2"}) {
+			@ui.GridCol(ui.GridColProps{}) {
+				@ui.Box(ui.BoxProps{Class: "border-b border-border p-6 md:border-b-0 md:border-r"}) {
+					@ui.Stack(ui.StackProps{Class: "gap-6"}) {
+						@ui.Stack(ui.StackProps{Class: "gap-2"}) {
+							@ui.Badge(ui.BadgeProps{Variant: "outline"}) { AI workspace }
+							@ui.Title(ui.TitleProps{As: 1, Class: "text-3xl font-bold tracking-tight md:text-4xl"}) { { props.Title } }
+							@ui.Text(ui.TextProps{Class: "text-sm leading-relaxed text-muted-foreground md:text-base"}) { { props.Subtitle } }
+						}
+						@ui.Box(ui.BoxProps{Class: "rounded-lg border border-border bg-background p-4 shadow-sm"}) {
+							@ui.Textarea(ui.TextareaProps{
+								Name:        "prompt",
+								Placeholder: props.Prompt,
+								Rows:        4,
+								Class:       "min-h-28 border-0 bg-transparent shadow-none focus-visible:ring-0",
+							})
+							@ui.Group(ui.GroupProps{Class: "mt-4 items-center justify-between gap-2"}) {
+								@ui.Group(ui.GroupProps{Class: "items-center gap-2"}) {
+									@ui.Button(ui.ButtonProps{Variant: "outline", Size: "sm", AriaLabel: props.AttachmentLabel}) { + }
+									@ui.Button(ui.ButtonProps{Variant: "outline", Size: "sm", AriaLabel: props.AssistantLabel}) { AI }
+									@ui.Button(ui.ButtonProps{Variant: "ghost", Size: "sm", AriaLabel: props.ShortcutLabel}) {
+										/
+									}
+								}
+								@ui.Button(ui.ButtonProps{Variant: "default", Size: "sm"}) {
+									{ props.PrimaryAction }
+								}
+							}
+						}
+						@ui.Stack(ui.StackProps{Class: "gap-2"}) {
+							@ui.Text(ui.TextProps{Class: "text-xs font-medium text-muted-foreground"}) { { props.SuggestionsLabel } }
+							@ui.Group(ui.GroupProps{Class: "flex flex-wrap gap-2"}) {
+								for _, suggestion := range props.Suggestions {
+									@ui.Badge(ui.BadgeProps{Variant: "secondary"}) {
+										{ suggestion }
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			@ui.GridCol(ui.GridColProps{}) {
+				@ui.Box(ui.BoxProps{Class: "bg-muted/30 p-6"}) {
+					@ui.Stack(ui.StackProps{Class: "gap-4"}) {
+						@ui.Text(ui.TextProps{Class: "text-xs font-semibold uppercase tracking-wide text-muted-foreground"}) { { "Workflow" } }
+						for index, step := range props.Workflow {
+							@ui.Group(ui.GroupProps{Class: "items-center gap-4 rounded-md border border-border bg-card px-4 py-4 shadow-sm"}) {
+								@cmp.IconBadge(cmp.IconBadgeProps{Size: "sm", Variant: workflowStepVariant(index)}) { workflowStepLabel(index) }
+								@ui.Text(ui.TextProps{Class: "text-sm font-medium"}) { { step.Label } }
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

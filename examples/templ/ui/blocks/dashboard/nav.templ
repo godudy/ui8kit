@@ -1,0 +1,34 @@
+package dashboard
+
+import (
+	cmp "github.com/fastygo/templ/components"
+)
+
+templ DashboardPrimaryNav(items []NavItem, class string) {
+	@cmp.Nav(cmp.NavProps{AriaLabel: "Primary navigation", Class: class}) {
+		@cmp.NavList(cmp.NavListProps{Class: "px-2"}) {
+			for index, item := range items {
+				@cmp.NavItem(cmp.NavItemProps{}) {
+					@cmp.NavLink(cmp.NavLinkProps{Href: item.Href, Active: index == 0, AriaLabel: item.Label}) {
+						@cmp.IconBadge(cmp.IconBadgeProps{Size: "sm", Variant: navIconVariant(index == 0)}) { navIconLetter(item.Icon) }
+						{ item.Label }
+					}
+				}
+			}
+		}
+	}
+}
+
+templ DashboardHeaderNav(items []NavItem, class string) {
+	@cmp.Nav(cmp.NavProps{AriaLabel: "Header navigation", Class: class}) {
+		@cmp.NavList(cmp.NavListProps{Class: "px-2"}) {
+			for _, item := range items {
+				@cmp.NavItem(cmp.NavItemProps{}) {
+					@cmp.NavLink(cmp.NavLinkProps{Href: item.Href, Variant: "ghost", Size: "sm"}) {
+						{ item.Label }
+					}
+				}
+			}
+		}
+	}
+}
