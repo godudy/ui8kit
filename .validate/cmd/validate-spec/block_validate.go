@@ -128,16 +128,27 @@ func validateVariantsFile(doc *specDoc, rel, specDir, variantsFile string) []val
 		return errs
 	}
 
+	// allow-list-source may reference the variants file by its full spec-relative
+	// path or by its short basename (e.g. "home.variants.json#toolTone" even when
+	// `variants:` points into a shared runtime-neutral location such as
+	// examples/data/home.variants.json via several "../" segments).
+	basenamePrefix := filepath.Base(variantsFile) + "#"
+	fullPrefix := variantsFile + "#"
 	for field, rawField := range api {
 		fm, _ := rawField.(map[string]any)
 		if fm == nil {
 			continue
 		}
 		source, _ := fm["allow-list-source"].(string)
-		if !strings.HasPrefix(source, variantsFile+"#") {
+		var key string
+		switch {
+		case strings.HasPrefix(source, fullPrefix):
+			key = strings.TrimPrefix(source, fullPrefix)
+		case strings.HasPrefix(source, basenamePrefix):
+			key = strings.TrimPrefix(source, basenamePrefix)
+		default:
 			continue
 		}
-		key := strings.TrimPrefix(source, variantsFile+"#")
 		specEnum := getStringSliceAny(fm["enum"])
 		codeEnum := sortedMapKeys(byKey[key])
 		missing, extra := diffEnum(specEnum, codeEnum)

@@ -40,7 +40,7 @@ docs/               # long-lived architecture, ARIA, onboarding, publishing docs
 | `components/` | Composites — multi-part bricks (`parts[]` in spec) |
 | `ui/*/facade.templ`, `components/facade.templ` | Re-export facades — prefer `@ui.*`, `@cmp.*` in examples |
 | `examples/` | Preview server, demo copy, block scaffolds — app-like but not shipped |
-| `examples/ui/blocks/<name>/` | Wireframe scaffolds: `*.data.json`, `props.go`, `page.templ`, generated `page_gen.go` |
+| `examples/templ/ui/blocks/<name>/` | Wireframe scaffolds: `props.go`, `page.templ`, generated `page_gen.go` (fixture/variant JSON lives in `examples/data/`) |
 
 ## Per-brick contract
 
@@ -84,7 +84,7 @@ Granular imports (`ui/button`) remain valid for copy-paste consumers. **Inside t
 2. Add `*.variants.json`; wire `ButtonClasses`-style helpers to `Compose`.
 3. Implement `*.templ`; run `bun run generate`.
 4. Add showcase to spec + optional `*.data.json`.
-5. Extend `examples/demo.templ` or a block under `examples/ui/blocks/` when a visual preview is needed.
+5. Extend `examples/demo.templ` or a block under `examples/templ/ui/blocks/` when a visual preview is needed.
 6. Run validation — see **`templ-validation-testing.mdc`**.
 
 Do not add durable docs or planning notes under `.project`; use `docs/` for

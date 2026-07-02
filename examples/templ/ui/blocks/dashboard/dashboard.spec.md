@@ -12,7 +12,9 @@ targets:
     facade: github.com/fastygo/templ/examples/templ/ui/blocks/dashboard
     component: Page
 
-variants: dashboard.variants.json
+variants: ../../../../data/dashboard.variants.json
+variants-package: github.com/fastygo/templ/examples/data
+variants-var: DashboardVariantsJSON
 data: ../../../../data/dashboard.data.json
 data-package: github.com/fastygo/templ/examples/data
 data-var: DashboardDataJSON

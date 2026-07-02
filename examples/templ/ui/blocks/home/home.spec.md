@@ -12,7 +12,9 @@ targets:
     facade: github.com/fastygo/templ/examples/templ/ui/blocks/home
     component: Page
 
-variants: home.variants.json
+variants: ../../../../data/home.variants.json
+variants-package: github.com/fastygo/templ/examples/data
+variants-var: HomeVariantsJSON
 data: ../../../../data/home.data.json
 data-package: github.com/fastygo/templ/examples/data
 data-var: HomeDataJSON

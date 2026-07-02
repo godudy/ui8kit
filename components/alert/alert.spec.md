@@ -9,25 +9,30 @@ api:
   Variant:
     role: appearance
     type: string
+    cva: true
     enum: [default, destructive, success, warning]
     allow-list-source: alert.variants.json#variant
     default: default
   Class:
     role: style-extension
     type: string
+    cva: false
   Role:
     role: live-region-role
     type: string
+    cva: false
     enum: [status, alert]
     default: status
   AriaLive:
     role: live-region-politeness
     type: string
+    cva: false
     enum: [off, polite, assertive]
     default: polite
   Attrs:
     role: html-attrs
     type: templ.Attributes
+    cva: false
 slots:
   default:
     required: true

@@ -19,20 +19,25 @@ api:
   Items:
     role: trail
     type: "[]BreadcrumbItem"
+    cva: false
   Class:
     role: style-extension
     type: string
+    cva: false
   AriaLabel:
     role: accessible-name
     type: string
+    cva: false
   DataUI8Kit:
     role: behavior-hook
     type: string
+    cva: false
     enum: ["", ui8kit]
     default: ""
   Attrs:
     role: html-attrs
     type: templ.Attributes
+    cva: false
 item-props:
   Label:
     role: crumb-label

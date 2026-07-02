@@ -32,11 +32,13 @@ bun run verify
 |------|---------|--------|
 | Variant invariants | `variantcheck` (in `verify`) | every `*.variants.json` |
 | Block grammar | `blockonce` (in `verify`) | one `<Block>` per TSX/Templ file |
-| Codegen | `bun run generate` | `examples/ui/blocks/*/page_gen.go`, `*_templ.go` |
+| Codegen | `bun run generate` | `examples/templ/ui/blocks/*/page_gen.go`, `*_templ.go` |
 | Spec contract | `validate-spec.sh` | `ui/**/*.spec.md`, `components/**/*.spec.md`, `utils/*.spec.md`, `examples/**/*.spec.md` |
 | Blockgen freshness | `blockgen --check` (in validate-spec.sh) | generated `page_gen.go` matches spec/data/variants |
 | Variant maps | `validate-spec` | `*Variants` / `*.variants.json` ↔ `api.enum` |
 | React test target | `validate-spec` | `targets.react.test` file must exist when declared |
+| React test coverage | `validate-spec` | test file must contain `describe(id-as-path, ...)` (or `targets.react.describe` override) |
+| `cva` presence | `validate-spec` | every `api.*` field must declare `cva: true` or `cva: false` |
 | ui8px | `bun run lint:ui8px` | `ui/`, `components/`, `utils/`, `examples/` |
 | ARIA manifest | `bun run validate:aria` | `examples/` markup vs `examples/web/static/js/manifest.json` |
 | Go tests | `go test ./...` | brick tests, `examples/*_render_test.go` |
@@ -68,9 +70,10 @@ Checks include:
 - `allow-list-source` ↔ `utils/tags.go`, `utils/utils.go`, or `*.variants.json`;
 - no empty-string variant keys and valid defaults;
 - `targets.react.test` existence when declared;
+- `targets.react.test` contains a matching `describe(...)` block (or `targets.react.describe` override);
 - `components.json` alias expectations.
 
-Example block specs: `examples/ui/blocks/home/home.spec.md`, `examples/ui/blocks/dashboard/dashboard.spec.md`.
+Example block specs: `examples/templ/ui/blocks/home/home.spec.md`, `examples/templ/ui/blocks/dashboard/dashboard.spec.md`.
 
 ## Go render tests
 
@@ -78,7 +81,7 @@ Add or extend `*_render_test.go` when markup contracts matter:
 
 - `components/components_render_test.go` — composite bricks
 - `examples/page_render_test.go` — preview document shell
-- `examples/ui/blocks/*/page_render_test.go` — demo scaffolds
+- `examples/templ/ui/blocks/*/page_render_test.go` — demo scaffolds
 
 Assert class strings, roles, and opt-in `data-ui8kit` hooks — not browser behavior.
 

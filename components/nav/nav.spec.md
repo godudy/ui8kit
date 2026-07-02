@@ -28,23 +28,28 @@ api:
   Orientation:
     role: direction
     type: string
+    cva: true
     enum: [vertical, horizontal]
     allow-list-source: nav-list.variants.json#orientation
     default: vertical
   LinkVariant:
     role: appearance
     type: string
+    cva: true
     enum: [default, active, ghost, muted]
     allow-list-source: nav-link.variants.json#variant
     default: default
   Size:
     role: density
     type: string
+    cva: true
     enum: [sm, default, lg]
+    allow-list-source: nav-link.variants.json#size
     default: default
   Gap:
     role: layout-spacing
     type: string
+    cva: true
     enum: [none, default, lg]
     allow-list-source: nav-list.variants.json#gap
     default: default

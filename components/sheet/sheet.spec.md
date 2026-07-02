@@ -26,32 +26,40 @@ api:
   Variant:
     role: appearance
     type: string
+    cva: true
     enum: [default, card, ghost]
     allow-list-source: sheet.variants.json#variant
     default: default
   Side:
     role: placement
     type: string
+    cva: true
     enum: [left, right, top, bottom]
+    allow-list-source: sheet.variants.json#side
     default: right
   Size:
     role: density
     type: string
+    cva: true
     enum: [sm, default, md, lg, xl, full]
+    allow-list-source: sheet.variants.json#size
     default: default
   Behavior:
     role: behavior-hook
     type: string
+    cva: false
     enum: ["", ui8kit]
     default: ""
   Open:
     role: state
     type: bool
+    cva: false
     default: false
     notes: 'Initial state for SSR + first React commit. With Behavior=ui8kit runtime is owned by @ui8kit/aria.'
   Target:
     role: id-reference
     type: string
+    cva: false
     react-only: true
     notes: 'Replaces Go For on SheetTrigger, SheetOverlay, SheetClose.'
 showcase:
@@ -68,6 +76,7 @@ targets:
     component: Sheet
     facade: '@fastygo/templ-react'
     test: ../../examples/vite/tests/sheet-ui8kit-contract.test.tsx
+    describe: 'Sheet ui8kit markup contract'
     package: '@fastygo/templ-react/components/sheet'
     notes:
       - 'Declarative open?: boolean sets initial hidden/data-state only; runtime uses @ui8kit/aria when behavior="ui8kit".'

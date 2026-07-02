@@ -18,8 +18,8 @@
       "@registry/ui/*": ["../../ui/*"],
       "@registry/components": ["../../components/index.ts"],
       "@registry/components/*": ["../../components/*"],
-      "@blocks/home-variants": ["../templ/ui/blocks/home/home.variants.json"],
-      "@blocks/dashboard-variants": ["../templ/ui/blocks/dashboard/dashboard.variants.json"]
+      "@blocks/home-variants": ["../data/home.variants.json"],
+      "@blocks/dashboard-variants": ["../data/dashboard.variants.json"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "vite.config.ts"]

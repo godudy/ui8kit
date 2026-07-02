@@ -19,53 +19,64 @@ api:
   Variant:
     role: appearance
     type: string
+    cva: true
     enum: [default, accent, secondary, outline, destructive]
     allow-list-source: iconbadge.variants.json#variant
     default: default
   Size:
     role: density
     type: string
+    cva: true
     enum: [xs, sm, default, lg]
     default: default
   Class:
     role: style-extension
     type: string
+    cva: false
   Attrs:
     role: html-attributes
     type: templ.Attributes
+    cva: false
   Name:
     role: icon-name
     type: string
+    cva: false
     deprecated: true
     deprecated-reason: "Pass content (letter, glyph, or <Icon/>) as children. Removed in next major."
   BaseClass:
     role: icon-pack-base-class
     type: string
+    cva: false
     deprecated: true
     deprecated-reason: "Pass an <Icon/> as children instead. Removed in next major."
   Prefix:
     role: icon-name-prefix
     type: string
+    cva: false
     deprecated: true
     deprecated-reason: "Pass an <Icon/> as children instead. Removed in next major."
   IconType:
     role: icon-type
     type: string
+    cva: false
     deprecated: true
     deprecated-reason: "Pass an <Icon/> as children instead. Removed in next major."
   Text:
     role: text-fallback
     type: string
+    cva: false
     deprecated: true
     deprecated-reason: "Pass the letter or glyph as children. Removed in next major."
   Title:
     role: icon-title
     type: string
+    cva: false
     deprecated: true
     deprecated-reason: "Pass an <Icon/> as children instead. Removed in next major."
   AriaLabel:
     role: icon-aria-label
     type: string
+    cva: false
     deprecated: true
     deprecated-reason: "Pass an <Icon/> as children instead. Removed in next major."
 slots:

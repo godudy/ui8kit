@@ -36,22 +36,27 @@ api:
   Class:
     role: style-extension
     type: string
+    cva: false
   Variant:
     role: appearance
     type: string
+    cva: true
     enum: [default, raised, kpi, muted, ghost, compact, flat, accent]
     allow-list-source: card.variants.json#variant
     default: default
   AsChild:
     role: composition
     type: bool
+    cva: false
     default: false
   Attrs:
     role: html-attrs
     type: templ.Attributes
+    cva: false
   As:
     role: heading-level
     type: int
+    cva: false
     enum: [1, 2, 3, 4, 5, 6]
     allow-list-source: utils.helpers.TitleTag
     applies-to: CardTitle

@@ -35,7 +35,7 @@ func TestGenerateBlockOutput(t *testing.T) {
 		"func BlockVariant(key, value string) string",
 		`"github.com/fastygo/templ/examples/data"`,
 		"data.HomeDataJSON",
-		"//go:embed home.variants.json",
+		"data.HomeVariantsJSON",
 	} {
 		if !strings.Contains(content, want) {
 			t.Fatalf("generated content missing %q", want)
@@ -43,6 +43,9 @@ func TestGenerateBlockOutput(t *testing.T) {
 	}
 	if strings.Contains(content, "//go:embed home.data.json") {
 		t.Fatalf("data-package mode should not emit local //go:embed for data JSON")
+	}
+	if strings.Contains(content, "//go:embed home.variants.json") {
+		t.Fatalf("variants-package mode should not emit local //go:embed for variants JSON")
 	}
 }
 

@@ -36,8 +36,8 @@ export default defineConfig({
     alias: {
       "@registry/ui": path.resolve(rootDir, "../../ui/index.ts"),
       "@registry/components": path.resolve(rootDir, "../../components/index.ts"),
-      "@blocks/home-variants": path.resolve(rootDir, "../templ/ui/blocks/home/home.variants.json"),
-      "@blocks/dashboard-variants": path.resolve(rootDir, "../templ/ui/blocks/dashboard/dashboard.variants.json"),
+      "@blocks/home-variants": path.resolve(rootDir, "../data/home.variants.json"),
+      "@blocks/dashboard-variants": path.resolve(rootDir, "../data/dashboard.variants.json"),
     },
   },
   server: {

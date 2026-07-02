@@ -23,7 +23,7 @@ ui/<brick>/
   <brick>.tsx              # React port (optional)
 ```
 
-Example block specs live under `examples/ui/blocks/*/*.spec.md` — same rules, `layer` may be `block` or documented in front matter.
+Example block specs live under `examples/templ/ui/blocks/*/*.spec.md` — same rules, `layer` may be `block` or documented in front matter.
 
 ## Two layers (do not collapse)
 
@@ -34,7 +34,9 @@ Example block specs live under `examples/ui/blocks/*/*.spec.md` — same rules, 
 
 **Rule for authors and LLM:** read `api.*.enum` for allowed values. Use `showcase` only for copy-paste examples and doc previews.
 
-Mark props in `api:`:
+Mark props in `api:`. `cva` is **required** on every field under `api:` — the
+`validateCVAPresence` check fails the build if it is missing (primitive or
+composite specs alike):
 
 - `cva: true` — `Variant`, `Size`, keys in `*.variants.json`
 - `cva: false` — `Class`, identity, a11y, state (raw Tailwind via `Class` only)
@@ -59,7 +61,10 @@ Runtime-scoped fields:
    validator fails the spec when this contract is broken.
 7. `react-only` fields must be boolean `true`, require `targets.react`, and must not leak into templ `parts[].props`.
 8. If `targets.react.test` is set, the referenced `.test.tsx` or `.test.ts`
-   file MUST exist. Add it for new React-capable bricks.
+   file MUST exist, and MUST contain a `describe(...)` block whose subject
+   matches `id` with every `.` replaced by `/` (`ui.button` → `"ui/button"`).
+   Override the expected subject with `targets.react.describe: <string>` for
+   non-standard test files (e.g. Sheet's dedicated contract test).
 9. STE prose only: `Summary`, `Use Cases`, `Semantics` — short sentences, active voice.
 10. `/** */` in `.templ` MUST match `## Summary`. `//` prop comments MUST match `api` enums.
 
@@ -85,4 +90,4 @@ Reference implementations:
 - `ui/button/button.spec.md`
 - `ui/block/block.spec.md`
 - `components/card/card.spec.md`
-- `examples/ui/blocks/home/home.spec.md`
+- `examples/templ/ui/blocks/home/home.spec.md`

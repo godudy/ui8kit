@@ -145,6 +145,8 @@ func validateSpec(doc *specDoc, allowLists map[string][]string) []validationErro
 	errs = append(errs, validateRuntimeScopedAPIFields(doc, rel)...)
 	errs = append(errs, validateBlockContract(doc, rel, findRepoRootMust())...)
 	errs = append(errs, validateReactTestTarget(doc, rel, findRepoRootMust())...)
+	errs = append(errs, validateReactTestDescribe(doc, rel, findRepoRootMust())...)
+	errs = append(errs, validateCVAPresence(doc, rel)...)
 	return errs
 }
 

@@ -53,7 +53,7 @@ Rules of thumb:
 2. **`Box` is strictly inside `Block`.** `Box` never carries a landmark
    `tag` (`aside`, `header`, `main`, `section`, `nav`). Use `Block` for that.
 3. **No raw markup in bricks or blocks.** Inside `ui/`, `components/`, and
-   `examples/ui/blocks/`, do not write `<div>`, `<aside>`, `<section>`,
+   `examples/templ/ui/blocks/`, do not write `<div>`, `<aside>`, `<section>`,
    `<header>`, etc. directly. Use `Block`/`Box`/`Stack`/`Group` (or another
    primitive/composite that wraps them).
    - Exception: brick root elements required by semantics (`<dialog>`,

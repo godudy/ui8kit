@@ -66,7 +66,7 @@ example of when that is correct rather than a smell.
 2. **`Box` is strictly inside `Block`.** `Box` never carries a landmark tag
    (`aside`, `header`, `main`, `section`, `nav`). Use `Block` for that.
 3. **No raw markup in bricks or blocks.** Inside `ui/`, `components/`, and
-   `examples/ui/blocks/`, do not write `<div>`, `<aside>`, `<section>`,
+   `examples/templ/ui/blocks/`, do not write `<div>`, `<aside>`, `<section>`,
    `<header>`, etc. directly — use `Block`/`Box`/`Stack`/`Group` (or another
    primitive/composite that wraps them). *Exceptions:* brick root elements
    required by semantics (`<dialog>`, `<button>`, `<details>`, `<table>`
