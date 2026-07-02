@@ -45,6 +45,9 @@ registry bricks and example scaffolds. Use primitives instead.
 `Block` may default to `<div>` when the widget is not a document landmark.
 `Box` always resolves to `<div>` — never pass landmark tags to `Box`.
 
+See [`learn/04-layout-grammar/`](learn/04-layout-grammar/) for the full rule
+set, a correct/incorrect example, and a spot-the-violation exercise.
+
 ## 4. ui8kit is the only reactivity boundary
 
 Registry bricks are **static**. They render HTML and ARIA attributes; they do
@@ -56,6 +59,9 @@ Interactive patterns (Sheet, Dialog, Accordion, …) opt in to
 
 If you need open/close behavior, use the documented Sheet pattern with
 `behavior="ui8kit"` — not `useState` inside a brick file.
+
+See [`learn/03-sheet/`](learn/03-sheet/) for a worked split-view lesson on the
+`data-ui8kit-*` contract and the mobile navigation `Sheet`.
 
 ## 5. Two runtimes, one contract
 
@@ -84,6 +90,7 @@ the spec requires it.
 
 - [`coming-from-shadcn.md`](coming-from-shadcn.md) — shadcn habits mapped to
   registry rules.
-- [`learn/01-hero/`](learn/01-hero/) — first split-view lesson (Hero block).
+- [`learn/`](learn/) — split-view lessons (Hero, Sidebar, Sheet, Layout
+  grammar).
 - [`architecture.md`](architecture.md) — deeper dual-stack contract details.
 - [`aria.md`](aria.md) — Sheet, Dialog, and ui8kit behavior hooks.

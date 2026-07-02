@@ -11,12 +11,17 @@ Two parallel previews share the same static assets under [`web/static/`](web/sta
 
 Shared assets (CSS tokens, Tailwind output, UI8Kit ARIA bundle) live in [`web/static/`](web/static/) so both previews load `/static/css/app.css` and `/static/js/ui8kit.js`.
 
+`examples/` is a Bun workspace member of the repository root — dependencies
+are installed **once** from the repository root (`bun install` in
+[`../`](../)), not from inside `examples/`. The commands below can be run
+either from `examples/` directly or as `bun run dev:templ` / `bun run
+dev:vite` from the repository root.
+
 ## Templ preview
 
-From **`examples/`**:
+From **`examples/`** (or the repository root, after the root `bun install`):
 
 ```bash
-bun install
 bun run dev:templ
 ```
 
@@ -26,7 +31,7 @@ The server lives at [`templ/cmd/server/main.go`](templ/cmd/server/main.go).
 
 ## Vite preview
 
-From **`examples/`** (after `bun install` and shared asset build):
+From **`examples/`** (or the repository root, after the root `bun install`):
 
 ```bash
 bun run dev:vite

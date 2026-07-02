@@ -91,7 +91,18 @@ Quick mapping:
 
 ## Local preview
 
-See [`examples/README.md`](examples/README.md) for a minimal preview server and Tailwind setup.
+The repository is a Bun workspace root (`examples` is the only workspace
+member today). A single `bun install` run from the repository root installs
+both the registry devDependencies and the `examples` workspace in one shared
+`node_modules` — no separate install step inside `examples/`.
+
+```bash
+bun install
+bun run dev:vite   # React preview at http://127.0.0.1:5173/
+bun run dev:templ  # Go Templ preview at http://127.0.0.1:8080/
+```
+
+See [`examples/README.md`](examples/README.md) for the full preview server and Tailwind setup.
 
 ## Usage
 

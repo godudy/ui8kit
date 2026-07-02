@@ -2,7 +2,15 @@
   "name": "fastygo-templ-registry",
   "private": true,
   "packageManager": "bun@1.3.3",
+  "workspaces": [
+    "examples"
+  ],
   "scripts": {
+    "dev": "cd examples && bun run dev:vite",
+    "dev:vite": "cd examples && bun run dev:vite",
+    "dev:templ": "cd examples && bun run dev:templ",
+    "build:vite": "cd examples && bun run build:vite",
+    "preview:vite": "cd examples && bun run preview:vite",
     "generate": "go run ./.validate/cmd/variantcheck && go run ./.validate/cmd/blockonce && go run ./.validate/cmd/variantgen && go run ./.validate/cmd/blockgen && go run ./.validate/cmd/tagsgen && go tool templ generate ./...",
     "lint:ui8px": "ui8px lint ui components utils examples examples/web/static/css/input.css examples/vite/dist/static/css/input.css",
     "lint:ui8px:vite": "cd examples/vite && bun run build && cd ../.. && ui8px lint examples/vite/dist/static/css/app.css",

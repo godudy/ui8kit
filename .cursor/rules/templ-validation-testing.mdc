@@ -84,8 +84,11 @@ Assert class strings, roles, and opt-in `data-ui8kit` hooks — not browser beha
 
 ## Examples preview (manual)
 
+`examples/` is a Bun workspace member of the repo root; dependencies are
+installed once via `bun install` at the repo root, not inside `examples/`.
+
 ```bash
-cd examples && bun install && bun run dev
+bun run dev:templ
 ```
 
 Rebuild client bundle after hook or `@ui8kit/aria` changes:
